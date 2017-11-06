@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using RLNET;
 
 namespace Halfbreed
@@ -9,7 +10,9 @@ namespace Halfbreed
 
         public static void Main()
         {
-            MainProgram.mainconsole = new RLRootConsole("terminal8x8.png", 80, 60, 8, 8, 1, "Halfbreed");
+            getConfigurationParameters();
+
+            MainProgram.mainconsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
             mainconsole.OnLoad += RootConsoleOnLoad;
             mainconsole.Update += RootConsoleUpdate;
@@ -24,24 +27,41 @@ namespace Halfbreed
 
         static void RootConsoleRender(object sender, EventArgs e)
         {
-            mainconsole.Clear();
-            mainconsole.Print(5, 5, "Hello World", RLColor.Cyan);
-            mainconsole.Draw();
-        }
+			if (Display.IsDirty)
+			{
+				mainconsole.Clear();
+				mainconsole = Display.CopyDisplayToMainConsole(mainconsole);
+				mainconsole.Draw();
+			}
+		}
+
         static void RootConsoleUpdate(object sender, EventArgs e)
         {
             RLKeyPress key = mainconsole.Keyboard.GetKeyPress();
             if (key != null)
             {
-                switch (key.Key)
+                UserInputHandler.addKeyboardInput(key.Key);
+
+                // TODO: Remove this once threading properly in.
+                if(key.Key == RLKey.Escape)
                 {
-                    case RLKey.Escape:
-                    {
-                        mainconsole.Close();
-                        break;
-                    }
+                    mainconsole.Close();
                 }
             }
+        }
+
+        static void checkSetup()
+        {
+            if (!System.IO.Directory.Exists("Foo"))
+            {
+
+            }
+
+        }
+
+        static void getConfigurationParameters()
+        {
+            
         }
 
     }
