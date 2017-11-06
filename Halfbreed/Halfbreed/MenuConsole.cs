@@ -14,7 +14,7 @@ namespace Halfbreed
 
 			for (int i = 0; i < options.Length; i++)
 			{
-				_console.Print(5, 10 + 4 * i, options[i], RLColor.Black);
+				_console.Print(5, 10 + 4 * i, (i+1).ToString() + ": " + options[i], RLColor.Black);
 			}
 
 			_console.Print(5, 70, bottom, RLColor.Black);
