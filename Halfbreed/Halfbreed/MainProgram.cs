@@ -47,6 +47,10 @@ namespace Halfbreed
                 {
                     mainconsole.Close();
                 }
+				if (key.Key == RLKey.Enter)
+				{
+					Display.DrawMenu();
+				}
             }
         }
 
