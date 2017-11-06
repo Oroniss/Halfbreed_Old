@@ -17,6 +17,10 @@ namespace Halfbreed
             mainconsole.OnLoad += RootConsoleOnLoad;
             mainconsole.Update += RootConsoleUpdate;
             mainconsole.Render += RootConsoleRender;
+
+			// Thread loopThread = new Thread(gameInterface.StartGameMenus);
+			// loopThread.start()
+
             mainconsole.Run();
         }
 
@@ -27,10 +31,10 @@ namespace Halfbreed
 
         static void RootConsoleRender(object sender, EventArgs e)
         {
-			if (Display.IsDirty)
+			if (GraphicDesplay.IsDirty)
 			{
 				mainconsole.Clear();
-				mainconsole = Display.CopyDisplayToMainConsole(mainconsole);
+				mainconsole = GraphicDesplay.CopyDisplayToMainConsole(mainconsole);
 				mainconsole.Draw();
 			}
 		}
@@ -49,7 +53,7 @@ namespace Halfbreed
                 }
 				if (key.Key == RLKey.Enter)
 				{
-					Display.DrawMenu();
+					GraphicDesplay.MenuConsole.DrawSelectFromMenu("Boo", new string[0], "Goodbye");
 				}
             }
         }
