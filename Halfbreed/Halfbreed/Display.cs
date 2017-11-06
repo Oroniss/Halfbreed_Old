@@ -6,20 +6,23 @@ namespace Halfbreed
     public static class Display
     {
 		// TODO: Refactor out the magic numbers here
-		private static RLConsole _backConsole = new RLConsole(120, 90);
-		private static RLConsole _menuConsole = new RLConsole(116, 86);
-
-		private static bool _isDirty = true;
+		private static BackConsole _backConsole = new BackConsole(120, 90);
+		private static DisplayConsole _menuConsole = new DisplayConsole(86, 116, 2, 2, RLColor.LightGray);
 
 		static Display()
 		{
-			_menuConsole.SetBackColor(0, 0, 116, 86, RLColor.LightGray);
 			_backConsole.Print(5, 5, "Hello", RLColor.Cyan);
 		}
 
 		public static bool IsDirty
 		{
-			get { return _isDirty; }
+			get
+			{
+				lock (_backConsole)
+				{
+					return _backConsole.IsDirty;
+				}
+			}
 		}
 
 		public static RLRootConsole CopyDisplayToMainConsole(RLRootConsole destination)
@@ -27,10 +30,19 @@ namespace Halfbreed
 			lock (_backConsole)
 			{
 				RLConsole.Blit(_backConsole, 0, 0, 120, 90, destination, 0, 0);
+				_backConsole.SetClean();
 			}
 			// TODO: Decide if this needs to be inside a lock too.
-			_isDirty = false;
 			return destination;
+		}
+
+		public static void DrawMenu()
+		{
+			lock (_backConsole)
+			{
+				_backConsole = _menuConsole.CopyToBackConsole(_backConsole);
+				_backConsole.SetDirty();
+			}
 		}
     }
 }
