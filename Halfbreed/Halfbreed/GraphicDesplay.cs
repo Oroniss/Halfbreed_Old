@@ -7,7 +7,7 @@ namespace Halfbreed
     {
 		// TODO: Refactor out the magic numbers here
 		private static BackConsole _backConsole = new BackConsole(120, 90);
-		private static DisplayConsole _menuConsole = new DisplayConsole(86, 116, 2, 2, RLColor.LightGray, _backConsole);
+		private static MenuConsole _menuConsole = new MenuConsole(86, 116, 2, 2, RLColor.LightGray, _backConsole);
 
 		static GraphicDesplay()
 		{
@@ -35,7 +35,7 @@ namespace Halfbreed
 			return destination;
 		}
 
-		public static DisplayConsole MenuConsole
+		public static MenuConsole MenuConsole
 		{
 			get { return _menuConsole; }
 		}
