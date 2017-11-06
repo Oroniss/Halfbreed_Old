@@ -32,11 +32,10 @@ namespace Halfbreed
 				RLConsole.Blit(_backConsole, 0, 0, 120, 90, destination, 0, 0);
 				_backConsole.SetClean();
 			}
-			// TODO: Decide if this needs to be inside a lock too.
 			return destination;
 		}
 
-		public static void DrawMenu()
+		public static void UpdateMenu()
 		{
 			lock (_backConsole)
 			{
