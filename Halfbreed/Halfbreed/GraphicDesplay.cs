@@ -3,13 +3,13 @@ using RLNET;
 
 namespace Halfbreed
 {
-    public static class Display
+    public static class GraphicDesplay
     {
 		// TODO: Refactor out the magic numbers here
 		private static BackConsole _backConsole = new BackConsole(120, 90);
-		private static DisplayConsole _menuConsole = new DisplayConsole(86, 116, 2, 2, RLColor.LightGray);
+		private static DisplayConsole _menuConsole = new DisplayConsole(86, 116, 2, 2, RLColor.LightGray, _backConsole);
 
-		static Display()
+		static GraphicDesplay()
 		{
 			_backConsole.Print(5, 5, "Hello", RLColor.Cyan);
 		}
@@ -35,13 +35,10 @@ namespace Halfbreed
 			return destination;
 		}
 
-		public static void UpdateMenu()
+		public static DisplayConsole MenuConsole
 		{
-			lock (_backConsole)
-			{
-				_backConsole = _menuConsole.CopyToBackConsole(_backConsole);
-				_backConsole.SetDirty();
-			}
+			get { return _menuConsole; }
 		}
+
     }
 }
