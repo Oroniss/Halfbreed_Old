@@ -44,9 +44,9 @@ namespace Halfbreed
 		public static int SelectFromMenu(string title, List<String> menuOptions, string bottom)
 		{
 			int page = 0;
-			List<String> currentDisplay = new List<string>();
 			while (true)
 			{
+				List<String> currentDisplay = new List<string>();
 				for (int i = 10 * page; i < Math.Min(10 * (page + 1), menuOptions.Count); i++)
 				{
 					currentDisplay.Add((i % 10 + 1).ToString() + ": " + menuOptions[i]);
