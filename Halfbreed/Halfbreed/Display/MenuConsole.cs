@@ -1,4 +1,5 @@
 ﻿using RLNET;
+using System.Collections.Generic;
 namespace Halfbreed
 {
 	public class MenuConsole : DisplayConsole
@@ -8,11 +9,12 @@ namespace Halfbreed
 		{
 		}
 
-		public void DrawSelectFromMenu(string title, string[] options, string bottom)
+		// TODO: Think about whether to have an override with an array here?
+		public void DrawSelectFromMenu(string title, List<string> options, string bottom)
 		{
 			_console.Print(5, 5, title, RLColor.Black);
 
-			for (int i = 0; i < options.Length; i++)
+			for (int i = 0; i < options.Count; i++)
 			{
 				_console.Print(5, 10 + 4 * i, (i+1).ToString() + ": " + options[i], RLColor.Black);
 			}
