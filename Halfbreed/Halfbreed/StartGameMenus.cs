@@ -49,32 +49,35 @@ namespace Halfbreed
 
 		private static bool StartNewGame()
 		{
-			int difficulty = ChooseDifficultySetting();
+			bool difficultyWasSet = SelectAndSetDifficulty();
 
-			if (difficulty == -1)
+			if (!difficultyWasSet)
 				return false;
 
-			string characterClass = ChooseCharacterClass(difficulty);
+			bool characterClasWasSet = SelectAndSetCharacterClass(GameParameters.DifficultySetting);
 
-			if (characterClass == "QUIT")
+			if (!characterClasWasSet)
 				return false;
 
-			var useAchievements = ChooseUseAchievements();
+			bool useAchievementsWasSet = SelectAndSetUseAchievements();
 
-			if (useAchievements == -1)
+			if (!useAchievementsWasSet)
 				return false;
-			
+
 			return true;
 		}
 
-		private static int ChooseDifficultySetting()
+		private static bool SelectAndSetDifficulty()
 		{
-			// +1 to account for 0 based indexing vs 1 based indexing
-			return UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
-														  "Escape to quit.") + 1;
+			int selection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
+														  "Escape to quit.");
+			if (selection == -1)
+				return false;
+			GameParameters.setStartingDifficulty(selection + 1);
+			return true;
 		}
 
-		private static string ChooseCharacterClass(int difficulty)
+		private static bool SelectAndSetCharacterClass(int difficulty)
 		{
 			List<string> classList = _hl12classes;
 
@@ -85,16 +88,27 @@ namespace Halfbreed
 				classList = _hl5classes;
 
 			int selection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
+
 			if (selection == -1)
-				return "QUIT";
-			else
-				return classList[selection];
+				return false;
+			
+			CharacterClasses characterClass = CharacterClassToStringConverter.ConvertStringToCharacterClass(
+				classList[selection]);
+			GameParameters.setStartingCharacterClass(characterClass);
+			return true;
+
 		}
 
-		private static int ChooseUseAchievements()
+		private static bool SelectAndSetUseAchievements()
 		{
-			return UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
+			int selection = UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
 															new List<string> { "Yes", "No" }, "Escape to Quit");
+
+			if (selection == -1)
+				return false;
+
+			GameParameters.setStartingUseAchievements(selection == 0);
+			return true;
 		}
 	}
 }
