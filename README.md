@@ -1,6 +1,6 @@
 # Halfbreed
 
-This is the repo for the python prototype of Halfbreed.
-Writing it in Python rather than C# just to get things progressing.
-This will at least give a faster option for experimenting/testing.
-Will try and maintain rough equivalence between the two versions.
+This is the repo for Halfbreed.
+Writing it in C# again, and even on mac it seems to be working ok.
+
+Trying to use some principled software development practices as well.
