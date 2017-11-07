@@ -10,14 +10,14 @@ namespace Halfbreed
 			"Thou art a pathetic weakling, unwilling to challenge thyself",
 			"Thou art either brave or foolhardy, only time will tell which",
 			"Thou art swimming far out of thy depth",
-			"Thou cannot comprehend the horrors that await thee"};
+			"Thou canst not comprehend the horrors that await thee"};
 
 
 		public static void TitleMenu()
 		{
 			while (true)
 			{
-				GraphicDesplay.MenuConsole.DrawSelectFromMenu("Welcome to Halfbreed", _titleMenu, "Escape to Quit");
+				GraphicDesplay.MenuConsole.DrawMenu("Welcome to Halfbreed", _titleMenu, "Escape to Quit");
 				string key = UserInputHandler.getNextKey();
 
 				switch (key)
@@ -54,28 +54,8 @@ namespace Halfbreed
 
 		private static int ChooseDifficultySetting()
 		{
-			GraphicDesplay.MenuConsole.DrawSelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
-			                                              "Escape to quit.");
-			while (true)
-			{
-				string key = UserInputHandler.getNextKey();
-				switch (key)
-				{
-					case "1":
-						return 1;
-					case "2":
-						return 2;
-					case "3":
-						return 3;
-					case "4":
-						return 4;
-					case "5":
-						return 5;
-					case "ESCAPE":
-						return -1;
-				}
-			}
-			
+			return UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
+														  "Escape to quit.");
 		}
 	}
 }
