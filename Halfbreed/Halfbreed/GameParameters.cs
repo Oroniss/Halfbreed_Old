@@ -7,34 +7,17 @@ namespace Halfbreed
 		private static CharacterClasses _characterClass;
 		private static bool _useAchievements;
 
-		// TODO: Add upper case versions.
-		// TODO: Put this somewhere more sensible.
-		private static Dictionary<string, CharacterClasses> _stringToCharacterClassConversions =
-			new Dictionary<string, CharacterClasses>
-			{
-			{"Cleric", CharacterClasses.CLERIC},
-			{"Fighter", CharacterClasses.FIGHTER},
-			{"Mage", CharacterClasses.MAGE},
-			{"Thief", CharacterClasses.THIEF},
-			{"Bard", CharacterClasses.BARD},
-			{"Blackguard", CharacterClasses.BLACKGUARD},
-			{"Druid", CharacterClasses.DRUID},
-			{"Necromancer", CharacterClasses.NECROMANCER},
-			{"Paladin", CharacterClasses.PALADIN},
-			{"Ranger", CharacterClasses.RANGER},
-			{"Dragonlord", CharacterClasses.DRAGONLORD}
-		};
-
-		public static void setStartingParameters(int difficulty, string characterClass, bool useAchievements)
+		public static void setStartingDifficulty(int difficulty)
 		{
 			_difficultySetting = difficulty;
-			_characterClass = ConvertStringToCharacterClass(characterClass);
-			_useAchievements = useAchievements;
 		}
-
-		public static CharacterClasses ConvertStringToCharacterClass(string characterClass)
+		public static void setStartingCharacterClass(CharacterClasses characterClass)
 		{
-			return _stringToCharacterClassConversions[characterClass];
+			_characterClass = characterClass;
+		}
+		public static void setStartingUseAchievements(bool useAchievements)
+		{
+			_useAchievements = useAchievements;
 		}
 
 		public static int DifficultySetting
