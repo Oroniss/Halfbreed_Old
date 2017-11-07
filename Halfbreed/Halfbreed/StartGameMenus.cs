@@ -11,18 +11,22 @@ namespace Halfbreed
 			"Thou art either brave or foolhardy, only time will tell which",
 			"Thou art swimming far out of thy depth",
 			"Thou canst not comprehend the horrors that await thee"};
+		private static List<string> _hl12classes = new List<string>{
+			"Cleric", "Fighter", "Mage", "Thief"};
+		private static List<string> _hl34classes = new List<string>{
+			"Bard", "Blackguard", "Druid", "Necromancer", "Paladin", "Ranger"};
+		private static List<string> _hl5classes = new List<string> { "Dragonlord" };
 
 
 		public static void TitleMenu()
 		{
 			while (true)
 			{
-				GraphicDesplay.MenuConsole.DrawMenu("Welcome to Halfbreed", _titleMenu, "Escape to Quit");
-				string key = UserInputHandler.getNextKey();
+				int selection = UserInputHandler.SelectFromMenu("Welcome to Halfbreed", _titleMenu, "Escape to Quit");
 
-				switch (key)
+				switch (selection)
 				{
-					case "1":
+					case 0:
 						{
 							bool proceed = StartNewGame();
 							if (!proceed)
@@ -32,7 +36,7 @@ namespace Halfbreed
 							}
 							break;
 						}
-					case "ESCAPE":
+					case -1:
 						{
 							MainProgram.quit();
 							return;
@@ -48,6 +52,11 @@ namespace Halfbreed
 			if (difficulty == -1)
 				return false;
 
+			string characterClass = ChooseCharacterClass(difficulty);
+
+			if (characterClass == "QUIT")
+				return false;
+
 			return true;
 			
 		}
@@ -55,7 +64,24 @@ namespace Halfbreed
 		private static int ChooseDifficultySetting()
 		{
 			return UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
-														  "Escape to quit.");
+														  "Escape to quit.") + 1;
+		}
+
+		private static string ChooseCharacterClass(int difficulty)
+		{
+			List<string> classList = _hl12classes;
+
+			if (difficulty == 3 || difficulty == 4)
+				classList = _hl34classes;
+
+			if (difficulty == 5)
+				classList = _hl5classes;
+
+			int selection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
+			if (selection == -1)
+				return "QUIT";
+			else
+				return classList[selection];
 		}
 	}
 }
