@@ -5,6 +5,8 @@ namespace Halfbreed
 	{
 		private static List<string> _titleMenu = new List<string>{"New Game", "Load Game", "View Achievements",
 			"Clear Achievements", "View Commands", "Config"};
+
+		// Character creation
 		private static List<string> _difficultySettings = new List<string>{
 			"Thou art a craven knave, worthy only of contempt",
 			"Thou art a pathetic weakling, unwilling to challenge thyself",
@@ -57,12 +59,17 @@ namespace Halfbreed
 			if (characterClass == "QUIT")
 				return false;
 
-			return true;
+			var useAchievements = ChooseUseAchievements();
+
+			if (useAchievements == -1)
+				return false;
 			
+			return true;
 		}
 
 		private static int ChooseDifficultySetting()
 		{
+			// +1 to account for 0 based indexing vs 1 based indexing
 			return UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
 														  "Escape to quit.") + 1;
 		}
@@ -82,6 +89,12 @@ namespace Halfbreed
 				return "QUIT";
 			else
 				return classList[selection];
+		}
+
+		private static int ChooseUseAchievements()
+		{
+			return UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
+															new List<string> { "Yes", "No" }, "Escape to Quit");
 		}
 	}
 }
