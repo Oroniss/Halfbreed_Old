@@ -43,12 +43,6 @@ namespace Halfbreed
             if (key != null)
             {
                 UserInputHandler.addKeyboardInput(key.Key);
-
-                // TODO: Remove this once threading properly in.
-                if(key.Key == RLKey.Up)
-                {
-                    mainconsole.Close();
-                }
             }
         }
 
