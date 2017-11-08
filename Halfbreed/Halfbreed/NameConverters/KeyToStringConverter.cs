@@ -4,7 +4,7 @@ using RLNET;
 
 namespace Halfbreed
 {
-    public class KeyToStringConverter
+    public static class KeyToStringConverter
     {
         private static Dictionary<RLKey, String> keyToString = 
         new Dictionary<RLKey, string>(){
@@ -25,12 +25,12 @@ namespace Halfbreed
 			{RLKey.Number9, "9"},
         };
 
-        public bool checkKeyIsValid(RLKey key)
+        public static bool checkKeyIsValid(RLKey key)
         {
             return keyToString.ContainsKey(key);
         }
 
-        public string convertKeyToString(RLKey key)
+        public static string convertKeyToString(RLKey key)
         {
             if (!keyToString.ContainsKey(key))
             {
