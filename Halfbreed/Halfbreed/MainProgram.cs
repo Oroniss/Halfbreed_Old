@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using RLNET;
 
@@ -16,7 +16,7 @@ namespace Halfbreed
             mainconsole.Update += RootConsoleUpdate;
             mainconsole.Render += RootConsoleRender;
 
-			Thread loopThread = new Thread(StartGameMenus.TitleMenu);
+			Thread loopThread = new Thread(MainMenu.TitleMenu);
 			loopThread.Start();
 
             mainconsole.Run();
@@ -29,10 +29,10 @@ namespace Halfbreed
 
         static void RootConsoleRender(object sender, EventArgs e)
         {
-			if (GraphicDesplay.IsDirty)
+			if (MainGraphicDisplay.IsDirty)
 			{
 				mainconsole.Clear();
-				mainconsole = GraphicDesplay.CopyDisplayToMainConsole(mainconsole);
+				mainconsole = MainGraphicDisplay.CopyDisplayToMainConsole(mainconsole);
 				mainconsole.Draw();
 			}
 		}
