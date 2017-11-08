@@ -6,6 +6,7 @@ namespace Halfbreed
 {
     public static class KeyToStringConverter
     {
+		// TODO: Add other keys as we go along.
         private static Dictionary<RLKey, String> keyToString = 
         new Dictionary<RLKey, string>(){
             {RLKey.Escape, "ESCAPE"},
