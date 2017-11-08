@@ -3,7 +3,7 @@ namespace Halfbreed
 {
 	public class CharacterClassToStringConverter
 	{
-		// TODO: Add upper case versions.
+		// TODO: Add upper case versions and the reverse.
 		private static Dictionary<string, CharacterClasses> _stringToCharacterClass =
 			new Dictionary<string, CharacterClasses>
 		{
