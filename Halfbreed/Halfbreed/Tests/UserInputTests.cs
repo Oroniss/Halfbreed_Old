@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Halfbreed
 {
     [TestFixture]
-    public class InputTests
+    public class UserInputTests
     {
 		[Test]
 		public void TestKeyBoardInputSimulator()
