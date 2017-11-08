@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 namespace Halfbreed
 {
-	public static class StartGameMenus
+	public static class MainMenu
 	{
-		private static List<string> _titleMenu = new List<string>{"New Game", "Load Game", "View Achievements",
+		private static List<string> _mainMenuOptions = new List<string>{"New Game", "Load Game", "View Achievements",
 			"Clear Achievements", "View Commands", "Config"};
 
 		public static void TitleMenu()
 		{
 			while (true)
 			{
-				int selection = UserInputHandler.SelectFromMenu("Welcome to Halfbreed", _titleMenu, "Escape to Quit");
+				int selection = UserInputHandler.SelectFromMenu("Welcome to Halfbreed", _mainMenuOptions, "Escape to Quit");
 
 				switch (selection)
 				{
