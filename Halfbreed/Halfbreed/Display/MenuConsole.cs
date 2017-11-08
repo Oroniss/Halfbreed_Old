@@ -1,8 +1,8 @@
-﻿using RLNET;
+using RLNET;
 using System.Collections.Generic;
 namespace Halfbreed
 {
-	public class MenuConsole : DisplayConsole
+	public class MenuConsole : BaseConsole
 	{
 		public MenuConsole(int height, int width, int top, int left, RLColor backColor, BackConsole backConsole)
 			: base(height, width, top, left, backColor, backConsole)
