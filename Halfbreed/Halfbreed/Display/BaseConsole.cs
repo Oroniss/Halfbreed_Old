@@ -1,7 +1,7 @@
 ﻿using RLNET;
 namespace Halfbreed
 {
-	public class DisplayConsole
+	public abstract class BaseConsole
 	{
 		int _height;
 		int _width;
@@ -11,7 +11,7 @@ namespace Halfbreed
 		BackConsole _backConsole;
 		protected RLConsole _console;
 
-		public DisplayConsole(int height, int width, int top, int left, RLColor backColor, BackConsole backConsole)
+		public BaseConsole(int height, int width, int top, int left, RLColor backColor, BackConsole backConsole)
 		{
 			_height = height;
 			_width = width;
