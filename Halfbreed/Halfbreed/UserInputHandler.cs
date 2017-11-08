@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using RLNET;
@@ -47,7 +47,7 @@ namespace Halfbreed
 				{
 					currentDisplay.Add(((i % 10 + 1) % 10).ToString() + ": " + menuOptions[i]);
 				}
-				GraphicDesplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
+				MainGraphicDisplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
 
 				string key = getNextKey();
 
