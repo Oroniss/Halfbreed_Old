@@ -1,15 +1,14 @@
-﻿using System.Threading;
-using RLNET;
+﻿using RLNET;
 
 namespace Halfbreed
 {
-    public static class GraphicDesplay
+    public static class MainGraphicDisplay
     {
 		// TODO: Refactor out the magic numbers here
 		private static BackConsole _backConsole = new BackConsole(120, 90);
 		private static MenuConsole _menuConsole = new MenuConsole(86, 116, 2, 2, RLColor.LightGray, _backConsole);
 
-		static GraphicDesplay()
+		static MainGraphicDisplay()
 		{
 			_backConsole.Print(5, 5, "Hello", RLColor.Cyan);
 		}
