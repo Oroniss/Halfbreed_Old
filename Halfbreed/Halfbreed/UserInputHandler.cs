@@ -8,19 +8,15 @@ namespace Halfbreed
     public static class UserInputHandler
     {
         private static List<String> _queuedInput = new List<String>();
-        private static KeyToStringConverter _keyConverter = new KeyToStringConverter();
 
 		private static List<String> _numberKeys = new List<String>
 		    {"1", "2", "3", "4", "5", "6", "7", "8", "9",  "0"};
 
-        public static void addKeyboardInput(RLKey key)
+        public static void addKeyboardInput(string key)
         {
-            if(_keyConverter.checkKeyIsValid(key))
+            lock (_queuedInput)
             {
-                lock (_queuedInput)
-                {
-                    _queuedInput.Add(_keyConverter.convertKeyToString(key));
-                }
+                _queuedInput.Add(key);
             }
         }
 
@@ -33,7 +29,7 @@ namespace Halfbreed
                     if(_queuedInput.Count > 0)
                     {
                         String toReturn = _queuedInput[0];
-                        _queuedInput = new List<string>();
+						_queuedInput.RemoveAt(0);
                         return toReturn;
                     }
                 }
@@ -49,7 +45,7 @@ namespace Halfbreed
 				List<String> currentDisplay = new List<string>();
 				for (int i = 10 * page; i < Math.Min(10 * (page + 1), menuOptions.Count); i++)
 				{
-					currentDisplay.Add((i % 10 + 1).ToString() + ": " + menuOptions[i]);
+					currentDisplay.Add(((i % 10 + 1) % 10).ToString() + ": " + menuOptions[i]);
 				}
 				GraphicDesplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
 
@@ -58,9 +54,19 @@ namespace Halfbreed
 				if (_numberKeys.Contains(key))
 				{
 					int num = Int32.Parse(key);
-					if (num + page * 10 <= menuOptions.Count)
+					if (num == 0)
 					{
-						return num - 1 + page * 10;
+						if ((page + 1) * 10 <= menuOptions.Count)
+						{
+							return (page + 1) * 10 - 1;
+						}
+					}
+					else
+					{
+						if (num + page * 10 <= menuOptions.Count)
+						{
+							return num - 1 + page * 10;
+						}
 					}
 				}
 				if (key == "LEFT" && page > 0)
