@@ -7,21 +7,6 @@ namespace Halfbreed
     [TestFixture]
     public class InputTests
     {
-        [Test]
-        public void TestCheckKeyIsValid()
-        {
-            Assert.IsFalse(KeyToStringConverter.checkKeyIsValid(RLKey.Tab));
-            Assert.IsTrue(KeyToStringConverter.checkKeyIsValid(RLKey.Escape));
-        }
-
-        [Test]
-        public void TestConvertKeyToString()
-        {
-            Assert.AreEqual("ESCAPE", KeyToStringConverter.convertKeyToString(RLKey.Escape));
-            Assert.AreEqual("LEFT", KeyToStringConverter.convertKeyToString(RLKey.Left));
-            Assert.AreEqual("RIGHT", KeyToStringConverter.convertKeyToString(RLKey.Right));
-        }
-
 		[Test]
 		public void TestKeyBoardInputSimulator()
 		{
