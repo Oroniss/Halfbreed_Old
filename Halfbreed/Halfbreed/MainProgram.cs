@@ -42,7 +42,8 @@ namespace Halfbreed
             RLKeyPress key = mainconsole.Keyboard.GetKeyPress();
             if (key != null)
             {
-                UserInputHandler.addKeyboardInput(key.Key);
+				if (KeyToStringConverter.checkKeyIsValid(key.Key))
+					UserInputHandler.addKeyboardInput(KeyToStringConverter.convertKeyToString(key.Key));
             }
         }
 
