@@ -1,4 +1,4 @@
-﻿using RLNET;
+using RLNET;
 
 namespace Halfbreed
 {
@@ -24,7 +24,7 @@ namespace Halfbreed
 			}
 		}
 
-		public static RLRootConsole CopyDisplayToMainConsole(RLRootConsole destination)
+		public static RLRootConsole CopyDisplayToRootConsole(RLRootConsole destination)
 		{
 			lock (_backConsole)
 			{

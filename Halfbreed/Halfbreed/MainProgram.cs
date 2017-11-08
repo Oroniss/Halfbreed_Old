@@ -6,40 +6,40 @@ namespace Halfbreed
 {
     public static class MainProgram
     {
-        private static RLRootConsole mainconsole;
+        private static RLRootConsole rootConsole;
 
         public static void Main()
         {
-            MainProgram.mainconsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
+			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
-            mainconsole.OnLoad += RootConsoleOnLoad;
-            mainconsole.Update += RootConsoleUpdate;
-            mainconsole.Render += RootConsoleRender;
+            rootConsole.OnLoad += RootConsoleOnLoad;
+            rootConsole.Update += RootConsoleUpdate;
+            rootConsole.Render += RootConsoleRender;
 
 			Thread loopThread = new Thread(MainMenu.TitleMenu);
 			loopThread.Start();
 
-            mainconsole.Run();
+            rootConsole.Run();
         }
 
         static void RootConsoleOnLoad(object sender, EventArgs e)
         {
-            mainconsole.SetWindowState(RLWindowState.Fullscreen);
+            rootConsole.SetWindowState(RLWindowState.Fullscreen);
         }
 
         static void RootConsoleRender(object sender, EventArgs e)
         {
 			if (MainGraphicDisplay.IsDirty)
 			{
-				mainconsole.Clear();
-				mainconsole = MainGraphicDisplay.CopyDisplayToMainConsole(mainconsole);
-				mainconsole.Draw();
+				rootConsole.Clear();
+				rootConsole = MainGraphicDisplay.CopyDisplayToRootConsole(rootConsole);
+				rootConsole.Draw();
 			}
 		}
 
         static void RootConsoleUpdate(object sender, EventArgs e)
         {
-            RLKeyPress key = mainconsole.Keyboard.GetKeyPress();
+            RLKeyPress key = rootConsole.Keyboard.GetKeyPress();
             if (key != null)
             {
 				if (KeyToStringConverter.checkKeyIsValid(key.Key))
@@ -49,7 +49,7 @@ namespace Halfbreed
 
 		public static void quit()
 		{
-			mainconsole.Close();
+			rootConsole.Close();
 		}
 
     }
