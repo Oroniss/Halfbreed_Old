@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System;
+
 namespace Halfbreed
 {
 	public class Level
@@ -8,10 +9,12 @@ namespace Halfbreed
 
 		private LevelMap _map;
 
+
 		public Level(string levelID)
 		{
 			_map = new LevelMap(levelID + "Map.txt");
 		}
+
 
 		public int MapWidth
 		{
@@ -26,6 +29,12 @@ namespace Halfbreed
 		public bool IsValidMapCoord(int x, int y)
 		{
 			return _map.IsValidMapCoord(x, y);
+		}
+
+		public TileType getMaptile(int x, int y)
+		{
+			// TODO: Add in check once furnishings go in.
+			return _map.GetTile(x, y);
 		}
 	}
 }
