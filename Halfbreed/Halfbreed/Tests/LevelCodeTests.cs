@@ -53,5 +53,28 @@ namespace Halfbreed
 			Assert.AreEqual(TileType.WOODENDEBRIS, testMap.GetTile(37, 8));
 			Assert.AreEqual(TileType.WOODENDEBRIS, testMap.GetTile(35, 10));
 		}
+
+		[Test]
+		public void TestRevealed()
+		{
+			LevelMap testMap = new LevelMap(testLevelMapFilePath);
+
+			Assert.IsFalse(testMap.isRevealed(0, 0));
+			Assert.IsFalse(testMap.isRevealed(15, 15));
+			Assert.IsFalse(testMap.isRevealed(20, 20));
+			Assert.IsFalse(testMap.isRevealed(15, 0));
+
+			testMap.revealTile(0, 0);
+			testMap.revealTile(10, 0);
+			testMap.revealTile(0, 15);
+
+			Assert.IsFalse(testMap.isRevealed(15, 0));
+			Assert.IsFalse(testMap.isRevealed(0, 10));
+
+			Assert.IsTrue(testMap.isRevealed(0, 0));
+			Assert.IsTrue(testMap.isRevealed(10, 0));
+			Assert.IsTrue(testMap.isRevealed(0, 15));
+
+		}
 	}
 }
