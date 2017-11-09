@@ -61,9 +61,19 @@ namespace Halfbreed
 		{
 			return x >= 0 && x < _width && y >= 0 && y < _height;
 		}
+
 		public TileType GetTile(int x, int y)
 		{
 			return _mapGrid[y * _width + x];
+		}
+
+		public bool isRevealed(int x, int y)
+		{
+			return _revealed[y * _width + x];
+		}
+		public void revealTile(int x, int y)
+		{
+			_revealed[y * _width + x] = true;
 		}
 
 	}
