@@ -5,46 +5,27 @@ namespace Halfbreed
 {
 	public class Level
 	{
-		private string _levelName;
-		private int _levelHeight;
-		private int _levelWidth;
-		private int _lightingLevel;
-		private float _anathemaMultiplier;
+
+		private LevelMap _map;
 
 		public Level(string levelID)
 		{
-			FileStream levelFile = File.Open(levelID + ".txt", FileMode.Open);
-
-			StreamReader reader = new StreamReader(levelFile);
-
-			_levelName = reader.ReadLine();
-			_levelHeight = Int32.Parse(reader.ReadLine());
-			_levelWidth = Int32.Parse(reader.ReadLine());
-			_lightingLevel = Int32.Parse(reader.ReadLine());
-			_anathemaMultiplier = float.Parse(reader.ReadLine());
-
-			levelFile.Close();
+			_map = new LevelMap(levelID + "Map.txt");
 		}
 
-		public string LevelName
+		public int MapWidth
 		{
-			get { return _levelName; }
+			get { return _map.Width; }
 		}
-		public int Height
+
+		public int MapHeight
 		{
-			get { return _levelHeight; }
+			get { return _map.Height; }
 		}
-		public int Width
+
+		public bool IsValidMapCoord(int x, int y)
 		{
-			get { return _levelWidth; }
-		}
-		public int LightingLevel
-		{
-			get { return _lightingLevel; }
-		}
-		public float AnathemaModifier
-		{
-			get { return _anathemaMultiplier; }
+			return _map.IsValidMapCoord(x, y);
 		}
 	}
 }
