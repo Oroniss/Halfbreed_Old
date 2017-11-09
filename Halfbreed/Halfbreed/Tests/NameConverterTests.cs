@@ -31,5 +31,14 @@ namespace Halfbreed
 							CharacterClassToStringConverter.ConvertStringToCharacterClass("Dragonlord"));
 		}
 
+		[Test]
+		public void TestStringToColorConverter()
+		{
+			Assert.AreEqual(Palette.BLACK, StringToColorConverter.ConvertStringToColor("Black"));
+			Assert.AreEqual(Palette.WHITE, StringToColorConverter.ConvertStringToColor("White"));
+			Assert.AreEqual(Palette.WOODBROWN, StringToColorConverter.ConvertStringToColor("Wood Brown"));
+			Assert.AreEqual(Palette.DARKWOODBROWN, StringToColorConverter.ConvertStringToColor("Dark Wood Brown"));
+		}
+
 	}
 }
