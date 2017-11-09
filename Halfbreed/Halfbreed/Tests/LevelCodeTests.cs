@@ -9,6 +9,7 @@ namespace Halfbreed
 		[Test]
 		public void TestLevelConstruction()
 		{
+			// TODO: Put a test in that tries to load every level to make sure it parses.
 			string filePath = TestContext.CurrentContext.TestDirectory + "/Tests/TestLevel";
 			Level testLevel = new Level(filePath);
 
