@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 namespace Halfbreed
 {
 	public static class MainMenu
@@ -17,12 +18,16 @@ namespace Halfbreed
 					case 0:
 						{
 							bool proceed = CharacterCreationMenus.StartNewGame();
-							if (!proceed)
+							if (proceed)
 							{
-								MainProgram.quit();
-								return;
+								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/Test";
+								Level lvl = new Level(filePath);
+								MainGraphicDisplay.MapConsole.DrawMap(lvl, 5, 5);
+								string key = UserInputHandler.getNextKey();
 							}
-							break;
+							MainProgram.quit();
+							return;
+
 						}
 					case -1:
 						{
