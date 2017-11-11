@@ -20,20 +20,20 @@ namespace Halfbreed
 		{
 			NewGameParameters parameters = new NewGameParameters();
 
-			parameters = SelectAndSetDifficulty(parameters);
+			parameters = ChooseDifficulty(parameters);
 
 			if (parameters.Cancel)
 				return parameters;
 
-			parameters = SelectAndSetCharacterClass(parameters);
+			parameters = ChooseCharacterClass(parameters);
 
 			if (parameters.Cancel)
 				return parameters;
 
-			return SelectAndSetUseAchievements(parameters);
+			return ChooseUseAchievements(parameters);
 		}
 
-		private static NewGameParameters SelectAndSetDifficulty(NewGameParameters parameters)
+		private static NewGameParameters ChooseDifficulty(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
 														  "Escape to quit.");
@@ -44,7 +44,7 @@ namespace Halfbreed
 			return parameters;
 		}
 
-		private static NewGameParameters SelectAndSetCharacterClass(NewGameParameters parameters)
+		private static NewGameParameters ChooseCharacterClass(NewGameParameters parameters)
 		{
 			List<string> classList = _hl12classes;
 
@@ -70,7 +70,7 @@ namespace Halfbreed
 
 		}
 
-		private static NewGameParameters SelectAndSetUseAchievements(NewGameParameters parameters)
+		private static NewGameParameters ChooseUseAchievements(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
 															new List<string> { "Yes", "No" }, "Escape to Quit");
