@@ -1,4 +1,5 @@
 ﻿using RLNET;
+
 namespace Halfbreed
 {
 	public class MapConsole:BaseConsole
