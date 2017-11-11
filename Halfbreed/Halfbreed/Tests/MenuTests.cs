@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 
 namespace Halfbreed
 {
@@ -9,35 +9,51 @@ namespace Halfbreed
 		[Test]
 		public void TestCharacterCreationMenu()
 		{
+			NewGameParameters ps = new NewGameParameters();
+			ps.CharacterClass = CharacterClasses.CLERIC;
+			Assert.AreEqual(ps.CharacterClass, CharacterClasses.CLERIC);
+
+			UserInputHandler.clearAllInput();
+
 			string[] keys = new string[] { "3", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			CharacterCreationMenus.StartNewGame();
-			Assert.AreEqual(3, GameParameters.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.NECROMANCER, GameParameters.CharacterClass);
-			Assert.IsTrue(GameParameters.UseAchievements);
+			NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
+			GameEngine.SetStartingParameters(parameters);
+			Assert.AreEqual(3, GameEngine.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.NECROMANCER, GameEngine.CharacterClass);
+			Assert.IsTrue(GameEngine.UseAchievements);
+
+			UserInputHandler.clearAllInput();
 
 			keys = new string[] { "1", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			CharacterCreationMenus.StartNewGame();
-			Assert.AreEqual(1, GameParameters.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.THIEF, GameParameters.CharacterClass);
-			Assert.IsTrue(GameParameters.UseAchievements);
+			parameters = CharacterCreationMenus.StartNewGame();
+			GameEngine.SetStartingParameters(parameters);
+			Assert.AreEqual(1, GameEngine.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.THIEF, GameEngine.CharacterClass);
+			Assert.IsTrue(GameEngine.UseAchievements);
+
+			UserInputHandler.clearAllInput();
 
 			keys = new string[] { "5", "1", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			CharacterCreationMenus.StartNewGame();
-			Assert.AreEqual(5, GameParameters.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.DRAGONLORD, GameParameters.CharacterClass);
-			Assert.IsFalse(GameParameters.UseAchievements);
+			parameters = CharacterCreationMenus.StartNewGame();
+			GameEngine.SetStartingParameters(parameters);
+			Assert.AreEqual(5, GameEngine.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.DRAGONLORD, GameEngine.CharacterClass);
+			Assert.IsFalse(GameEngine.UseAchievements);
+
+			UserInputHandler.clearAllInput();
 
 			keys = new string[] { "6", "4", "7", "1", "3", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			CharacterCreationMenus.StartNewGame();
-			Assert.AreEqual(4, GameParameters.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.BARD, GameParameters.CharacterClass);
-			Assert.IsFalse(GameParameters.UseAchievements);
+			parameters = CharacterCreationMenus.StartNewGame();
+			GameEngine.SetStartingParameters(parameters);
+			Assert.AreEqual(4, GameEngine.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.BARD, GameEngine.CharacterClass);
+			Assert.IsFalse(GameEngine.UseAchievements);
 
-
+			UserInputHandler.clearAllInput();
 		}
 
 	}
