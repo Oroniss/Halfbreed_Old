@@ -17,9 +17,10 @@ namespace Halfbreed
 				{
 					case 0:
 						{
-							bool proceed = CharacterCreationMenus.StartNewGame();
-							if (proceed)
+							NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
+							if (!parameters.Cancel)
 							{
+								GameEngine.SetStartingParameters(parameters);
 								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/Test";
 								Level lvl = new Level(filePath);
 								MainGraphicDisplay.MapConsole.DrawMap(lvl, 5, 5);
