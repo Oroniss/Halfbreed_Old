@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 namespace Halfbreed
 {
 	public static class CharacterCreationMenus
@@ -16,68 +16,102 @@ namespace Halfbreed
 		private static List<string> _hl5classes = new List<string> { "Dragonlord" };
 
 
-		public static bool StartNewGame()
+		public static NewGameParameters StartNewGame()
 		{
-			bool difficultyWasSet = SelectAndSetDifficulty();
+			NewGameParameters parameters = new NewGameParameters();
 
-			if (!difficultyWasSet)
-				return false;
+			parameters = SelectAndSetDifficulty(parameters);
 
-			bool characterClasWasSet = SelectAndSetCharacterClass(GameParameters.DifficultySetting);
+			if (parameters.Cancel)
+				return parameters;
 
-			if (!characterClasWasSet)
-				return false;
+			parameters = SelectAndSetCharacterClass(parameters);
 
-			bool useAchievementsWasSet = SelectAndSetUseAchievements();
+			if (parameters.Cancel)
+				return parameters;
 
-			if (!useAchievementsWasSet)
-				return false;
-
-			return true;
+			return SelectAndSetUseAchievements(parameters);
 		}
 
-		private static bool SelectAndSetDifficulty()
+		private static NewGameParameters SelectAndSetDifficulty(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
 														  "Escape to quit.");
 			if (selection == -1)
-				return false;
-			GameParameters.setStartingDifficulty(selection + 1);
-			return true;
+				parameters.Cancel = true;
+			else
+				parameters.DifficultySetting = selection + 1;
+			return parameters;
 		}
 
-		private static bool SelectAndSetCharacterClass(int difficulty)
+		private static NewGameParameters SelectAndSetCharacterClass(NewGameParameters parameters)
 		{
 			List<string> classList = _hl12classes;
 
-			if (difficulty == 3 || difficulty == 4)
+			if (parameters.DifficultySetting == 3 || parameters.DifficultySetting == 4)
 				classList = _hl34classes;
 
-			if (difficulty == 5)
+			if (parameters.DifficultySetting == 5)
 				classList = _hl5classes;
 
 			int selection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
 
 			if (selection == -1)
-				return false;
-
-			CharacterClasses characterClass = CharacterClassToStringConverter.ConvertStringToCharacterClass(
-				classList[selection]);
-			GameParameters.setStartingCharacterClass(characterClass);
-			return true;
+			{
+				parameters.Cancel = true;
+			}
+			else
+			{
+				CharacterClasses characterClass = CharacterClassToStringConverter.ConvertStringToCharacterClass(
+					classList[selection]);
+				parameters.CharacterClass = characterClass;
+			}
+			return parameters;
 
 		}
 
-		private static bool SelectAndSetUseAchievements()
+		private static NewGameParameters SelectAndSetUseAchievements(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
 															new List<string> { "Yes", "No" }, "Escape to Quit");
 
 			if (selection == -1)
-				return false;
+				parameters.Cancel = true;
+			else
+				parameters.UseAchievements = (selection == 0);
+			return parameters;
+		}
+	}
 
-			GameParameters.setStartingUseAchievements(selection == 0);
-			return true;
+	public class NewGameParameters
+	{
+		private bool cancel = false;
+		private int difficultySetting = 1;
+		private CharacterClasses characterClass = CharacterClasses.FIGHTER;
+		private bool useAchievements = true;
+
+		public bool Cancel
+		{
+			get { return cancel; }
+			set { cancel = value; }
+		}
+
+		public int DifficultySetting
+		{
+			get { return difficultySetting; }
+			set { difficultySetting = value; }
+		}
+
+		public CharacterClasses CharacterClass
+		{
+			get { return characterClass; }
+			set { characterClass = value; }
+		}
+
+		public bool UseAchievements
+		{
+			get { return useAchievements; }
+			set { useAchievements = value; }
 		}
 	}
 }
