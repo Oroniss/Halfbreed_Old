@@ -37,6 +37,14 @@ namespace Halfbreed
             }
         }
 
+		public static void clearAllInput()
+		{
+			lock (_queuedInput)
+			{
+				_queuedInput = new List<string>();
+			}
+		}
+
 		public static int SelectFromMenu(string title, List<String> menuOptions, string bottom)
 		{
 			int page = 0;
