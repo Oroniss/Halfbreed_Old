@@ -4,7 +4,6 @@ namespace Halfbreed
 {
 	public static class Palette
 	{
-		// TODO: Update with earlier values.
 		// TODO: Remove references to built in RLColors in consoles, etc.
 		// Basics
 		public static readonly RLColor BLACK = new RLColor(0, 0, 0);
