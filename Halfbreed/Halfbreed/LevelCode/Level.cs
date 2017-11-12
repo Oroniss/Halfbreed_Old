@@ -4,6 +4,7 @@ using System;
 
 namespace Halfbreed
 {
+	[Serializable]
 	public class Level
 	{
 
