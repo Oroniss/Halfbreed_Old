@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading;
 using RLNET;
 
@@ -10,21 +11,23 @@ namespace Halfbreed
 
         public static void Main()
         {
+			SetupDirectoriesAndFiles();
+
 			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
             rootConsole.OnLoad += RootConsoleOnLoad;
             rootConsole.Update += RootConsoleUpdate;
             rootConsole.Render += RootConsoleRender;
 
-			Thread loopThread = new Thread(MainMenu.TitleMenu);
-			loopThread.Start();
+			Thread mainLoopThread = new Thread(MainMenu.TitleMenu);
+			mainLoopThread.Start();
 
             rootConsole.Run();
         }
 
         static void RootConsoleOnLoad(object sender, EventArgs e)
         {
-            rootConsole.SetWindowState(RLWindowState.Fullscreen);
+            //rootConsole.SetWindowState(RLWindowState.Fullscreen);
         }
 
         static void RootConsoleRender(object sender, EventArgs e)
@@ -50,6 +53,16 @@ namespace Halfbreed
 		public static void quit()
 		{
 			rootConsole.Close();
+		}
+
+		public static void SetupDirectoriesAndFiles()
+		{
+			if (!Directory.Exists("Saves"))
+				Directory.CreateDirectory("Saves");
+			if (!Directory.Exists("Logs"))
+				Directory.CreateDirectory("Logs");
+			if (!Directory.Exists("Misc"))
+				Directory.CreateDirectory("Misc");
 		}
 
     }
