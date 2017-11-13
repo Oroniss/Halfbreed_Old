@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Collections.Generic;
 using RLNET;
 
 namespace Halfbreed
@@ -11,7 +12,7 @@ namespace Halfbreed
 
         public static void Main()
         {
-			SetupDirectoriesAndFiles();
+			ReaderWriter.SetupDirectoriesAndFiles();
 
 			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
@@ -53,16 +54,6 @@ namespace Halfbreed
 		public static void quit()
 		{
 			rootConsole.Close();
-		}
-
-		public static void SetupDirectoriesAndFiles()
-		{
-			if (!Directory.Exists("Saves"))
-				Directory.CreateDirectory("Saves");
-			if (!Directory.Exists("Logs"))
-				Directory.CreateDirectory("Logs");
-			if (!Directory.Exists("Misc"))
-				Directory.CreateDirectory("Misc");
 		}
 
     }
