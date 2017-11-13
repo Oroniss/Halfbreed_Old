@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 namespace Halfbreed
 {
 	public static class GameEngine
@@ -47,16 +51,28 @@ namespace Halfbreed
 		// TODO: Put these somewhere else
 		public static void SaveGame()
 		{
-			// Game parameters
+			IFormatter saveFormatter = new BinaryFormatter();
+			Stream saveStream = new FileStream(_saveFileName, FileMode.Create, FileAccess.Write);
+			NewGameParameters parameters = new NewGameParameters(_difficultySetting, _characterClass, _useAchievements);
+			saveFormatter.Serialize(saveStream, parameters);
+			saveStream.Flush();
+			saveStream.Close();
+
 			// Current Level
 			
 		}
 
-		public static void LoadGame()
+		public static void LoadGame(string loadFileName)
 		{
-			// Game parameters
-			// Current level
-			
+			IFormatter loadFormatter = new BinaryFormatter();
+			Stream loadStream = new FileStream(loadFileName, FileMode.Open, FileAccess.Read);
+			NewGameParameters parameters = (NewGameParameters)loadFormatter.Deserialize(loadStream);
+			loadStream.Close();
+			SetStartingParameters(parameters);
+
+			// Current Level
 		}
+
 	}
+
 }
