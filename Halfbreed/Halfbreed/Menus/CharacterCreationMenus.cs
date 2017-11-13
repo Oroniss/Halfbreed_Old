@@ -83,12 +83,24 @@ namespace Halfbreed
 		}
 	}
 
+	[System.Serializable]
 	public class NewGameParameters
 	{
 		private bool cancel = false;
-		private int difficultySetting = 1;
-		private CharacterClasses characterClass = CharacterClasses.FIGHTER;
-		private bool useAchievements = true;
+		private int _difficultySetting = 1;
+		private CharacterClasses _characterClass = CharacterClasses.FIGHTER;
+		private bool _useAchievements = true;
+
+		public NewGameParameters()
+		{
+		}
+
+		public NewGameParameters(int difficulty, CharacterClasses characterClass, bool useAchievements)
+		{
+			_difficultySetting = difficulty;
+			_characterClass = characterClass;
+			_useAchievements = useAchievements;
+		}
 
 		public bool Cancel
 		{
@@ -98,20 +110,20 @@ namespace Halfbreed
 
 		public int DifficultySetting
 		{
-			get { return difficultySetting; }
-			set { difficultySetting = value; }
+			get { return _difficultySetting; }
+			set { _difficultySetting = value; }
 		}
 
 		public CharacterClasses CharacterClass
 		{
-			get { return characterClass; }
-			set { characterClass = value; }
+			get { return _characterClass; }
+			set { _characterClass = value; }
 		}
 
 		public bool UseAchievements
 		{
-			get { return useAchievements; }
-			set { useAchievements = value; }
+			get { return _useAchievements; }
+			set { _useAchievements = value; }
 		}
 	}
 }
