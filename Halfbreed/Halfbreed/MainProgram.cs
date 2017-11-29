@@ -1,7 +1,5 @@
 using System;
-using System.IO;
 using System.Threading;
-using System.Collections.Generic;
 using RLNET;
 
 namespace Halfbreed
@@ -12,7 +10,7 @@ namespace Halfbreed
 
         public static void Main()
         {
-			ReaderWriter.SetupDirectoriesAndFiles();
+			SQLiteConnection.SetupDirectoriesAndFiles();
 
 			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
