@@ -1,1 +1,14 @@
 ﻿
+Need to figure out how best to design this.
+When should we check/assign things like paths, save file ids, etc.
+Needs to work with both main game and testing environment.
+Set starting parameters should really do only what it is supposed to do.
+Have a generate id function - called from main menu when the game is created.
+
+A Database for save games.
+A table for the save game summaries.
+A table for the actual save games themselves - may require more than 1.
+These should all have a foreign key back to the main table.
+
+The database is currently set to copy - eventually it should become an embedded resource.
+This means it needs a wrapper to avoid changing many places.
