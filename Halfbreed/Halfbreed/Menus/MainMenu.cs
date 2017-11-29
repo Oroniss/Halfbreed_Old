@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 namespace Halfbreed
 {
@@ -20,6 +20,7 @@ namespace Halfbreed
 							NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
 							if (!parameters.Cancel)
 							{
+								parameters.GameId = SQLiteConnection.GenerateNextGameId();
 								GameEngine.SetStartingParameters(parameters);
 								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/Test";
 								Level lvl = new Level(filePath);
