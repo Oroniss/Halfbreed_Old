@@ -10,7 +10,7 @@ namespace Halfbreed
 
         public static void Main()
         {
-			SQLiteConnection.SetupDirectoriesAndFiles();
+			// DatabaseConnection.SetupDirectoriesAndFiles();
 
 			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
 
