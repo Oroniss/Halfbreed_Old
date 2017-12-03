@@ -36,5 +36,11 @@ namespace Halfbreed
 			LastSaveTime = lastSaveTime;
 		}
 
+		public override string ToString()
+		{
+			
+			return string.Format("[SaveGameSummary]");
+		}
+
 	}
 }
