@@ -129,7 +129,6 @@ namespace SQLite
 		private TimeSpan _busyTimeout;
 		private Dictionary<string, TableMapping> _mappings = null;
 		private Dictionary<string, TableMapping> _tables = null;
-		private System.Diagnostics.Stopwatch _sw;
 		private long _elapsedMilliseconds = 0;
 
 		private int _transactionDepth = 0;
