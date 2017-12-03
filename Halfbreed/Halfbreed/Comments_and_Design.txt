@@ -6,9 +6,9 @@ Set starting parameters should really do only what it is supposed to do.
 Have a generate id function - called from main menu when the game is created.
 
 A Database for save games.
-A table for the save game summaries.
 A table for the actual save games themselves - may require more than 1.
 These should all have a foreign key back to the main table.
 
-The database is currently set to copy - eventually it should become an embedded resource.
-This means it needs a wrapper to avoid changing many places.
+Figure out how to store complex stuff in the database - probably serialization again.
+
+Should swap new game so that it saves a new game and then calls load game.
