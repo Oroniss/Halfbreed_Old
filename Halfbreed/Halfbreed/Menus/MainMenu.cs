@@ -20,7 +20,7 @@ namespace Halfbreed
 							NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
 							if (!parameters.Cancel)
 							{
-								parameters.GameId = SQLiteConnection.GenerateNextGameId();
+								parameters.GameId = DatabaseConnection.GenerateNextGameId();
 								GameEngine.SetStartingParameters(parameters);
 								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/Test";
 								Level lvl = new Level(filePath);
@@ -30,6 +30,11 @@ namespace Halfbreed
 							MainProgram.quit();
 							return;
 
+						}
+					case 1:
+						{
+							int gameId = LoadGameMenus.SelectSavedGame();
+							break;
 						}
 					case -1:
 						{
