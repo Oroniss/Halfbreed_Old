@@ -38,8 +38,25 @@ namespace Halfbreed
 
 		public override string ToString()
 		{
+			DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			dtDateTime = dtDateTime.AddSeconds( LastSaveTime ).ToLocalTime();
+
+			string achString = "Off";
+			if (UseAchievements)
+				achString = "On";
 			
-			return string.Format("[SaveGameSummary]");
+			string[] items = new string[] {
+				CharacterClassToStringConverter.ConvertCharacterClassToString(CharacterClass), 
+				DifficultySetting.ToString(),
+				achString, 
+				CurrentLevelName,
+				dtDateTime.ToString(),
+				};
+			
+			string returnString = "Character Class: {0}, Difficulty: {1}, Use Previous Achievements: {2}" +
+				"\nCurrent Level: {3}, Last Save Time: {4}.";
+			
+			return string.Format(returnString, items);
 		}
 
 	}
