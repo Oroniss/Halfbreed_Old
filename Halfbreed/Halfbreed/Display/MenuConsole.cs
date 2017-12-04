@@ -16,14 +16,21 @@ namespace Halfbreed
 
 			_console.Print(5, 5, title, RLColor.Black);
 
-			// TODO: Figure out how to split a single element over multiple lines.
 			// TODO: Figure out whether we can dynamically space the menu between 1 and 4 spaces.
 			for (int i = 0; i < options.Count; i++)
 			{
-				_console.Print(5, 10 + 4 * i, options[i], RLColor.Black);
+				if (options[i].Contains("\n"))
+				{
+					var pieces = options[i].Split('\n');
+					// TODO: Add a check for more than 3 pieces.
+					for (int j = 0; j < pieces.Length; j++)
+						_console.Print(5, 10 + 4 * i + j, pieces[j], Palette.BLACK);
+				}
+				else
+					_console.Print(5, 10 + 4 * i, options[i], Palette.BLACK);
 			}
 
-			_console.Print(5, 80, bottom, RLColor.Black);
+			_console.Print(5, 80, bottom, Palette.BLACK);
 
 			CopyToBackConsole();
 		}
