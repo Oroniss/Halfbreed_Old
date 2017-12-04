@@ -20,9 +20,30 @@ namespace Halfbreed
 			{"Dragonlord", CharacterClasses.DRAGONLORD}
 		};
 
+		private static Dictionary<CharacterClasses, string> _characterClassToString =
+			new Dictionary<CharacterClasses, string>
+		{
+			{CharacterClasses.CLERIC, "Cleric"},
+			{CharacterClasses.FIGHTER, "Fighter"},
+			{CharacterClasses.MAGE, "Mage"},
+			{CharacterClasses.THIEF, "Thief"},
+			{CharacterClasses.BARD, "Bard"},
+			{CharacterClasses.BLACKGUARD, "Blackguard"},
+			{CharacterClasses.DRUID, "Druid"},
+			{CharacterClasses.NECROMANCER, "Necromancer"},
+			{CharacterClasses.PALADIN, "Paladin"},
+			{CharacterClasses.RANGER, "Ranger"},
+			{CharacterClasses.DRAGONLORD, "Dragonlord"}
+		};
+
 		public static CharacterClasses ConvertStringToCharacterClass(string characterClassName)
 		{
 			return _stringToCharacterClass[characterClassName];
+		}
+
+		public static string ConvertCharacterClassToString(CharacterClasses characterClass)
+		{
+			return _characterClassToString[characterClass];
 		}
 
 	}
