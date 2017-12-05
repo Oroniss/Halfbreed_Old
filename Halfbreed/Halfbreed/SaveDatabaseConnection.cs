@@ -5,9 +5,9 @@ using Mono.Data.Sqlite;
 
 namespace Halfbreed
 {
-	public static class DatabaseConnection
+	public static class SaveDatabaseConnection
 	{
-		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/Halfbreed.db";
+		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/HalfbreedSv.db";
         private static SqliteConnection _connection;
 		private static bool _testingMode = false;
 
@@ -32,7 +32,8 @@ namespace Halfbreed
 			_connection.Open();
 			List<SaveGameSummary> saveList = new List<SaveGameSummary>();
 
-			string commandString = "SELECT * FROM SaveGameSummaries WHERE StillAlive = 1;";
+			// TODO: Decide whether to order by GameId or Last Save Time reversed.
+			string commandString = "SELECT * FROM SaveGameSummaries WHERE StillAlive = 1 ORDER BY GameId;";
 
 			using (var queryCommand = _connection.CreateCommand())
 			{
@@ -89,8 +90,32 @@ namespace Halfbreed
 
 		public static void WriteSaveGame(SaveGameSummary summary, object data)
 		{
-			// Only needs to modify current level, still alive, last save time.
-			// Then write the serialized data to the db.
+			UpdateSaveSummary(summary);
+			if (summary.StillAlive)
+			{
+				// Then write the serialized data to the db.
+			}
+		}
+
+		private static void UpdateSaveSummary(SaveGameSummary summary)
+		{
+			_connection = new SqliteConnection("Data Source=" + _DatabaseLocation);
+			_connection.Open();
+
+			int isAlive = 0;
+			if (summary.StillAlive)
+				isAlive = 1;
+
+			string commandString = string.Format(
+				"UPDATE SaveGameSummaries SET CurrentLevelName = \"{0}\", StillAlive = {1}, LastSaveTime = {2} " + 
+				"WHERE GameId = {3};", summary.CurrentLevelName, isAlive, summary.LastSaveTime, summary.GameId);
+
+			var updateCommand = _connection.CreateCommand();
+			updateCommand.CommandText = commandString;
+            var numberOfRows = updateCommand.ExecuteNonQuery();
+
+			_connection.Close();
+
 		}
 
 		public static object ReadSaveGame(int gameId)
