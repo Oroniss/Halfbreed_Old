@@ -5,11 +5,6 @@ namespace Halfbreed
 	public static class LoadGameMenus
 	{
 
-		public static void LoadGame(int gameId)
-		{
-
-		}
-
 		public static int SelectSavedGame()
 		{
 			List<SaveGameSummary> currentSaves = DatabaseConnection.GetSaveGameSummaries();
