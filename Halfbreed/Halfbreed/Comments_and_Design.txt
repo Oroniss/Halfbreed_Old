@@ -1,14 +1,10 @@
 ﻿
-Need to figure out how best to design this.
-When should we check/assign things like paths, save file ids, etc.
-Needs to work with both main game and testing environment.
-Set starting parameters should really do only what it is supposed to do.
-Have a generate id function - called from main menu when the game is created.
-
 A Database for save games.
 A table for the actual save games themselves - may require more than 1.
-These should all have a foreign key back to the main table.
 
 Figure out how to store complex stuff in the database - probably serialization again.
 
 Should swap new game so that it saves a new game and then calls load game.
+
+Need to rejig the saving stuff so that it has it's own DB and DB connection class to
+prevent overwrite on entity db updates.

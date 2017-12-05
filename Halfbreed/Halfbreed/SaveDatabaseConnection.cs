@@ -11,11 +11,6 @@ namespace Halfbreed
         private static SqliteConnection _connection;
 		private static bool _testingMode = false;
 
-		public static void SetupDirectoriesAndFiles()
-		{
-
-		}
-
 		public static int GenerateNextGameId()
 		{
 			_connection = new SqliteConnection("Data Source=" + _DatabaseLocation);
@@ -92,11 +87,17 @@ namespace Halfbreed
 			_connection.Close();
 		}
 
-		public static void UpdateSaveGameSummary(SaveGameSummary summary)
+		public static void WriteSaveGame(SaveGameSummary summary, object data)
 		{
 			// Only needs to modify current level, still alive, last save time.
+			// Then write the serialized data to the db.
 		}
 
+		public static object ReadSaveGame(int gameId)
+		{
+			// Needs to read the serialized data out of the db.
+			return true;
+		}
 
 		// Testing functionality
 		public static bool CopyAndSwitchToTestDatabase(string TestContext)
