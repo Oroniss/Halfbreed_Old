@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed
 {
@@ -7,7 +7,7 @@ namespace Halfbreed
 
 		public static int SelectSavedGame()
 		{
-			List<SaveGameSummary> currentSaves = DatabaseConnection.GetSaveGameSummaries();
+			List<SaveGameSummary> currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
 			List<string> saveStrings = new List<string>();
 			foreach (SaveGameSummary saveSummary in currentSaves)
 				saveStrings.Add(saveSummary.ToString());
