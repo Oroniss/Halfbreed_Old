@@ -20,11 +20,12 @@ namespace Halfbreed
 							NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
 							if (!parameters.Cancel)
 							{
-								parameters.GameId = DatabaseConnection.GenerateNextGameId();
+								parameters.GameId = SaveDatabaseConnection.GenerateNextGameId();
 								GameEngine.SetStartingParameters(parameters);
 								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/Test";
 								Level lvl = new Level(filePath);
 								MainGraphicDisplay.MapConsole.DrawMap(lvl, 5, 5);
+								SaveDatabaseConnection.InsertNewSaveGameSummary(GameEngine.GenerateSaveSummary());
 								string key = UserInputHandler.getNextKey();
 							}
 							MainProgram.quit();
