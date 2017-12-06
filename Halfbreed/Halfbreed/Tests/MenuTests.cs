@@ -1,10 +1,18 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Halfbreed
 {
 	[TestFixture]
 	public class MenuTests
 	{
+
+		[SetUp] // In visual studio this is [TestInitialize]
+		public void TestSetUp()
+		{
+			string TestDBLocation = TestContext.CurrentContext.TestDirectory;
+			Assert.True(SaveDatabaseConnection.CopyAndSwitchToTestDatabase(TestDBLocation));
+		}
 
 		[Test]
 		public void TestCharacterCreationMenu()
@@ -56,5 +64,27 @@ namespace Halfbreed
 			UserInputHandler.clearAllInput();
 		}
 
+		[Test]
+		public void TestLoadGameMenu()
+		{
+			// Need to swap the database context across.
+
+			UserInputHandler.clearAllInput();
+
+			KeyBoardInputSimulator.AddKeyBoardInput("2");
+			Assert.AreEqual(2, LoadGameMenus.SelectSavedGame());
+
+			UserInputHandler.clearAllInput();
+
+			KeyBoardInputSimulator.AddKeyBoardInput("1");
+			Assert.AreEqual(1, LoadGameMenus.SelectSavedGame());
+
+		}
+
+		[TearDown] // In visual studio this is [TestCleanUp]
+		public void TestTearDown()
+		{
+			SaveDatabaseConnection.RemoveTestDb();
+		}
 	}
 }
