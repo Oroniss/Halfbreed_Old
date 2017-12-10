@@ -1,10 +1,24 @@
 ﻿
-A Database for save games.
 A table for the actual save games themselves - may require more than 1.
 
 Figure out how to store complex stuff in the database - probably serialization again.
 
 Should swap new game so that it saves a new game and then calls load game.
 
-Need to rejig the saving stuff so that it has it's own DB and DB connection class to
-prevent overwrite on entity db updates.
+
+
+Means:
+
+On exit of level - save or continue.
+All load games restart in the town hub for the chapter.
+The deck should reset between levels as well.
+Anathema is only for the current level and resets as well.
+The variation within a level needs to increase to improve replayability.
+
+So - what needs to get saved?
+
+Achievements/Unlocks
+Equipment/Items/Money
+Abilities and setup
+
+Means logging is only for the game experience for a single level.
