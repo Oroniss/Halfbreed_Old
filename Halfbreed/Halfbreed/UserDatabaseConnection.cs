@@ -5,7 +5,7 @@ using Mono.Data.Sqlite;
 
 namespace Halfbreed
 {
-	public static class SaveDatabaseConnection
+	public static class UserDatabaseConnection
 	{
 		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/HalfbreedSv.db";
         private static SqliteConnection _connection;
@@ -46,12 +46,13 @@ namespace Halfbreed
 					int difficultySetting = reader.GetInt32(1);
 					CharacterClasses characterClass = (CharacterClasses)reader.GetInt32(2);
 					bool useAchievements = (reader.GetInt32(3) == 1);
-					string currentLevelName = reader.GetString(4);
-					bool stillAlive = (reader.GetInt32(5) == 1);
-					long lastSaveTime = reader.GetInt64(6);
+					int currentAct = reader.GetInt32(4);
+					int currentChapter = reader.GetInt32(5);
+					bool stillAlive = (reader.GetInt32(6) == 1);
+					long lastSaveTime = reader.GetInt64(7);
 
 					saveList.Add(new SaveGameSummary(gameId, difficultySetting, characterClass,
-					                                useAchievements, currentLevelName, stillAlive, lastSaveTime));
+					                                useAchievements, currentAct, currentChapter, stillAlive, lastSaveTime));
 				}
 			}
 			_connection.Close();
@@ -74,12 +75,13 @@ namespace Halfbreed
 				summary.DifficultySetting.ToString(),
 				((int)summary.CharacterClass).ToString(),
 				useAchievements.ToString(),
-				summary.CurrentLevelName,
+				summary.CurrentAct.ToString(),
+				summary.CurrentChapter.ToString(),
 				isAlive.ToString(),
 				summary.LastSaveTime.ToString()};
 
 			string commandString = string.Format(
-				"INSERT INTO SaveGameSummaries VALUES({0}, {1}, {2}, {3}, \"{4}\", {5}, {6});", valueArray);
+				"INSERT INTO SaveGameSummaries VALUES({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7});", valueArray);
 
 			var insertCommand = _connection.CreateCommand();
 			insertCommand.CommandText = commandString;
@@ -93,7 +95,7 @@ namespace Halfbreed
 			UpdateSaveSummary(summary);
 			if (summary.StillAlive)
 			{
-				// Then write the serialized data to the db.
+				// TODO: Then write the serialized data to the db.
 			}
 		}
 
@@ -107,8 +109,8 @@ namespace Halfbreed
 				isAlive = 1;
 
 			string commandString = string.Format(
-				"UPDATE SaveGameSummaries SET CurrentLevelName = \"{0}\", StillAlive = {1}, LastSaveTime = {2} " + 
-				"WHERE GameId = {3};", summary.CurrentLevelName, isAlive, summary.LastSaveTime, summary.GameId);
+				"UPDATE SaveGameSummaries SET CurrentAct = {0}, CurrentChapter = {1}, StillAlive = {2}, LastSaveTime = {3} " + 
+				"WHERE GameId = {4};", summary.CurrentAct, summary.CurrentChapter, isAlive, summary.LastSaveTime, summary.GameId);
 
 			var updateCommand = _connection.CreateCommand();
 			updateCommand.CommandText = commandString;
@@ -120,7 +122,7 @@ namespace Halfbreed
 
 		public static object ReadSaveGame(int gameId)
 		{
-			// Needs to read the serialized data out of the db.
+			// TODO: Needs to read the serialized data out of the db.
 			return true;
 		}
 
