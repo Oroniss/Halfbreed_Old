@@ -43,7 +43,7 @@ namespace Halfbreed
 		{
 			// TODO: Fix once level title goes in.
 			SaveGameSummary summary = new SaveGameSummary(_gameId, _difficultySetting, _characterClass, _useAchievements,
-														  "Wall Market", true, System.DateTime.Now);
+														  1, 1, true, System.DateTime.Now);
 			return summary;
 		}
 
