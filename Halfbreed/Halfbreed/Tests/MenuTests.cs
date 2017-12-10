@@ -11,7 +11,7 @@ namespace Halfbreed
 		public void TestSetUp()
 		{
 			string TestDBLocation = TestContext.CurrentContext.TestDirectory;
-			Assert.True(SaveDatabaseConnection.CopyAndSwitchToTestDatabase(TestDBLocation));
+			Assert.True(UserDatabaseConnection.CopyAndSwitchToTestDatabase(TestDBLocation));
 		}
 
 		[Test]
@@ -84,7 +84,7 @@ namespace Halfbreed
 		[TearDown] // In visual studio this is [TestCleanUp]
 		public void TestTearDown()
 		{
-			SaveDatabaseConnection.RemoveTestDb();
+			UserDatabaseConnection.RemoveTestDb();
 		}
 	}
 }
