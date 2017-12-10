@@ -8,30 +8,33 @@ namespace Halfbreed
 		public int DifficultySetting;
 		public CharacterClasses CharacterClass;
 		public bool UseAchievements;
-		public string CurrentLevelName;
+		public int CurrentAct;
+		public int CurrentChapter;
 		public bool StillAlive;
 		public long LastSaveTime;
 
 		public SaveGameSummary(int gameId, int difficultySetting, CharacterClasses characterClass,
-							   bool useAchievements, string currentLevelName, bool stillAlive, DateTime lastSaveTime)
+							   bool useAchievements, int currentAct, int currentChapter, bool stillAlive, DateTime lastSaveTime)
 		{
 			GameId = gameId;
 			DifficultySetting = difficultySetting;
 			CharacterClass = characterClass;
 			UseAchievements = useAchievements;
-			CurrentLevelName = currentLevelName;
+			CurrentAct = currentAct;
+			CurrentChapter = currentChapter;
 			StillAlive = stillAlive;
 			LastSaveTime = ((DateTimeOffset)lastSaveTime).ToUnixTimeSeconds();
 		}
 
 		public SaveGameSummary(int gameId, int difficultySetting, CharacterClasses characterClass,
-					   bool useAchievements, string currentLevelName, bool stillAlive, long lastSaveTime)
+					   bool useAchievements, int currentAct, int currentChapter, bool stillAlive, long lastSaveTime)
 		{
 			GameId = gameId;
 			DifficultySetting = difficultySetting;
 			CharacterClass = characterClass;
 			UseAchievements = useAchievements;
-			CurrentLevelName = currentLevelName;
+			CurrentAct = currentAct;
+			CurrentChapter = currentChapter;
 			StillAlive = stillAlive;
 			LastSaveTime = lastSaveTime;
 		}
@@ -49,12 +52,13 @@ namespace Halfbreed
 				CharacterClassToStringConverter.ConvertCharacterClassToString(CharacterClass), 
 				DifficultySetting.ToString(),
 				achString, 
-				CurrentLevelName,
+				CurrentAct.ToString(),
+				CurrentChapter.ToString(),
 				dtDateTime.ToString(),
 				};
 			
 			string returnString = "Character Class: {0}, Difficulty: {1}, Use Previous Achievements: {2}" +
-				"\nCurrent Level: {3}, Last Save Time: {4}.";
+				"\nCurrent Act: {3}, Current Chapter: {4}, Last Save Time: {5}.";
 			
 			return string.Format(returnString, items);
 		}
