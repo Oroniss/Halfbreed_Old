@@ -7,7 +7,7 @@ namespace Halfbreed
 
 		public static int SelectSavedGame()
 		{
-			List<SaveGameSummary> currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
+			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 			List<string> saveStrings = new List<string>();
 			foreach (SaveGameSummary saveSummary in currentSaves)
 				saveStrings.Add(saveSummary.ToString());
