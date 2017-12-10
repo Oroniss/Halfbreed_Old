@@ -10,16 +10,16 @@ namespace Halfbreed
 		public void TestSetUp()
 		{
 			string TestDBLocation = TestContext.CurrentContext.TestDirectory;
-			Assert.True(SaveDatabaseConnection.CopyAndSwitchToTestDatabase(TestDBLocation));
+			Assert.True(UserDatabaseConnection.CopyAndSwitchToTestDatabase(TestDBLocation));
 		}
 
 		[Test]
 		public void SaveSummaryFileMethods()
 		{
-			int nextId = SaveDatabaseConnection.GenerateNextGameId();
+			int nextId = UserDatabaseConnection.GenerateNextGameId();
 			Assert.AreEqual(3, nextId);
 
-			List<SaveGameSummary> currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
+			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 
 			Assert.AreEqual(2, currentSaves.Count);
 			Assert.AreEqual(CharacterClasses.FIGHTER, currentSaves[0].CharacterClass);
@@ -29,17 +29,17 @@ namespace Halfbreed
 			Assert.IsFalse(currentSaves[1].UseAchievements);
 
 			SaveGameSummary newSaveGameSummary = new SaveGameSummary(nextId, 3, CharacterClasses.PALADIN,
-																	 true, "Wall Market", true, 1200000000);
+																	 true, 1, 1, true, 1200000000);
 
-			SaveDatabaseConnection.InsertNewSaveGameSummary(newSaveGameSummary);
+			UserDatabaseConnection.InsertNewSaveGameSummary(newSaveGameSummary);
 
-			currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
+			currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 
 			Assert.AreEqual(3, currentSaves.Count);
 			Assert.AreEqual(CharacterClasses.PALADIN, currentSaves[2].CharacterClass);
 			Assert.AreEqual(3, currentSaves[2].DifficultySetting);
 
-			nextId = SaveDatabaseConnection.GenerateNextGameId();
+			nextId = UserDatabaseConnection.GenerateNextGameId();
 
 			Assert.AreEqual(4, nextId);
 
@@ -48,9 +48,10 @@ namespace Halfbreed
 		[Test]
 		public void TestReadAndWriteSaveGame()
 		{
-			List<SaveGameSummary> currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
+			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 
-			Assert.AreEqual("Wall Market", currentSaves[0].CurrentLevelName);
+			Assert.AreEqual(1, currentSaves[0].CurrentAct);
+			Assert.AreEqual(1, currentSaves[0].CurrentChapter);
 			Assert.IsTrue(currentSaves[0].StillAlive);
 			Assert.AreEqual(1000000000, currentSaves[0].LastSaveTime);
 
@@ -58,15 +59,16 @@ namespace Halfbreed
 															  currentSaves[0].DifficultySetting,
 															  currentSaves[0].CharacterClass,
 															  currentSaves[0].UseAchievements,
-															  "Outcasts End",
+															  3, 5,
 															  true,
 															  1200000000);
 
-			SaveDatabaseConnection.WriteSaveGame(updatedSave, new object());
+			UserDatabaseConnection.WriteSaveGame(updatedSave, new object());
 
-			currentSaves = SaveDatabaseConnection.GetSaveGameSummaries();
+			currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 
-			Assert.AreEqual("Outcasts End", currentSaves[0].CurrentLevelName);
+			Assert.AreEqual(3, currentSaves[0].CurrentAct);
+			Assert.AreEqual(5, currentSaves[0].CurrentChapter);
 			Assert.IsTrue(currentSaves[0].StillAlive);
 			Assert.AreEqual(1200000000, currentSaves[0].LastSaveTime);
 		}
@@ -74,7 +76,7 @@ namespace Halfbreed
 		[TearDown] // In visual studio this is [TestCleanUp]
 		public void TestTearDown()
 		{
-			SaveDatabaseConnection.RemoveTestDb();
+			UserDatabaseConnection.RemoveTestDb();
 		}
 
 	}
