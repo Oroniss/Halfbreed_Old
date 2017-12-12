@@ -24,6 +24,7 @@ namespace Halfbreed
 			{"Putrid Green", Palette.PUTRIDGREEN},
 			{"Vile Green", Palette.VILEGREEN},
 			// Metals
+			{"Light Grey", Palette.LIGHTGREY},
 			{"Steel Grey", Palette.STEELGREY},
 			// Oranges
 			{"Dark Orange", Palette.DARKORANGE}
