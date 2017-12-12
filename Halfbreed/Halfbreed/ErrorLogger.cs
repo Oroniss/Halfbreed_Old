@@ -1,9 +1,10 @@
 ﻿using System;
 namespace Halfbreed
 {
-	public class ErrorLogger
+	public static class ErrorLogger
 	{
-		public ErrorLogger()
+
+		public static void AddDebugText(string text)
 		{
 		}
 	}
