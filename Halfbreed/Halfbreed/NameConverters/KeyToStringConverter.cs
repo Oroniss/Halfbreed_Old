@@ -35,7 +35,7 @@ namespace Halfbreed
         {
             if (!keyToString.ContainsKey(key))
             {
-                // TODO: Print an error message here
+				ErrorLogger.AddDebugText(string.Format("Tried to convert unknown key: {0} to a string", key.ToString()));
                 return "ESCAPE";
             }
             return keyToString[key];
