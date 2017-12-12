@@ -4,7 +4,6 @@ namespace Halfbreed
 {
 	public static class Palette
 	{
-		// TODO: Remove references to built in RLColors in consoles, etc.
 		// Basics
 		public static readonly RLColor BLACK = new RLColor(0, 0, 0);
 		public static readonly RLColor WHITE = new RLColor(255, 255, 255);
@@ -21,6 +20,7 @@ namespace Halfbreed
 		public static readonly RLColor PUTRIDGREEN = new RLColor(193, 255, 193);
 		public static readonly RLColor VILEGREEN = new RLColor(50, 205, 50);
 		// Metals
+		public static readonly RLColor LIGHTGREY = new RLColor(190, 190, 190);
 		public static readonly RLColor STEELGREY = new RLColor(122, 122, 122);
 		// Oranges
 		public static readonly RLColor DARKORANGE = new RLColor(238, 154, 0);
