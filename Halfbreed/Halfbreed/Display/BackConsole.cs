@@ -1,5 +1,4 @@
-﻿using System;
-using RLNET;
+﻿using RLNET;
 namespace Halfbreed
 {
 	public class BackConsole:RLConsole
