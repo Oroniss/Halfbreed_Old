@@ -22,3 +22,17 @@ Equipment/Items/Money
 Abilities and setup
 
 Means logging is only for the game experience for a single level.
+
+Need to be able to:
+	Check if an entity has a certain type of component.
+	Get the actual component associated with an entity.
+	Get all entities with a certain type of component.
+	Only store each component in a single location.
+
+	If each component keeps track of entity id, then can we just keep 2 lists?
+	One of components and another of component types?
+
+Add a debug class and mock out a an add debug text function.
+Splint "Entity" into a few different files.
+Start the component database and component database connection class.
+Call it something more useful though - it's permenant, not user based.
