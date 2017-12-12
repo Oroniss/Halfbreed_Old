@@ -29,11 +29,18 @@ namespace Halfbreed
 							CharacterClassToStringConverter.ConvertStringToCharacterClass("Fighter"));
 			Assert.AreEqual(CharacterClasses.DRAGONLORD,
 							CharacterClassToStringConverter.ConvertStringToCharacterClass("Dragonlord"));
+			Assert.AreEqual(CharacterClasses.RANGER,
+							CharacterClassToStringConverter.ConvertStringToCharacterClass("ranger"));
+			Assert.AreEqual(CharacterClasses.DRUID,
+							CharacterClassToStringConverter.ConvertStringToCharacterClass("druid"));
+			Assert.AreEqual(CharacterClasses.THIEF,
+							CharacterClassToStringConverter.ConvertStringToCharacterClass("thief"));
 		}
 
 		[Test]
 		public void TestStringToColorConverter()
 		{
+			// TODO: Add some more here
 			Assert.AreEqual(Palette.BLACK, StringToColorConverter.ConvertStringToColor("Black"));
 			Assert.AreEqual(Palette.WHITE, StringToColorConverter.ConvertStringToColor("White"));
 			Assert.AreEqual(Palette.WOODBROWN, StringToColorConverter.ConvertStringToColor("Wood Brown"));
