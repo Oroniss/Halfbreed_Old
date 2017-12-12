@@ -4,15 +4,24 @@ namespace Halfbreed
 {
     public static class MainGraphicDisplay
     {
-		// TODO: Refactor out the magic numbers here
-		private static BackConsole _backConsole = new BackConsole(120, 90);
-		private static MenuConsole _menuConsole = new MenuConsole(86, 116, 2, 2, RLColor.LightGray, _backConsole);
-		private static MapConsole _mapConsole = new MapConsole(60, 60, 0, 0, Palette.BLACK, _backConsole);
+		// TODO: See if this can be cleaned up a little.
+		private static int _backConsoleWidth = 120;
+		private static int _backConsoleHeight = 90;
+		private static BackConsole _backConsole = new BackConsole(_backConsoleWidth, _backConsoleHeight);
 
-		static MainGraphicDisplay()
-		{
-			_backConsole.Print(5, 5, "Hello", RLColor.Cyan);
-		}
+		private static int _menuConsoleOffset = 2;
+		private static MenuConsole _menuConsole = new MenuConsole(_backConsoleWidth - 2 * _menuConsoleOffset,
+		                                                          _backConsoleHeight - 2 * _menuConsoleOffset,
+		                                                          _menuConsoleOffset,
+		                                                          _menuConsoleOffset, 
+		                                                          Palette.LIGHTGREY, 
+		                                                          _backConsole);
+
+		private static int _mapConsoleWidth = 60;
+		private static int _mapConsoleHeight = 60;
+		private static int _mapConsoleOffset = 0;
+		private static MapConsole _mapConsole = new MapConsole(_mapConsoleWidth, _mapConsoleHeight, 0, 0, 
+		                                                       Palette.BLACK, _backConsole);
 
 		public static bool IsDirty
 		{
@@ -29,7 +38,7 @@ namespace Halfbreed
 		{
 			lock (_backConsole)
 			{
-				RLConsole.Blit(_backConsole, 0, 0, 120, 90, destination, 0, 0);
+				RLConsole.Blit(_backConsole, 0, 0, _backConsoleWidth, _backConsoleHeight, destination, 0, 0);
 				_backConsole.SetClean();
 			}
 			return destination;
