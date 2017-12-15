@@ -32,7 +32,7 @@ Need to be able to:
 	If each component keeps track of entity id, then can we just keep 2 lists?
 	One of components and another of component types?
 
-Add a debug class and mock out a an add debug text function.
-Splint "Entity" into a few different files.
 Start the component database and component database connection class.
 Call it something more useful though - it's permenant, not user based.
+
+Add a cleanup and a destroy method to Component and PositionComponent.
