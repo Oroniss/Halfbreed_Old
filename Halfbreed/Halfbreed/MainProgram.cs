@@ -11,8 +11,9 @@ namespace Halfbreed
         public static void Main()
         {
 			// DatabaseConnection.SetupDirectoriesAndFiles();
-
-			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 120, 90, 8, 8, 1, "Halfbreed");
+			// TODO: Pull these magic numbers out and line them up with thet MainGraphicsDisplay
+			// TODO: Also sort out a config file to store them.
+			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
 
             rootConsole.OnLoad += RootConsoleOnLoad;
             rootConsole.Update += RootConsoleUpdate;
