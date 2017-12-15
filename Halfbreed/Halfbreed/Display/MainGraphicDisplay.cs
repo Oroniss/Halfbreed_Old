@@ -5,8 +5,8 @@ namespace Halfbreed
     public static class MainGraphicDisplay
     {
 		// TODO: See if this can be cleaned up a little.
-		private static int _backConsoleWidth = 120;
-		private static int _backConsoleHeight = 90;
+		private static int _backConsoleWidth = 160;
+		private static int _backConsoleHeight = 80;
 		private static BackConsole _backConsole = new BackConsole(_backConsoleWidth, _backConsoleHeight);
 
 		private static int _menuConsoleOffset = 2;
@@ -17,8 +17,8 @@ namespace Halfbreed
 		                                                          Palette.LIGHTGREY, 
 		                                                          _backConsole);
 
-		private static int _mapConsoleWidth = 60;
-		private static int _mapConsoleHeight = 60;
+		private static int _mapConsoleWidth = 80;
+		private static int _mapConsoleHeight = 80;
 		private static int _mapConsoleOffset = 0;
 		private static MapConsole _mapConsole = new MapConsole(_mapConsoleWidth, _mapConsoleHeight, 0, 0, 
 		                                                       Palette.BLACK, _backConsole);
