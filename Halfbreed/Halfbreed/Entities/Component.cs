@@ -1,9 +1,8 @@
-﻿using System;
-namespace Halfbreed
+﻿namespace Halfbreed
 {
 	public abstract class Component
 	{
-		private ComponentTypes _componentType;
+		protected ComponentTypes _componentType;
 		private int _entityId;
 
 		public Component(int entityId)
