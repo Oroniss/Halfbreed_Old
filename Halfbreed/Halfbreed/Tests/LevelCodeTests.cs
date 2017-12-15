@@ -76,5 +76,28 @@ namespace Halfbreed
 			Assert.IsTrue(testMap.isRevealed(0, 15));
 
 		}
+
+		[Test]
+		public void TestEntities()
+		{
+			LevelMap testMap = new LevelMap(testLevelMapFilePath);
+
+			testMap.addEntity(15, 15, 0);
+			testMap.addEntity(10, 20, 1);
+			testMap.addEntity(15, 15, 2);
+
+			Assert.AreEqual(testMap.getEntities(0, 0).Count, 0);
+			Assert.AreEqual(testMap.getEntities(15, 15).Count, 2);
+			Assert.IsTrue(testMap.getEntities(15, 15).Contains(2));
+			Assert.IsFalse(testMap.getEntities(15, 15).Contains(1));
+			Assert.AreEqual(testMap.getEntities(20, 10).Count, 0);
+			Assert.IsTrue(testMap.getEntities(10, 20).Contains(1));
+
+			testMap.removeEntity(15, 15, 0);
+
+			Assert.AreEqual(testMap.getEntities(15, 15).Count, 1);
+			Assert.IsTrue(testMap.getEntities(15, 15).Contains(2));
+			Assert.IsFalse(testMap.getEntities(15, 15).Contains(0));
+		}
 	}
 }
