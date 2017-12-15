@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Halfbreed
 {
@@ -14,26 +15,10 @@ namespace Halfbreed
 			_map = new LevelMap(levelID + "Map.txt");
 		}
 
-
-		public int MapWidth
+		public LevelMap Map
 		{
-			get { return _map.Width; }
+			get { return _map; }
 		}
 
-		public int MapHeight
-		{
-			get { return _map.Height; }
-		}
-
-		public bool IsValidMapCoord(int x, int y)
-		{
-			return _map.IsValidMapCoord(x, y);
-		}
-
-		public TileType getMaptile(int x, int y)
-		{
-			// TODO: Add in check once furnishings go in.
-			return _map.GetTile(x, y);
-		}
 	}
 }
