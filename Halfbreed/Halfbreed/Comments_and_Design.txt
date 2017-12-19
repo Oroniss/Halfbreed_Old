@@ -23,16 +23,55 @@ Abilities and setup
 
 Means logging is only for the game experience for a single level.
 
-Need to be able to:
-	Check if an entity has a certain type of component.
-	Get the actual component associated with an entity.
-	Get all entities with a certain type of component.
-	Only store each component in a single location.
-
-	If each component keeps track of entity id, then can we just keep 2 lists?
-	One of components and another of component types?
 
 Start the component database and component database connection class.
 Call it something more useful though - it's permenant, not user based.
 
-Add a cleanup and a destroy method to Component and PositionComponent.
+Decide whether Position component should be responsible for talking to the current level
+as part of move, add, update and destroy? It would enforce consistency, but that might not be good.
+
+Or move that from the Level class to the Component class?
+The interaction between Level and Component has to happen somewhere.
+
+Where is the best place to store the data.
+How should that interaction be handled.
+
+
+What ultimately is the game supposed to be?
+Roguelike, CCG, RPG, loot finder, achievement system?
+Slot abilities ALA path to exile?
+Find them and build a deck - essentially the same.
+
+Select trees on rest?
+That limits each slot to 8? Then trigger runes when they are activated.
+Allow hot-keys to be setup for common abilities.
+
+Give weapon basic attack and up to 3 other abilities?
+Give shield up to 2 abilites (1h weapon is 2, 2h weapon is 4).
+
+Becomes 4 from 16 groups, 2 from 12 groups, 2 from 2 groups for Dragonlord - every other is much easier.
+Need to make sure there is some relevance to every group for every class that can use it.
+
+Advanced classes are 4 from 8 and 2 from 2, easy enough.
+
+Now much happier about random distribution of ability related stuff.
+Make it set abilities - trained upgrades and skillup through practice?
+
+When do runes recharge?
+On level change, on rest or something else?
+
+What are the main collectibles then?
+
+Recipes
+Set/Rare/Unique items
+
+Can a rune item be a part of the game.
+I.e. have a way of upgrading the runes on the item - more powerful, frequent, etc.
+Should be stuff that is common to every ability, recharge, power level, etc.
+Applies to all runes in a tier.
+
+4 Parts - frequency of use, ease of recharge, primary power level, secondary power level.
+Means power level gets driven from rune, stat and skill - looks pretty similar to old setup.
+Make frequency of use set - just have recharge change.
+Split them out by skill - recharge, power level, 3 "addon effects".
+Gets back to roughly where we were before - but a cleaner mechanic.
