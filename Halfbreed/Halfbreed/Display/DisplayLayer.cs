@@ -1,11 +1,10 @@
-﻿using System;
-
+﻿
 namespace Halfbreed
 {
 	public enum DisplayLayer
 	{
 		MISC = 0,
-		INTERFACE = 1,
+		UI = 1,
 		PLAYER = 2,
 		MINION = 3,
 		ACTOR = 4,
