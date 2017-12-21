@@ -24,9 +24,6 @@ Abilities and setup
 Means logging is only for the game experience for a single level.
 
 
-Start the component database and component database connection class.
-Call it something more useful though - it's permenant, not user based.
-
 Decide whether Position component should be responsible for talking to the current level
 as part of move, add, update and destroy? It would enforce consistency, but that might not be good.
 
@@ -35,6 +32,12 @@ The interaction between Level and Component has to happen somewhere.
 
 Where is the best place to store the data.
 How should that interaction be handled.
+
+Go back and Refactor the menus onto a single static class.
+Probably worth doing the same thing on the data classes eventually.
+Turn the converter into a single public function that takes an object argument a desired class.
+Or possibly a series of convert to string, convert to character class, type methods.
+Write some tests for the Palette class. Make sure this includes testing the length.
 
 
 What ultimately is the game supposed to be?
