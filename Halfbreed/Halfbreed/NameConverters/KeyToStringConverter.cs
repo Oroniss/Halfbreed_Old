@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using RLNET;
 
-namespace Halfbreed
+namespace Halfbreed.Converters
 {
     public class KeyToStringConverter
     {
@@ -25,11 +25,6 @@ namespace Halfbreed
 			{RLKey.Number8, "8"},
 			{RLKey.Number9, "9"},
         };
-
-        public bool checkKeyIsValid(RLKey key)
-        {
-            return keyToString.ContainsKey(key);
-        }
 
         public string convertKeyToString(RLKey key)
         {
