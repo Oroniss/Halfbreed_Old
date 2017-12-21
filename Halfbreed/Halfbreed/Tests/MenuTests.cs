@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Halfbreed.Menus;
 
 namespace Halfbreed
 {
@@ -25,7 +26,7 @@ namespace Halfbreed
 
 			string[] keys = new string[] { "3", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
+			NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetStartingParameters(parameters);
 			Assert.AreEqual(3, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.NECROMANCER, GameEngine.CharacterClass);
@@ -35,7 +36,7 @@ namespace Halfbreed
 
 			keys = new string[] { "1", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = CharacterCreationMenus.StartNewGame();
+			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetStartingParameters(parameters);
 			Assert.AreEqual(1, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.THIEF, GameEngine.CharacterClass);
@@ -45,7 +46,7 @@ namespace Halfbreed
 
 			keys = new string[] { "5", "1", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = CharacterCreationMenus.StartNewGame();
+			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetStartingParameters(parameters);
 			Assert.AreEqual(5, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.DRAGONLORD, GameEngine.CharacterClass);
@@ -55,7 +56,7 @@ namespace Halfbreed
 
 			keys = new string[] { "6", "4", "7", "1", "3", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = CharacterCreationMenus.StartNewGame();
+			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetStartingParameters(parameters);
 			Assert.AreEqual(4, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.BARD, GameEngine.CharacterClass);
@@ -72,12 +73,12 @@ namespace Halfbreed
 			UserInputHandler.clearAllInput();
 
 			KeyBoardInputSimulator.AddKeyBoardInput("2");
-			Assert.AreEqual(2, LoadGameMenus.SelectSavedGame());
+			Assert.AreEqual(2, MenuProvider.LoadGameMenu.SelectSavedGame());
 
 			UserInputHandler.clearAllInput();
 
 			KeyBoardInputSimulator.AddKeyBoardInput("1");
-			Assert.AreEqual(1, LoadGameMenus.SelectSavedGame());
+			Assert.AreEqual(1, MenuProvider.LoadGameMenu.SelectSavedGame());
 
 		}
 
