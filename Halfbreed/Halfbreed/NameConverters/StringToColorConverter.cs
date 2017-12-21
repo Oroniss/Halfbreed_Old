@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using RLNET;
 
-namespace Halfbreed
+namespace Halfbreed.Converters
 {
 	public class StringToColorConverter
 	{
