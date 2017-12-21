@@ -36,9 +36,8 @@ How should that interaction be handled.
 
 Go back and Refactor the menus onto a single static class.
 Probably worth doing the same thing on the data classes eventually.
-Turn the converter into a single public function that takes an object argument a desired class.
-Or possibly a series of convert to string, convert to character class, type methods.
 Write some tests for the Palette class. Make sure this includes testing the length.
+Write the consistency check for the converter.
 
 
 What ultimately is the game supposed to be?
