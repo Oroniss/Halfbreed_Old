@@ -22,6 +22,7 @@ namespace Halfbreed
 			queryCommand.CommandText = commandString;
 			// Double conversion necessary since SQLite doesn't allow smaller integer types.
 			int currentMaxId = (int)(long) queryCommand.ExecuteScalar();
+			_connection.Close();
 			return currentMaxId + 1;
 		}
 
