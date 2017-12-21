@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RLNET;
 
 namespace Halfbreed
@@ -14,7 +14,7 @@ namespace Halfbreed
 		{
 			_componentType = ComponentTypes.DISPLAY;
 			_displayCharacter = character;
-			_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(fgColorName);
+			_fgColor = EnumConverter.ConvertStringToColor(fgColorName);
 			_layer = layer;
 		}
 
@@ -32,7 +32,7 @@ namespace Halfbreed
 
 		public void ChangeColor(string colorName)
 		{
-			_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(colorName);
+			_fgColor = EnumConverter.ConvertStringToColor(colorName);
 		}
 
 		public DisplayLayer Layer
