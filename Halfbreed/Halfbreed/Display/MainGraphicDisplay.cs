@@ -14,14 +14,14 @@ namespace Halfbreed
 		                                                          _backConsoleHeight - 2 * _menuConsoleOffset,
 		                                                          _menuConsoleOffset,
 		                                                          _menuConsoleOffset, 
-		                                                          Palette.LIGHTGREY, 
+		                                                          Palette.GetColor(Colors.LIGHTGREY), 
 		                                                          _backConsole);
 
 		private static int _mapConsoleWidth = 80;
 		private static int _mapConsoleHeight = 80;
 		private static int _mapConsoleOffset = 0;
 		private static MapConsole _mapConsole = new MapConsole(_mapConsoleWidth, _mapConsoleHeight, 0, 0, 
-		                                                       Palette.BLACK, _backConsole);
+		                                                       Palette.GetColor(Colors.BLACK), _backConsole);
 
 		public static bool IsDirty
 		{
