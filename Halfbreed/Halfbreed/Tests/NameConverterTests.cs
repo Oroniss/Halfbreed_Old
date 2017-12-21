@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using RLNET;
 
 namespace Halfbreed
@@ -41,10 +42,12 @@ namespace Halfbreed
 		public void TestStringToColorConverter()
 		{
 			// TODO: Add some more here
-			Assert.AreEqual(Palette.BLACK, NameConverter.StringToColorConverter.ConvertStringToColor("Black"));
-			Assert.AreEqual(Palette.WHITE, NameConverter.StringToColorConverter.ConvertStringToColor("White"));
-			Assert.AreEqual(Palette.WOODBROWN, NameConverter.StringToColorConverter.ConvertStringToColor("Wood Brown"));
-			Assert.AreEqual(Palette.DARKWOODBROWN, NameConverter.StringToColorConverter.ConvertStringToColor("Dark Wood Brown"));
+			Assert.AreEqual(Colors.BLACK, NameConverter.StringToColorConverter.ConvertStringToColor("Black"));
+			Assert.AreEqual(Colors.WHITE, NameConverter.StringToColorConverter.ConvertStringToColor("White"));
+			Assert.AreEqual(Colors.WOODBROWN, NameConverter.StringToColorConverter.ConvertStringToColor("Wood Brown"));
+			Assert.AreEqual(Colors.DARKWOODBROWN, NameConverter.StringToColorConverter.ConvertStringToColor("Dark Wood Brown"));
+
+			Assert.AreEqual(Enum.GetNames(typeof(Colors)).Length, NameConverter.StringToColorConverter.NumberOfColors);
 		}
 
 	}
