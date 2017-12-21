@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed
 {
@@ -31,8 +31,8 @@ namespace Halfbreed
 			Elevation = elevation;
 			MoveTypes = moveTypes;
 			AllowLOS = allowLOS;
-			BGColor = NameConverter.StringToColorConverter.ConvertStringToColor(bgColorName);
-			FogColor = NameConverter.StringToColorConverter.ConvertStringToColor(fogColorName);
+			BGColor = EnumConverter.ConvertStringToColor(bgColorName);
+			FogColor = EnumConverter.ConvertStringToColor(fogColorName);
 		}
 	}
 
