@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.IO;
-namespace Halfbreed
+
+namespace Halfbreed.Menus
 {
-	public static class MainMenu
+	public class MainMenu
 	{
 		private static List<string> _mainMenuOptions = new List<string>{"New Game", "Load Game", "View Achievements",
 			"Clear Achievements", "View Commands", "Config"};
 
-		public static void TitleMenu()
+		public void TitleMenu()
 		{
 			while (true)
 			{
@@ -17,7 +18,7 @@ namespace Halfbreed
 				{
 					case 0:
 						{
-							NewGameParameters parameters = CharacterCreationMenus.StartNewGame();
+							NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 							if (!parameters.Cancel)
 							{
 								parameters.GameId = UserDatabaseConnection.GenerateNextGameId();
@@ -34,7 +35,7 @@ namespace Halfbreed
 						}
 					case 1:
 						{
-							int gameId = LoadGameMenus.SelectSavedGame();
+							int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
 							break;
 						}
 					case -1:
