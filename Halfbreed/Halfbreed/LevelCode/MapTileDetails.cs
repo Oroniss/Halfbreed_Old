@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using RLNET;
 
 namespace Halfbreed
 {
@@ -22,8 +21,8 @@ namespace Halfbreed
 		public int Elevation;
 		public int MoveTypes;
 		public bool AllowLOS;
-		public RLColor BGColor;
-		public RLColor FogColor;
+		public Colors BGColor;
+		public Colors FogColor;
 
 		internal TileDetails(string name, int elevation, int moveTypes, bool allowLOS, string bgColorName,
 							string fogColorName)
