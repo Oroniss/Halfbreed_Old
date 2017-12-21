@@ -33,6 +33,7 @@ The interaction between Level and Component has to happen somewhere.
 Where is the best place to store the data.
 How should that interaction be handled.
 
+
 Go back and Refactor the menus onto a single static class.
 Probably worth doing the same thing on the data classes eventually.
 Turn the converter into a single public function that takes an object argument a desired class.
