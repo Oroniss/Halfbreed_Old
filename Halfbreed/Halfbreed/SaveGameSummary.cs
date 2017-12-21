@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Halfbreed
 {
@@ -49,7 +49,7 @@ namespace Halfbreed
 				achString = "On";
 			
 			string[] items = new string[] {
-				NameConverter.CharacterClassToStringConverter.ConvertCharacterClassToString(CharacterClass), 
+				EnumConverter.ConvertEnumToString(CharacterClass), 
 				DifficultySetting.ToString(),
 				achString, 
 				CurrentAct.ToString(),
