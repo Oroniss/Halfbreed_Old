@@ -33,11 +33,9 @@ The interaction between Level and Component has to happen somewhere.
 Where is the best place to store the data.
 How should that interaction be handled.
 
-
-Go back and Refactor the menus onto a single static class.
-Probably worth doing the same thing on the data classes eventually.
 Write some tests for the Palette class. Make sure this includes testing the length.
 Write the consistency check for the converter.
+
 
 
 What ultimately is the game supposed to be?
@@ -72,6 +70,8 @@ Can a rune item be a part of the game.
 I.e. have a way of upgrading the runes on the item - more powerful, frequent, etc.
 Should be stuff that is common to every ability, recharge, power level, etc.
 Applies to all runes in a tier.
+
+Have it so that even if they recharge, it takes time. This is another aspect to the runes.
 
 4 Parts - frequency of use, ease of recharge, primary power level, secondary power level.
 Means power level gets driven from rune, stat and skill - looks pretty similar to old setup.
