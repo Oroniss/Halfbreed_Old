@@ -19,7 +19,7 @@ namespace Halfbreed
             rootConsole.Update += RootConsoleUpdate;
             rootConsole.Render += RootConsoleRender;
 
-			Thread mainLoopThread = new Thread(MainMenu.TitleMenu);
+			Thread mainLoopThread = new Thread(MenuProvider.MainMenu.TitleMenu);
 			mainLoopThread.Start();
 
             rootConsole.Run();
