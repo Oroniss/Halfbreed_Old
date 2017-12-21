@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Halfbreed.Menus
 {
-	public class CharacterCreationMenus
+	public class CharacterCreationMenu
 	{
 		private List<string> _difficultySettings = new List<string>{
 					"Thou art a craven knave, worthy only of contempt",
