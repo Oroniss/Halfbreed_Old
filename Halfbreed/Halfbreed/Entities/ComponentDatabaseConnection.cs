@@ -4,12 +4,15 @@ using Mono.Data.Sqlite;
 
 namespace Halfbreed
 {
-	public static partial class Entity
+	public static partial class EntityManager
 	{
 		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/HalfbreedComponents.db";
 		private static SqliteConnection _connection;
 		private static bool _connectionOpen = false;
 		private static bool _testingMode = false;
+
+		private static ComponentTypes[] _componentOrdering = new ComponentTypes[] { 
+		ComponentTypes.UNDEFINED, ComponentTypes.POSITION, ComponentTypes.DISPLAY};
 
 		public static void openDBConnection()
 		{
@@ -42,6 +45,18 @@ namespace Halfbreed
 			using (var queryCommand = _connection.CreateCommand())
 			{
 				queryCommand.CommandText = queryText;
+
+				var reader = queryCommand.ExecuteReader();
+				if (!reader.Read())
+				{
+					ErrorLogger.AddDebugText(string.Format("Couldn't find entity {0} in Component DB", entityName));
+					return components;
+				}
+				for (int index = 0; index < _componentOrdering.Length; index++)
+				{
+					if (reader.GetInt64(index) == 1)
+						components.Add(_componentOrdering[index]);
+				}
 			}
 
 			return components;
