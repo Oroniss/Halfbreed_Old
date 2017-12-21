@@ -23,7 +23,7 @@ namespace Halfbreed
 					TileType tile = level.Map.GetTile(x, y);
 					_console.SetBackColor(x + xLimits.Offset, 
 					                      y + yLimits.Offset, 
-					                      MapTileDetails.MapTileDict[tile].BGColor);
+					                      Palette.GetColor( MapTileDetails.MapTileDict[tile].BGColor));
 				}
 			}
 
