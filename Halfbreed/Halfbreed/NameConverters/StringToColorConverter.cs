@@ -3,9 +3,9 @@ using RLNET;
 
 namespace Halfbreed
 {
-	public static class StringToColorConverter
+	public class StringToColorConverter
 	{
-		private static Dictionary<string, RLColor> stringToColorDict = new Dictionary<string, RLColor>()
+		private Dictionary<string, RLColor> stringToColorDict = new Dictionary<string, RLColor>()
 		{
 			// TODO: Keep this up to date.
 			// Basic colors
@@ -30,7 +30,7 @@ namespace Halfbreed
 			{"Dark Orange", Palette.DARKORANGE}
 		};
 
-		public static RLColor ConvertStringToColor(string colorName)
+		public RLColor ConvertStringToColor(string colorName)
 		{
 			return stringToColorDict[colorName];
 		}

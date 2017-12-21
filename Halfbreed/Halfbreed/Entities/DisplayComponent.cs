@@ -16,7 +16,7 @@ namespace Halfbreed
 			_componentType = ComponentTypes.DISPLAY;
 			_displayCharacter = character;
 			_fgColorName = fgColorName;
-			_fgColor = StringToColorConverter.ConvertStringToColor(fgColorName);
+			_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(fgColorName);
 			_layer = layer;
 		}
 
@@ -32,7 +32,7 @@ namespace Halfbreed
 			set
 			{
 				_fgColorName = value;
-				_fgColor = StringToColorConverter.ConvertStringToColor(value);}
+				_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(value);}
 			}
 
 		public RLColor FGColor

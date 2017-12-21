@@ -4,7 +4,7 @@ namespace Halfbreed
 {
 	public class CharacterClassToStringConverter
 	{
-		private static Dictionary<string, CharacterClasses> _stringToCharacterClass =
+		private Dictionary<string, CharacterClasses> _stringToCharacterClass =
 			new Dictionary<string, CharacterClasses>
 		{
 			{"Cleric", CharacterClasses.CLERIC},
@@ -31,7 +31,7 @@ namespace Halfbreed
 			{"dragonlord", CharacterClasses.DRAGONLORD}
 		};
 
-		private static Dictionary<CharacterClasses, string> _characterClassToString =
+		private Dictionary<CharacterClasses, string> _characterClassToString =
 			new Dictionary<CharacterClasses, string>
 		{
 			{CharacterClasses.CLERIC, "Cleric"},
@@ -47,12 +47,12 @@ namespace Halfbreed
 			{CharacterClasses.DRAGONLORD, "Dragonlord"}
 		};
 
-		public static CharacterClasses ConvertStringToCharacterClass(string characterClassName)
+		public CharacterClasses ConvertStringToCharacterClass(string characterClassName)
 		{
 			return _stringToCharacterClass[characterClassName];
 		}
 
-		public static string ConvertCharacterClassToString(CharacterClasses characterClass)
+		public string ConvertCharacterClassToString(CharacterClasses characterClass)
 		{
 			return _characterClassToString[characterClass];
 		}

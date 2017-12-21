@@ -32,8 +32,8 @@ namespace Halfbreed
 			Elevation = elevation;
 			MoveTypes = moveTypes;
 			AllowLOS = allowLOS;
-			BGColor = StringToColorConverter.ConvertStringToColor(bgColorName);
-			FogColor = StringToColorConverter.ConvertStringToColor(fogColorName);
+			BGColor = NameConverter.StringToColorConverter.ConvertStringToColor(bgColorName);
+			FogColor = NameConverter.StringToColorConverter.ConvertStringToColor(fogColorName);
 		}
 	}
 

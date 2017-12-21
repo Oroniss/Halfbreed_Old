@@ -62,7 +62,7 @@ namespace Halfbreed
 			}
 			else
 			{
-				CharacterClasses characterClass = CharacterClassToStringConverter.ConvertStringToCharacterClass(
+				CharacterClasses characterClass = NameConverter.CharacterClassToStringConverter.ConvertStringToCharacterClass(
 					classList[selection]);
 				parameters.CharacterClass = characterClass;
 			}

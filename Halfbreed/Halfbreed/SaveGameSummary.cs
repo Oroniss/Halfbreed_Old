@@ -49,7 +49,7 @@ namespace Halfbreed
 				achString = "On";
 			
 			string[] items = new string[] {
-				CharacterClassToStringConverter.ConvertCharacterClassToString(CharacterClass), 
+				NameConverter.CharacterClassToStringConverter.ConvertCharacterClassToString(CharacterClass), 
 				DifficultySetting.ToString(),
 				achString, 
 				CurrentAct.ToString(),
