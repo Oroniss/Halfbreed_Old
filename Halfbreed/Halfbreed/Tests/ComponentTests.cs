@@ -44,12 +44,15 @@ namespace Halfbreed
 			DisplayComponent testComponent1 = new DisplayComponent(0, 'a', "Steel Grey", DisplayLayer.MINION);
 
 			Assert.AreEqual('a', testComponent1.DisplayCharacter);
-			Assert.AreEqual("Steel Grey", testComponent1.FGColorName);
-			Assert.AreEqual(Palette.STEELGREY, testComponent1.FGColor);
+			Assert.AreEqual(Colors.STEELGREY, testComponent1.FGColor);
 
-			testComponent1.FGColorName = "Black";
+			testComponent1.FGColor = Colors.BLACK;
 
-			Assert.AreEqual(Palette.BLACK, testComponent1.FGColor);
+			Assert.AreEqual(Colors.BLACK, testComponent1.FGColor);
+
+			testComponent1.ChangeColor("Putrid Green");
+
+			Assert.AreEqual(Colors.PUTRIDGREEN, testComponent1.FGColor);
 
 			DisplayComponent testComponent2 = new DisplayComponent(1, 'x', "White", DisplayLayer.DOOR);
 			DisplayComponent testComponent3 = new DisplayComponent(2, 'x', "White", DisplayLayer.PLAYER);
