@@ -1,5 +1,6 @@
 ﻿using RLNET;
-namespace Halfbreed
+
+namespace Halfbreed.Display
 {
 	public class BackConsole:RLConsole
 	{
