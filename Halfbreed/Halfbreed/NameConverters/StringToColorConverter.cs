@@ -5,34 +5,39 @@ namespace Halfbreed
 {
 	public class StringToColorConverter
 	{
-		private Dictionary<string, RLColor> stringToColorDict = new Dictionary<string, RLColor>()
+		private Dictionary<string, Colors> stringToColorDict = new Dictionary<string, Colors>()
 		{
 			// TODO: Keep this up to date.
 			// Basic colors
-			{"Black", Palette.BLACK},
-			{"White", Palette.WHITE},
+			{"Black", Colors.BLACK},
+			{"White", Colors.WHITE},
 			// Browns
-			{"Wood Brown", Palette.WOODBROWN},
-			{"Dark Wood Brown", Palette.DARKWOODBROWN},
-			{"Red Brown", Palette.REDBROWN},
-			{"Dark Brown", Palette.DARKBROWN},
-			{"Wood Fog", Palette.WOODFOG},
-			{"Tan", Palette.TAN},
-			{"Old Cloth", Palette.OLDCLOTH},
-			{"Faded Cloth", Palette.FADEDCLOTH},
+			{"Wood Brown", Colors.WOODBROWN},
+			{"Dark Wood Brown", Colors.DARKWOODBROWN},
+			{"Red Brown", Colors.REDBROWN},
+			{"Dark Brown", Colors.DARKBROWN},
+			{"Wood Fog", Colors.WOODFOG},
+			{"Tan", Colors.TAN},
+			{"Old Cloth", Colors.OLDCLOTH},
+			{"Faded Cloth", Colors.FADEDCLOTH},
 			// Greens
-			{"Putrid Green", Palette.PUTRIDGREEN},
-			{"Vile Green", Palette.VILEGREEN},
+			{"Putrid Green", Colors.PUTRIDGREEN},
+			{"Vile Green", Colors.VILEGREEN},
 			// Metals
-			{"Light Grey", Palette.LIGHTGREY},
-			{"Steel Grey", Palette.STEELGREY},
+			{"Light Grey", Colors.LIGHTGREY},
+			{"Steel Grey", Colors.STEELGREY},
 			// Oranges
-			{"Dark Orange", Palette.DARKORANGE}
+			{"Dark Orange", Colors.DARKORANGE}
 		};
 
-		public RLColor ConvertStringToColor(string colorName)
+		public Colors ConvertStringToColor(string colorName)
 		{
 			return stringToColorDict[colorName];
+		}
+
+		public int NumberOfColors
+		{
+			get { return stringToColorDict.Count; }
 		}
 
 	}
