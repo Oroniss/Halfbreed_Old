@@ -1,22 +1,23 @@
 using System.Collections.Generic;
-namespace Halfbreed
+
+namespace Halfbreed.Menus
 {
-	public static class CharacterCreationMenus
+	public class CharacterCreationMenus
 	{
-		private static List<string> _difficultySettings = new List<string>{
+		private List<string> _difficultySettings = new List<string>{
 					"Thou art a craven knave, worthy only of contempt",
 					"Thou art a pathetic weakling, unwilling to challenge thyself",
 					"Thou art either brave or foolhardy, only time will tell which",
 					"Thou art swimming far out of thy depth",
 					"Thou canst not comprehend the horrors that await thee"};
-		private static List<string> _hl12classes = new List<string>{
+		private List<string> _hl12classes = new List<string>{
 					"Cleric", "Fighter", "Mage", "Thief"};
-		private static List<string> _hl34classes = new List<string>{
+		private List<string> _hl34classes = new List<string>{
 					"Bard", "Blackguard", "Druid", "Necromancer", "Paladin", "Ranger"};
-		private static List<string> _hl5classes = new List<string> { "Dragonlord" };
+		private List<string> _hl5classes = new List<string> { "Dragonlord" };
 
 
-		public static NewGameParameters StartNewGame()
+		public NewGameParameters StartNewGame()
 		{
 			NewGameParameters parameters = new NewGameParameters();
 
@@ -33,7 +34,7 @@ namespace Halfbreed
 			return ChooseUseAchievements(parameters);
 		}
 
-		private static NewGameParameters ChooseDifficulty(NewGameParameters parameters)
+		private NewGameParameters ChooseDifficulty(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", _difficultySettings,
 														  "Escape to quit.");
@@ -44,7 +45,7 @@ namespace Halfbreed
 			return parameters;
 		}
 
-		private static NewGameParameters ChooseCharacterClass(NewGameParameters parameters)
+		private NewGameParameters ChooseCharacterClass(NewGameParameters parameters)
 		{
 			List<string> classList = _hl12classes;
 
@@ -70,7 +71,7 @@ namespace Halfbreed
 
 		}
 
-		private static NewGameParameters ChooseUseAchievements(NewGameParameters parameters)
+		private NewGameParameters ChooseUseAchievements(NewGameParameters parameters)
 		{
 			int selection = UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
 															new List<string> { "Yes", "No" }, "Escape to Quit");

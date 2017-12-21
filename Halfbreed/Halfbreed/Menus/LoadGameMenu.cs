@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-namespace Halfbreed
+namespace Halfbreed.Menus
 {
-	public static class LoadGameMenus
+	public class LoadGameMenus
 	{
 
-		public static int SelectSavedGame()
+		public int SelectSavedGame()
 		{
 			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
 			List<string> saveStrings = new List<string>();
