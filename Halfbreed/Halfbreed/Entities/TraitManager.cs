@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 namespace Halfbreed
 {
-	public static partial class Entity
+	public static partial class EntityManager
 	{
 		private static Dictionary<int, List<EntityTraits>> _entityTraits = new Dictionary<int, List<EntityTraits>>();
 
