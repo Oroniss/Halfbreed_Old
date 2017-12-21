@@ -1,6 +1,7 @@
 using RLNET;
 using System.Collections.Generic;
-namespace Halfbreed
+
+namespace Halfbreed.Display
 {
 	public class MenuConsole : BaseConsole
 	{
