@@ -6,8 +6,7 @@ namespace Halfbreed
 	public class DisplayComponent : Component, IComparable<DisplayComponent>
 	{
 		private char _displayCharacter;
-		private string _fgColorName;
-		private RLColor _fgColor;
+		private Colors _fgColor;
 		private DisplayLayer _layer;
 
 		public DisplayComponent(int entityId, char character, string fgColorName, DisplayLayer layer)
@@ -15,7 +14,6 @@ namespace Halfbreed
 		{
 			_componentType = ComponentTypes.DISPLAY;
 			_displayCharacter = character;
-			_fgColorName = fgColorName;
 			_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(fgColorName);
 			_layer = layer;
 		}
@@ -26,18 +24,15 @@ namespace Halfbreed
 			set { _displayCharacter = value; }
 		}
 
-		public string FGColorName
-		{
-			get { return _fgColorName; }
-			set
-			{
-				_fgColorName = value;
-				_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(value);}
-			}
-
-		public RLColor FGColor
+		public Colors FGColor
 		{
 			get { return _fgColor; }
+			set { _fgColor = value; }
+		}
+
+		public void ChangeColor(string colorName)
+		{
+			_fgColor = NameConverter.StringToColorConverter.ConvertStringToColor(colorName);
 		}
 
 		public DisplayLayer Layer
