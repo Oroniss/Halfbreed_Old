@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Halfbreed.Menus
 {
-	public class LoadGameMenus
+	public class LoadGameMenu
 	{
 
 		public int SelectSavedGame()
