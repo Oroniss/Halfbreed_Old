@@ -63,8 +63,7 @@ namespace Halfbreed.Menus
 			}
 			else
 			{
-				CharacterClasses characterClass = NameConverter.CharacterClassToStringConverter.ConvertStringToCharacterClass(
-					classList[selection]);
+				CharacterClasses characterClass = EnumConverter.ConvertStringToCharacterClass(classList[selection]);
 				parameters.CharacterClass = characterClass;
 			}
 			return parameters;
