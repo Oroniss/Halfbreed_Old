@@ -9,7 +9,7 @@ namespace Halfbreed
 		private static Level _currentLevel;
 		private static int _gameId;
 
-		public static void SetStartingParameters(NewGameParameters startingParameters)
+		public static void SetStartingParameters(Menus.NewGameParameters startingParameters)
 		{
 			_difficultySetting = startingParameters.DifficultySetting;
 			_characterClass = startingParameters.CharacterClass;
