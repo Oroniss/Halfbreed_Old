@@ -2,7 +2,7 @@
 
 namespace Halfbreed
 {
-	public partial class Entity
+	public partial class EntityManager
 	{
 		private static Dictionary<int, List<ComponentTypes>> _entityComponentTypes = new Dictionary<int, List<ComponentTypes>>();
 		private static Dictionary<int, List<Component>> _entityComponents = new Dictionary<int, List<Component>>();
