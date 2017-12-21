@@ -5,11 +5,11 @@ using RLNET;
 namespace Halfbreed
 {
 	[TestFixture]
-	public class NameConverterTests
+	public class EnumConverterTests
 	{
 
 		[Test]
-		public void TestKeyToStringConverter()
+		public void TestKeyToString()
 		{
 			Assert.AreEqual("ESCAPE", EnumConverter.ConvertEnumToString(RLKey.Escape));
 			Assert.AreEqual("LEFT", EnumConverter.ConvertEnumToString(RLKey.Left));
@@ -17,7 +17,7 @@ namespace Halfbreed
 		}
 
 		[Test]
-		public void TestCharacterClassToStringConverter()
+		public void TestStringToCharacterClass()
 		{
 			Assert.AreEqual(CharacterClasses.BARD,
 			                EnumConverter.ConvertStringToCharacterClass("Bard"));
@@ -36,7 +36,16 @@ namespace Halfbreed
 		}
 
 		[Test]
-		public void TestStringToColorConverter()
+		public void TestCharacterClassToString()
+		{
+			Assert.AreEqual("Bard", EnumConverter.ConvertEnumToString(CharacterClasses.BARD));
+			Assert.AreEqual("Paladin", EnumConverter.ConvertEnumToString(CharacterClasses.PALADIN));
+			Assert.AreEqual("Ranger", EnumConverter.ConvertEnumToString(CharacterClasses.RANGER));
+			Assert.AreEqual("Mage", EnumConverter.ConvertEnumToString(CharacterClasses.MAGE));
+		}
+
+		[Test]
+		public void TestStringToColor()
 		{
 			// TODO: Add some more here
 			Assert.AreEqual(Colors.BLACK, EnumConverter.ConvertStringToColor("Black"));
@@ -44,12 +53,6 @@ namespace Halfbreed
 			Assert.AreEqual(Colors.WOODBROWN, EnumConverter.ConvertStringToColor("Wood Brown"));
 			Assert.AreEqual(Colors.DARKWOODBROWN, EnumConverter.ConvertStringToColor("Dark Wood Brown"));
 
-		}
-
-		[Test]
-		public void CheckDictionaryConsistency()
-		{
-			// TODO: Write a function on the converter that validates everything has the right number of entries.
 		}
 
 	}
