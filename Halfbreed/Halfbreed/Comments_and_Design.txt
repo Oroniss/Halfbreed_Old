@@ -24,17 +24,50 @@ Abilities and setup
 Means logging is only for the game experience for a single level.
 
 
-Decide whether Position component should be responsible for talking to the current level
-as part of move, add, update and destroy? It would enforce consistency, but that might not be good.
+Not feeling this component framework business.
+Would probably prefer 3-4 base entity types.
+With possibly 3-4 additional types - things like trapped, light, fluid, etc.
+Does create limitations - i.e. no swimming in a gelatinous cube.
 
-Or move that from the Level class to the Component class?
-The interaction between Level and Component has to happen somewhere.
 
-Where is the best place to store the data.
-How should that interaction be handled.
+Actor
+Furnishing - Trap, Harvestable, Liquid.
+Item - Equipment, Consumable, Resource, Money, QuestItem.
 
-Write some tests for the Palette class. Make sure this includes testing the length.
-Write the consistency check for the converter.
+Common:
+
+Basics - stick these on the actual entity.
+Material
+Traits
+Description Block
+Stat Block
+Buffs
+
+Optional
+
+Container
+Hidden
+Light Source
+
+Furnishing
+
+Interaction + trigger
+Movement + trigger
+Harvestable
+
+Item
+
+Carryable
+Equipable
+Usable
+
+Actor
+
+Action Block
+Ability Block
+Skill Block
+Input Source - AI or Player
+Conversation - Quest, Merchant, Trainer
 
 
 
