@@ -24,10 +24,9 @@ Abilities and setup
 Means logging is only for the game experience for a single level.
 
 
-Not feeling this component framework business.
 Would probably prefer 3-4 base entity types.
 With possibly 3-4 additional types - things like trapped, light, fluid, etc.
-Does create limitations - i.e. no swimming in a gelatinous cube.
+
 
 
 Actor
@@ -37,10 +36,7 @@ Item - Equipment, Consumable, Resource, Money, QuestItem.
 Common:
 
 Basics - stick these on the actual entity.
-Material
-Traits
 Description Block
-Stat Block
 Buffs
 
 Optional
@@ -54,12 +50,20 @@ Furnishing
 Interaction + trigger
 Movement + trigger
 Harvestable
+Tile
+Liquid
 
 Item
 
 Carryable
 Equipable
 Usable
+Resource
+Quantity
+Identified
+Cursed
+Weight
+QuestItem
 
 Actor
 
@@ -68,6 +72,8 @@ Ability Block
 Skill Block
 Input Source - AI or Player
 Conversation - Quest, Merchant, Trainer
+PrimaryStats
+SecondaryStats
 
 
 
@@ -107,7 +113,12 @@ Applies to all runes in a tier.
 Have it so that even if they recharge, it takes time. This is another aspect to the runes.
 
 4 Parts - frequency of use, ease of recharge, primary power level, secondary power level.
-Means power level gets driven from rune, stat and skill - looks pretty similar to old setup.
+Means power level gets driven from rune, stat and passive - looks pretty similar to old setup.
+Passive is split between xp based and achievement based.
+XP based is 1-100, therefore 1 to 6 times - achievement based adds up to 2 * additional.
+Each point buys + 5%.
+Runes are  1 to 3 times.
+Stats are 1 to 3 times.
 Make frequency of use set - just have recharge change.
 Split them out by skill - recharge, power level, 3 "addon effects".
 Gets back to roughly where we were before - but a cleaner mechanic.
