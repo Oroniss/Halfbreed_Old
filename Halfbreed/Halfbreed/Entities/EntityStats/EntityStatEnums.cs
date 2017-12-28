@@ -1,15 +1,15 @@
 ﻿namespace Halfbreed.Entities
 {
-	public enum EntityPrimaryStat
+	public enum EntityPrimaryStatTypes
 	{
 		MIGHT,
 		AGILITY,
 		MIND,
-		WILL,
+		WILLPOWER,
 		PRESENCE,
 	}
 
-	public enum EntityDefense
+	public enum EntityDefenseTypes
 	{
 		ACIDRESISTANCE,
 		COLDRESISTANCE,
@@ -24,7 +24,7 @@
 		NETHERRESISTANCE
 	}
 
-	public enum EntitySecondaryStat
+	public enum EntitySecondaryStatTypes
 	{
 		PRECISION,
 		POTENCY,
