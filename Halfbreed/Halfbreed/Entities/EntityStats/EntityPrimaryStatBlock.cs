@@ -2,100 +2,114 @@
 
 namespace Halfbreed.Entities
 {
-	public class EntityStatBlock
+	public class EntityPrimaryStatBlock
 	{
-		public EntityStatBlock()
-		{
+		private EntityPrimaryStat _might;
+		private EntityPrimaryStat _agility;
+		private EntityPrimaryStat _mind;
+		private EntityPrimaryStat _willpower;
+		private EntityPrimaryStat _presence;
 
+		public EntityPrimaryStatBlock(EntityPrimaryStatTemplate template)
+		{
+			_might = new EntityPrimaryStat(template.Might);
+			_agility = new EntityPrimaryStat(template.Agility);
+			_mind = new EntityPrimaryStat(template.Mind);
+			_willpower = new EntityPrimaryStat(template.Willpower);
+			_presence = new EntityPrimaryStat(template.Presence);
 		}
+
+		// TODO: Add another constructor for item/furnishing template.
+		// TODO: Add another constructor for actors based on actor type and level.
 
 		public int MightRating
 		{
-			get { return 0; }
+			get { return _might.Rating; }
 		}
 
 		public float MightMultiplier
 		{
-			get { return 1.0f; }
+			get { return _might.Multiplier; }
 		}
 
 		public int AgilityRating
 		{
-			get { return 0; }
+			get { return _agility.Rating; }
 		}
 
 		public float AgilityMultiplier
 		{
-			get { return 1.0f; }
+			get { return _agility.Multiplier; }
 		}
 
 		public int MindRating
 		{
-			get { return 0; }
+			get { return _mind.Rating; }
 		}
 
 		public float MindMultiplier
 		{
-			get { return 1.0f; }
+			get { return _mind.Multiplier; }
 		}
 
 		public int WillpowerRating
 		{
-			get { return 0; }
+			get { return _willpower.Rating; }
 		}
 
 		public float WillpowerMultiplier
 		{
-			get { return 1.0f; }
+			get { return _willpower.Multiplier; }
 		}
 
 		public int PresenceRating
 		{
-			get { return 0; }
+			get { return _presence.Rating; }
 		}
 
 		public float PresenceMultiplier
 		{
-			get { return 1.0f; }
+			get { return _presence.Multiplier; }
 		}
 
-		public int GetPrimaryStatRating(EntityPrimaryStat stat)
+		public int GetPrimaryStatRating(EntityPrimaryStatTypes stat)
 		{
 			switch (stat)
 			{
-				case EntityPrimaryStat.MIGHT:
+				case EntityPrimaryStatTypes.MIGHT:
 					return MightRating;
-				case EntityPrimaryStat.AGILITY:
+				case EntityPrimaryStatTypes.AGILITY:
 					return AgilityRating;
-				case EntityPrimaryStat.MIND:
+				case EntityPrimaryStatTypes.MIND:
 					return MindRating;
-				case EntityPrimaryStat.WILLPOWER:
+				case EntityPrimaryStatTypes.WILLPOWER:
 					return WillpowerRating;
-				case EntityPrimaryStat.PRESENCE:
+				case EntityPrimaryStatTypes.PRESENCE:
 					return PresenceRating;
 			}
-			ErrorLogger.AddDebugText("Invalid stat type: " + stat.ToString());
 			return 0;
 		}
 
-		public float GetPrimaryStatMultiplier(EntityPrimaryStat stat)
+		public float GetPrimaryStatMultiplier(EntityPrimaryStatTypes stat)
 		{
 			switch (stat)
 			{
-				case EntityPrimaryStat.MIGHT:
+				case EntityPrimaryStatTypes.MIGHT:
 					return MightMultiplier;
-				case EntityPrimaryStat.AGILITY:
+				case EntityPrimaryStatTypes.AGILITY:
 					return AgilityMultiplier;
-				case EntityPrimaryStat.MIND:
+				case EntityPrimaryStatTypes.MIND:
 					return MindMultiplier;
-				case EntityPrimaryStat.WILLPOWER:
+				case EntityPrimaryStatTypes.WILLPOWER:
 					return WillpowerMultiplier;
-				case EntityPrimaryStat.PRESENCE:
-					return PresenceRating;
+				case EntityPrimaryStatTypes.PRESENCE:
+					return PresenceMultiplier;
 			}
-			ErrorLogger.AddDebugText("Invalid stat type: " + stat.ToString());
 			return 1.0f;
 		}
+
+		// TODO: Add an "add modifier" function.
+		// TOOD: Add a "recalculate all" function.
 
 	}
 }
