@@ -7,6 +7,8 @@ namespace Halfbreed
 		private static CharacterClasses _characterClass;
 		private static bool _useAchievements;
 		private static Level _currentLevel;
+		private static int _currentAct = 1;
+		private static int _currentChapter = 1;
 		private static int _gameId;
 
 		public static void SetStartingParameters(Menus.NewGameParameters startingParameters)
@@ -32,6 +34,16 @@ namespace Halfbreed
 		public static Level CurrentLevel
 		{
 			get { return _currentLevel; }
+		}
+
+		public static int CurrentAct
+		{
+			get { return _currentAct; }
+		}
+
+		public static int CurrentChapter
+		{
+			get { return _currentChapter; }
 		}
 
 		public static void LevelTransition(string newLevelName, int newX, int newY)
