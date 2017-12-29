@@ -24,6 +24,20 @@ Abilities and setup
 Means logging is only for the game experience for a single level.
 
 
+
+
+Next Steps:
+
+Figure out best way to sort entity DB - should it query for each entity - that seems like it would be slow.
+Should it query on level creation - probably much faster.
+Or query on start-up / chapter change - even faster still, but will chew up some memory.
+Need a back-up query option as well.
+
+Also sort out tests for all the entity stuff that's there already. Especially the calculations.
+
+
+
+
 Would probably prefer 3-4 base entity types.
 With possibly 3-4 additional types - things like trapped, light, fluid, etc.
 
@@ -33,17 +47,6 @@ Actor
 Furnishing - Trap, Harvestable, Liquid.
 Item - Equipment, Consumable, Resource, Money, QuestItem.
 
-Common:
-
-Basics - stick these on the actual entity.
-Description Block
-Buffs
-
-Optional
-
-Container
-Hidden
-Light Source
 
 Furnishing
 
@@ -122,3 +125,5 @@ Stats are 1 to 3 times.
 Make frequency of use set - just have recharge change.
 Split them out by skill - recharge, power level, 3 "addon effects".
 Gets back to roughly where we were before - but a cleaner mechanic.
+
+Flat modification to defensive stats needs to be for difficulty - not ACT.
