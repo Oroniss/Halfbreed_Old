@@ -53,6 +53,18 @@ namespace Halfbreed
 			Assert.AreEqual(Colors.WOODBROWN, EnumConverter.ConvertStringToColor("Wood Brown"));
 			Assert.AreEqual(Colors.DARKWOODBROWN, EnumConverter.ConvertStringToColor("Dark Wood Brown"));
 
+			Assert.AreEqual(Enum.GetValues(typeof(Colors)).Length, Converters.StringToColorConverter.NumberOfColors);
+
+		}
+
+		[Test]
+		public void TestStringToMaterial()
+		{
+			Assert.AreEqual(Materials.COPPER, EnumConverter.ConvertStringToMaterial("Copper"));
+			Assert.AreEqual(Materials.HESSION, EnumConverter.ConvertStringToMaterial("Hession"));
+			Assert.AreNotEqual(Materials.FUR, EnumConverter.ConvertStringToMaterial("Tin"));
+
+			Assert.AreEqual(Enum.GetValues(typeof(Materials)).Length, Converters.MaterialToStringConverter.NumberOfMaterials);
 		}
 
 	}
