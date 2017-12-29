@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using RLNET;
 
 namespace Halfbreed.Converters
 {
 	public class StringToColorConverter
 	{
-		private Dictionary<string, Colors> stringToColorDict = new Dictionary<string, Colors>()
+		private static Dictionary<string, Colors> stringToColorDict = new Dictionary<string, Colors>()
 		{
 			// TODO: Keep this up to date.
 			// Basic colors
@@ -35,7 +34,7 @@ namespace Halfbreed.Converters
 			return stringToColorDict[colorName];
 		}
 
-		public int NumberOfColors
+		public static int NumberOfColors
 		{
 			get { return stringToColorDict.Count; }
 		}
