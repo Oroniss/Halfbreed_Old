@@ -15,6 +15,7 @@ namespace Halfbreed.Converters
 			{"Dark Wood Brown", Colors.DARKWOODBROWN},
 			{"Red Brown", Colors.REDBROWN},
 			{"Dark Brown", Colors.DARKBROWN},
+			{"Light Brown", Colors.LIGHTBROWN},
 			{"Wood Fog", Colors.WOODFOG},
 			{"Tan", Colors.TAN},
 			{"Old Cloth", Colors.OLDCLOTH},
@@ -25,6 +26,8 @@ namespace Halfbreed.Converters
 			// Metals
 			{"Light Grey", Colors.LIGHTGREY},
 			{"Steel Grey", Colors.STEELGREY},
+			{"Tin", Colors.TIN},
+			{"Copper", Colors.COPPER},
 			// Oranges
 			{"Dark Orange", Colors.DARKORANGE}
 		};
