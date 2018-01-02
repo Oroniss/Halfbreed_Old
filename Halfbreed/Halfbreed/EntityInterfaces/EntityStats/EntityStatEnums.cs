@@ -1,0 +1,36 @@
+﻿namespace Halfbreed.Entities
+{
+	public enum EntityPrimaryStatTypes
+	{
+		MIGHT,
+		AGILITY,
+		MIND,
+		WILLPOWER,
+		PRESENCE,
+	}
+
+	public enum EntityDefenseTypes
+	{
+		ACIDRESISTANCE,
+		COLDRESISTANCE,
+		FIRERESISTANCE,
+		ELECTRICITYRESISTANCE,
+		POISONRESISTANCE,
+		DISEASERESISTANCE,
+		LIGHTRESISTANCE,
+		SHADOWRESISTANCE,
+		MENTALRESISTANCE,
+		PHYSICALRESISTANCE,
+		NETHERRESISTANCE
+	}
+
+	public enum EntitySecondaryStatTypes
+	{
+		PRECISION,
+		POTENCY,
+		RESILIENCE,
+		MOVESPEED,
+		ATTACKSPEED,
+		CASTSPEED
+	}
+}

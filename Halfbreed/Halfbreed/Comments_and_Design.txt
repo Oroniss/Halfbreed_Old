@@ -35,7 +35,16 @@ Need a back-up query option as well.
 
 Also sort out tests for all the entity stuff that's there already. Especially the calculations.
 
+Does it really need a base entity class?
+Just implement 2 or 3 interfaces?
 
+Damageable.
+Position.
+Description.
+Traits.
+Concealed.
+Light Source.
+Container.
 
 
 Would probably prefer 3-4 base entity types.
