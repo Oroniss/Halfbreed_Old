@@ -15,6 +15,7 @@ namespace Halfbreed
 			{Colors.DARKWOODBROWN, new RLColor(139, 105, 20)},
 			{Colors.REDBROWN, new RLColor(165, 102, 0)},
 			{Colors.DARKBROWN, new RLColor(109, 85, 5)},
+			{Colors.LIGHTBROWN, new RLColor(218, 165, 32)},
 			{Colors.WOODFOG, new RLColor(165, 125, 20)},
 			{Colors.TAN, new RLColor(210, 180, 140)},
 			{Colors.OLDCLOTH, new RLColor(205, 190, 112)},
@@ -25,6 +26,8 @@ namespace Halfbreed
 			// Metals
 			{Colors.LIGHTGREY, new RLColor(190, 190, 190)},
 			{Colors.STEELGREY, new RLColor(122, 122, 122)},
+			{Colors.TIN, new RLColor(211, 212, 213)},
+			{Colors.COPPER, new RLColor(184, 115, 51)},
 			// Oranges
 			{Colors.DARKORANGE, new RLColor(238, 154, 0)}
 		};
@@ -50,6 +53,7 @@ namespace Halfbreed
 		WOODBROWN,
 		DARKWOODBROWN,
 		REDBROWN,
+		LIGHTBROWN,
 		DARKBROWN,
 		WOODFOG,
 		TAN,
@@ -61,6 +65,8 @@ namespace Halfbreed
 		// Metals
 		LIGHTGREY,
 		STEELGREY,
+		TIN,
+		COPPER,
 		// Oranges
 		DARKORANGE
 	}
