@@ -1,10 +1,19 @@
 ﻿using System;
+using Halfbreed.Entities;
+
+using NUnit.Framework;
+
 namespace Halfbreed
 {
+	[TestFixture]
 	public class EntityTests
 	{
-		public EntityTests()
+
+		[Test]
+		public void TestEntityDefensiveStats()
 		{
+			
 		}
+
 	}
 }
