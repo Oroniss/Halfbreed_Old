@@ -10,7 +10,8 @@ namespace Halfbreed
 
         public static void Main()
         {
-			// DatabaseConnection.SetupDirectoriesAndFiles();
+			ComponentDatabaseConnection.openDBConnection();
+			Entities.EntityData.SetupDictionaries();
 			// TODO: Pull these magic numbers out and line them up with thet MainGraphicsDisplay
 			// TODO: Also sort out a config file to store them.
 			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
@@ -51,6 +52,7 @@ namespace Halfbreed
 
 		public static void quit()
 		{
+			ComponentDatabaseConnection.closeDBConnection();
 			rootConsole.Close();
 		}
 
