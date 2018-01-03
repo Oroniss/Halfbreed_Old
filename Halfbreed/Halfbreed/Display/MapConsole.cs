@@ -13,14 +13,14 @@ namespace Halfbreed.Display
 		{
 			Clear();
 
-			MapDrawingLimits xLimits = getDrawingLimits(level.Map.Width, _console.Width, xCentre);
-			MapDrawingLimits yLimits = getDrawingLimits(level.Map.Height, _console.Height, yCentre);
+			MapDrawingLimits xLimits = getDrawingLimits(level.Width, _console.Width, xCentre);
+			MapDrawingLimits yLimits = getDrawingLimits(level.Height, _console.Height, yCentre);
 
 			for (int y = yLimits.Min; y < yLimits.Max; y++)
 			{
 				for (int x = xLimits.Min; x < xLimits.Max; x++)
 				{
-					TileType tile = level.Map.GetTile(x, y);
+					TileType tile = level.GetTile(x, y);
 					_console.SetBackColor(x + xLimits.Offset, 
 					                      y + yLimits.Offset, 
 					                      Palette.GetColor( MapTileDetails.MapTileDict[tile].BGColor));
