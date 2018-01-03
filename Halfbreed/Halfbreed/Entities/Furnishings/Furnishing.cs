@@ -3,7 +3,7 @@ using Halfbreed.Entities;
 
 namespace Halfbreed
 {
-	public class Furnishing:IPosition,IDescription	
+	public class Furnishing:Entity
 	{
 
 		private static int _currentMaxFurnishingId = 0;
@@ -11,12 +11,6 @@ namespace Halfbreed
 
 		private int _furnishingId;
 
-		private int _xLoc;
-		private int _yLoc;
-
-		protected Colors _fgColor;
-		protected char _symbol;
-		protected DisplayLayer _displayLayer;
 		protected string _furnishingName;
 		protected Materials _material;
 
@@ -40,46 +34,7 @@ namespace Halfbreed
 			_material = material;
 		}
 
-		// IPosition
-		public int XLoc
-		{
-			get { return _xLoc; }
-		}
-
-		public int YLoc
-		{
-			get { return _yLoc; }
-		}
-
-		public void UpdatePosition(Position newPosition)
-		{
-			_xLoc = newPosition.X;
-			_yLoc = newPosition.Y;
-		}
-
-		public void MoveObject(int deltaX, int deltaY)
-		{
-			_xLoc += deltaX;
-			_yLoc += deltaY;
-		}
-
-		// IDescription
-		public char Symbol
-		{
-			get	{ return _symbol; }
-		}
-
-		public Colors FGColor
-		{
-			get { return _fgColor; }
-		}
-
-		public DisplayLayer DisplayLayer
-		{
-			get { return _displayLayer; }
-		}
-
-		public string GetDescription()
+		public override string GetDescription()
 		{
 			return _furnishingName;
 		}
