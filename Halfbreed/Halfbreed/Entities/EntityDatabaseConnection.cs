@@ -5,7 +5,7 @@ using Halfbreed.Entities;
 
 namespace Halfbreed
 {
-	public static class ComponentDatabaseConnection
+	public static class EntityDatabaseConnection
 	{
 		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/HalfbreedComponents.db";
 		private static SqliteConnection _connection;
@@ -30,6 +30,7 @@ namespace Halfbreed
 			if (_connectionOpen)
 			{
 				_connection.Close();
+				_connectionOpen = false;
 				return;
 			}
 			ErrorLogger.AddDebugText("Tried to close already closed DB connection");
@@ -90,6 +91,27 @@ namespace Halfbreed
 		public static List<EntityTraits> GetEntityTraits(string EntityName)
 		{
 			return new List<EntityTraits>();
+		}
+
+		public static FurnishingTemplate GetFurnishingDetails(string FurnishingName)
+		{
+			string queryText = string.Format("SELECT * FROM Furnishings WHERE FurnishingName = \"{0}\";", FurnishingName);
+
+			using (var queryCommand = _connection.CreateCommand())
+			{
+				queryCommand.CommandText = queryText;
+
+				var reader = queryCommand.ExecuteReader();
+				reader.Read();
+
+				string furnishingName = reader.GetString(0);
+				char symbol = reader.GetString(1)[0];
+				int volume = reader.GetInt32(2);
+
+				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume);
+
+				return template;
+			}
 		}
 
 
