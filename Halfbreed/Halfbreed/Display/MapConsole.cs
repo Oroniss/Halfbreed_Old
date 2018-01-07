@@ -21,9 +21,14 @@ namespace Halfbreed.Display
 				for (int x = xLimits.Min; x < xLimits.Max; x++)
 				{
 					TileType tile = level.GetTile(x, y);
-					_console.SetBackColor(x + xLimits.Offset, 
-					                      y + yLimits.Offset, 
-					                      Palette.GetColor( MapTileDetails.MapTileDict[tile].BGColor));
+					_console.Set(x + xLimits.Offset, y + yLimits.Offset, null,
+					                      Palette.GetColor( MapTileDetails.MapTileDict[tile].BGColor), ' ');
+					if (level.HasEntity(x, y))
+					{
+						Entities.Entity entity = level.GetDrawingEntity(x, y);
+						_console.Set(x + xLimits.Offset, y + yLimits.Offset, Palette.GetColor(entity.FGColor), 
+						             null, entity.Symbol);
+					}
 				}
 			}
 
