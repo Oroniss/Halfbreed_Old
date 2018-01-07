@@ -8,10 +8,14 @@ namespace Halfbreed
 	public class Level
 	{
 
+		private string _levelTitle;
 		private int _height;
 		private int _width;
 		private TileType[] _mapGrid;
 		private bool[] _revealed;
+
+		private int _visibility;
+		private float _anathemaMultiplier;
 
 		private Dictionary<int, List<Entities.Entity>> _entities;
 		private Dictionary<int, List<Furnishing>> _furnishings;
@@ -19,20 +23,28 @@ namespace Halfbreed
 		public Level(string LevelFilePath)
 		{
 			// TODO: Move this to a separate function to allow easy switching to resources.
-			FileStream mapFile = File.Open(LevelFilePath + "Map.txt", FileMode.Open);
-			StreamReader MapSpecificationFile = new StreamReader(mapFile);
+			FileStream levelStream = File.Open(LevelFilePath + ".txt", FileMode.Open);
+			StreamReader LevelSpecificationFile = new StreamReader(levelStream);
 
 			Dictionary<int, TileType> tileDict = new Dictionary<int, TileType>();
 
-			_height = Int32.Parse(MapSpecificationFile.ReadLine());
-			_width = Int32.Parse(MapSpecificationFile.ReadLine());
+			_levelTitle = LevelSpecificationFile.ReadLine();
+			_height = Int32.Parse(LevelSpecificationFile.ReadLine());
+			_width = Int32.Parse(LevelSpecificationFile.ReadLine());
 
-			MapSpecificationFile.ReadLine(); // Move to start of dictionary.
+			_visibility = Int32.Parse(LevelSpecificationFile.ReadLine());
+			_anathemaMultiplier = float.Parse(LevelSpecificationFile.ReadLine());
+
+			_entities = new Dictionary<int, List<Entities.Entity>>();
+			_furnishings = new Dictionary<int, List<Furnishing>>();
+			
+
+			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
 			while (true)
 			{
-				string line = MapSpecificationFile.ReadLine().Trim();
-				if (line == "###")
+				string line = LevelSpecificationFile.ReadLine().Trim();
+				if (LineIsBreakPoint(line))
 					break;
 
 				string[] splitLine = line.Split(',');
@@ -44,7 +56,7 @@ namespace Halfbreed
 
 			for (int y = 0; y < _height; y++)
 			{
-				string[] _row = MapSpecificationFile.ReadLine().Trim().Split(',');
+				string[] _row = LevelSpecificationFile.ReadLine().Trim().Split(',');
 				for (int x = 0; x < _width; x++)
 				{
 					_mapGrid[y * _width + x] = tileDict[Int32.Parse(_row[x])];
@@ -52,11 +64,39 @@ namespace Halfbreed
 				}
 			}
 
-			mapFile.Close();
+			// Remove the next break line
+			LevelSpecificationFile.ReadLine();
+			// TODO: Throw an exception if it isn't "###"
 
-			_entities = new Dictionary<int, List<Entities.Entity>>();
-			_furnishings = new Dictionary<int, List<Furnishing>>();
 
+			// Furnishings
+			const int FURNISHINGPREFIXLENGTH = 4;
+			while (true)
+			{
+				string line = LevelSpecificationFile.ReadLine().Trim();
+				if (LineIsBreakPoint(line))
+				   break;
+
+				string[] splitLine = line.Split(',');
+				string furnishingName = splitLine[0];
+				Materials material = EnumConverter.ConvertStringToMaterial(splitLine[1]);
+				int xLoc = Int32.Parse(splitLine[2]);
+				int yLoc = Int32.Parse(splitLine[3]);
+				string[] otherParams = new string[splitLine.Length - FURNISHINGPREFIXLENGTH];
+				for (int i = 0; i < splitLine.Length - FURNISHINGPREFIXLENGTH; i++)
+					otherParams[i] = splitLine[i + FURNISHINGPREFIXLENGTH];
+				Furnishing newFurnishing = Entities.FurnishingFactory.CreateFurnishing(furnishingName, material,
+																					   xLoc, yLoc, otherParams);
+				AddFurnishing(xLoc, yLoc, newFurnishing);
+			}
+
+			levelStream.Close();
+
+		}
+
+		private bool LineIsBreakPoint(string line)
+		{
+			return line == "###";
 		}
 
 		public int Height
@@ -166,6 +206,14 @@ namespace Halfbreed
 			}
 
 			return returnList;
+		}
+
+		public Entities.Entity GetDrawingEntity(int x, int y)
+		{
+			if(_entities.ContainsKey(ConvertXYToInt(x, y)))
+				return _entities[ConvertXYToInt(x, y)][0];
+			// TODO: Throw an exception.
+			return null;
 		}
 	}
 }
