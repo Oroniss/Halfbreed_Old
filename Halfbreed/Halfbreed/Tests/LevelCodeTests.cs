@@ -6,7 +6,15 @@ namespace Halfbreed
 	[TestFixture]
 	public class LevelCodeTests
 	{
-		private string testLevelMapFilePath = TestContext.CurrentContext.TestDirectory + "/LevelFiles/Testing/TestMap.txt";
+		private string testLevelMapFilePath = TestContext.CurrentContext.TestDirectory + "/LevelFiles/Testing/TestLevel";
+
+		[SetUp]
+		public void SetupDatabaseConnection()
+		{
+			EntityDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
+			EntityDatabaseConnection.openDBConnection();
+			Entities.EntityData.SetupDictionaries();
+		}
 
 		[Test]
 		public void TestLevelMapConstruction()
@@ -78,7 +86,7 @@ namespace Halfbreed
 		}
 
 		[Test]
-		public void TestEntities()
+		public void TestFurnishings()
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
@@ -94,6 +102,12 @@ namespace Halfbreed
 			//Assert.AreEqual(testLevel.getEntities(15, 15).Count, 1);
 			//Assert.IsTrue(testLevel.getEntities(15, 15).Contains(2));
 			//Assert.IsFalse(testLevel.getEntities(15, 15).Contains(0));
+		}
+
+		[TearDown]
+		public void CloseDBConnection()
+		{
+			EntityDatabaseConnection.closeDBConnection();
 		}
 	}
 }
