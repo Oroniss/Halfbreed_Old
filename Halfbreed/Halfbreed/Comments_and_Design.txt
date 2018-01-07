@@ -28,15 +28,15 @@ Means logging is only for the game experience for a single level.
 
 Next Steps:
 
+Get some furnishings onto the map and start drawing them.
+Shouldn't be too hard.
+
 Figure out best way to sort entity DB - should it query for each entity - that seems like it would be slow.
 Should it query on level creation - probably much faster.
 Or query on start-up / chapter change - even faster still, but will chew up some memory.
 Need a back-up query option as well.
 
 Also sort out tests for all the entity stuff that's there already. Especially the calculations.
-
-Does it really need a base entity class?
-Just implement 2 or 3 interfaces?
 
 Damageable.
 Position.
