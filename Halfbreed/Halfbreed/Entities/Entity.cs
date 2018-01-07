@@ -4,12 +4,26 @@ namespace Halfbreed.Entities
 {
 	public abstract class Entity : IPosition, IDescription, IComparable
 	{
+		private string _entityName;
+
+		protected int _xLoc;
+		protected int _yLoc;
+
 		protected DisplayLayer _displayLayer;
 		protected Colors _fgColor;
 		protected char _symbol;
 
-		protected int _xLoc;
-		protected int _yLoc;
+		protected Entity(string entityName, int xLoc, int yLoc)
+		{
+			_entityName = entityName;
+			_xLoc = xLoc;
+			_yLoc = yLoc;
+		}
+
+		public string EntityName
+		{
+			get { return _entityName; }
+		}
 
 		public DisplayLayer DisplayLayer
 		{
