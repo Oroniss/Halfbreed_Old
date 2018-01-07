@@ -11,10 +11,10 @@ namespace Halfbreed
 
 		private int _furnishingId;
 
-		protected string _furnishingName;
 		protected Materials _material;
 
-		public Furnishing(string furnishingName, Materials material, int xLoc, int yLoc, string[] otherParameters)
+		public Furnishing(string furnishingName, Materials material, FurnishingTemplate template, int xLoc, int yLoc, string[] otherParameters)
+			:base(furnishingName, xLoc, yLoc)
 		{
 			if (_freeFurnishingIds.Count == 0)
 			{
@@ -27,21 +27,24 @@ namespace Halfbreed
 				_freeFurnishingIds.RemoveAt(0);
 			}
 
-			_xLoc = xLoc;
-			_yLoc = yLoc;
-
-			_furnishingName = furnishingName;
 			_material = material;
-		}
+			_displayLayer = DisplayLayer.FURNISHING;
 
-		public override string GetDescription()
-		{
-			return _furnishingName;
+			MaterialProperties properties = EntityData.GetProperties(material);
+
+			_fgColor = properties.FGColor;
+			_symbol = template.Symbol;
 		}
 
 		public Materials Material
 		{
 			get { return _material; }
+		}
+
+		public override string GetDescription()
+		{
+			// TODO: Need to actually implement this.
+			return EntityName;
 		}
 
 	}
