@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
@@ -14,7 +14,7 @@ namespace Halfbreed.Entities
 
 		public static void SetupDictionaries()
 		{
-			_materialProperties = ComponentDatabaseConnection.GetMaterialProperties();
+			_materialProperties = EntityDatabaseConnection.GetMaterialProperties();
 		}
 
 	}
