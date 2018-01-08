@@ -208,6 +208,26 @@ namespace Halfbreed
 			return returnList;
 		}
 
+		// TODO: Think about whether this function is actually required?
+		public bool HasFurnishing(int x, int y)
+		{
+			return _furnishings.ContainsKey(ConvertXYToInt(x, y));
+		}
+
+		public List<Furnishing> GetFurnishings(int x, int y)
+		{
+			List<Furnishing> returnList = new List<Furnishing>() { };
+
+			if (_furnishings.ContainsKey(ConvertXYToInt(x, y)))
+			{
+				foreach (Furnishing furnishing in _furnishings[ConvertXYToInt(x, y)])
+					returnList.Add(furnishing);
+			}
+
+			return returnList;
+
+		}
+
 		public Entities.Entity GetDrawingEntity(int x, int y)
 		{
 			if(_entities.ContainsKey(ConvertXYToInt(x, y)))
