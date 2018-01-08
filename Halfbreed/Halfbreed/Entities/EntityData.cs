@@ -12,6 +12,11 @@ namespace Halfbreed.Entities
 			return _materialProperties[material];
 		}
 
+		public static int GetNumberOfMaterials()
+		{
+			return _materialProperties.Count;
+		}
+
 		public static void SetupDictionaries()
 		{
 			_materialProperties = EntityDatabaseConnection.GetMaterialProperties();
