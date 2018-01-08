@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Halfbreed.Entities;
 
 namespace Halfbreed
 {
@@ -86,22 +87,29 @@ namespace Halfbreed
 		}
 
 		[Test]
-		public void TestFurnishings()
+		public void TestFurnishingSetup()
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
-			//Assert.AreEqual(testLevel.getEntities(0, 0).Count, 0);
-			//Assert.AreEqual(testLevel.getEntities(15, 15).Count, 2);
-			//Assert.IsTrue(testLevel.getEntities(15, 15).Contains(2));
-			//Assert.IsFalse(testLevel.getEntities(15, 15).Contains(1));
-			//Assert.AreEqual(testLevel.getEntities(20, 10).Count, 0);
-			//Assert.IsTrue(testLevel.getEntities(10, 20).Contains(1));
+			Assert.AreEqual("Pallet", testLevel.GetFurnishings(42, 19)[0].EntityName);
+			// TODO: Think of a better way to do this.
+		}
 
-			//testLevel.removeEntity(15, 15, 0);
+		[Test]
+		public void TestDrawingEntities()
+		{
+			Level testLevel = new Level(testLevelMapFilePath);
 
-			//Assert.AreEqual(testLevel.getEntities(15, 15).Count, 1);
-			//Assert.IsTrue(testLevel.getEntities(15, 15).Contains(2));
-			//Assert.IsFalse(testLevel.getEntities(15, 15).Contains(0));
+			Assert.IsTrue(testLevel.HasEntity(42, 19));
+			Assert.AreEqual('.', testLevel.GetDrawingEntity(42, 19).Symbol);
+			Assert.AreEqual(Colors.TAN, testLevel.GetDrawingEntity(42, 19).FGColor);
+			Assert.IsTrue(testLevel.HasEntity(24, 16));
+			Assert.AreEqual('#', testLevel.GetDrawingEntity(24, 16).Symbol);
+			Assert.AreEqual(Colors.REDBROWN, testLevel.GetDrawingEntity(24, 16).FGColor);
+
+			Assert.IsFalse(testLevel.HasEntity(4, 20));
+			Assert.IsFalse(testLevel.HasEntity(41, 5));
+
 		}
 
 		[TearDown]
