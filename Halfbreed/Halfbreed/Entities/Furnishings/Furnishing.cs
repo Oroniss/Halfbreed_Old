@@ -30,7 +30,7 @@ namespace Halfbreed
 			_material = material;
 			_displayLayer = DisplayLayer.FURNISHING;
 
-			MaterialProperties properties = EntityData.GetProperties(material);
+			MaterialProperties properties = StaticData.GetProperties(material);
 
 			_fgColor = properties.FGColor;
 			_symbol = template.Symbol;
