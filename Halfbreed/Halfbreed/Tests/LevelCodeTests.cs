@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NUnit.Framework;
 using Halfbreed.Entities;
 
@@ -14,7 +14,7 @@ namespace Halfbreed
 		{
 			EntityDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
 			EntityDatabaseConnection.openDBConnection();
-			Entities.EntityData.SetupDictionaries();
+			StaticData.SetupDictionaries();
 		}
 
 		[Test]
@@ -55,12 +55,12 @@ namespace Halfbreed
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
-			Assert.AreEqual(TileType.WOODWALL, testLevel.GetTile(0, 0));
-			Assert.AreEqual(TileType.WOODWALL, testLevel.GetTile(43, 24));
-			Assert.AreEqual(TileType.WOODFLOOR, testLevel.GetTile(1, 1));
-			Assert.AreEqual(TileType.WOODFLOOR, testLevel.GetTile(42, 1));
-			Assert.AreEqual(TileType.WOODENDEBRIS, testLevel.GetTile(37, 8));
-			Assert.AreEqual(TileType.WOODENDEBRIS, testLevel.GetTile(35, 10));
+			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(0, 0));
+			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(43, 24));
+			Assert.AreEqual(Colors.WOODBROWN, testLevel.GetBGColor(1, 1));
+			Assert.AreEqual(Colors.WOODBROWN, testLevel.GetBGColor(42, 1));
+			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(37, 8));
+			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(35, 10));
 		}
 
 		[Test]
