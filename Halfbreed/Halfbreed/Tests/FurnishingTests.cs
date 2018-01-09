@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Halfbreed.Entities;
 using NUnit.Framework;
 
@@ -13,7 +13,7 @@ namespace Halfbreed
 		{
 			EntityDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
 			EntityDatabaseConnection.openDBConnection();
-			Entities.EntityData.SetupDictionaries();
+			StaticData.SetupDictionaries();
 		}
 
 		[Test]
