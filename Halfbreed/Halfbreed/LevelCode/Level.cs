@@ -11,7 +11,7 @@ namespace Halfbreed
 		private string _levelTitle;
 		private int _height;
 		private int _width;
-		private TileType[] _mapGrid;
+		private MapTileDetails[] _mapGrid;
 		private bool[] _revealed;
 
 		private int _visibility;
@@ -51,7 +51,7 @@ namespace Halfbreed
 				tileDict[Int32.Parse(splitLine[0])] = (TileType)Enum.Parse(typeof(TileType), splitLine[1]);
 			}
 
-			_mapGrid = new TileType[_width * _height];
+			_mapGrid = new MapTileDetails[_width * _height];
 			_revealed = new bool[_width * _height];
 
 			for (int y = 0; y < _height; y++)
@@ -59,7 +59,7 @@ namespace Halfbreed
 				string[] _row = LevelSpecificationFile.ReadLine().Trim().Split(',');
 				for (int x = 0; x < _width; x++)
 				{
-					_mapGrid[y * _width + x] = tileDict[Int32.Parse(_row[x])];
+					_mapGrid[y * _width + x] = StaticData.GetMapTileDetails(tileDict[Int32.Parse(_row[x])]);
 					_revealed[y * _width + x] = false;
 				}
 			}
@@ -118,9 +118,14 @@ namespace Halfbreed
 			return x >= 0 && x < _width && y >= 0 && y < _height;
 		}
 
-		public TileType GetTile(int x, int y)
+		public Colors GetBGColor(int x, int y)
 		{
-			return _mapGrid[ConvertXYToInt(x, y)];
+			return _mapGrid[ConvertXYToInt(x, y)].BGColor;
+		}
+
+		public Colors GetFogColor(int x, int y)
+		{
+			return _mapGrid[ConvertXYToInt(x, y)].FogColor;
 		}
 
 		public bool isRevealed(int x, int y)
@@ -206,12 +211,6 @@ namespace Halfbreed
 			}
 
 			return returnList;
-		}
-
-		// TODO: Think about whether this function is actually required?
-		public bool HasFurnishing(int x, int y)
-		{
-			return _furnishings.ContainsKey(ConvertXYToInt(x, y));
 		}
 
 		public List<Furnishing> GetFurnishings(int x, int y)
