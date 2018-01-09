@@ -78,6 +78,39 @@ namespace Halfbreed
 			return materialDict;
 		}
 
+		public static Dictionary<TileType, MapTileDetails> GetMapTiles()
+		{
+			Dictionary<TileType, MapTileDetails> tileDict = new Dictionary<TileType, MapTileDetails>();
+
+			string queryText = "SELECT * FROM MapTiles;";
+
+			using (var queryCommand = _connection.CreateCommand())
+			{
+				queryCommand.CommandText = queryText;
+
+				var reader = queryCommand.ExecuteReader();
+
+				while (reader.Read())
+				{
+					string tileName = reader.GetString(0);
+					TileType tileType = EnumConverter.ConvertStringToTileType(tileName);
+					// Materials material = EnumConverter.ConvertStringToMaterial(reader.GetString(0));
+
+					int elevation = reader.GetInt32(1);
+					MovementModes movementMode = (MovementModes)reader.GetInt32(2);
+					bool allowLOS = (reader.GetInt32(3) == 1);
+					string bgColor = reader.GetString(4);
+					string fogColor = reader.GetString(5);
+
+					tileDict.Add(tileType, new MapTileDetails(tileName, elevation, movementMode, allowLOS,
+					                                                       bgColor, fogColor));
+				}
+			}
+
+			return tileDict;
+
+		}
+
 		public static EntityPrimaryStatTemplate GetPrimaryStats(string EntityName)
 		{
 			return new EntityPrimaryStatTemplate(0, 0, 0, 0, 0);
