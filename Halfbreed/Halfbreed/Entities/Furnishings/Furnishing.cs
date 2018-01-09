@@ -13,6 +13,9 @@ namespace Halfbreed
 
 		protected Materials _material;
 
+		protected bool _hasMapTile;
+		protected MapTileDetails _mapTile;
+
 		public Furnishing(string furnishingName, Materials material, FurnishingTemplate template, int xLoc, int yLoc, string[] otherParameters)
 			:base(furnishingName, xLoc, yLoc)
 		{
@@ -45,6 +48,26 @@ namespace Halfbreed
 		{
 			// TODO: Need to actually implement this.
 			return EntityName;
+		}
+
+		public bool HasMapTile
+		{
+			get { return _hasMapTile; }
+		}
+
+		public MapTileDetails MapTile
+		{
+			get {
+				if (_hasMapTile)
+				{
+					return _mapTile;
+				}
+				else
+				{
+					ErrorLogger.AddDebugText("Tried to access non-existant map tile on " + this.ToString());
+					return StaticData.GetMapTileDetails(TileType.WOODFLOOR);
+				}
+			}
 		}
 
 	}
