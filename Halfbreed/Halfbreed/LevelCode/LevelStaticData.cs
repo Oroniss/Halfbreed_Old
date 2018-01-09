@@ -1,10 +1,17 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Halfbreed.Levels;
+
 namespace Halfbreed
 {
-	public class LevelStaticData
+	public partial class Level
 	{
-		public LevelStaticData()
+		private static Dictionary<TileType, MapTileDetails> _mapTiles = new Dictionary<TileType, MapTileDetails>();
+
+
+		public static void SetupTileDictionary()
 		{
+			
 		}
+
 	}
 }
