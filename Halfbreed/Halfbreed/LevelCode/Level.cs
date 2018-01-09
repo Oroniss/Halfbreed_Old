@@ -19,6 +19,7 @@ namespace Halfbreed
 
 		private Dictionary<int, List<Entities.Entity>> _entities;
 		private Dictionary<int, List<Furnishing>> _furnishings;
+		private Dictionary<int, Furnishing> _tileFurnishings;
 
 		public Level(string LevelFilePath)
 		{
@@ -37,6 +38,7 @@ namespace Halfbreed
 
 			_entities = new Dictionary<int, List<Entities.Entity>>();
 			_furnishings = new Dictionary<int, List<Furnishing>>();
+			_tileFurnishings = new Dictionary<int, Furnishing>();
 			
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
@@ -120,12 +122,18 @@ namespace Halfbreed
 
 		public Colors GetBGColor(int x, int y)
 		{
-			return _mapGrid[ConvertXYToInt(x, y)].BGColor;
+			int index = ConvertXYToInt(x, y);
+			if (_tileFurnishings.ContainsKey(index))
+				return _tileFurnishings[index].MapTile.BGColor;
+			return _mapGrid[index].BGColor;
 		}
 
 		public Colors GetFogColor(int x, int y)
 		{
-			return _mapGrid[ConvertXYToInt(x, y)].FogColor;
+			int index = ConvertXYToInt(x, y);
+			if (_tileFurnishings.ContainsKey(index))
+				return _tileFurnishings[index].MapTile.FogColor;
+			return _mapGrid[index].FogColor;
 		}
 
 		public bool isRevealed(int x, int y)
@@ -140,17 +148,40 @@ namespace Halfbreed
 		public void AddFurnishing(int x, int y, Furnishing furnishing)
 		{
 			int index = ConvertXYToInt(x, y);
+
+			if (furnishing.HasMapTile)
+			{
+				if (_tileFurnishings.ContainsKey(index))
+				{
+					// TODO: Throw an exception here.
+					return;
+				}
+				_tileFurnishings[index] = furnishing;
+			}
+			
 			if (_furnishings.ContainsKey(index))
 				_furnishings[index].Add(furnishing);
 			else
 				_furnishings[index] = new List<Furnishing>() { furnishing };
-			
+
 			AddEntity(index, furnishing);
 		}
 
 		public void RemoveFurnishing(int x, int y, Furnishing furnishing)
 		{
 			int index = ConvertXYToInt(x, y);
+
+			if (furnishing.HasMapTile)
+			{
+				if (!_tileFurnishings.ContainsKey(index))
+				{
+					ErrorLogger.AddDebugText(string.Format("Tried to remove non-existant tile furnishing {0} at index {1}", furnishing, index));
+					return;
+				}
+				else
+					_tileFurnishings.Remove(index);
+			}
+
 			if (!_furnishings.ContainsKey(index) || !_furnishings[index].Contains(furnishing))
 			{
 				ErrorLogger.AddDebugText(string.Format("Tried to remove non-existant furnishing {0} at index {1}", furnishing, index));
