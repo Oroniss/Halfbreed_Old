@@ -8,6 +8,7 @@ namespace Halfbreed
 		private static StringToColorConverter StringToColorConverter = new StringToColorConverter();
 		private static CharacterClassToStringConverter CharacterClassToStringConverter = new CharacterClassToStringConverter();
 		private static MaterialToStringConverter MaterialToStringConverter = new MaterialToStringConverter();
+		private static StringToTileTypeConverter StringToTileConverter = new StringToTileTypeConverter();
 
 		public static string ConvertEnumToString(object enumValue)
 		{
@@ -38,6 +39,11 @@ namespace Halfbreed
 		public static Materials ConvertStringToMaterial(string inputValue)
 		{
 			return MaterialToStringConverter.ConvertStringToMaterial(inputValue);
+		}
+
+		public static TileType ConvertStringToTileType(string tileName)
+		{
+			return StringToTileConverter.ConvertStringToTileType(tileName);
 		}
 	}
 }
