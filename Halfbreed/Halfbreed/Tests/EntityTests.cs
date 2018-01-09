@@ -14,18 +14,18 @@ namespace Halfbreed
 		{
 			EntityDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
 			EntityDatabaseConnection.openDBConnection();
-			Entities.EntityData.SetupDictionaries();
+			StaticData.SetupDictionaries();
 		}
 
 		[Test]
 		public void TestMaterialDictionary()
 		{
-			Assert.AreEqual(Enum.GetValues(typeof(Materials)).Length, EntityData.GetNumberOfMaterials());
+			Assert.AreEqual(Enum.GetValues(typeof(Materials)).Length, StaticData.GetNumberOfMaterials());
 
-			Assert.AreEqual(200, EntityData.GetProperties(Materials.COPPER).DefensiveStatTemplate.AcidResistance);
-			Assert.AreEqual(400, EntityData.GetProperties(Materials.HESSION).DefensiveStatTemplate.LightResistance);
-			Assert.AreEqual(10, EntityData.GetProperties(Materials.TIN).Hardness);
-			Assert.AreEqual(Colors.TAN, EntityData.GetProperties(Materials.HESSION).FGColor);
+			Assert.AreEqual(200, StaticData.GetProperties(Materials.COPPER).DefensiveStatTemplate.AcidResistance);
+			Assert.AreEqual(400, StaticData.GetProperties(Materials.HESSION).DefensiveStatTemplate.LightResistance);
+			Assert.AreEqual(10, StaticData.GetProperties(Materials.TIN).Hardness);
+			Assert.AreEqual(Colors.TAN, StaticData.GetProperties(Materials.HESSION).FGColor);
 		}
 
 		[TearDown]
