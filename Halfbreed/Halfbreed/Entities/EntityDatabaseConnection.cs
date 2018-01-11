@@ -140,8 +140,12 @@ namespace Halfbreed
 				string furnishingName = reader.GetString(0);
 				char symbol = reader.GetString(1)[0];
 				int volume = reader.GetInt32(2);
+				bool hasTile = (reader.GetInt32(3) == 1);
+				string tileName = "";
+				if (hasTile)
+					tileName = reader.GetString(4);
 
-				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume);
+				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, hasTile, tileName);
 
 				return template;
 			}
