@@ -28,19 +28,16 @@ Means logging is only for the game experience for a single level.
 
 Next Steps:
 
-Test converter for tile type and some of the level stuff.
-Also do a check to make sure the number of elements are the same everywhere.
-
-
-Put tile onto furnishing - add tests and sort out drawing.
-
-
+Might as well go back and do components, since it looks like we are going to end up with them anyway.
+Keep Entity class with the "always on" stuff though.
+Just have a few different factories for creating them,
+and a few different constructors.
+Give component a "unique" flag
 
 Implement the trait section and flesh out some additional traits for both Furnishings and Materials.
 Write the tests for this.
 
 Implement a simple get description.
-Add elevation to tiles.
 
 Add harvesting nodes to furnishing db.
 
@@ -63,7 +60,6 @@ Then concealment and light sources.
 
 
 Damageable.
-Position.
 Description.
 Traits.
 Concealed.
@@ -86,7 +82,6 @@ Furnishing
 Interaction + trigger
 Movement + trigger
 Harvestable
-Tile
 Liquid
 
 Item
