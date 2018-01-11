@@ -1,10 +1,26 @@
-﻿using System;
-namespace Halfbreed
+﻿namespace Halfbreed
 {
-	public class Component
+	public abstract class Component
 	{
-		public Component()
+		protected ComponentType _componentType;
+		protected Entity _entity;
+
+		protected Component(Entity entity)
 		{
+			_entity = entity;
 		}
+
+		public Entity Entity
+		{
+			get { return _entity; }
+		}
+
+		public ComponentType ComponentType
+		{
+			get { return _componentType; }
+		}
+
+		public virtual void DestroyComponent() { }
+
 	}
 }
