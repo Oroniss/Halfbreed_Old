@@ -17,9 +17,8 @@ namespace Halfbreed
 		private int _visibility;
 		private float _anathemaMultiplier;
 
-		private Dictionary<int, List<Entities.Entity>> _entities;
-		private Dictionary<int, List<Furnishing>> _furnishings;
-		private Dictionary<int, Furnishing> _tileFurnishings;
+		private Dictionary<int, List<Entity>> _entities;
+		private Dictionary<int, MapTileDetails> _tilesWithTileEntities;
 
 		public Level(string LevelFilePath)
 		{
@@ -36,10 +35,8 @@ namespace Halfbreed
 			_visibility = Int32.Parse(LevelSpecificationFile.ReadLine());
 			_anathemaMultiplier = float.Parse(LevelSpecificationFile.ReadLine());
 
-			_entities = new Dictionary<int, List<Entities.Entity>>();
-			_furnishings = new Dictionary<int, List<Furnishing>>();
-			_tileFurnishings = new Dictionary<int, Furnishing>();
-			
+			_entities = new Dictionary<int, List<Entity>>();
+			_tilesWithTileEntities = new Dictionary<int, MapTileDetails>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -87,9 +84,9 @@ namespace Halfbreed
 				string[] otherParams = new string[splitLine.Length - FURNISHINGPREFIXLENGTH];
 				for (int i = 0; i < splitLine.Length - FURNISHINGPREFIXLENGTH; i++)
 					otherParams[i] = splitLine[i + FURNISHINGPREFIXLENGTH];
-				Furnishing newFurnishing = Entities.FurnishingFactory.CreateFurnishing(furnishingName, material,
+				Entity newFurnishing = Entities.FurnishingFactory.CreateFurnishing(furnishingName, material,
 																					   xLoc, yLoc, otherParams);
-				AddFurnishing(xLoc, yLoc, newFurnishing);
+				AddEntity(xLoc, yLoc, newFurnishing);
 			}
 
 			levelStream.Close();
@@ -123,16 +120,16 @@ namespace Halfbreed
 		public Colors GetBGColor(int x, int y)
 		{
 			int index = ConvertXYToInt(x, y);
-			if (_tileFurnishings.ContainsKey(index))
-				return _tileFurnishings[index].MapTile.BGColor;
+			if (_tilesWithTileEntities.ContainsKey(index))
+				return _tilesWithTileEntities[index].BGColor;
 			return _mapGrid[index].BGColor;
 		}
 
 		public Colors GetFogColor(int x, int y)
 		{
 			int index = ConvertXYToInt(x, y);
-			if (_tileFurnishings.ContainsKey(index))
-				return _tileFurnishings[index].MapTile.FogColor;
+			if (_tilesWithTileEntities.ContainsKey(index))
+				return _tilesWithTileEntities[index].FogColor;
 			return _mapGrid[index].FogColor;
 		}
 
@@ -145,70 +142,46 @@ namespace Halfbreed
 			_revealed[ConvertXYToInt(x, y)] = true;
 		}
 
-		public void AddFurnishing(int x, int y, Furnishing furnishing)
+		public void AddEntity(int x, int y, Entity entity)
 		{
 			int index = ConvertXYToInt(x, y);
 
-			if (furnishing.HasMapTile)
+			if (entity.HasComponent(ComponentType.TILE))
 			{
-				if (_tileFurnishings.ContainsKey(index))
+				if (_tilesWithTileEntities.ContainsKey(index))
 				{
-					// TODO: Throw an exception here.
+					ErrorLogger.AddDebugText(string.Format("Tried to add another tile component to same location." +
+														   "New entity = {0}, existing entity = {1}.",
+														   _tilesWithTileEntities[index], entity));
 					return;
 				}
-				_tileFurnishings[index] = furnishing;
-			}
-			
-			if (_furnishings.ContainsKey(index))
-				_furnishings[index].Add(furnishing);
-			else
-				_furnishings[index] = new List<Furnishing>() { furnishing };
-
-			AddEntity(index, furnishing);
-		}
-
-		public void RemoveFurnishing(int x, int y, Furnishing furnishing)
-		{
-			int index = ConvertXYToInt(x, y);
-
-			if (furnishing.HasMapTile)
-			{
-				if (!_tileFurnishings.ContainsKey(index))
-				{
-					ErrorLogger.AddDebugText(string.Format("Tried to remove non-existant tile furnishing {0} at index {1}", furnishing, index));
-					return;
-				}
-				else
-					_tileFurnishings.Remove(index);
+				_tilesWithTileEntities[index] = ((TileComponent)entity.GetComponent(ComponentType.TILE)).MapTileDetails;
 			}
 
-			if (!_furnishings.ContainsKey(index) || !_furnishings[index].Contains(furnishing))
-			{
-				ErrorLogger.AddDebugText(string.Format("Tried to remove non-existant furnishing {0} at index {1}", furnishing, index));
-				return;
-			}
-			if (_furnishings[index].Count == 1)
-				_furnishings.Remove(index);
-			else
-				_furnishings[index].Remove(furnishing);
-
-			RemoveEntity(index, furnishing);
-		}
-
-		private void AddEntity(int index, Entities.Entity entity)
-		{
 			if (_entities.ContainsKey(index))
 			{
 				_entities[index].Add(entity);
 				_entities[index].Sort();
 			}
 			else
-				_entities[index] = new List<Entities.Entity>() { entity };
+				_entities[index] = new List<Entity>() { entity };
 			
 		}
 
-		private void RemoveEntity(int index, Entities.Entity entity)
+		public void RemoveEntity(int x, int y, Entity entity)
 		{
+			int index = ConvertXYToInt(x, y);
+
+			if (entity.HasComponent(ComponentType.TILE))
+			{
+				if (_tilesWithTileEntities.ContainsKey(index) && 
+				    _tilesWithTileEntities[index] == ((TileComponent)entity.GetComponent(ComponentType.TILE)).MapTileDetails)
+					_tilesWithTileEntities.Remove(index);
+				else
+					ErrorLogger.AddDebugText(string.Format("Tried to remove a tile entity but not present in db" +
+														   "Entity = {0}, x = {1}, y = {2}", entity, x, y));
+			}
+
 			if (_entities.ContainsKey(index))
 			{
 				if (_entities[index].Contains(entity))
@@ -224,6 +197,8 @@ namespace Halfbreed
 				}
 			}
 			ErrorLogger.AddDebugText(String.Format("Tried to remove non-existant Entity: {0} at index {1}", entity, index)); 
+
+
 		}
 
 		public bool HasEntity(int x, int y)
@@ -231,34 +206,20 @@ namespace Halfbreed
 			return _entities.ContainsKey(ConvertXYToInt(x, y));
 		}
 
-		public List<Entities.Entity> GetEntities(int x, int y)
+		public List<Entity> GetEntities(int x, int y)
 		{
-			List<Entities.Entity> returnList = new List<Entities.Entity>();
+			List<Entity> returnList = new List<Entity>();
 
 			if (_entities.ContainsKey(ConvertXYToInt(x, y)))
 			{
-				foreach (Entities.Entity entity in _entities[ConvertXYToInt(x, y)])
+				foreach (Entity entity in _entities[ConvertXYToInt(x, y)])
 					returnList.Add(entity);
 			}
 
 			return returnList;
 		}
 
-		public List<Furnishing> GetFurnishings(int x, int y)
-		{
-			List<Furnishing> returnList = new List<Furnishing>() { };
-
-			if (_furnishings.ContainsKey(ConvertXYToInt(x, y)))
-			{
-				foreach (Furnishing furnishing in _furnishings[ConvertXYToInt(x, y)])
-					returnList.Add(furnishing);
-			}
-
-			return returnList;
-
-		}
-
-		public Entities.Entity GetDrawingEntity(int x, int y)
+		public Entity GetDrawingEntity(int x, int y)
 		{
 			if(_entities.ContainsKey(ConvertXYToInt(x, y)))
 				return _entities[ConvertXYToInt(x, y)][0];
