@@ -19,25 +19,25 @@ namespace Halfbreed
 		[Test]
 		public void TestFurnishingBasics()
 		{
-			Furnishing newPallet = FurnishingFactory.CreateFurnishing("Pallet", Materials.HESSION, 5, 5, new string[] { });
-			Furnishing newDoor = FurnishingFactory.CreateFurnishing("Door", Materials.PINE, 10, 10, new string[] { });
-			Furnishing newChest = FurnishingFactory.CreateFurnishing("Chest", Materials.TIN, 12, 8, new string[] { });
+			Entity newPallet = FurnishingFactory.CreateFurnishing("Pallet", Materials.HESSION, 5, 5, new string[] { });
+			Entity newDoor = FurnishingFactory.CreateFurnishing("Door", Materials.PINE, 10, 10, new string[] { });
+			Entity newChest = FurnishingFactory.CreateFurnishing("Chest", Materials.TIN, 12, 8, new string[] { });
 
 			Assert.AreEqual(5, newPallet.YLoc);
 			Assert.AreEqual(5, newPallet.XLoc);
-			Assert.AreEqual(Materials.HESSION, newPallet.Material);
+			Assert.AreEqual(Materials.HESSION, ((MaterialComponent)newPallet.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('.', newPallet.Symbol);
 			Assert.AreEqual(DisplayLayer.FURNISHING, newPallet.DisplayLayer);
 
 			Assert.AreEqual(10, newDoor.YLoc);
 			Assert.AreEqual(10, newDoor.XLoc);
-			Assert.AreEqual(Materials.PINE, newDoor.Material);
+			Assert.AreEqual(Materials.PINE, ((MaterialComponent)newDoor.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('+', newDoor.Symbol);
 			Assert.AreEqual(DisplayLayer.FURNISHING, newDoor.DisplayLayer);
 
 			Assert.AreEqual(8, newChest.YLoc);
 			Assert.AreEqual(12, newChest.XLoc);
-			Assert.AreEqual(Materials.TIN, newChest.Material);
+			Assert.AreEqual(Materials.TIN, ((MaterialComponent)newChest.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('#', newChest.Symbol);
 			Assert.AreEqual(DisplayLayer.FURNISHING, newPallet.DisplayLayer);
 		}
