@@ -8,7 +8,9 @@ namespace Halfbreed.Converters
 		{
 			{"Wood Floor", TileType.WOODFLOOR},
 			{"Wood Wall", TileType.WOODWALL},
-			{"Wooden Debris", TileType.WOODENDEBRIS}
+			{"Wooden Debris", TileType.WOODENDEBRIS},
+			{"Pallet", TileType.PALLET},
+			{"Platform", TileType.PLATFORM}
 		};
 
 		public TileType ConvertStringToTileType(string tileName)
