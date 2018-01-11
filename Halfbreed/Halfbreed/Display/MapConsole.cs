@@ -24,7 +24,7 @@ namespace Halfbreed.Display
 					             Palette.GetColor( level.GetBGColor(x, y)), ' ');
 					if (level.HasEntity(x, y))
 					{
-						Entities.Entity entity = level.GetDrawingEntity(x, y);
+						Entity entity = level.GetDrawingEntity(x, y);
 						_console.Set(x + xLimits.Offset, y + yLimits.Offset, Palette.GetColor(entity.FGColor), 
 						             null, entity.Symbol);
 					}
