@@ -67,5 +67,15 @@ namespace Halfbreed
 			Assert.AreEqual(Enum.GetValues(typeof(Materials)).Length, Converters.MaterialToStringConverter.NumberOfMaterials);
 		}
 
+		[Test]
+		public void TestStringToTileType()
+		{
+			Assert.AreEqual(TileType.WOODFLOOR, EnumConverter.ConvertStringToTileType("Wood Floor"));
+			Assert.AreEqual(TileType.WOODWALL, EnumConverter.ConvertStringToTileType("Wood Wall"));
+			Assert.AreEqual(TileType.WOODENDEBRIS, EnumConverter.ConvertStringToTileType("Wooden Debris"));
+
+			Assert.AreEqual(Enum.GetValues(typeof(TileType)).Length, Converters.StringToTileTypeConverter.GetNumberOfTiles());
+		}
+
 	}
 }
