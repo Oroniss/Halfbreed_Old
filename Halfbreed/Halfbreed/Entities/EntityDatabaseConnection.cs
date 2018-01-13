@@ -36,6 +36,15 @@ namespace Halfbreed
 			ErrorLogger.AddDebugText("Tried to close already closed DB connection");
 		}
 
+		private static EntityTraits[] GetTraits(string traitAttribute)
+		{
+			string[] traitNames = traitAttribute.Trim().Split(',');
+			EntityTraits[] traits = new EntityTraits[traitNames.Length];
+			for (int i = 0; i < traitNames.Length; i++)
+				traits[i] = EnumConverter.ConvertStringToTrait(traitNames[i]);
+			return traits;
+		}
+
 		public static Dictionary<Materials, MaterialProperties> GetMaterialProperties()
 		{
 			Dictionary<Materials, MaterialProperties> materialDict = new Dictionary<Materials, MaterialProperties>();
@@ -69,9 +78,12 @@ namespace Halfbreed
 
 					Colors fgcolor = EnumConverter.ConvertStringToColor(reader.GetString(15));
 
+					EntityTraits[] traits = GetTraits(reader.GetString(16));
+					string adjective = reader.GetString(17);
+
 					materialDict.Add(material, new MaterialProperties(acid, cold, elec, fire, poison, disease, light,
 																	  shadow, mental, physical, nether, hppervol,
-					                                                  wgtpervol, hardness, fgcolor));
+					                                                  wgtpervol, hardness, fgcolor, traits, adjective));
 				}
 			}
 
@@ -94,7 +106,6 @@ namespace Halfbreed
 				{
 					string tileName = reader.GetString(0);
 					TileType tileType = EnumConverter.ConvertStringToTileType(tileName);
-					// Materials material = EnumConverter.ConvertStringToMaterial(reader.GetString(0));
 
 					int elevation = reader.GetInt32(1);
 					MovementModes movementMode = (MovementModes)reader.GetInt32(2);
@@ -121,11 +132,6 @@ namespace Halfbreed
 			return new EntityDefensiveStatTemplate(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		}
 
-		public static List<EntityTraits> GetEntityTraits(string EntityName)
-		{
-			return new List<EntityTraits>();
-		}
-
 		public static FurnishingTemplate GetFurnishingDetails(string FurnishingName)
 		{
 			string queryText = string.Format("SELECT * FROM Furnishings WHERE FurnishingName = \"{0}\";", FurnishingName);
@@ -140,12 +146,13 @@ namespace Halfbreed
 				string furnishingName = reader.GetString(0);
 				char symbol = reader.GetString(1)[0];
 				int volume = reader.GetInt32(2);
-				bool hasTile = (reader.GetInt32(3) == 1);
+				EntityTraits[] traits = GetTraits(reader.GetString(3));
+				bool hasTile = (reader.GetInt32(4) == 1);
 				string tileName = "";
 				if (hasTile)
-					tileName = reader.GetString(4);
+					tileName = reader.GetString(5);
 
-				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, hasTile, tileName);
+				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, traits, hasTile, tileName);
 
 				return template;
 			}
