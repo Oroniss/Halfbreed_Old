@@ -17,13 +17,19 @@ namespace Halfbreed
 		protected Colors _fgColor;
 		protected char _symbol;
 
-		protected Entity(string entityName, int xLoc, int yLoc)
+		protected List<EntityTraits> _traits;
+
+		private Entity(string entityName, int xLoc, int yLoc, EntityTraits[] traits)
 		{
 			_entityId = GetNextId();
 			_entityName = entityName;
 			_xLoc = xLoc;
 			_yLoc = yLoc;
 			_components = new Dictionary<ComponentType, Component>();
+			_traits = new List<EntityTraits>();
+
+			foreach (EntityTraits trait in traits)
+				AddTrait(trait);
 		}
 
 		private static int GetNextId()
@@ -64,6 +70,25 @@ namespace Halfbreed
 		public int YLoc
 		{
 			get { return _yLoc; }
+		}
+
+		public void AddTrait(EntityTraits trait) 
+		{
+			_traits.Add(trait);
+		}
+
+		public void RemoveTrait(EntityTraits trait) 
+		{
+			if (_traits.Contains(trait))
+				_traits.Remove(trait);
+			else
+				ErrorLogger.AddDebugText(string.Format("Tried to remove non-existant trait from entity" +
+				                                       "Entity: {0}, Trait: {1}", this, trait));
+		}
+
+		public bool HasTrait(EntityTraits trait)
+		{
+			return _traits.Contains(trait);
 		}
 
 		public int CompareTo(object obj)
