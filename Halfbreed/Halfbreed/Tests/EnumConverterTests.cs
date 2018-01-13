@@ -77,5 +77,18 @@ namespace Halfbreed
 			Assert.AreEqual(Enum.GetValues(typeof(TileType)).Length, Converters.StringToTileTypeConverter.GetNumberOfTiles());
 		}
 
+		[Test]
+		public void TestStringToEntityTrait()
+		{
+			Assert.AreEqual(EntityTraits.CLOTH, EnumConverter.ConvertStringToTrait("Cloth"));
+			Assert.AreEqual(EntityTraits.FURNISHING, EnumConverter.ConvertStringToTrait("Furnishing"));
+			Assert.AreEqual(EntityTraits.RUINED, EnumConverter.ConvertStringToTrait("Ruined"));
+			Assert.AreEqual(EntityTraits.IMMUNETOACID, EnumConverter.ConvertStringToTrait("Immune to Acid"));
+			Assert.AreEqual(EntityTraits.IMMUNETOPOISON, EnumConverter.ConvertStringToTrait("Immune to Poison"));
+			Assert.AreEqual(EntityTraits.STONE, EnumConverter.ConvertStringToTrait("Stone"));
+
+			Assert.AreEqual(Enum.GetValues(typeof(EntityTraits)).Length, Converters.StringToTraitConverter.GetNumberOfTraits());
+		}
+
 	}
 }
