@@ -28,18 +28,11 @@ Means logging is only for the game experience for a single level.
 
 Next Steps:
 
-Might as well go back and do components, since it looks like we are going to end up with them anyway.
-Keep Entity class with the "always on" stuff though.
-Just have a few different factories for creating them,
-and a few different constructors.
-Give component a "unique" flag
+Add harvesting nodes to db.
 
-Implement the trait section and flesh out some additional traits for both Furnishings and Materials.
-Write the tests for this.
+Do a full clean-up/Refactoring.
+Switch MaterialProperties to a flyweight class.
 
-Implement a simple get description.
-
-Add harvesting nodes to furnishing db.
 
 Start on Actors - at least need to get the player in.
 
