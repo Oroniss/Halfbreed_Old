@@ -84,7 +84,7 @@ namespace Halfbreed
 				string[] otherParams = new string[splitLine.Length - FURNISHINGPREFIXLENGTH];
 				for (int i = 0; i < splitLine.Length - FURNISHINGPREFIXLENGTH; i++)
 					otherParams[i] = splitLine[i + FURNISHINGPREFIXLENGTH];
-				Entity newFurnishing = Entities.FurnishingFactory.CreateFurnishing(furnishingName, material,
+				Entity newFurnishing = Entities.EntityFactory.CreateFurnishing(furnishingName, material,
 																					   xLoc, yLoc, otherParams);
 				AddEntity(xLoc, yLoc, newFurnishing);
 			}
