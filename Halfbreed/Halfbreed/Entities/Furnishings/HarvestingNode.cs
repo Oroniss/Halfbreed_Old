@@ -1,10 +1,19 @@
-﻿using System;
+﻿using Halfbreed.Entities;
+
 namespace Halfbreed
 {
-	public class HarvestingNode
+	public partial class Entity
 	{
-		public HarvestingNode()
+
+
+		public Entity(string harvestableName, int xLoc, int yLoc, string[] otherParams)
+			:this(harvestableName, xLoc, yLoc)
 		{
+
+			FurnishingTemplate furnishingTemplate = EntityDatabaseConnection.GetFurnishingDetails(harvestableName);
+
+			_symbol = furnishingTemplate.Symbol;
+			_displayLayer = DisplayLayer.HARVESTABLE;
 		}
 	}
 }
