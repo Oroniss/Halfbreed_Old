@@ -1,8 +1,7 @@
 using NUnit.Framework;
-using System;
 using RLNET;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class EnumConverterTests
@@ -43,52 +42,5 @@ namespace Halfbreed
 			Assert.AreEqual("Ranger", EnumConverter.ConvertEnumToString(CharacterClasses.RANGER));
 			Assert.AreEqual("Mage", EnumConverter.ConvertEnumToString(CharacterClasses.MAGE));
 		}
-
-		[Test]
-		public void TestStringToColor()
-		{
-			// TODO: Add some more here
-			Assert.AreEqual(Colors.BLACK, EnumConverter.ConvertStringToColor("Black"));
-			Assert.AreEqual(Colors.WHITE, EnumConverter.ConvertStringToColor("White"));
-			Assert.AreEqual(Colors.WOODBROWN, EnumConverter.ConvertStringToColor("Wood Brown"));
-			Assert.AreEqual(Colors.DARKWOODBROWN, EnumConverter.ConvertStringToColor("Dark Wood Brown"));
-
-			Assert.AreEqual(Enum.GetValues(typeof(Colors)).Length, Converters.StringToColorConverter.NumberOfColors);
-
-		}
-
-		[Test]
-		public void TestStringToMaterial()
-		{
-			Assert.AreEqual(Materials.COPPER, EnumConverter.ConvertStringToMaterial("Copper"));
-			Assert.AreEqual(Materials.HESSION, EnumConverter.ConvertStringToMaterial("Hession"));
-			Assert.AreNotEqual(Materials.FUR, EnumConverter.ConvertStringToMaterial("Tin"));
-
-			Assert.AreEqual(Enum.GetValues(typeof(Materials)).Length, Converters.MaterialToStringConverter.NumberOfMaterials);
-		}
-
-		[Test]
-		public void TestStringToTileType()
-		{
-			Assert.AreEqual(Levels.TileType.WOODFLOOR, EnumConverter.ConvertStringToTileType("Wood Floor"));
-			Assert.AreEqual(Levels.TileType.WOODWALL, EnumConverter.ConvertStringToTileType("Wood Wall"));
-			Assert.AreEqual(Levels.TileType.WOODENDEBRIS, EnumConverter.ConvertStringToTileType("Wooden Debris"));
-
-			Assert.AreEqual(Enum.GetValues(typeof(Levels.TileType)).Length, Converters.StringToTileTypeConverter.GetNumberOfTiles());
-		}
-
-		[Test]
-		public void TestStringToEntityTrait()
-		{
-			Assert.AreEqual(EntityTraits.CLOTH, EnumConverter.ConvertStringToTrait("Cloth"));
-			Assert.AreEqual(EntityTraits.FURNISHING, EnumConverter.ConvertStringToTrait("Furnishing"));
-			Assert.AreEqual(EntityTraits.RUINED, EnumConverter.ConvertStringToTrait("Ruined"));
-			Assert.AreEqual(EntityTraits.IMMUNETOACID, EnumConverter.ConvertStringToTrait("Immune to Acid"));
-			Assert.AreEqual(EntityTraits.IMMUNETOPOISON, EnumConverter.ConvertStringToTrait("Immune to Poison"));
-			Assert.AreEqual(EntityTraits.STONE, EnumConverter.ConvertStringToTrait("Stone"));
-
-			Assert.AreEqual(Enum.GetValues(typeof(EntityTraits)).Length, Converters.StringToTraitConverter.GetNumberOfTraits());
-		}
-
-	}
+			}
 }
