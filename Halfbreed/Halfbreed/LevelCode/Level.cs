@@ -89,6 +89,21 @@ namespace Halfbreed
 				AddEntity(xLoc, yLoc, newFurnishing);
 			}
 
+			while (true)
+			{
+				string line = LevelSpecificationFile.ReadLine().Trim();
+				if (LineIsBreakPoint(line))
+					break;
+
+				string[] splitLine = line.Split(',');
+				string harvestingName = splitLine[0];
+				int xLoc = Int32.Parse(splitLine[1]);
+				int yLoc = Int32.Parse(splitLine[2]);
+				Entity newHarvestingNode = Entities.EntityFactory.CreateHarvestingNode(harvestingName, xLoc, yLoc);
+
+				AddEntity(xLoc, yLoc, newHarvestingNode);
+			}
+
 			levelStream.Close();
 
 		}
