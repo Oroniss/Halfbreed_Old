@@ -1,5 +1,4 @@
-﻿
-namespace Halfbreed
+﻿namespace Halfbreed
 {
 	public enum DisplayLayer
 	{
@@ -8,11 +7,12 @@ namespace Halfbreed
 		PLAYER = 2,
 		MINION = 3,
 		ACTOR = 4,
-		ITEM = 5,
-		DOOR = 6,
-		TRAP = 7,
+		DOOR = 5,
+		TRAP = 6,
+		ITEM = 7,
 		HARVESTABLE = 8,
 		FURNISHING = 9,
-		TILE = 10
+		TILE = 10,
+		NOTDISPLAYED = 11
 	}
 }
