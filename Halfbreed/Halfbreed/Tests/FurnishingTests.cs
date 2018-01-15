@@ -11,8 +11,8 @@ namespace Halfbreed
 		[SetUp]
 		public void OpenTestDatabases()
 		{
-			EntityDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
-			EntityDatabaseConnection.openDBConnection();
+			StaticDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
+			StaticDatabaseConnection.openDBConnection();
 			StaticData.SetupDictionaries();
 		}
 
@@ -96,7 +96,7 @@ namespace Halfbreed
 		[TearDown]
 		public void CloseDBConnection()
 		{
-			EntityDatabaseConnection.closeDBConnection();
+			StaticDatabaseConnection.closeDBConnection();
 		}
 
 	}
