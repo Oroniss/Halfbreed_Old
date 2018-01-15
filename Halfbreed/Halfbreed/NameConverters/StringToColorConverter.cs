@@ -6,7 +6,6 @@ namespace Halfbreed.Converters
 	{
 		private static Dictionary<string, Colors> stringToColorDict = new Dictionary<string, Colors>()
 		{
-			// TODO: Keep this up to date.
 			// Basic colors
 			{"Black", Colors.BLACK},
 			{"White", Colors.WHITE},
