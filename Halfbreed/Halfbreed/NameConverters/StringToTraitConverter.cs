@@ -23,7 +23,9 @@ namespace Halfbreed.Converters
 			{"Stone", EntityTraits.STONE},
 			{"Gem", EntityTraits.GEM},
 			{"Leather", EntityTraits.LEATHER},
-			{"Cloth", EntityTraits.CLOTH}
+			{"Cloth", EntityTraits.CLOTH},
+			{"Animal", EntityTraits.ANIMAL},
+			{"Plant", EntityTraits.PLANT}
 		};
 
 		public EntityTraits ConvertStringToTrait(string traitName)
