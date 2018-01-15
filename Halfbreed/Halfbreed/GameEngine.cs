@@ -10,6 +10,7 @@ namespace Halfbreed
 		private static int _currentAct = 1;
 		private static int _currentChapter = 1;
 		private static int _gameId;
+		private static string _versionNumber = "0.01";
 
 		public static void SetStartingParameters(Menus.NewGameParameters startingParameters)
 		{
