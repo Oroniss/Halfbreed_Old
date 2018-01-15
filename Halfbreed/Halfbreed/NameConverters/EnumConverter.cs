@@ -5,11 +5,7 @@ namespace Halfbreed
 	public static class EnumConverter
 	{
 		private static KeyToStringConverter KeyToStringConverter = new KeyToStringConverter();
-		private static StringToColorConverter StringToColorConverter = new StringToColorConverter();
 		private static CharacterClassToStringConverter CharacterClassToStringConverter = new CharacterClassToStringConverter();
-		private static MaterialToStringConverter MaterialToStringConverter = new MaterialToStringConverter();
-		private static StringToTileTypeConverter StringToTileConverter = new StringToTileTypeConverter();
-		private static StringToTraitConverter StringToTraitConverter = new StringToTraitConverter();
 
 		public static string ConvertEnumToString(object enumValue)
 		{
@@ -27,29 +23,9 @@ namespace Halfbreed
 			return "";
 		}
 
-		public static Colors ConvertStringToColor(string inputValue)
-		{
-			return StringToColorConverter.ConvertStringToColor(inputValue);
-		}
-
 		public static CharacterClasses ConvertStringToCharacterClass(string inputValue)
 		{
 			return CharacterClassToStringConverter.ConvertStringToCharacterClass(inputValue);
-		}
-
-		public static Materials ConvertStringToMaterial(string inputValue)
-		{
-			return MaterialToStringConverter.ConvertStringToMaterial(inputValue);
-		}
-
-		public static Levels.TileType ConvertStringToTileType(string tileName)
-		{
-			return StringToTileConverter.ConvertStringToTileType(tileName);
-		}
-
-		public static EntityTraits ConvertStringToTrait(string traitName)
-		{
-			return StringToTraitConverter.ConvertStringToTrait(traitName);
 		}
 	}
 }
