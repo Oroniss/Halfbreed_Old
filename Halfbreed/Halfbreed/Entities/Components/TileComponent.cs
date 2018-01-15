@@ -1,4 +1,5 @@
-﻿using Halfbreed.Levels;
+﻿using System;
+using Halfbreed.Levels;
 
 namespace Halfbreed
 {
@@ -11,7 +12,7 @@ namespace Halfbreed
 		{
 			_componentType = ComponentType.TILE;
 
-			_tileDetails = StaticData.GetMapTileDetails(EnumConverter.ConvertStringToTileType(tileName));
+			_tileDetails = StaticData.GetMapTileDetails((TileType)Enum.Parse(typeof(TileType), tileName));
 		}
 
 		public MapTileDetails MapTileDetails
