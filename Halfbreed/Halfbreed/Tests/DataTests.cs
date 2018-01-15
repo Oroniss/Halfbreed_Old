@@ -2,7 +2,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class DataTests

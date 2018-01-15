@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class SaveDatabaseConnectionTests

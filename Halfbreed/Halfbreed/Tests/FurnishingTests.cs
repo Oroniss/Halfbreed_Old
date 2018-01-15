@@ -1,8 +1,7 @@
-using System;
 using Halfbreed.Entities;
 using NUnit.Framework;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class FurnishingTests
@@ -63,10 +62,10 @@ namespace Halfbreed
 		[Test]
 		public void TestHarvestingNodes()
 		{
-			Entity newDen = Entities.EntityFactory.CreateHarvestingNode("Rat Den", 5, 10);
-			Entity newMold = Entities.EntityFactory.CreateHarvestingNode("Green Mold", 10, 10);
-			Entity newOre = Entities.EntityFactory.CreateHarvestingNode("Copper Ore", 15, 15);
-			Entity newRichOre = Entities.EntityFactory.CreateHarvestingNode("Rich Copper Ore", 20, 20);
+			Entity newDen = EntityFactory.CreateHarvestingNode("Rat Den", 5, 10);
+			Entity newMold = EntityFactory.CreateHarvestingNode("Green Mold", 10, 10);
+			Entity newOre = EntityFactory.CreateHarvestingNode("Copper Ore", 15, 15);
+			Entity newRichOre = EntityFactory.CreateHarvestingNode("Rich Copper Ore", 20, 20);
 
 			Assert.AreEqual(5, newDen.XLoc);
 			Assert.AreEqual(10, newDen.YLoc);

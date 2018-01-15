@@ -3,7 +3,7 @@ using Halfbreed.Entities;
 
 using NUnit.Framework;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class EntityTests

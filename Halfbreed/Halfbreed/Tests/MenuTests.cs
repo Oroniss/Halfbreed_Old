@@ -1,8 +1,7 @@
 using NUnit.Framework;
-using System.Collections.Generic;
 using Halfbreed.Menus;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class MenuTests

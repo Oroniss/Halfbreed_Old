@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Tests
 {
 	public static class KeyBoardInputSimulator
 	{

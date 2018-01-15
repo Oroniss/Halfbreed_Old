@@ -1,8 +1,6 @@
-using System;
 using NUnit.Framework;
-using Halfbreed.Entities;
 
-namespace Halfbreed
+namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class LevelCodeTests
@@ -46,8 +44,6 @@ namespace Halfbreed
 			Assert.IsFalse(testLevel.IsValidMapCoord(50, 50));
 			Assert.IsFalse(testLevel.IsValidMapCoord(44, 5));
 			Assert.IsFalse(testLevel.IsValidMapCoord(-5, 25));
-
-
 		}
 
 		[Test]
@@ -87,29 +83,19 @@ namespace Halfbreed
 		}
 
 		[Test]
-		public void TestFurnishingSetup()
-		{
-			Level testLevel = new Level(testLevelMapFilePath);
-
-			//Assert.AreEqual("Pallet", testLevel.GetFurnishings(42, 19)[0].EntityName);
-			// TODO: Think of a better way to do this.
-		}
-
-		[Test]
 		public void TestDrawingEntities()
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
-			Assert.IsTrue(testLevel.HasEntity(42, 19));
+			Assert.IsTrue(testLevel.HasDrawingEntity(42, 19));
 			Assert.AreEqual('.', testLevel.GetDrawingEntity(42, 19).Symbol);
 			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetDrawingEntity(42, 19).FGColor); // Pallet
-			Assert.IsTrue(testLevel.HasEntity(24, 16));
+			Assert.IsTrue(testLevel.HasDrawingEntity(24, 16));
 			Assert.AreEqual('#', testLevel.GetDrawingEntity(24, 16).Symbol);
 			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetDrawingEntity(24, 16).FGColor); // Chest
 
-			Assert.IsFalse(testLevel.HasEntity(4, 20));
-			Assert.IsFalse(testLevel.HasEntity(41, 5));
-
+			Assert.IsFalse(testLevel.HasDrawingEntity(4, 20));
+			Assert.IsFalse(testLevel.HasDrawingEntity(41, 5));
 		}
 
 		[TearDown]
