@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Entities
 {
 	public abstract class Component
 	{
@@ -19,8 +19,5 @@
 		{
 			get { return _componentType; }
 		}
-
-		public virtual void DestroyComponent() { }
-
 	}
 }
