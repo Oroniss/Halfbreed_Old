@@ -1,12 +1,4 @@
 ﻿
-A table for the actual save games themselves - may require more than 1.
-
-Figure out how to store complex stuff in the database - probably serialization again.
-
-Should swap new game so that it saves a new game and then calls load game.
-
-
-
 Means:
 
 On exit of level - save or continue.
@@ -30,12 +22,15 @@ Means logging is only for the game experience for a single level.
 Next Steps:
 
 Do a full clean-up/Refactoring.
-Switch MaterialProperties to a flyweight class.
+
+Refactor the "Entities" folder and contents.
+
+Add a version number - then figure out a branch for the next version number.
 
 
 Start on Actors - at least need to get the player in.
 
-Start on items.
+Then actually implement save games.
 
 Then begin filling out interactions between the entity classes.
 Timing and action queue.
@@ -43,6 +38,7 @@ Timing and action queue.
 Movement/Interaction.
 
 Then stats and process damage.
+Then start thinking about randomisation.
 
 Then traps and hazards, liquid, etc.
 
@@ -51,11 +47,27 @@ Then vision and perception.
 Then concealment and light sources.
 
 
+Make an Enum of levels - setup a dictionary somewhere.
+Then write a test that creates each one and check it parses.
+
+Then do Level Transition.
+Make sure it builds into save games properly.
+Then add logging.
+
+Fix up the initial process - fill out some starting menu options.
+Setup a config and a key binding option.
+Add the new game text to new game process.
+
+
+Entity Components Remaining.
+
 Damageable.
 Description.
 Concealed.
 Light Source.
 Container.
+CurrentEffect.
+Update. - Should go on everything, even if not an actor - can just check for Actor component if need be.
 
 
 Would probably prefer 3-4 base entity types.
