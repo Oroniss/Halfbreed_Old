@@ -234,12 +234,18 @@ namespace Halfbreed
 			return returnList;
 		}
 
+		public bool HasDrawingEntity(int x, int y)
+		{
+			int index = ConvertXYToInt(x, y);
+			return _entities.ContainsKey(index) && _entities[index][0].DisplayLayer != DisplayLayer.NOTDISPLAYED;
+		}
+
 		public Entity GetDrawingEntity(int x, int y)
 		{
-			if(_entities.ContainsKey(ConvertXYToInt(x, y)))
-				return _entities[ConvertXYToInt(x, y)][0];
-			// TODO: Throw an exception.
-			return null;
+			// TODO: Keep an eye on this to see if it needs to be added back.
+			// Error check removed since it should only be called from one place.
+			// if(_entities.ContainsKey(ConvertXYToInt(x, y)))
+			return _entities[ConvertXYToInt(x, y)][0];
 		}
 	}
 }
