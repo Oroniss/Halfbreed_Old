@@ -48,12 +48,13 @@ namespace Halfbreed
 
 		public static void LevelTransition(string newLevelName, int newX, int newY)
 		{
+			// TODO: Add player at correct coordinates.
+			// TODO: Need to use correct update move function so that it moves all equipped items as well.
 			_currentLevel = new Level(newLevelName);
 		}
 
 		public static SaveGameSummary GenerateSaveSummary()
 		{
-			// TODO: Fix once level title goes in.
 			SaveGameSummary summary = new SaveGameSummary(_gameId, _difficultySetting, _characterClass, _useAchievements,
 														  1, 1, true, System.DateTime.Now);
 			return summary;
