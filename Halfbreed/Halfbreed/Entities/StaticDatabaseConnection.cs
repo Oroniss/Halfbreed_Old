@@ -7,7 +7,7 @@ using Halfbreed.Levels;
 
 namespace Halfbreed
 {
-	public static class EntityDatabaseConnection
+	public static class StaticDatabaseConnection
 	{
 		private static string _DatabaseLocation = Directory.GetCurrentDirectory() + "/HalfbreedComponents.db";
 		private static SqliteConnection _connection;
