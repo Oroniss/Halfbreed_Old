@@ -146,7 +146,7 @@ namespace Halfbreed
 		{
 			if (!_testingMode)
 			{
-				// Add a debug message
+				// TODO: Throw an exception.
 				return;
 			}
 
