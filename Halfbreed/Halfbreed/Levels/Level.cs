@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Halfbreed.Levels;
+using Halfbreed.Entities;
 
 namespace Halfbreed
 {
