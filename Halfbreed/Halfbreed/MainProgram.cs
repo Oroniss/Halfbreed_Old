@@ -12,9 +12,9 @@ namespace Halfbreed
         {
 			StaticDatabaseConnection.openDBConnection();
 			StaticData.SetupDictionaries();
-			// TODO: Pull these magic numbers out and line them up with thet MainGraphicsDisplay
+			// TODO: Pull these magic numbers out and line them up with the MainGraphicsDisplay
 			// TODO: Also sort out a config file to store them.
-			MainProgram.rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
+			rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
 
             rootConsole.OnLoad += RootConsoleOnLoad;
             rootConsole.Update += RootConsoleUpdate;
@@ -22,7 +22,6 @@ namespace Halfbreed
 
 			Thread mainLoopThread = new Thread(MenuProvider.MainMenu.TitleMenu);
 			mainLoopThread.Start();
-
             rootConsole.Run();
         }
 
