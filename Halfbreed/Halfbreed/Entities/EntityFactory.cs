@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
@@ -12,7 +12,7 @@ namespace Halfbreed.Entities
 		public static Entity CreateFurnishing(string furnishingName, Materials material, int xLoc, int yLoc, string[] otherParams)
 		{
 			if (!_furnishings.ContainsKey(furnishingName))
-				_furnishings[furnishingName] = EntityDatabaseConnection.GetFurnishingDetails(furnishingName);
+				_furnishings[furnishingName] = StaticDatabaseConnection.GetFurnishingDetails(furnishingName);
 
 			Entity newFurnishing = new Entity(furnishingName, material, _furnishings[furnishingName],
 											  xLoc, yLoc, otherParams);
@@ -22,7 +22,7 @@ namespace Halfbreed.Entities
 		public static Entity CreateHarvestingNode(string harvestingName, int xLoc, int yLoc)
 		{
 			if (!_harvestingNodes.ContainsKey(harvestingName))
-				_harvestingNodes[harvestingName] = EntityDatabaseConnection.GetHarvestingDetails(harvestingName);
+				_harvestingNodes[harvestingName] = StaticDatabaseConnection.GetHarvestingDetails(harvestingName);
 
 			Entity newHarvestible = new Entity(harvestingName, xLoc, yLoc, _harvestingNodes[harvestingName].NodeType);
 
