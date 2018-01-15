@@ -43,7 +43,7 @@ namespace Halfbreed
 			string[] traitNames = traitAttribute.Trim().Split(',');
 			EntityTraits[] traits = new EntityTraits[traitNames.Length];
 			for (int i = 0; i < traitNames.Length; i++)
-				traits[i] = EnumConverter.ConvertStringToTrait(traitNames[i]);
+				traits[i] = (EntityTraits)Enum.Parse(typeof(EntityTraits), traitNames[i]);
 			return traits;
 		}
 
@@ -61,7 +61,7 @@ namespace Halfbreed
 
 				while (reader.Read())
 				{
-					Materials material = EnumConverter.ConvertStringToMaterial(reader.GetString(0));
+					Materials material = (Materials)Enum.Parse(typeof(Materials), reader.GetString(0));
 					int acid = reader.GetInt32(1);
 					int cold = reader.GetInt32(2);
 					int elec = reader.GetInt32(3);
@@ -78,7 +78,7 @@ namespace Halfbreed
 					int wgtpervol = reader.GetInt32(13);
 					int hardness = reader.GetInt32(14);
 
-					Colors fgcolor = EnumConverter.ConvertStringToColor(reader.GetString(15));
+					Colors fgcolor = (Colors)Enum.Parse(typeof(Colors), reader.GetString(15));
 
 					EntityTraits[] traits = GetTraits(reader.GetString(16));
 					string adjective = reader.GetString(17);
@@ -107,7 +107,7 @@ namespace Halfbreed
 				while (reader.Read())
 				{
 					string tileName = reader.GetString(0);
-					TileType tileType = EnumConverter.ConvertStringToTileType(tileName);
+					TileType tileType = (TileType)Enum.Parse(typeof(TileType), tileName);
 
 					int elevation = reader.GetInt32(1);
 					MovementModes movementMode = (MovementModes)reader.GetInt32(2);
