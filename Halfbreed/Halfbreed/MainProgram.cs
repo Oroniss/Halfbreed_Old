@@ -10,7 +10,7 @@ namespace Halfbreed
 
         public static void Main()
         {
-			EntityDatabaseConnection.openDBConnection();
+			StaticDatabaseConnection.openDBConnection();
 			StaticData.SetupDictionaries();
 			// TODO: Pull these magic numbers out and line them up with thet MainGraphicsDisplay
 			// TODO: Also sort out a config file to store them.
@@ -52,7 +52,7 @@ namespace Halfbreed
 
 		public static void quit()
 		{
-			EntityDatabaseConnection.closeDBConnection();
+			StaticDatabaseConnection.closeDBConnection();
 			rootConsole.Close();
 		}
 
