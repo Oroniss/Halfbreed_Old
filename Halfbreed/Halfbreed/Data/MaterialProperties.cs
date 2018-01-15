@@ -1,14 +1,14 @@
 ﻿namespace Halfbreed
 {
-	public struct MaterialProperties
+	public class MaterialProperties
 	{
-		private Entities.EntityDefensiveStatTemplate _defensiveStatTemplate;
-		private int _hpPerUnitVolume;
-		private int _weightPerUnitVolume;
-		private int _hardness;
-		private Colors _fgColor;
-		private EntityTraits[] _traits;
-		private string _adjective;
+		private readonly Entities.EntityDefensiveStatTemplate _defensiveStatTemplate;
+		private readonly int _hpPerUnitVolume;
+		private readonly int _weightPerUnitVolume;
+		private readonly int _hardness;
+		private readonly Colors _fgColor;
+		private readonly EntityTraits[] _traits;
+		private readonly string _adjective;
 
 		public MaterialProperties(int acid, int cold, int electricity, int fire, int poison, int disease, int light,
 								  int shadow, int mental, int physical, int nether, int hpPV, int weightPV, 
