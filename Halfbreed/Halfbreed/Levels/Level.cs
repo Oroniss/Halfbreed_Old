@@ -79,7 +79,7 @@ namespace Halfbreed
 
 				string[] splitLine = line.Split(',');
 				string furnishingName = splitLine[0];
-				Materials material = EnumConverter.ConvertStringToMaterial(splitLine[1]);
+				Materials material = (Materials)Enum.Parse(typeof(Materials), splitLine[1]);
 				int xLoc = Int32.Parse(splitLine[2]);
 				int yLoc = Int32.Parse(splitLine[3]);
 				string[] otherParams = new string[splitLine.Length - FURNISHINGPREFIXLENGTH];
