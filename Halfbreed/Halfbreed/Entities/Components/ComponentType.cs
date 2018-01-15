@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Entities
 {
 	public enum ComponentType
 	{
@@ -7,7 +7,7 @@
 		LIGHTSOURCE,
 		CONTAINER,
 		INTERACTIBLE,
-		TRIGGER,
-		MATERIAL
+		MATERIAL,
+		HARVESTIBLE
 	}
 }
