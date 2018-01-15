@@ -1,3 +1,5 @@
+using System;
+
 namespace Halfbreed.Levels
 {
 
@@ -17,8 +19,8 @@ namespace Halfbreed.Levels
 			Elevation = elevation;
 			MoveModes = moveTypes;
 			AllowLOS = allowLOS;
-			BGColor = EnumConverter.ConvertStringToColor(bgColorName);
-			FogColor = EnumConverter.ConvertStringToColor(fogColorName);
+			BGColor = (Colors)Enum.Parse(typeof(Colors), bgColorName);
+			FogColor = (Colors)Enum.Parse(typeof(Colors), fogColorName);
 		}
 	}
 
