@@ -1,4 +1,6 @@
-﻿namespace Halfbreed
+﻿using Halfbreed.Levels;
+
+namespace Halfbreed
 {
 	public class TileComponent:Component
 	{
