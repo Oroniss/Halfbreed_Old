@@ -28,6 +28,8 @@ namespace Halfbreed.Converters
 			{"Steel Grey", Colors.STEELGREY},
 			{"Tin", Colors.TIN},
 			{"Copper", Colors.COPPER},
+			{"Silver", Colors.SILVER},
+			{"Gold", Colors.GOLD},
 			// Oranges
 			{"Dark Orange", Colors.DARKORANGE}
 		};
