@@ -1,7 +1,7 @@
 ﻿using System;
 using Halfbreed.Levels;
 
-namespace Halfbreed
+namespace Halfbreed.Entities
 {
 	public class TileComponent:Component
 	{
@@ -11,7 +11,6 @@ namespace Halfbreed
 			:base(entity)
 		{
 			_componentType = ComponentType.TILE;
-
 			_tileDetails = StaticData.GetMapTileDetails((TileType)Enum.Parse(typeof(TileType), tileName));
 		}
 
