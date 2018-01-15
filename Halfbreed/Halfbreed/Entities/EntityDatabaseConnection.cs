@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using Halfbreed.Entities;
+using Halfbreed.Levels;
 
 namespace Halfbreed
 {
