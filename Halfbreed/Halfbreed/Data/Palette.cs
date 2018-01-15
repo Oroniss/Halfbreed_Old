@@ -28,6 +28,8 @@ namespace Halfbreed
 			{Colors.STEELGREY, new RLColor(122, 122, 122)},
 			{Colors.TIN, new RLColor(211, 212, 213)},
 			{Colors.COPPER, new RLColor(184, 115, 51)},
+			{Colors.SILVER, new RLColor()},
+			{Colors.GOLD, new RLColor()},
 			// Oranges
 			{Colors.DARKORANGE, new RLColor(238, 154, 0)}
 		};
@@ -67,6 +69,8 @@ namespace Halfbreed
 		STEELGREY,
 		TIN,
 		COPPER,
+		SILVER,
+		GOLD,
 		// Oranges
 		DARKORANGE
 	}
