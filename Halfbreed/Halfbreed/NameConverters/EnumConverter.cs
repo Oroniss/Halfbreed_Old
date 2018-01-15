@@ -42,7 +42,7 @@ namespace Halfbreed
 			return MaterialToStringConverter.ConvertStringToMaterial(inputValue);
 		}
 
-		public static TileType ConvertStringToTileType(string tileName)
+		public static Levels.TileType ConvertStringToTileType(string tileName)
 		{
 			return StringToTileConverter.ConvertStringToTileType(tileName);
 		}
