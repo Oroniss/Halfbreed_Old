@@ -1,5 +1,4 @@
-﻿using System;
-namespace Halfbreed
+﻿namespace Halfbreed
 {
 	public static class ErrorLogger
 	{
