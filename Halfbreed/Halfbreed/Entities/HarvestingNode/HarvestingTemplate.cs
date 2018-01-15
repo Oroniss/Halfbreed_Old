@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Entities
 {
 	public struct HarvestingTemplate
 	{
