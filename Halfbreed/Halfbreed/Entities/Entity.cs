@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Halfbreed
+namespace Halfbreed.Entities
 {
 	public partial class Entity : IComparable
 	{
+		private static int _currentMaxEntityId = 0;
+		private static List<int> _currentFreeEntityIds = new List<int>();
+
 		private string _entityName;
 		private int _entityId;
 
@@ -34,7 +37,15 @@ namespace Halfbreed
 
 		private static int GetNextId()
 		{
-			return 0;
+			int toReturn = _currentMaxEntityId;
+			if (_currentFreeEntityIds.Count > 0)
+			{
+				toReturn = _currentFreeEntityIds[0];
+				_currentFreeEntityIds.Remove(toReturn);
+			}
+			else
+				_currentMaxEntityId++;
+			return toReturn;
 		}
 
 		public string EntityName
