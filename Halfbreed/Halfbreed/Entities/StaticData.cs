@@ -31,8 +31,8 @@ namespace Halfbreed
 
 		public static void SetupDictionaries()
 		{
-			_materialProperties = EntityDatabaseConnection.GetMaterialProperties();
-			_mapTiles = EntityDatabaseConnection.GetMapTiles();
+			_materialProperties = StaticDatabaseConnection.GetMaterialProperties();
+			_mapTiles = StaticDatabaseConnection.GetMapTiles();
 		}
 
 	}
