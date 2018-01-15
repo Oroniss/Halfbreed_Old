@@ -21,12 +21,6 @@ Means logging is only for the game experience for a single level.
 
 Next Steps:
 
-Do a full clean-up/Refactoring.
-
-Refactor the "Entities" folder and contents.
-
-Add a version number - then figure out a branch for the next version number.
-
 
 Start on Actors - at least need to get the player in.
 
