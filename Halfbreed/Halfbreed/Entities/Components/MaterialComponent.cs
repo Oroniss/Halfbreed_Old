@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Entities
 {
 	public class MaterialComponent:Component
 	{
@@ -7,6 +7,7 @@
 		public MaterialComponent(Entity entity, Materials material)
 			:base(entity)
 		{
+			_componentType = ComponentType.MATERIAL;
 			_material = material;
 		}
 
