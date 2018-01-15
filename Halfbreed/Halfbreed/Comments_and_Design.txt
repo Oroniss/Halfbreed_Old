@@ -20,6 +20,7 @@ So - what needs to get saved?
 Achievements/Unlocks
 Equipment/Items/Money
 Abilities and setup
+Quests/Progress
 
 Means logging is only for the game experience for a single level.
 
@@ -27,8 +28,6 @@ Means logging is only for the game experience for a single level.
 
 
 Next Steps:
-
-Add harvesting nodes to db.
 
 Do a full clean-up/Refactoring.
 Switch MaterialProperties to a flyweight class.
@@ -54,7 +53,6 @@ Then concealment and light sources.
 
 Damageable.
 Description.
-Traits.
 Concealed.
 Light Source.
 Container.
@@ -74,7 +72,6 @@ Furnishing
 
 Interaction + trigger
 Movement + trigger
-Harvestable
 Liquid
 
 Item
