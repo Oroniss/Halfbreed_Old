@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Mono.Data.Sqlite;
@@ -158,7 +159,25 @@ namespace Halfbreed
 			}
 		}
 
+		public static HarvestingTemplate GetHarvestingDetails(string HarvestingNodeName)
+		{
+			string queryText = string.Format("SELECT * FROM HarvestingNodes WHERE NodeName = \"{0}\";", HarvestingNodeName);
 
+			using (var queryCommand = _connection.CreateCommand())
+			{
+				queryCommand.CommandText = queryText;
+
+				var reader = queryCommand.ExecuteReader();
+				reader.Read();
+
+				string nodeName = reader.GetString(0);
+				HarvestingNodeType nodeType = (HarvestingNodeType)Enum.Parse(typeof(HarvestingNodeType), reader.GetString(1));
+				object lootLists = null; // TODO: Fix this.
+
+				HarvestingTemplate template = new HarvestingTemplate(nodeName, nodeType, lootLists);
+				return template;
+			}
+		}
 
 		// Testing functionality
 		public static void SetupTestContext(string TestContext)
