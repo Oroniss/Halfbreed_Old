@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Halfbreed.Levels;
 
 namespace Halfbreed.Converters
 {
@@ -13,7 +14,7 @@ namespace Halfbreed.Converters
 			{"Platform", TileType.PLATFORM}
 		};
 
-		public TileType ConvertStringToTileType(string tileName)
+		public Levels.TileType ConvertStringToTileType(string tileName)
 		{
 			return _stringToTiles[tileName];
 		}
