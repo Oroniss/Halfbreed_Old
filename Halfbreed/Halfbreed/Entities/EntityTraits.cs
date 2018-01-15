@@ -23,7 +23,10 @@
 		STONE,
 		GEM,
 		LEATHER,
-		CLOTH
+		CLOTH,
+
+		ANIMAL,
+		PLANT
 
 	}
 }
