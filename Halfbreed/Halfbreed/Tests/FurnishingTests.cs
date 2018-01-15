@@ -60,6 +60,39 @@ namespace Halfbreed
 			Assert.IsTrue(newChest.HasTrait(EntityTraits.INORGANIC));
 		}
 
+		[Test]
+		public void TestHarvestingNodes()
+		{
+			Entity newDen = Entities.EntityFactory.CreateHarvestingNode("Rat Den", 5, 10);
+			Entity newMold = Entities.EntityFactory.CreateHarvestingNode("Green Mold", 10, 10);
+			Entity newOre = Entities.EntityFactory.CreateHarvestingNode("Copper Ore", 15, 15);
+			Entity newRichOre = Entities.EntityFactory.CreateHarvestingNode("Rich Copper Ore", 20, 20);
+
+			Assert.AreEqual(5, newDen.XLoc);
+			Assert.AreEqual(10, newDen.YLoc);
+			Assert.AreEqual(DisplayLayer.HARVESTABLE, newDen.DisplayLayer);
+			Assert.AreEqual(':', newDen.Symbol);
+			Assert.AreEqual(Colors.TAN, newDen.FGColor);
+			Assert.IsFalse(newDen.HasTrait(EntityTraits.INORGANIC));
+			Assert.IsTrue(newDen.HasTrait(EntityTraits.FURNISHING));
+			Assert.IsTrue(newDen.HasTrait(EntityTraits.ORGANIC));
+			Assert.IsTrue(newDen.HasTrait(EntityTraits.IMMUNETOMENTAL));
+			Assert.IsTrue(newDen.HasTrait(EntityTraits.ANIMAL));
+
+			Assert.AreEqual('}', newMold.Symbol);
+			Assert.AreEqual(Colors.PUTRIDGREEN, newMold.FGColor);
+			Assert.IsFalse(newMold.HasTrait(EntityTraits.ANIMAL));
+			Assert.IsTrue(newMold.HasTrait(EntityTraits.PLANT));
+
+			Assert.AreEqual('*', newOre.Symbol);
+			Assert.AreEqual(Colors.BLACK, newOre.FGColor);
+			Assert.IsFalse(newOre.HasTrait(EntityTraits.ORGANIC));
+			Assert.IsTrue(newOre.HasTrait(EntityTraits.INORGANIC));
+
+			Assert.AreEqual('*', newRichOre.Symbol);
+			Assert.AreEqual(Colors.GOLD, newRichOre.FGColor);
+}
+
 		[TearDown]
 		public void CloseDBConnection()
 		{
