@@ -22,7 +22,7 @@ namespace Halfbreed.Display
 				{
 					_console.Set(x + xLimits.Offset, y + yLimits.Offset, null,
 					             Palette.GetColor( level.GetBGColor(x, y)), ' ');
-					if (level.HasEntity(x, y))
+					if (level.HasDrawingEntity(x, y))
 					{
 						Entity entity = level.GetDrawingEntity(x, y);
 						_console.Set(x + xLimits.Offset, y + yLimits.Offset, Palette.GetColor(entity.FGColor), 
