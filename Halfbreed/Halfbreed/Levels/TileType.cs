@@ -1,4 +1,4 @@
-﻿namespace Halfbreed
+﻿namespace Halfbreed.Levels
 {
 	public enum TileType
 	{
