@@ -98,6 +98,18 @@ namespace Halfbreed.Tests
 			Assert.IsFalse(testLevel.HasDrawingEntity(41, 5));
 		}
 
+		[Test]
+		public void TestPassible()
+		{
+			Level testLevel = new Level(testLevelMapFilePath);
+
+			Assert.IsTrue(testLevel.IsPassible(1, 1, MovementModes.WALK));
+			Assert.IsTrue(testLevel.IsPassible(42, 1, MovementModes.FLY));
+			Assert.IsTrue(testLevel.IsPassible(42, 23, MovementModes.CLIMB));
+			Assert.IsFalse(testLevel.IsPassible(1, 23, MovementModes.FLY));
+			Assert.IsTrue(testLevel.IsPassible(1, 23, MovementModes.PHASE));
+		}
+
 		[TearDown]
 		public void CloseDBConnection()
 		{
