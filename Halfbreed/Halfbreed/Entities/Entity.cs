@@ -13,14 +13,14 @@ namespace Halfbreed.Entities
 
 		private Dictionary<ComponentType, Component> _components;
 
-		protected int _xLoc;
-		protected int _yLoc;
+		private int _xLoc;
+		private int _yLoc;
 
-		protected DisplayLayer _displayLayer;
-		protected Colors _fgColor;
-		protected char _symbol;
+		private DisplayLayer _displayLayer;
+		private Colors _fgColor;
+		private char _symbol;
 
-		protected List<EntityTraits> _traits;
+		private List<EntityTraits> _traits;
 
 		private Entity(string entityName, int xLoc, int yLoc, EntityTraits[] traits)
 		{
@@ -83,6 +83,24 @@ namespace Halfbreed.Entities
 			get { return _yLoc; }
 		}
 
+		public void UpdatePosition(Position newPosition)
+		{
+			_xLoc = newPosition.X;
+			_yLoc = newPosition.Y;
+		}
+
+		public void UpdatePosition(int newX, int newY)
+		{
+			_xLoc = newX;
+			_yLoc = newY;
+		}
+
+		public void MoveEntity(int deltaX, int deltaY)
+		{
+			_xLoc += deltaX;
+			_yLoc += deltaY;
+		}
+
 		public void AddTrait(EntityTraits trait) 
 		{
 			_traits.Add(trait);
@@ -118,6 +136,16 @@ namespace Halfbreed.Entities
 				return _components[componentType];
 			ErrorLogger.AddDebugText(string.Format("Asked for component type {0}, which is not present on {1}.", componentType, this));
 			return null;
+		}
+
+		public void Update(int currentTime)
+		{
+			// TODO: Go through effects and check if any expire.
+			if (HasComponent(ComponentType.INPUT))
+			{
+				InputComponent inputComponent = (InputComponent)_components[ComponentType.INPUT];
+				inputComponent.GetNextMove(currentTime);
+			}
 		}
 
 	}
