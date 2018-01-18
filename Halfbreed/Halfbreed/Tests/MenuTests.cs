@@ -26,7 +26,7 @@ namespace Halfbreed.Tests
 			string[] keys = new string[] { "3", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetStartingParameters(parameters);
+			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(3, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.NECROMANCER, GameEngine.CharacterClass);
 			Assert.IsTrue(GameEngine.UseAchievements);
@@ -36,7 +36,7 @@ namespace Halfbreed.Tests
 			keys = new string[] { "1", "4", "1" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetStartingParameters(parameters);
+			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(1, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.THIEF, GameEngine.CharacterClass);
 			Assert.IsTrue(GameEngine.UseAchievements);
@@ -46,7 +46,7 @@ namespace Halfbreed.Tests
 			keys = new string[] { "5", "1", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetStartingParameters(parameters);
+			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(5, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.DRAGONLORD, GameEngine.CharacterClass);
 			Assert.IsFalse(GameEngine.UseAchievements);
@@ -56,7 +56,7 @@ namespace Halfbreed.Tests
 			keys = new string[] { "6", "4", "7", "1", "3", "2" };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetStartingParameters(parameters);
+			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(4, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.BARD, GameEngine.CharacterClass);
 			Assert.IsFalse(GameEngine.UseAchievements);
