@@ -11,13 +11,18 @@ namespace Halfbreed
 		private static int _currentChapter = 1;
 		private static int _gameId;
 		private static string _versionNumber = "0.01";
+		private static Entities.Entity _player;
+		private static int _currentTime = 0;
+		private static int _currentDays; // TODO: Think this through a bit more carefully.
+		private static bool _quit;
 
-		public static void SetStartingParameters(Menus.NewGameParameters startingParameters)
+		public static void SetupNewGame(Menus.NewGameParameters startingParameters)
 		{
 			_difficultySetting = startingParameters.DifficultySetting;
 			_characterClass = startingParameters.CharacterClass;
 			_useAchievements = startingParameters.UseAchievements;
 			_gameId = startingParameters.GameId;
+			_player = new Entities.Entity(startingParameters);
 		}
 
 		public static int DifficultySetting
@@ -47,11 +52,28 @@ namespace Halfbreed
 			get { return _currentChapter; }
 		}
 
+		public static Entities.Entity Player
+		{
+			get { return _player; }
+		}
+
+		public static int CurrentTime
+		{
+			get { return _currentTime; }
+		}
+
+		public static void Quit()
+		{
+			_quit = true;
+		}
+
 		public static void LevelTransition(string newLevelName, int newX, int newY)
 		{
-			// TODO: Add player at correct coordinates.
+			// TODO: Need to pack up the existing level too.
 			// TODO: Need to use correct update move function so that it moves all equipped items as well.
 			_currentLevel = new Level(newLevelName);
+			_player.UpdatePosition(newX, newY);
+			_currentLevel.AddEntity(_player);
 		}
 
 		public static SaveGameSummary GenerateSaveSummary()
@@ -59,6 +81,18 @@ namespace Halfbreed
 			SaveGameSummary summary = new SaveGameSummary(_gameId, _difficultySetting, _characterClass, _useAchievements,
 														  1, 1, true, System.DateTime.Now);
 			return summary;
+		}
+
+		public static void RunGame()
+		{
+			while (true)
+			{
+				_currentLevel.ActivateEntities(_currentTime);
+				_currentTime++;
+				MainGraphicDisplay.MapConsole.DrawMap(_currentLevel, _player.XLoc, _player.YLoc);
+				if (_quit)
+					return;
+			}
 		}
 
 
