@@ -138,6 +138,8 @@ namespace Halfbreed
 		{
 			string queryText = string.Format("SELECT * FROM Furnishings WHERE FurnishingName = \"{0}\";", FurnishingName);
 
+			System.Console.WriteLine(queryText);
+
 			using (var queryCommand = _connection.CreateCommand())
 			{
 				queryCommand.CommandText = queryText;
@@ -153,8 +155,10 @@ namespace Halfbreed
 				string tileName = "";
 				if (hasTile)
 					tileName = reader.GetString(5);
+				bool hasDoor = (reader.GetInt32(6) == 1);
 
-				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, traits, hasTile, tileName);
+				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, traits, hasTile, 
+				                                                     tileName, hasDoor);
 
 				return template;
 			}
