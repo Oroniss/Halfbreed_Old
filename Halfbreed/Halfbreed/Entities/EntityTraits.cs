@@ -32,7 +32,8 @@
 		ANIMAL,
 		PLANT,
 
-		PLAYER
+		PLAYER,
+		CANINTERACT
 
 	}
 }
