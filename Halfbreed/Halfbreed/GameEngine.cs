@@ -89,7 +89,6 @@ namespace Halfbreed
 			{
 				_currentLevel.ActivateEntities(_currentTime);
 				_currentTime++;
-				MainGraphicDisplay.MapConsole.DrawMap(_currentLevel, _player.XLoc, _player.YLoc);
 				if (_quit)
 					return;
 			}
