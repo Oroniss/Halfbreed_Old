@@ -32,6 +32,17 @@ namespace Halfbreed
 		                                                       Palette.GetColor(Colors.BLACK), 
 		                                                       _backConsole);
 
+		private static int _textConsoleWidth = 40;
+		private static int _textConsoleHeight = 80;
+		private static int _textConsoleXOffset = 120;
+		private static int _textConsoleYOffset = 0;
+		private static TextConsole _textConsole = new TextConsole(_textConsoleWidth,
+																  _textConsoleHeight,
+																  _textConsoleXOffset,
+																  _textConsoleYOffset,
+																  Palette.GetColor(Colors.BLACK),
+																  _backConsole);
+
 		public static bool IsDirty
 		{
 			get
@@ -61,6 +72,17 @@ namespace Halfbreed
 		public static MapConsole MapConsole
 		{
 			get { return _mapConsole; }
+		}
+
+		public static TextConsole TextConsole
+		{
+			get { return _textConsole; }
+		}
+
+		public static void UpdateGameScreen()
+		{
+			_textConsole.DrawOutputText();
+			_mapConsole.DrawMap(GameEngine.CurrentLevel, GameEngine.Player.XLoc, GameEngine.Player.YLoc);
 		}
 
     }
