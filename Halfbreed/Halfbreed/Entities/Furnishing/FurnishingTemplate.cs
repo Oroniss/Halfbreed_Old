@@ -8,8 +8,10 @@
 		private EntityTraits[] _traits;
 		private bool _hasTile;
 		private string _tileTypeName;
+		private bool _hasDoor;
 
-		public FurnishingTemplate(string furnishingName, char symbol, int volume, EntityTraits[] traits, bool hasTile, string tileTypeName)
+		public FurnishingTemplate(string furnishingName, char symbol, int volume, EntityTraits[] traits, bool hasTile, string tileTypeName,
+		                         bool hasDoor)
 		{
 			_furnishingName = furnishingName;
 			_symbol = symbol;
@@ -17,6 +19,7 @@
 			_traits = traits;
 			_hasTile = hasTile;
 			_tileTypeName = tileTypeName;
+			_hasDoor = hasDoor;
 		}
 
 		public string FurnishingName
@@ -47,6 +50,11 @@
 		public string TileTypeName
 		{
 			get { return _tileTypeName; }
+		}
+
+		public bool HasDoor
+		{
+			get { return _hasDoor; }
 		}
 	}
 }
