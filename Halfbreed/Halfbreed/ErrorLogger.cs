@@ -5,6 +5,8 @@
 
 		public static void AddDebugText(string text)
 		{
+			// TODO: Fix this up properly.
+			System.Console.WriteLine(text);
 		}
 	}
 }
