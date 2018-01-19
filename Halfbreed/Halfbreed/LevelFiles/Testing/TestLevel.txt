@@ -48,7 +48,7 @@ Broken Chest,PINE,4,5
 Broken Chest,PINE,4,6
 Broken Chest,PINE,7,5
 Chest,PINE,7,6
-Door,PINE,8,2
+Door,PINE,8,2,Open
 Broken Door,PINE,8,3
 Pallet,PINE,2,6
 Pallet,PINE,3,6
