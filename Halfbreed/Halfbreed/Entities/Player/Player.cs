@@ -17,6 +17,7 @@ namespace Halfbreed.Entities
 			_traits = new List<EntityTraits>();
 			AddTrait(EntityTraits.PLAYER);
 			AddTrait(EntityTraits.BLOCKMOVE);
+			AddTrait(EntityTraits.CANINTERACT);
 
 			InputComponent inputComponent = new InputComponent(this);
 			inputComponent.SetManual();
