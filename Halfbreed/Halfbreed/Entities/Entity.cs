@@ -56,16 +56,19 @@ namespace Halfbreed.Entities
 		public DisplayLayer DisplayLayer
 		{
 			get {return _displayLayer;}
+			set { _displayLayer = value; }
 		}
 
 		public Colors FGColor
 		{
-			get{return _fgColor;}
+			get {return _fgColor;}
+			set { _fgColor = value; }
 		}
 
 		public char Symbol
 		{
 			get { return _symbol; }
+			set { _symbol = value; }
 		}
 
 		public string GetDescription()
