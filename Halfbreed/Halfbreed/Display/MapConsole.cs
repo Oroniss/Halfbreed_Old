@@ -4,8 +4,8 @@ namespace Halfbreed.Display
 {
 	public class MapConsole:BaseConsole
 	{
-		public MapConsole(int height, int width, int top, int left, RLColor backColor, BackConsole backConsole)
-			:base(height, width, top, left, backColor, backConsole)
+		public MapConsole(int width, int height, int left, int top, RLColor backColor, BackConsole backConsole)
+			:base(width, height, left, top, backColor, backConsole)
 		{
 		}
 
