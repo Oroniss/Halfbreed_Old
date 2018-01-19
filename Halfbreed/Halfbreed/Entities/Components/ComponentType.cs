@@ -6,7 +6,7 @@
 		CONCEALED,
 		LIGHTSOURCE,
 		CONTAINER,
-		INTERACTION,
+		INTERACTIBLE, // For being interacted with - primarily Furnishings.
 		MATERIAL,
 		HARVESTINGNODE,
 		DOOR,
