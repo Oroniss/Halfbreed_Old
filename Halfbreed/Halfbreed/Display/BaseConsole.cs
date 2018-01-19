@@ -12,7 +12,7 @@ namespace Halfbreed.Display
 		BackConsole _backConsole;
 		protected RLConsole _console;
 
-		public BaseConsole(int width, int height, int top, int left, RLColor backColor, BackConsole backConsole)
+		public BaseConsole(int width, int height, int left, int top, RLColor backColor, BackConsole backConsole)
 		{
 			_height = height;
 			_width = width;
