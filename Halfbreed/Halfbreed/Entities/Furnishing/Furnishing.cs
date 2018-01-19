@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities
 {
@@ -28,6 +29,20 @@ namespace Halfbreed.Entities
 
 			if (template.HasTile)
 				_components[ComponentType.TILE] = new TileComponent(this, template.TileTypeName);
+
+			_components[ComponentType.INTERACTIBLE] = new InteractibleComponent(this);
+
+			if (template.HasDoor)
+			{
+				bool locked = (Array.IndexOf(otherParameters, "Locked") != -1);
+				if (locked)
+					_components[ComponentType.DOOR] = new DoorComponent(this, true, otherParameters);
+				else
+				{
+					bool isOpen = (Array.IndexOf(otherParameters, "Open") != -1);
+					_components[ComponentType.DOOR] = new DoorComponent(this, isOpen);
+				}
+			}
 
 		}
 
