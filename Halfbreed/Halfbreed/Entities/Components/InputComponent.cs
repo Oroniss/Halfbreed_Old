@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using RLNET;
 
 namespace Halfbreed.Entities
 {
 	public class InputComponent:Component
 	{
-		private static List<string> _movementKeys = new List<string>() { "UP", "DOWN", "LEFT", "RIGHT" };
+		private static List<RLKey> _movementKeys = new List<RLKey>() { RLKey.Up, RLKey.Down, RLKey.Left, RLKey.Right };
 		private static System.DateTime _lastPlayerTurn = System.DateTime.Now;
 
 		private bool _active;
@@ -35,12 +36,15 @@ namespace Halfbreed.Entities
 		{
 			System.Console.WriteLine("Elapsed time = " + (System.DateTime.Now - _lastPlayerTurn));
 
+
 			bool MadeValidMove = false;
 
 			while (!MadeValidMove)
 			{
-				string key = UserInputHandler.getNextKey();
-				if (key == "ESCAPE")
+				MainGraphicDisplay.UpdateGameScreen();
+
+				RLKey key = UserInputHandler.getNextKey();
+				if (key == RLKey.Escape)
 				{
 					GameEngine.Quit();
 					MadeValidMove = true;
@@ -50,18 +54,48 @@ namespace Halfbreed.Entities
 					int newX = _entity.XLoc;
 					int newY = _entity.YLoc;
 
-					if (key == "UP")
+					if (key == RLKey.Up)
 						newY--;
-					if (key == "DOWN")
+					if (key == RLKey.Down)
 						newY++;
-					if (key == "LEFT")
+					if (key == RLKey.Left)
 						newX--;
-					if (key == "RIGHT")
+					if (key == RLKey.Right)
 						newX++;
 
 					MadeValidMove = ((MovementComponent)_entity.GetComponent(ComponentType.MOVEMENT)).AttemptMove(newX, newY);
 				}
+				if (key == RLKey.U && _entity.HasTrait(EntityTraits.CANINTERACT))
+				{
+					Direction direction = UserInputHandler.GetDirection("", true);
+					if (direction == null)
+						continue;
+
+					List<Entity> entities = new List<Entity>();
+
+					foreach (Entity entity in GameEngine.CurrentLevel.GetEntities(_entity.XLoc + direction.XDirection,
+																				  _entity.YLoc + direction.YDirection))
+					{
+						if (entity.HasComponent(ComponentType.INTERACTIBLE)) // TODO: Check for concealed.
+							entities.Add(entity);
+					}
+
+					List<string> options = new List<string>();
+					for (int i = 0; i < entities.Count; i++)
+						options.Add(entities[i].GetDescription());
+
+					int choice = UserInputHandler.SelectFromMenu("Select object:", options, "Escape to cancel");
+
+					if (choice == -1)
+						continue;
+
+					MainGraphicDisplay.UpdateGameScreen();
+
+					((InteractibleComponent)entities[choice].GetComponent(ComponentType.INTERACTIBLE)).InteractWith(_entity, currentTime);
+					MadeValidMove = true;
+				}
 			}
+			MainGraphicDisplay.UpdateGameScreen();
 			_lastPlayerTurn = System.DateTime.Now;
 		}
 
