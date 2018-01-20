@@ -274,9 +274,6 @@ namespace Halfbreed
 
 		public Entity GetDrawingEntity(int x, int y)
 		{
-			// TODO: Keep an eye on this to see if it needs to be added back.
-			// Error check removed since it should only be called from one place.
-			// if(_entities.ContainsKey(ConvertXYToInt(x, y)))
 			return _entityLocations[ConvertXYToInt(x, y)][0];
 		}
 
