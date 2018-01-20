@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Halfbreed.Menus;
+using RLNET;
 
 namespace Halfbreed.Tests
 {
@@ -23,7 +24,7 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			string[] keys = new string[] { "3", "4", "1" };
+			RLKey[] keys = new RLKey[] { RLKey.Number3, RLKey.Number4, RLKey.Number1 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
@@ -33,7 +34,7 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			keys = new string[] { "1", "4", "1" };
+			keys = new RLKey[] { RLKey.Number1, RLKey.Number4, RLKey.Number1 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
@@ -43,7 +44,7 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			keys = new string[] { "5", "1", "2" };
+			keys = new RLKey[] { RLKey.Number5, RLKey.Number1, RLKey.Number2 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
@@ -53,7 +54,7 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			keys = new string[] { "6", "4", "7", "1", "3", "2" };
+			keys = new RLKey[] { RLKey.Number6, RLKey.Number4, RLKey.Number7, RLKey.Number1, RLKey.Number3, RLKey.Number2 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
@@ -71,12 +72,12 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			KeyBoardInputSimulator.AddKeyBoardInput("2");
+			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Number2);
 			Assert.AreEqual(2, MenuProvider.LoadGameMenu.SelectSavedGame());
 
 			UserInputHandler.clearAllInput();
 
-			KeyBoardInputSimulator.AddKeyBoardInput("1");
+			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Number1);
 			Assert.AreEqual(1, MenuProvider.LoadGameMenu.SelectSavedGame());
 
 		}
