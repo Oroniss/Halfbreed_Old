@@ -138,8 +138,6 @@ namespace Halfbreed
 		{
 			string queryText = string.Format("SELECT * FROM Furnishings WHERE FurnishingName = \"{0}\";", FurnishingName);
 
-			System.Console.WriteLine(queryText);
-
 			using (var queryCommand = _connection.CreateCommand())
 			{
 				queryCommand.CommandText = queryText;
