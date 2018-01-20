@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using RLNET;
 
 namespace Halfbreed.Tests
 {
@@ -11,24 +12,24 @@ namespace Halfbreed.Tests
 		{
 			UserInputHandler.clearAllInput();
 
-			KeyBoardInputSimulator.AddKeyBoardInput("LEFT");
-			Assert.AreEqual(UserInputHandler.getNextKey(), "LEFT");
+			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Left);
+			Assert.AreEqual(UserInputHandler.getNextKey(), RLKey.Left);
 
 			UserInputHandler.clearAllInput();
 
-			KeyBoardInputSimulator.AddKeyBoardInput("ESCAPE");
-			Assert.AreEqual("ESCAPE", UserInputHandler.getNextKey());
+			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Escape);
+			Assert.AreEqual(RLKey.Escape, UserInputHandler.getNextKey());
 
 			UserInputHandler.clearAllInput();
 
-			string[] keyArray = new string[] { "LEFT", "1", "7", "UP", "DOWN" };
+			RLKey[] keyArray = new RLKey[] {RLKey.Left, RLKey.Number1, RLKey.Number7, RLKey.Up, RLKey.Down };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 
-			Assert.AreEqual("LEFT", UserInputHandler.getNextKey());
-			Assert.AreEqual("1", UserInputHandler.getNextKey());
-			Assert.AreEqual("7", UserInputHandler.getNextKey());
-			Assert.AreEqual("UP", UserInputHandler.getNextKey());
-			Assert.AreEqual("DOWN", UserInputHandler.getNextKey());
+			Assert.AreEqual(RLKey.Left, UserInputHandler.getNextKey());
+			Assert.AreEqual(RLKey.Number1, UserInputHandler.getNextKey());
+			Assert.AreEqual(RLKey.Number7, UserInputHandler.getNextKey());
+			Assert.AreEqual(RLKey.Up, UserInputHandler.getNextKey());
+			Assert.AreEqual(RLKey.Down, UserInputHandler.getNextKey());
 
 			UserInputHandler.clearAllInput();
 		}
@@ -47,67 +48,67 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 
-			string[] keyArray = new string[] { "3" };
+			RLKey[] keyArray = new RLKey[] { RLKey.Number3 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(2, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "UP", "7" };
+			keyArray = new RLKey[] { RLKey.Up, RLKey.Number7 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(6, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "LEFT", "5" };
+			keyArray = new RLKey[] { RLKey.Left, RLKey.Number5 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(4, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "0" };
+			keyArray = new RLKey[] { RLKey.Number0 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(9, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "UP", "UP", "7" };
+			keyArray = new RLKey[] { RLKey.Up, RLKey.Up, RLKey.Number7 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(6, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "7" };
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Number7 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(16, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "RIGHT", "RIGHT", "4" };
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Right, RLKey.Right, RLKey.Number4 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(33, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "RIGHT", "0" };
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Right, RLKey.Number0 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(29, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "RIGHT", "LEFT", "5"};
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Right, RLKey.Left, RLKey.Number5};
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(14, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "RIGHT", "RIGHT", "8", "LEFT", "6"};
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Right, RLKey.Right, RLKey.Number8, RLKey.Left, RLKey.Number6};
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(25, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
 			UserInputHandler.clearAllInput();
 
-			keyArray = new string[] { "RIGHT", "RIGHT", "RIGHT", "8", "ESCAPE"};
+			keyArray = new RLKey[] { RLKey.Right, RLKey.Right, RLKey.Right, RLKey.Number8, RLKey.Escape};
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
 			Assert.AreEqual(-1, UserInputHandler.SelectFromMenu(title, menuOptions, end));
 
