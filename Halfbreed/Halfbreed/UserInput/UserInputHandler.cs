@@ -1,17 +1,25 @@
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using RLNET;
 
 namespace Halfbreed
 {
     public static class UserInputHandler
     {
-        private static List<String> _queuedInput = new List<String>();
+        private static List<RLKey> _queuedInput = new List<RLKey>();
 
-		private static List<String> _numberKeys = new List<String>
-		    {"1", "2", "3", "4", "5", "6", "7", "8", "9",  "0"};
+		private static Dictionary<RLKey, int> _numberKeys = new Dictionary<RLKey, int>
+			{{RLKey.Number0, 0}, {RLKey.Number1, 1},  {RLKey.Number2, 2}, {RLKey.Number3, 3}, {RLKey.Number4, 4},
+			{RLKey.Number5, 5}, {RLKey.Number6, 6}, {RLKey.Number7, 7}, {RLKey.Number8, 8}, {RLKey.Number9, 9}};
 
-        public static void addKeyboardInput(string key)
+		private static Dictionary<RLKey, Direction> _directionKeys = new Dictionary<RLKey, Direction>
+			{{RLKey.Up, new Direction(0, -1)}, {RLKey.Down, new Direction(0, 1)}, {RLKey.Left, new Direction(-1, 0)},
+			{RLKey.Right, new Direction(1, 0)}};
+		// TODO: Add the keypad keys here too.
+		// TODO: Make sure the laptop keys options changes this too.
+
+        public static void addKeyboardInput(RLKey key)
         {
             lock (_queuedInput)
             {
@@ -19,7 +27,7 @@ namespace Halfbreed
             }
         }
 
-        public static String getNextKey()
+        public static RLKey getNextKey()
         {
             while (true)
             {
@@ -27,7 +35,7 @@ namespace Halfbreed
                 {
                     if(_queuedInput.Count > 0)
                     {
-                        String toReturn = _queuedInput[0];
+                        RLKey toReturn = _queuedInput[0];
 						_queuedInput.RemoveAt(0);
                         return toReturn;
                     }
@@ -40,7 +48,7 @@ namespace Halfbreed
 		{
 			lock (_queuedInput)
 			{
-				_queuedInput = new List<string>();
+				_queuedInput = new List<RLKey>();
 			}
 		}
 
@@ -56,11 +64,11 @@ namespace Halfbreed
 				}
 				MainGraphicDisplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
 
-				string key = getNextKey();
+				RLKey key = getNextKey();
 
-				if (_numberKeys.Contains(key))
+				if (_numberKeys.ContainsKey(key))
 				{
-					int num = Int32.Parse(key);
+					int num = _numberKeys[key];
 					if (num == 0)
 					{
 						if ((page + 1) * 10 <= menuOptions.Count)
@@ -76,18 +84,37 @@ namespace Halfbreed
 						}
 					}
 				}
-				if (key == "LEFT" && page > 0)
+				if (key == RLKey.Left && page > 0)
 				{
 					page--;
 				}
-				if (key == "RIGHT" && ((page + 1) * 10 < menuOptions.Count))
+				if (key == RLKey.Right && ((page + 1) * 10 < menuOptions.Count))
 				{
 					page++;
 				}
-				if (key == "ESCAPE")
+				if (key == RLKey.Escape)
 				{
 					return -1;
 				}
+			}
+		}
+
+		public static Direction GetDirection(string queryText, bool centre)
+		{
+			if (queryText == "")
+				queryText = "Which direction?";
+
+			while (true)
+			{
+				MainGraphicDisplay.TextConsole.AddOutputText("Which direction");
+				RLKey key = getNextKey();
+
+				if (_directionKeys.ContainsKey(key))
+					return _directionKeys[key];
+				if (key == RLKey.Enter && centre)
+					return new Direction(0, 0);
+				if (key == RLKey.Escape)
+					return null;
 			}
 		}
     }
