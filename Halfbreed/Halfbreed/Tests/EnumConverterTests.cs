@@ -8,14 +8,6 @@ namespace Halfbreed.Tests
 	{
 
 		[Test]
-		public void TestKeyToString()
-		{
-			Assert.AreEqual("ESCAPE", EnumConverter.ConvertEnumToString(RLKey.Escape));
-			Assert.AreEqual("LEFT", EnumConverter.ConvertEnumToString(RLKey.Left));
-			Assert.AreEqual("RIGHT", EnumConverter.ConvertEnumToString(RLKey.Right));
-		}
-
-		[Test]
 		public void TestStringToCharacterClass()
 		{
 			Assert.AreEqual(CharacterClasses.BARD,
