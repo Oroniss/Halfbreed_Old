@@ -10,10 +10,14 @@ namespace Halfbreed.Converters
         private Dictionary<RLKey, String> keyToString = 
         new Dictionary<RLKey, string>(){
 			{RLKey.Escape, "ESCAPE"},
+
 			{RLKey.Up, "UP"},
 			{RLKey.Down, "DOWN"},
 			{RLKey.Left, "LEFT"},
 			{RLKey.Right, "RIGHT"},
+			{RLKey.Keypad5, "CENTRE"},
+			// TODO: Add other keypad keys DOWNLEFT, DOWNRIGHT, etc.
+			{RLKey.Enter, "ENTER"},
 
 			{RLKey.Number0, "0"},
 			{RLKey.Number1, "1"},
