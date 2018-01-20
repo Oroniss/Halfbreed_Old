@@ -10,7 +10,7 @@
 
 		private static void NoUse(Entity interactible, Entity actor, int currentTime)
 		{
-			// TODO: Add text output.
+			MainGraphicDisplay.TextConsole.AddOutputText("You can't do anything with that!");
 		}
 
 	}
