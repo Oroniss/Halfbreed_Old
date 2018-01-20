@@ -1,16 +1,18 @@
-﻿namespace Halfbreed.Tests
+﻿using RLNET;
+
+namespace Halfbreed.Tests
 {
 	public static class KeyBoardInputSimulator
 	{
 
-		public static void AddKeyBoardInput(string key)
+		public static void AddKeyBoardInput(RLKey key)
 		{
 			UserInputHandler.addKeyboardInput(key);
 		}
 
-		public static void AddKeyBoardInput(string[] keys)
+		public static void AddKeyBoardInput(RLKey[] keys)
 		{
-			foreach (string key in keys)
+			foreach (RLKey key in keys)
 			{
 				UserInputHandler.addKeyboardInput(key);
 			}
