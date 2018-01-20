@@ -71,6 +71,11 @@ namespace Halfbreed.Entities
 			set { _symbol = value; }
 		}
 
+		public override string ToString()
+		{
+			return _entityName;
+		}
+
 		public string GetDescription()
 		{
 			return _entityName;
