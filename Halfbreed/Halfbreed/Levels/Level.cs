@@ -229,13 +229,55 @@ namespace Halfbreed
 
 		public bool MoveEntityAttempt(Entity entity, int newX, int newY)
 		{
-			// TODO: Do the checks for movement here.
-			// Try to leave.
-			// Leave
-			// Try to enter
-			MoveEntity(entity, newX, newY);
-			// TODO: Enter
-			return true;
+			int originalX = entity.XLoc;
+			int originalY = entity.YLoc;
+			int origin = ConvertXYToInt(entity.XLoc, entity.YLoc);
+			int destination = ConvertXYToInt(newX, newY);
+			if (Math.Abs(GetElevation(origin) - GetElevation(destination)) > 3)
+			{
+				MainGraphicDisplay.TextConsole.AddOutputText("That is too risky");
+				return false;
+			}
+
+			// Try to move off
+			List<Entity> movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEOFFATTEMPT);
+			bool success = true;
+			foreach (Entity trigger in movementTriggers)
+			{
+				if (!((MoveOffAttemptComponent)trigger.GetComponent(ComponentType.MOVEOFFATTEMPT)).MoveOffAttempt(entity, newX, newY))
+					success = false;
+			}
+			if (!success)
+				return false;
+
+			// Move off
+			movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEOFF);
+			foreach (Entity trigger in movementTriggers)
+				((MoveOffComponent)trigger.GetComponent(ComponentType.MOVEOFF)).MoveOff(entity, newX, newY);
+
+			// Try to move on
+			movementTriggers = GetEntitiesWithComponent(newX, newY, ComponentType.MOVEONATTEMPT);
+			foreach (Entity trigger in movementTriggers)
+			{
+				if (!((MoveOnAttemptComponent)trigger.GetComponent(ComponentType.MOVEONATTEMPT)).MoveOnAttempt(entity, originalX, originalY))
+					success = false;
+			}
+			if (success)
+			{
+	            MoveEntity(entity, newX, newY);
+				movementTriggers = GetEntitiesWithComponent(newX, newY, ComponentType.MOVEON);
+				foreach (Entity trigger in movementTriggers)
+					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, originalX, originalY);
+
+				return true;
+			}
+			else
+			{
+				movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEON);
+				foreach (Entity trigger in movementTriggers)
+					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, newX, newY);
+				return false;
+			}
 		}
 
 		public void MoveEntity(Entity entity, int newX, int newY)
@@ -328,6 +370,17 @@ namespace Halfbreed
 						return true;
 				}
 			return false;
+		}
+
+		public List<Entity> GetEntitiesWithComponent(int x, int y, ComponentType componentType)
+		{
+			List<Entity> returnList = new List<Entity>();
+			foreach (Entity entity in GetEntities(x, y))
+			{
+				if (entity.HasComponent(componentType))
+					returnList.Add(entity);
+			}
+			return returnList;
 		}
 
 	}
