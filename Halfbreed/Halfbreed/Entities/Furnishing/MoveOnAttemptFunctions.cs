@@ -1,10 +1,12 @@
-﻿using System;
-namespace Halfbreed
+﻿using System.Collections.Generic;
+
+namespace Halfbreed.Entities
 {
-	public class MoveOnAttemptFunctions
+	public partial class MoveOnAttemptComponent:MovementTriggerComponent
 	{
-		public MoveOnAttemptFunctions()
-		{
-		}
+		private static Dictionary<string, MoveOnAttemptFunction> _moveOnAttemptFunctionDictionary =
+			new Dictionary<string, MoveOnAttemptFunction>()
+			{
+			};
 	}
 }

@@ -1,10 +1,11 @@
-﻿using System;
-namespace Halfbreed
+﻿using System.Collections.Generic;
+
+namespace Halfbreed.Entities
 {
-	public class MoveOffFunctions
+	public partial class MoveOffComponent
 	{
-		public MoveOffFunctions()
+		private static Dictionary<string, MoveOnFunction> _moveOffFunctionDictionary = new Dictionary<string, MoveOnFunction>()
 		{
-		}
+		};
 	}
 }

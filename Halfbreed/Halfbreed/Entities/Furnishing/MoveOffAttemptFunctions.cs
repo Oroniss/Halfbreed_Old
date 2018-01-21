@@ -1,10 +1,12 @@
-﻿using System;
-namespace Halfbreed
+﻿using System.Collections.Generic;
+
+namespace Halfbreed.Entities
 {
-	public class MoveOffAttemptFunctions
+	public partial class MoveOffAttemptComponent
 	{
-		public MoveOffAttemptFunctions()
-		{
-		}
+		private static Dictionary<string, MoveOffAttemptFunction> _moveOffAttemptFunctionDictionary =
+			new Dictionary<string, MoveOffAttemptFunction>()
+			{
+			};
 	}
 }
