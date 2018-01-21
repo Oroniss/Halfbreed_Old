@@ -41,9 +41,15 @@
 
 			if (_isOpen)
 			{
-				_isOpen = false;
-				_entity.Symbol = '+';
-				_entity.AddTrait(EntityTraits.BLOCKMOVE);
+				if (GameEngine.CurrentLevel.IsPassible(_entity.XLoc, _entity.YLoc, MovementModes.WALK))
+				{
+					_isOpen = false;
+					_entity.Symbol = '+';
+					_entity.AddTrait(EntityTraits.BLOCKMOVE);
+				}
+				else
+					// TODO: Think this through a bit more carefully.
+					MainGraphicDisplay.TextConsole.AddOutputText("Something is blocking the door");
 			}
 			else
 			{
