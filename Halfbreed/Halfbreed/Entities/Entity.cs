@@ -156,5 +156,12 @@ namespace Halfbreed.Entities
 			}
 		}
 
+		public Combat.Damage ProcessDamage(Entity attacker, Combat.Damage Damage)
+		{
+			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("{0} takes {1} points of {2} damage",
+																	   this, Damage.FinalDamageAmount, Damage.DamageType));
+			return Damage;
+		}
+
 	}
 }
