@@ -44,6 +44,14 @@ namespace Halfbreed.Entities
 				}
 			}
 
+			// TODO: Sort out a proper "Trap" section.
+			if (furnishingName == "Pit")
+			{
+				MoveOnComponent trap = new MoveOnComponent(this);
+				trap.AddFunction("PitMoveOn");
+				_components[ComponentType.MOVEON] = trap;
+			}
+
 		}
 
 
