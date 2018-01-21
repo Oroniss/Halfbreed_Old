@@ -33,7 +33,8 @@
 		PLANT,
 
 		PLAYER,
-		CANINTERACT
+		CANINTERACT,
+		TRAP
 
 	}
 }
