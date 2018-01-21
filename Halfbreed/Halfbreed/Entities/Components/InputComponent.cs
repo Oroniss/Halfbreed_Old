@@ -71,23 +71,26 @@ namespace Halfbreed.Entities
 					if (direction == null)
 						continue;
 
-					List<Entity> entities = new List<Entity>();
-
-					foreach (Entity entity in GameEngine.CurrentLevel.GetEntities(_entity.XLoc + direction.XDirection,
-																				  _entity.YLoc + direction.YDirection))
+					List<Entity> entities = GameEngine.CurrentLevel.GetEntitiesWithComponent(_entity.XLoc + direction.XDirection,
+																							 _entity.YLoc + direction.YDirection,
+																							 ComponentType.INTERACTIBLE);
+					if (entities.Count == 0)
 					{
-						if (entity.HasComponent(ComponentType.INTERACTIBLE)) // TODO: Check for concealed.
-							entities.Add(entity);
-					}
-
-					List<string> options = new List<string>();
-					for (int i = 0; i < entities.Count; i++)
-						options.Add(entities[i].GetDescription());
-
-					int choice = UserInputHandler.SelectFromMenu("Select object:", options, "Escape to cancel");
-
-					if (choice == -1)
+						MainGraphicDisplay.TextConsole.AddOutputText("There is nothing there you can use");
 						continue;
+					}
+					int choice = 0;
+					if (entities.Count > 1)
+					{
+						List<string> options = new List<string>();
+						for (int i = 0; i < entities.Count; i++)
+							options.Add(entities[i].GetDescription());
+
+						choice = UserInputHandler.SelectFromMenu("Select object:", options, "Escape to cancel");
+
+						if (choice == -1)
+							continue;
+					}
 
 					MainGraphicDisplay.UpdateGameScreen();
 
