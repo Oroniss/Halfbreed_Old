@@ -103,8 +103,8 @@ Pallet,PINE,15,11
 Pallet,PINE,16,11
 Pallet,PINE,17,11
 Broken Chest,PINE,17,6
-Broken Chest,PINE,17,6
-Broken Chest,PINE,18,7
+Broken Chest,PINE,17,7
+Broken Chest,PINE,18,6
 Chest,PINE,18,7
 Door,PINE,13,12
 Door,PINE,18,12
@@ -334,6 +334,7 @@ Broken Chest,PINE,42,21
 Chest,PINE,42,22
 Broken Door,PINE,32,22
 Brazier,TIN,30,5,isLit,True
+Pit,TIN,32,5
 ###
 Rat Den,1,4
 Rat Den,9,2
