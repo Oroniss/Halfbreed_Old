@@ -114,5 +114,52 @@ namespace Halfbreed.Tests
 
 			UserInputHandler.clearAllInput();
 		}
+
+		[Test]
+		public void TestGetDirection()
+		{
+			UserInputHandler.clearAllInput();
+
+			RLKey[] keyArray = new RLKey[] { RLKey.Up };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
+			Direction intendedDirection = new Direction(0, -1);
+			Direction actualDirection = UserInputHandler.GetDirection("", true);
+			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
+			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
+
+			UserInputHandler.clearAllInput();
+
+			keyArray = new RLKey[] { RLKey.Down };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
+			intendedDirection = new Direction(0, 1);
+			actualDirection = UserInputHandler.GetDirection("", true);
+			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
+			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
+
+			UserInputHandler.clearAllInput();
+
+			keyArray = new RLKey[] { RLKey.Number5, RLKey.Left };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
+			intendedDirection = new Direction(-1, 0);
+			actualDirection = UserInputHandler.GetDirection("", true);
+			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
+			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
+
+			UserInputHandler.clearAllInput();
+
+			keyArray = new RLKey[] { RLKey.Enter };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
+			intendedDirection = new Direction(0, 0);
+			actualDirection = UserInputHandler.GetDirection("", true);
+			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
+			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
+
+			UserInputHandler.clearAllInput();
+
+			keyArray = new RLKey[] { RLKey.Enter, RLKey.Escape };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
+			Assert.IsNull(UserInputHandler.GetDirection("", false));
+
+		}
     }
 }
