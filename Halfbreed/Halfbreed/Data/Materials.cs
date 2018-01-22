@@ -29,6 +29,8 @@
 		// Leathers
 		FUR,
 		// Cloths
-		HESSION
+		HESSION,
+		//
+		WATER
 	}
 }
