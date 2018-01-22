@@ -103,11 +103,21 @@ namespace Halfbreed.Tests
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
-			Assert.IsTrue(testLevel.IsPassible(1, 1, MovementModes.WALK));
-			Assert.IsTrue(testLevel.IsPassible(42, 1, MovementModes.FLY));
-			Assert.IsTrue(testLevel.IsPassible(42, 23, MovementModes.CLIMB));
-			Assert.IsFalse(testLevel.IsPassible(1, 23, MovementModes.FLY));
-			Assert.IsTrue(testLevel.IsPassible(1, 23, MovementModes.PHASE));
+			Assert.IsTrue(testLevel.IsPassible(1, 1, true, true, true));
+			Assert.IsTrue(testLevel.IsPassible(42, 1, false, true, false));
+			Assert.IsTrue(testLevel.IsPassible(42, 23, true, false, false));
+			Assert.IsFalse(testLevel.IsPassible(1, 23, true, true, false));
+			// TODO: Add some swimming tests here later.
+		}
+
+		[Test]
+		public void TestGetEntitiesWithComponent()
+		{
+			Level testLevel = new Level(testLevelMapFilePath);
+
+			Assert.AreEqual(2, testLevel.GetEntitiesWithComponent(16, 10, Entities.ComponentType.INTERACTIBLE).Count);
+			Assert.AreEqual(0, testLevel.GetEntitiesWithComponent(16, 10, Entities.ComponentType.MOVEON).Count);
+			Assert.AreEqual(1, testLevel.GetEntitiesWithComponent(1, 1, Entities.ComponentType.INTERACTIBLE).Count);
 		}
 
 		[TearDown]
