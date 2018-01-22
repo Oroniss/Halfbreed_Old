@@ -7,22 +7,25 @@ namespace Halfbreed.Levels
 	{
 		public readonly string Name;
 		public readonly int Elevation;
-		public readonly MovementModes MoveModes;
+		public readonly bool Walkable;
+		public readonly bool Flyable;
+		public readonly bool Swimmable;
 		public readonly bool AllowLOS;
 		public readonly Colors BGColor;
 		public readonly Colors FogColor;
 
-		public MapTileDetails(string name, int elevation, MovementModes moveTypes, bool allowLOS, string bgColorName,
+		public MapTileDetails(string name, int elevation, bool walkable, bool flyable, bool swimmable, bool allowLOS, string bgColorName,
 							string fogColorName)
 		{
 			Name = name;
 			Elevation = elevation;
-			MoveModes = moveTypes;
+			Walkable = walkable;
+			Flyable = flyable;
+			Swimmable = swimmable;
 			AllowLOS = allowLOS;
 			BGColor = (Colors)Enum.Parse(typeof(Colors), bgColorName);
 			FogColor = (Colors)Enum.Parse(typeof(Colors), fogColorName);
 		}
 	}
-
 }
 
