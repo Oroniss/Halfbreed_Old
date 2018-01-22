@@ -31,7 +31,12 @@ namespace Halfbreed
 			{Colors.STEELGREY, new RLColor(122, 122, 122)},
 			{Colors.TIN, new RLColor(211, 212, 213)},
 			// Oranges
-			{Colors.DARKORANGE, new RLColor(238, 154, 0)}
+			{Colors.DARKORANGE, new RLColor(238, 154, 0)},
+			// Blues
+			{Colors.WATERBLUE, new RLColor(0, 0, 238)},
+			{Colors.DARKWATER, new RLColor(0, 0, 115)},
+			// Reds
+			{Colors.RED, new RLColor(255, 0, 0)}
 		};
 
 		public static RLColor GetColor(Colors colorName)
@@ -72,6 +77,11 @@ namespace Halfbreed
 		STEELGREY,
 		TIN,
 		// Oranges
-		DARKORANGE
+		DARKORANGE,
+		// Blues
+		WATERBLUE,
+		DARKWATER,
+		// Reds
+		RED
 	}
 }
