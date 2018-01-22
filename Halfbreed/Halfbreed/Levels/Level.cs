@@ -227,55 +227,82 @@ namespace Halfbreed
 			_entities.Remove(entity);
 		}
 
-		public bool MoveEntityAttempt(Entity entity, int newX, int newY)
+		private int CalculateElevationDifference(int originIndex, int destinationIndex)
 		{
-			int originalX = entity.XLoc;
-			int originalY = entity.YLoc;
-			int origin = ConvertXYToInt(entity.XLoc, entity.YLoc);
-			int destination = ConvertXYToInt(newX, newY);
-			if (Math.Abs(GetElevation(origin) - GetElevation(destination)) > 3)
-			{
-				MainGraphicDisplay.TextConsole.AddOutputText("That is too risky");
-				return false;
-			}
+			return GetElevation(destinationIndex) - GetElevation(originIndex);
+		}
 
+		public bool MoveEntityAttempt(Entity entity, int originX, int originY, int destinationX, int destinationY)
+		{
+			// This should eventually go in a "CanClimb" function.
+			// Then do a "CanSwim" function.
+			// Figure out any elevation changes.
+			int elevationDifference = CalculateElevationDifference(ConvertXYToInt(originX, originY), ConvertXYToInt(destinationX, destinationY));
+
+			if (Math.Abs(elevationDifference) > 1 && !entity.HasTrait(EntityTraits.CANFLY))
+			{
+				if (GetEntitiesWithTrait(originX, originY, EntityTraits.ELEVATIONCHANGE).Count > 0 ||
+					GetEntitiesWithTrait(destinationX, destinationY, EntityTraits.ELEVATIONCHANGE).Count > 0)
+				{
+					if (entity.HasTrait(EntityTraits.PLAYER))
+					{
+						if (elevationDifference > 1)
+							MainGraphicDisplay.TextConsole.AddOutputText("You climb up");
+						else
+							MainGraphicDisplay.TextConsole.AddOutputText("You climb down");
+					}
+				}
+				else
+				{
+					if (entity.HasTrait(EntityTraits.PLAYER))
+					{
+						if (elevationDifference > 1)
+							MainGraphicDisplay.TextConsole.AddOutputText("You can't climb up there");
+						else
+							MainGraphicDisplay.TextConsole.AddOutputText("It would be too risky to drop down there");
+					}
+
+					return false;
+				}
+			}
+				
 			// Try to move off
-			List<Entity> movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEOFFATTEMPT);
+			List<Entity> movementTriggers = GetEntitiesWithComponent(originX, originY, ComponentType.MOVEOFFATTEMPT);
 			bool success = true;
 			foreach (Entity trigger in movementTriggers)
 			{
-				if (!((MoveOffAttemptComponent)trigger.GetComponent(ComponentType.MOVEOFFATTEMPT)).MoveOffAttempt(entity, newX, newY))
+				if (!((MoveOffAttemptComponent)trigger.GetComponent(ComponentType.MOVEOFFATTEMPT)).MoveOffAttempt(entity, destinationX, destinationY))
 					success = false;
 			}
 			if (!success)
 				return false;
 
 			// Move off
-			movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEOFF);
+			movementTriggers = GetEntitiesWithComponent(originX, originY, ComponentType.MOVEOFF);
 			foreach (Entity trigger in movementTriggers)
-				((MoveOffComponent)trigger.GetComponent(ComponentType.MOVEOFF)).MoveOff(entity, newX, newY);
+				((MoveOffComponent)trigger.GetComponent(ComponentType.MOVEOFF)).MoveOff(entity, destinationX, destinationY);
 
 			// Try to move on
-			movementTriggers = GetEntitiesWithComponent(newX, newY, ComponentType.MOVEONATTEMPT);
+			movementTriggers = GetEntitiesWithComponent(destinationX, destinationY, ComponentType.MOVEONATTEMPT);
 			foreach (Entity trigger in movementTriggers)
 			{
-				if (!((MoveOnAttemptComponent)trigger.GetComponent(ComponentType.MOVEONATTEMPT)).MoveOnAttempt(entity, originalX, originalY))
+				if (!((MoveOnAttemptComponent)trigger.GetComponent(ComponentType.MOVEONATTEMPT)).MoveOnAttempt(entity, originX, originY))
 					success = false;
 			}
 			if (success)
 			{
-	            MoveEntity(entity, newX, newY);
-				movementTriggers = GetEntitiesWithComponent(newX, newY, ComponentType.MOVEON);
+	            MoveEntity(entity, destinationX, destinationY);
+				movementTriggers = GetEntitiesWithComponent(destinationX, destinationY, ComponentType.MOVEON);
 				foreach (Entity trigger in movementTriggers)
-					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, originalX, originalY);
+					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, originX, originY);
 
 				return true;
 			}
 			else
 			{
-				movementTriggers = GetEntitiesWithComponent(originalX, originalY, ComponentType.MOVEON);
+				movementTriggers = GetEntitiesWithComponent(originX, originY, ComponentType.MOVEON);
 				foreach (Entity trigger in movementTriggers)
-					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, newX, newY);
+					((MoveOnComponent)trigger.GetComponent(ComponentType.MOVEON)).MoveOn(entity, destinationX, destinationY);
 				return false;
 			}
 		}
@@ -340,20 +367,16 @@ namespace Halfbreed
 			}
 		}
 
-		public bool IsPassible(int x, int y, MovementModes movementMode)
+		public bool IsPassible(int x, int y, bool canWalk, bool canFly, bool canSwim)
 		{
 			if (!IsValidMapCoord(x, y))
 				return false;
-
-			int index = ConvertXYToInt(x, y);
-
-			EntityTraits blockingTrait = EntityTraits.BLOCKMOVE;
-			if (movementMode == MovementModes.PHASE)
-				blockingTrait = EntityTraits.BLOCKPHASING;
-			if (IsBlockedByEntity(index, blockingTrait))
+			if (GetEntitiesWithTrait(x, y, EntityTraits.BLOCKMOVE).Count > 0)
 				return false;
 
-			return movementMode > GetTileDetails(index).MoveModes;
+			int index = ConvertXYToInt(x, y);
+			MapTileDetails tileInfo = GetTileDetails(index);
+			return (tileInfo.Walkable && canWalk) || (tileInfo.Flyable && canFly) || (tileInfo.Swimmable && canSwim);
 		}
 
 		private int GetElevation(int index)
@@ -381,6 +404,18 @@ namespace Halfbreed
 					returnList.Add(entity);
 			}
 			return returnList;
+		}
+
+		public List<Entity> GetEntitiesWithTrait(int x, int y, EntityTraits trait)
+		{
+			List<Entity> returnList = new List<Entity>();
+			foreach (Entity entity in GetEntities(x, y))
+			{
+				if (entity.HasTrait(trait))
+					returnList.Add(entity);
+			}
+			return returnList;
+			
 		}
 
 	}
