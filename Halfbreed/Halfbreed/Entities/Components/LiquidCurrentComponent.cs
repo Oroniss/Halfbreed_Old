@@ -1,8 +1,8 @@
 ﻿namespace Halfbreed.Entities
 {
-	public class LiquidComponent:Component
+	public class LiquidCurrentComponent:Component
 	{
-		public LiquidComponent(Entity entity)
+		public LiquidCurrentComponent(Entity entity)
 			:base(entity)
 		{
 		}
