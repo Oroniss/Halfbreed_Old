@@ -44,14 +44,14 @@ namespace Halfbreed.Entities
 				}
 			}
 
-			// TODO: Sort out a proper "Trap" section.
-			if (furnishingName == "Pit")
+			// TODO: Put this somewhere else and make it generic for every entity type.
+			if (Array.IndexOf(otherParameters, "Trapped") != -1)
 			{
-				MoveOnComponent trap = new MoveOnComponent(this);
-				trap.AddFunction("PitMoveOn");
-				_components[ComponentType.MOVEON] = trap;
+				string trapType = otherParameters[Array.IndexOf(otherParameters, "TrapType") + 1];
+				int difficulty = Int32.Parse(otherParameters[Array.IndexOf(otherParameters, "TrapLevel") + 1]);
+				_components[ComponentType.TRAP] = new TrapComponent(this, trapType, difficulty);
+				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("TriggerTrap");
 			}
-
 		}
 
 
