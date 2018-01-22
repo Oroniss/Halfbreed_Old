@@ -17,6 +17,9 @@ namespace Halfbreed.Entities
 				AddTrait(trait);
 			AddTrait(EntityTraits.FURNISHING);
 
+			InteractibleComponent interactionComponent = new InteractibleComponent(this);
+			_components[ComponentType.INTERACTIBLE] = interactionComponent;
+
 			// TODO: Need to add the defensive stats - should all be the same
 			// TODO: Need to set the harvesting component.
 			// TODO: Need to add any other required traits.
