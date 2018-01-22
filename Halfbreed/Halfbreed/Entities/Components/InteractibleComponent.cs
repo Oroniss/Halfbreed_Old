@@ -5,13 +5,6 @@ namespace Halfbreed.Entities
 {
 	public partial class InteractibleComponent:Component
 	{
-		private static Dictionary<string, InteractionFunction> _interactionFunctionDictionary = new
-			Dictionary<string, InteractionFunction>()
-		{
-			{"NoUse", new InteractionFunction(NoUse)},
-			{"UseDoor", new InteractionFunction(UseDoor)}
-		};
-
 		private List<string> _interactionFunctions;
 
 		public InteractibleComponent(Entity entity)
