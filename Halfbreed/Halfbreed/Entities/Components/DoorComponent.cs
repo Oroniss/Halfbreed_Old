@@ -41,7 +41,7 @@
 
 			if (_isOpen)
 			{
-				if (GameEngine.CurrentLevel.IsPassible(_entity.XLoc, _entity.YLoc, MovementModes.WALK))
+				if (GameEngine.CurrentLevel.IsPassible(_entity.XLoc, _entity.YLoc, true, true, true))
 				{
 					_isOpen = false;
 					_entity.Symbol = '+';
