@@ -11,6 +11,7 @@ namespace Halfbreed
 	{
 
 		private string _levelTitle;
+		private int _threatLevel;
 		private int _height;
 		private int _width;
 		private MapTileDetails[] _mapGrid;
@@ -33,6 +34,7 @@ namespace Halfbreed
 			Dictionary<int, TileType> tileDict = new Dictionary<int, TileType>();
 
 			_levelTitle = LevelSpecificationFile.ReadLine();
+			_threatLevel = Int32.Parse(LevelSpecificationFile.ReadLine());
 			_height = Int32.Parse(LevelSpecificationFile.ReadLine());
 			_width = Int32.Parse(LevelSpecificationFile.ReadLine());
 
@@ -87,14 +89,13 @@ namespace Halfbreed
 				Materials material = (Materials)Enum.Parse(typeof(Materials), splitLine[1]);
 				int xLoc = Int32.Parse(splitLine[2]);
 				int yLoc = Int32.Parse(splitLine[3]);
-				string[] otherParams = new string[splitLine.Length - FURNISHINGPREFIXLENGTH];
-				for (int i = 0; i < splitLine.Length - FURNISHINGPREFIXLENGTH; i++)
-					otherParams[i] = splitLine[i + FURNISHINGPREFIXLENGTH];
-				Entity newFurnishing = Entities.EntityFactory.CreateFurnishing(furnishingName, material,
+				string[] otherParams = GetOtherParams(splitLine, FURNISHINGPREFIXLENGTH);
+				Entity newFurnishing = EntityFactory.CreateFurnishing(furnishingName, material,
 																					   xLoc, yLoc, otherParams);
 				AddEntity(newFurnishing);
 			}
 
+			// Harvesting Nodes
 			while (true)
 			{
 				string line = LevelSpecificationFile.ReadLine().Trim();
@@ -105,18 +106,50 @@ namespace Halfbreed
 				string harvestingName = splitLine[0];
 				int xLoc = Int32.Parse(splitLine[1]);
 				int yLoc = Int32.Parse(splitLine[2]);
-				Entity newHarvestingNode = Entities.EntityFactory.CreateHarvestingNode(harvestingName, xLoc, yLoc);
+				Entity newHarvestingNode = EntityFactory.CreateHarvestingNode(harvestingName, xLoc, yLoc);
 
 				AddEntity(newHarvestingNode);
+			}
+
+			// Traps
+			const int TRAPPREFIXLENGTH = 3;
+			while (true)
+			{
+				string line = LevelSpecificationFile.ReadLine().Trim();
+				if (LineIsBreakPoint(line))
+					break;
+
+				string[] splitLine = line.Split(',');
+				string trapName = splitLine[0];
+				int xLoc = Int32.Parse(splitLine[1]);
+				int yLoc = Int32.Parse(splitLine[2]);
+				string[] otherParams = GetOtherParams(splitLine, TRAPPREFIXLENGTH);
+
+				Entity newTrap = EntityFactory.CreateMovementTrap(trapName, xLoc, yLoc, otherParams);
+
+				AddEntity(newTrap);
 			}
 
 			levelStream.Close();
 
 		}
 
+		private string[] GetOtherParams(string[] line, int prefixLength)
+		{
+			string[] otherParams = new string[line.Length - prefixLength];
+			for (int i = 0; i<line.Length - prefixLength; i++)
+				otherParams[i] = line[i + prefixLength];
+			return otherParams;
+		}
+
 		private bool LineIsBreakPoint(string line)
 		{
 			return line == "###";
+		}
+
+		public int ThreatLevel
+		{
+			get { return _threatLevel; }
 		}
 
 		public int Height
@@ -232,14 +265,28 @@ namespace Halfbreed
 			return GetElevation(destinationIndex) - GetElevation(originIndex);
 		}
 
-		public bool MoveEntityAttempt(Entity entity, int originX, int originY, int destinationX, int destinationY)
+		public bool SwimAttempt(Entity entity, int originX, int originY, int destinationX, int destinationY)
+		{
+			if (!IsSwimmable(destinationX, destinationY))
+				return false;
+			// TODO: Perform swimming checks here.
+			return ApplyMovementFunctions(entity, originX, originY, destinationX, destinationY);
+		}
+
+		public bool FlyAttempt(Entity entity, int originX, int originY, int destinationX, int destinationY)
+		{
+			if (!IsFlyable(destinationX, destinationY))
+			   return false;
+			return ApplyMovementFunctions(entity, originX, originY, destinationX, destinationY);
+		}
+
+		public bool WalkAttempt(Entity entity, int originX, int originY, int destinationX, int destinationY)
 		{
 			// This should eventually go in a "CanClimb" function.
-			// Then do a "CanSwim" function.
 			// Figure out any elevation changes.
 			int elevationDifference = CalculateElevationDifference(ConvertXYToInt(originX, originY), ConvertXYToInt(destinationX, destinationY));
 
-			if (Math.Abs(elevationDifference) > 1 && !entity.HasTrait(EntityTraits.CANFLY))
+			if (Math.Abs(elevationDifference) > 1)
 			{
 				if (GetEntitiesWithTrait(originX, originY, EntityTraits.ELEVATIONCHANGE).Count > 0 ||
 					GetEntitiesWithTrait(destinationX, destinationY, EntityTraits.ELEVATIONCHANGE).Count > 0)
@@ -265,7 +312,11 @@ namespace Halfbreed
 					return false;
 				}
 			}
-				
+			return ApplyMovementFunctions(entity, originX, originY, destinationX, destinationY);
+		}
+
+		private bool ApplyMovementFunctions(Entity entity, int originX, int originY, int destinationX, int destinationY)
+		{
 			// Try to move off
 			List<Entity> movementTriggers = GetEntitiesWithComponent(originX, originY, ComponentType.MOVEOFFATTEMPT);
 			bool success = true;
@@ -367,16 +418,30 @@ namespace Halfbreed
 			}
 		}
 
-		public bool IsPassible(int x, int y, bool canWalk, bool canFly, bool canSwim)
+		public bool IsPassible(int x, int y)
 		{
 			if (!IsValidMapCoord(x, y))
 				return false;
-			if (GetEntitiesWithTrait(x, y, EntityTraits.BLOCKMOVE).Count > 0)
+			if (HasEntityWithTrait(x, y, EntityTraits.BLOCKMOVE))
 				return false;
 
-			int index = ConvertXYToInt(x, y);
-			MapTileDetails tileInfo = GetTileDetails(index);
-			return (tileInfo.Walkable && canWalk) || (tileInfo.Flyable && canFly) || (tileInfo.Swimmable && canSwim);
+			MapTileDetails tileInfo = GetTileDetails(ConvertXYToInt(x, y));
+			return tileInfo.Walkable || tileInfo.Flyable || tileInfo.Swimmable;
+		}
+
+		public bool IsSwimmable(int x, int y)
+		{
+			return IsPassible(x, y) && GetTileDetails(ConvertXYToInt(x, y)).Swimmable;
+		}
+
+		public bool IsWalkable(int x, int y)
+		{
+			return IsPassible(x, y) && GetTileDetails(ConvertXYToInt(x, y)).Walkable;
+		}
+
+		public bool IsFlyable(int x, int y)
+		{
+			return IsPassible(x, y) && GetTileDetails(ConvertXYToInt(x, y)).Flyable;
 		}
 
 		private int GetElevation(int index)
@@ -384,14 +449,13 @@ namespace Halfbreed
 			return GetTileDetails(index).Elevation;
 		}
 
-		private bool IsBlockedByEntity(int index, EntityTraits blockingTrait)
+		public bool HasEntityWithComponent(int x, int y, ComponentType componentType)
 		{
-			if (_entityLocations.ContainsKey(index))
-				foreach (Entity entity in _entityLocations[index])
-				{
-					if (entity.HasTrait(blockingTrait))
-						return true;
-				}
+			foreach (Entity entity in GetEntities(x, y))
+			{
+				if (entity.HasComponent(componentType))
+					return true;
+			}
 			return false;
 		}
 
@@ -404,6 +468,17 @@ namespace Halfbreed
 					returnList.Add(entity);
 			}
 			return returnList;
+		}
+
+		public bool HasEntityWithTrait(int x, int y, EntityTraits trait)
+		{
+			foreach (Entity entity in GetEntities(x, y))
+			{
+				if (entity.HasTrait(trait))
+					return true;
+			}
+			return false;
+			
 		}
 
 		public List<Entity> GetEntitiesWithTrait(int x, int y, EntityTraits trait)
