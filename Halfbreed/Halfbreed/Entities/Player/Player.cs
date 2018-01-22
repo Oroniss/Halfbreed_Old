@@ -18,11 +18,14 @@ namespace Halfbreed.Entities
 			AddTrait(EntityTraits.PLAYER);
 			AddTrait(EntityTraits.BLOCKMOVE);
 			AddTrait(EntityTraits.CANINTERACT);
+			AddTrait(EntityTraits.CANWALK);
+			AddTrait(EntityTraits.CANSWIM);
+			AddTrait(EntityTraits.CANCLIMB);
 
 			InputComponent inputComponent = new InputComponent(this);
 			inputComponent.SetManual();
 			_components[ComponentType.INPUT] = inputComponent;
-			_components[ComponentType.MOVEMENT] = new MovementComponent(this, new MovementModes[] { MovementModes.WALK });
+			_components[ComponentType.MOVEMENT] = new MovementComponent(this);
 		}
 	}
 }
