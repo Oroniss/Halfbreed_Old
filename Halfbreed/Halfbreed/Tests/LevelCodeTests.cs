@@ -103,11 +103,14 @@ namespace Halfbreed.Tests
 		{
 			Level testLevel = new Level(testLevelMapFilePath);
 
-			Assert.IsTrue(testLevel.IsPassible(1, 1, true, true, true));
-			Assert.IsTrue(testLevel.IsPassible(42, 1, false, true, false));
-			Assert.IsTrue(testLevel.IsPassible(42, 23, true, false, false));
-			Assert.IsFalse(testLevel.IsPassible(1, 23, true, true, false));
-			// TODO: Add some swimming tests here later.
+			Assert.IsTrue(testLevel.IsPassible(1, 1));
+			Assert.IsTrue(testLevel.IsPassible(42, 1));
+			Assert.IsTrue(testLevel.IsPassible(42, 23));
+			Assert.IsFalse(testLevel.IsPassible(1, 23));
+			Assert.IsTrue(testLevel.IsSwimmable(36, 4));
+			Assert.IsFalse(testLevel.IsWalkable(36, 4));
+			Assert.IsFalse(testLevel.IsSwimmable(35, 4));
+			Assert.IsTrue(testLevel.IsFlyable(36, 4));
 		}
 
 		[Test]
