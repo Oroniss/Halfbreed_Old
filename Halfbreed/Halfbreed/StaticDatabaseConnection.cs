@@ -110,13 +110,15 @@ namespace Halfbreed
 					TileType tileType = (TileType)Enum.Parse(typeof(TileType), tileName);
 
 					int elevation = reader.GetInt32(1);
-					MovementModes movementMode = (MovementModes)reader.GetInt32(2);
-					bool allowLOS = (reader.GetInt32(3) == 1);
-					string bgColor = reader.GetString(4);
-					string fogColor = reader.GetString(5);
+					bool walkable = (reader.GetInt32(2) == 1);
+					bool flyable = (reader.GetInt32(3) == 1);
+					bool swimmable = (reader.GetInt32(4) == 1);
+					bool allowLOS = (reader.GetInt32(5) == 1);
+					string bgColor = reader.GetString(6);
+					string fogColor = reader.GetString(7);
 
-					tileDict.Add(tileType, new MapTileDetails(tileName, elevation, movementMode, allowLOS,
-					                                                       bgColor, fogColor));
+					tileDict.Add(tileType, new MapTileDetails(tileName, elevation, walkable, flyable, swimmable, 
+					                                          allowLOS, bgColor, fogColor));
 				}
 			}
 
