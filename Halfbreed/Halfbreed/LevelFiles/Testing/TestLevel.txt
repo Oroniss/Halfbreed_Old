@@ -1,4 +1,5 @@
 Wall Market Square Storage Facility - Temporary Storage
+1
 25
 44
 -6
@@ -107,7 +108,7 @@ Broken Chest,PINE,17,7
 Broken Chest,PINE,18,6
 Chest,PINE,18,7
 Door,PINE,13,12
-Door,PINE,18,12
+Door,PINE,18,12,Trapped,TrapType,Swinging Blade,TrapLevel,1
 Pallet,PINE,9,14
 Pallet,PINE,10,14
 Pallet,PINE,11,14
@@ -334,7 +335,15 @@ Broken Chest,PINE,42,21
 Chest,PINE,42,22
 Broken Door,PINE,32,22
 Brazier,TIN,30,5,isLit,True
-Pit,TIN,32,5
+Liquid,WATER,36,4
+Liquid,WATER,37,4
+Liquid,WATER,38,4
+Liquid,WATER,36,5
+Liquid,WATER,37,5
+Liquid,WATER,38,5
+Liquid,WATER,36,6
+Liquid,WATER,37,6
+Liquid,WATER,38,6
 ###
 Rat Den,1,4
 Rat Den,9,2
@@ -345,6 +354,13 @@ Green Mold,17,14
 Green Mold,19,22
 Green Mold,28,1
 Green Mold,42,18
+###
+Pit Trap,40,4,TrapLevel,1
+Pit Trap,40,6,TrapLevel,2
+Flame Vent Trap,2,2,TrapLevel,5
+Flame Vent Trap,2,4,TrapLevel,5
+Flame Vent Trap,4,2,TrapLevel,6
+Flame Vent Trap,4,4,TrapLevel,6
 ###
 Stairs,2,2,newLevelId,WallMarketStorage_2,new49,new42
 ###
