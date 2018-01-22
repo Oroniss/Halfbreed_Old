@@ -29,6 +29,7 @@
 
 		ANIMAL,
 		PLANT,
+		LIQUID,
 
 		PLAYER,
 		CANINTERACT,
