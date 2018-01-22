@@ -35,7 +35,7 @@ namespace Halfbreed.Tests
 			Assert.AreEqual(Colors.DARKBROWN, StaticData.GetMapTileDetails(Levels.TileType.WOODWALL).FogColor);
 			Assert.AreEqual(20, StaticData.GetMapTileDetails(Levels.TileType.WOODENDEBRIS).Elevation);
 			Assert.AreEqual(3, StaticData.GetMapTileDetails(Levels.TileType.PALLET).Elevation);
-			Assert.AreEqual(0, StaticData.GetMapTileDetails(Levels.TileType.PLATFORM).MoveModes);
+			Assert.IsTrue(StaticData.GetMapTileDetails(Levels.TileType.PLATFORM).Walkable);
 			Assert.IsTrue(StaticData.GetMapTileDetails(Levels.TileType.WOODFLOOR).AllowLOS);
 			Assert.IsFalse(StaticData.GetMapTileDetails(Levels.TileType.WOODWALL).AllowLOS);
 		}
