@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities
 {
@@ -6,7 +7,6 @@ namespace Halfbreed.Entities
 	{
 		private static Dictionary<string, FurnishingTemplate> _furnishings = new Dictionary<string, FurnishingTemplate>();
 		private static Dictionary<string, HarvestingTemplate> _harvestingNodes = new Dictionary<string, HarvestingTemplate>();
-
 
 
 		public static Entity CreateFurnishing(string furnishingName, Materials material, int xLoc, int yLoc, string[] otherParams)
@@ -27,6 +27,17 @@ namespace Halfbreed.Entities
 			Entity newHarvestible = new Entity(harvestingName, xLoc, yLoc, _harvestingNodes[harvestingName].NodeType);
 
 			return newHarvestible;
+		}
+
+		public static Entity CreateMovementTrap(string trapName, int xLoc, int yLoc, string[] otherParams)
+		{
+			// if (!_traps.ContainsKey(trapName))
+			//	_traps[trapName] = StaticDatabaseConnection.GetTrapDetails(trapName);
+
+			int trapLevel = Int32.Parse(otherParams[Array.IndexOf(otherParams, "TrapLevel") + 1]);
+			Entity newTrap = new Entity(trapName, xLoc, yLoc, trapLevel, otherParams);
+
+			return newTrap;
 		}
 	}
 }
