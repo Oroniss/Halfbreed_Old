@@ -41,7 +41,7 @@
 
 			if (_isOpen)
 			{
-				if (GameEngine.CurrentLevel.IsPassible(_entity.XLoc, _entity.YLoc, true, true, true))
+				if (GameEngine.CurrentLevel.IsPassible(_entity.XLoc, _entity.YLoc))
 				{
 					_isOpen = false;
 					_entity.Symbol = '+';
