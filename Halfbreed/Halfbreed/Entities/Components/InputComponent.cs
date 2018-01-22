@@ -34,8 +34,8 @@ namespace Halfbreed.Entities
 
 		private void GetManualInput(int currentTime)
 		{
-			System.Console.WriteLine("Elapsed time = " + (System.DateTime.Now - _lastPlayerTurn));
-
+			MainGraphicDisplay.TextConsole.AddOutputText("");
+			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("Elapsed time = {0}", (System.DateTime.Now - _lastPlayerTurn)));
 
 			bool MadeValidMove = false;
 
