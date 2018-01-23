@@ -2,8 +2,8 @@
 {
 	public class Direction
 	{
-		private int _xDirection;
-		private int _yDirection;
+		readonly int _xDirection;
+		readonly int _yDirection;
 
 		public Direction(int x, int y)
 		{
