@@ -31,10 +31,7 @@ namespace Halfbreed.Entities
 
 		public static Entity CreateMovementTrap(string trapName, int xLoc, int yLoc, string[] otherParams)
 		{
-			// if (!_traps.ContainsKey(trapName))
-			//	_traps[trapName] = StaticDatabaseConnection.GetTrapDetails(trapName);
-
-			int trapLevel = Int32.Parse(otherParams[Array.IndexOf(otherParams, "TrapLevel") + 1]);
+			int trapLevel = int.Parse(otherParams[Array.IndexOf(otherParams, "TrapLevel") + 1]);
 			Entity newTrap = new Entity(trapName, xLoc, yLoc, trapLevel, otherParams);
 
 			return newTrap;
