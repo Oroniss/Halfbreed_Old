@@ -35,6 +35,43 @@ namespace Halfbreed.Entities
 				AddTrait(trait);
 		}
 
+		private void SetupOtherComponents(string[] otherComponents, string[] otherParameters)
+		{
+			var allParams = MergeOptionalParameters(otherComponents, otherParameters);
+
+			// Door component
+			if (Array.IndexOf(allParams, "AddDoorComponent") != -1)
+			{
+				bool locked = (Array.IndexOf(allParams, "Locked") != -1);
+				if (locked)
+					_components[ComponentType.DOOR] = new DoorComponent(this, true, allParams);
+				else
+				{
+					bool isOpen = (Array.IndexOf(allParams, "Open") != -1);
+					_components[ComponentType.DOOR] = new DoorComponent(this, isOpen);
+				}
+			}
+
+			// Trap component
+			if (Array.IndexOf(allParams, "AddTrapComponent") != -1)
+			{
+				string trapType = allParams[Array.IndexOf(allParams, "TrapType") + 1];
+				int difficulty = Int32.Parse(allParams[Array.IndexOf(allParams, "TrapLevel") + 1]);
+				_components[ComponentType.TRAP] = new TrapComponent(this, trapType, difficulty);
+				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("TriggerTrap");
+			}
+		}
+
+		private string[] MergeOptionalParameters(string[] otherComponents, string[] otherParameters)
+		{
+			var returnArray = new string[otherComponents.Length + otherParameters.Length];
+			for (int i = 0; i < otherComponents.Length; i++)
+				returnArray[i] = otherComponents[i];
+			for (int i = 0; i < otherParameters.Length; i++)
+				returnArray[i + otherComponents.Length] = otherParameters[i];
+			return returnArray;
+		}
+
 		private static int GetNextId()
 		{
 			int toReturn = _currentMaxEntityId;
