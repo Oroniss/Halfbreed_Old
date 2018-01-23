@@ -126,16 +126,6 @@ namespace Halfbreed
 
 		}
 
-		public static EntityPrimaryStatTemplate GetPrimaryStats(string EntityName)
-		{
-			return new EntityPrimaryStatTemplate(0, 0, 0, 0, 0);
-		}
-
-		public static EntityDefensiveStatTemplate GetDefensiveStats(string EntityName)
-		{
-			return new EntityDefensiveStatTemplate(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-		}
-
 		public static FurnishingTemplate GetFurnishingDetails(string FurnishingName)
 		{
 			string queryText = string.Format("SELECT * FROM Furnishings WHERE FurnishingName = \"{0}\";", FurnishingName);
@@ -155,10 +145,10 @@ namespace Halfbreed
 				string tileName = "";
 				if (hasTile)
 					tileName = reader.GetString(5);
-				bool hasDoor = (reader.GetInt32(6) == 1);
+				string[] otherComponents = reader.GetString(6).Trim().Split(',');
 
 				FurnishingTemplate template = new FurnishingTemplate(furnishingName, symbol, volume, traits, hasTile, 
-				                                                     tileName, hasDoor);
+				                                                     tileName, otherComponents);
 
 				return template;
 			}
