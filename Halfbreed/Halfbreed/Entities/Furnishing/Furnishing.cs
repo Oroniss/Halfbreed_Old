@@ -32,26 +32,7 @@ namespace Halfbreed.Entities
 
 			_components[ComponentType.INTERACTIBLE] = new InteractibleComponent(this);
 
-			if (template.HasDoor)
-			{
-				bool locked = (Array.IndexOf(otherParameters, "Locked") != -1);
-				if (locked)
-					_components[ComponentType.DOOR] = new DoorComponent(this, true, otherParameters);
-				else
-				{
-					bool isOpen = (Array.IndexOf(otherParameters, "Open") != -1);
-					_components[ComponentType.DOOR] = new DoorComponent(this, isOpen);
-				}
-			}
-
-			// TODO: Put this somewhere else and make it generic for every entity type.
-			if (Array.IndexOf(otherParameters, "Trapped") != -1)
-			{
-				string trapType = otherParameters[Array.IndexOf(otherParameters, "TrapType") + 1];
-				int difficulty = Int32.Parse(otherParameters[Array.IndexOf(otherParameters, "TrapLevel") + 1]);
-				_components[ComponentType.TRAP] = new TrapComponent(this, trapType, difficulty);
-				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("TriggerTrap");
-			}
+			SetupOtherComponents(template.OtherComponents, otherParameters);
 		}
 
 
