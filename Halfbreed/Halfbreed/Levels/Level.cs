@@ -34,11 +34,11 @@ namespace Halfbreed
 			Dictionary<int, TileType> tileDict = new Dictionary<int, TileType>();
 
 			_levelTitle = LevelSpecificationFile.ReadLine();
-			_threatLevel = Int32.Parse(LevelSpecificationFile.ReadLine());
-			_height = Int32.Parse(LevelSpecificationFile.ReadLine());
-			_width = Int32.Parse(LevelSpecificationFile.ReadLine());
+			_threatLevel = int.Parse(LevelSpecificationFile.ReadLine());
+			_height = int.Parse(LevelSpecificationFile.ReadLine());
+			_width = int.Parse(LevelSpecificationFile.ReadLine());
 
-			_visibility = Int32.Parse(LevelSpecificationFile.ReadLine());
+			_visibility = int.Parse(LevelSpecificationFile.ReadLine());
 			_anathemaMultiplier = float.Parse(LevelSpecificationFile.ReadLine());
 
 			_entities = new List<Entity>();
@@ -55,7 +55,7 @@ namespace Halfbreed
 					break;
 
 				string[] splitLine = line.Split(',');
-				tileDict[Int32.Parse(splitLine[0])] = (TileType)Enum.Parse(typeof(TileType), splitLine[1]);
+				tileDict[int.Parse(splitLine[0])] = (TileType)Enum.Parse(typeof(TileType), splitLine[1]);
 			}
 
 			_mapGrid = new MapTileDetails[_width * _height];
@@ -66,7 +66,7 @@ namespace Halfbreed
 				string[] _row = LevelSpecificationFile.ReadLine().Trim().Split(',');
 				for (int x = 0; x < _width; x++)
 				{
-					_mapGrid[y * _width + x] = StaticData.GetMapTileDetails(tileDict[Int32.Parse(_row[x])]);
+					_mapGrid[y * _width + x] = StaticData.GetMapTileDetails(tileDict[int.Parse(_row[x])]);
 					_revealed[y * _width + x] = false;
 				}
 			}
@@ -87,8 +87,8 @@ namespace Halfbreed
 				string[] splitLine = line.Split(',');
 				string furnishingName = splitLine[0];
 				Materials material = (Materials)Enum.Parse(typeof(Materials), splitLine[1]);
-				int xLoc = Int32.Parse(splitLine[2]);
-				int yLoc = Int32.Parse(splitLine[3]);
+				int xLoc = int.Parse(splitLine[2]);
+				int yLoc = int.Parse(splitLine[3]);
 				string[] otherParams = GetOtherParams(splitLine, FURNISHINGPREFIXLENGTH);
 				Entity newFurnishing = EntityFactory.CreateFurnishing(furnishingName, material,
 																					   xLoc, yLoc, otherParams);
@@ -104,8 +104,8 @@ namespace Halfbreed
 
 				string[] splitLine = line.Split(',');
 				string harvestingName = splitLine[0];
-				int xLoc = Int32.Parse(splitLine[1]);
-				int yLoc = Int32.Parse(splitLine[2]);
+				int xLoc = int.Parse(splitLine[1]);
+				int yLoc = int.Parse(splitLine[2]);
 				Entity newHarvestingNode = EntityFactory.CreateHarvestingNode(harvestingName, xLoc, yLoc);
 
 				AddEntity(newHarvestingNode);
@@ -121,8 +121,8 @@ namespace Halfbreed
 
 				string[] splitLine = line.Split(',');
 				string trapName = splitLine[0];
-				int xLoc = Int32.Parse(splitLine[1]);
-				int yLoc = Int32.Parse(splitLine[2]);
+				int xLoc = int.Parse(splitLine[1]);
+				int yLoc = int.Parse(splitLine[2]);
 				string[] otherParams = GetOtherParams(splitLine, TRAPPREFIXLENGTH);
 
 				Entity newTrap = EntityFactory.CreateMovementTrap(trapName, xLoc, yLoc, otherParams);
@@ -483,8 +483,8 @@ namespace Halfbreed
 
 		public List<Entity> GetEntitiesWithTrait(int x, int y, EntityTraits trait)
 		{
-			List<Entity> returnList = new List<Entity>();
-			foreach (Entity entity in GetEntities(x, y))
+			var returnList = new List<Entity>();
+			foreach (var entity in GetEntities(x, y))
 			{
 				if (entity.HasTrait(trait))
 					returnList.Add(entity);
