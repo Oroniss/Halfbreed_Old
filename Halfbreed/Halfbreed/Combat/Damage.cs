@@ -2,10 +2,10 @@
 {
 	public class Damage
 	{
-		private DamageType _damageType;
-		private int _originalDamageAmount;
-		private int _damageModifiers;
-		private bool _negateDamage;
+		readonly DamageType _damageType;
+		readonly int _originalDamageAmount;
+		int _damageModifiers;
+		bool _negateDamage;
 
 		public Damage(DamageType damageType, int originalDamageAmount)
 		{
