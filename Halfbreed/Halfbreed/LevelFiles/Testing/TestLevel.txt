@@ -108,7 +108,7 @@ Broken Chest,PINE,17,7
 Broken Chest,PINE,18,6
 Chest,PINE,18,7
 Door,PINE,13,12
-Door,PINE,18,12,Trapped,TrapType,Swinging Blade,TrapLevel,1
+Door,PINE,18,12,AddTrapComponent,TrapType,Swinging Blade,TrapLevel,1
 Pallet,PINE,9,14
 Pallet,PINE,10,14
 Pallet,PINE,11,14
