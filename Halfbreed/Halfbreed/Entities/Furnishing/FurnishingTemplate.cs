@@ -2,16 +2,16 @@
 {
 	public struct FurnishingTemplate
 	{
-		private string _furnishingName;
-		private char _symbol;
-		private int _volume;
-		private EntityTraits[] _traits;
-		private bool _hasTile;
-		private string _tileTypeName;
-		private bool _hasDoor;
+		string _furnishingName;
+		char _symbol;
+		int _volume;
+		EntityTraits[] _traits;
+		bool _hasTile;
+		string _tileTypeName;
+		string[] _otherComponents;
 
 		public FurnishingTemplate(string furnishingName, char symbol, int volume, EntityTraits[] traits, bool hasTile, string tileTypeName,
-		                         bool hasDoor)
+		                         string[] otherComponents)
 		{
 			_furnishingName = furnishingName;
 			_symbol = symbol;
@@ -19,7 +19,7 @@
 			_traits = traits;
 			_hasTile = hasTile;
 			_tileTypeName = tileTypeName;
-			_hasDoor = hasDoor;
+			_otherComponents = otherComponents;
 		}
 
 		public string FurnishingName
@@ -52,9 +52,9 @@
 			get { return _tileTypeName; }
 		}
 
-		public bool HasDoor
+		public string[] OtherComponents
 		{
-			get { return _hasDoor; }
+			get { return _otherComponents; }
 		}
 	}
 }
