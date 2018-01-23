@@ -19,6 +19,8 @@
 			MoveOnComponent moveOn = new MoveOnComponent(this);
 			moveOn.AddFunction("TriggerTrap");
 			_components[ComponentType.MOVEON] = moveOn;
+
+			SetupOtherComponents(new string[] { }, otherParameters);
 		}
 	}
 }
