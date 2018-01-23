@@ -20,6 +20,9 @@ namespace Halfbreed.Entities
 			InteractibleComponent interactionComponent = new InteractibleComponent(this);
 			_components[ComponentType.INTERACTIBLE] = interactionComponent;
 
+			SetupOtherComponents(new string[] { }, new string[] { });
+			// TODO: Also need to modify the relevant functions to require a list of optional parameters.
+
 			// TODO: Need to add the defensive stats - should all be the same
 			// TODO: Need to set the harvesting component.
 			// TODO: Need to add any other required traits.
