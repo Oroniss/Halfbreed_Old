@@ -39,16 +39,21 @@ namespace Halfbreed.Entities
 
 			bool MadeValidMove = false;
 
-			System.DateTime startLOS = System.DateTime.Now;
-
-			var ViewList = GameEngine.CurrentLevel.CalculateFOV(_entity.XLoc, _entity.YLoc, 18, 
-			                                                    GameEngine.CurrentLevel.GetElevation(_entity.XLoc, 
-			                                                                                         _entity.YLoc),
-			                                                    false, false);
-			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("LOS TIME = {0}", (System.DateTime.Now - startLOS)));
-
-			if (_entity.HasTrait(EntityTraits.PLAYER))
+			if (_entity.HasTrait(EntityTraits.PLAYER) && _entity.HasComponent(ComponentType.SENSORY))
 			{
+				System.DateTime startLOS = System.DateTime.Now;
+
+				var currentViewDistance = ((SensoryComponent)_entity.GetComponent(ComponentType.SENSORY)).CurrentViewDistance;
+				var elevation = GameEngine.CurrentLevel.GetElevation(_entity.XLoc, _entity.YLoc);
+				var blindsight = _entity.HasTrait(EntityTraits.BLINDSIGHT);
+				var trueseeing = _entity.HasTrait(EntityTraits.TRUESEEING);
+				var darkvision = _entity.HasTrait(EntityTraits.DARKVISION);
+
+				var ViewList = GameEngine.CurrentLevel.CalculateFOV(_entity.XLoc, _entity.YLoc, currentViewDistance,
+																	elevation, blindsight, trueseeing, darkvision);
+	
+				MainGraphicDisplay.TextConsole.AddOutputText(string.Format("LOS TIME = {0}", (System.DateTime.Now - startLOS)));
+
 				foreach (Position position in ViewList)
 					GameEngine.CurrentLevel.revealTile(position.X, position.Y);
 				GameEngine.VisibleTiles = ViewList;
