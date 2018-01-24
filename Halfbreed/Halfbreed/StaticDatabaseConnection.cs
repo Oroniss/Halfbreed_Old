@@ -113,12 +113,12 @@ namespace Halfbreed
 					bool walkable = (reader.GetInt32(2) == 1);
 					bool flyable = (reader.GetInt32(3) == 1);
 					bool swimmable = (reader.GetInt32(4) == 1);
-					bool allowLOS = (reader.GetInt32(5) == 1);
+					bool blockLOS = (reader.GetInt32(5) == 1);
 					string bgColor = reader.GetString(6);
 					string fogColor = reader.GetString(7);
 
 					tileDict.Add(tileType, new MapTileDetails(tileName, elevation, walkable, flyable, swimmable, 
-					                                          allowLOS, bgColor, fogColor));
+					                                          blockLOS, bgColor, fogColor));
 				}
 			}
 
