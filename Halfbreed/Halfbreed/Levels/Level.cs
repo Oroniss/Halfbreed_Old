@@ -17,7 +17,8 @@ namespace Halfbreed
 		private MapTileDetails[] _mapGrid;
 		private bool[] _revealed;
 
-		private int _visibility;
+		private int _lightLevel;
+		private int _smokeLevel;
 		private float _anathemaMultiplier;
 
 		private List<Entity> _entities;
@@ -38,7 +39,8 @@ namespace Halfbreed
 			_height = int.Parse(LevelSpecificationFile.ReadLine());
 			_width = int.Parse(LevelSpecificationFile.ReadLine());
 
-			_visibility = int.Parse(LevelSpecificationFile.ReadLine());
+			_lightLevel = int.Parse(LevelSpecificationFile.ReadLine());
+			_smokeLevel = int.Parse(LevelSpecificationFile.ReadLine());
 			_anathemaMultiplier = float.Parse(LevelSpecificationFile.ReadLine());
 
 			_entities = new List<Entity>();
@@ -591,8 +593,14 @@ namespace Halfbreed
 			{1, 0, 0, 1, -1, 0, 0, -1}
 		};
 
-		public List<Position> CalculateFOV(int xLoc, int yLoc, int viewDistance, int elevation, bool blindsight, bool trueseeing)
+		public List<Position> CalculateFOV(int xLoc, int yLoc, int viewDistance, int elevation, bool blindsight, 
+		                                   bool trueseeing, bool darkvision)
 		{
+			if (!darkvision && !blindsight)
+				viewDistance += _lightLevel;
+			if (!blindsight)
+				viewDistance += _smokeLevel;
+
 			CheckBlockedFunction blockFunction = new CheckBlockedFunction(BlockTrueSeeing);
 			if (trueseeing)
 				blockFunction = new CheckBlockedFunction(BlockBlindSight);
