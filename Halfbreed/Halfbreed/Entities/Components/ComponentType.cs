@@ -2,21 +2,22 @@
 {
 	public enum ComponentType
 	{
-		TILE,
 		CONCEALED,
-		LIGHTSOURCE,
 		CONTAINER,
-		INTERACTIBLE, // For being interacted with - primarily Furnishings.
-		MATERIAL,
-		HARVESTINGNODE,
 		DOOR,
-		MOVEMENT,
-		MOVEON,
-		MOVEOFF,
-		MOVEONATTEMPT,
-		MOVEOFFATTEMPT,
+		HARVESTINGNODE,
 		INPUT,
+		INTERACTIBLE, // For being interacted with - primarily Furnishings.
+		LIGHTSOURCE,
 		LIQUIDCURRENT,
+		MATERIAL,
+		MOVEMENT,
+		MOVEOFF,
+		MOVEOFFATTEMPT,
+		MOVEON,
+		MOVEONATTEMPT,
+		SENSORY,
+		TILE,
 		TRAP
 	}
 }
