@@ -444,6 +444,11 @@ namespace Halfbreed
 			return IsPassible(x, y) && GetTileDetails(ConvertXYToInt(x, y)).Flyable;
 		}
 
+		public int GetElevation(int x, int y)
+		{
+			return GetElevation(ConvertXYToInt(x, y));
+		}
+
 		private int GetElevation(int index)
 		{
 			return GetTileDetails(index).Elevation;
@@ -478,7 +483,6 @@ namespace Halfbreed
 					return true;
 			}
 			return false;
-			
 		}
 
 		public List<Entity> GetEntitiesWithTrait(int x, int y, EntityTraits trait)
@@ -490,7 +494,123 @@ namespace Halfbreed
 					returnList.Add(entity);
 			}
 			return returnList;
-			
+		}
+
+		private bool BlockSight(int x, int y, int elevation)
+		{
+			return HasEntityWithTrait(x, y, EntityTraits.MAGICALOPAQUE) ||
+				BlockTrueSeeing(x, y, elevation);
+		}
+
+		private bool BlockTrueSeeing(int x, int y, int elevation)
+		{
+			return BlockBlindSight(x, y, elevation) ||
+				HasEntityWithTrait(x, y, EntityTraits.NATURALOPAQUE);
+		}
+
+		private bool BlockBlindSight(int x, int y, int elevation)
+		{
+			return !IsValidMapCoord(x, y) ||
+				GetElevation(ConvertXYToInt(x, y)) > elevation ||
+				HasEntityWithTrait(x, y, EntityTraits.BLOCKALLSIGHT) ||
+				GetTileDetails(ConvertXYToInt(x, y)).BlockLOS;
+		}
+
+		private delegate bool CheckBlockedFunction(int x, int y, int elevation);
+
+		private void CastLight(int xLoc, int yLoc, int row, double start, double end, int viewDistance,
+									   int xx, int xy, int yx, int yy, int recursionNumber, int elevation, 
+		                               HashSet<int> viewSet, CheckBlockedFunction checkBlocked)
+		{
+			double newStart = 0.0d;
+
+			if (start < end)
+				return;
+
+			var viewDistanceSquared = viewDistance * viewDistance;
+			for (int j = row; j <= viewDistance; j++)
+			{
+				var dx = -j - 1;
+				var dy = -j;
+				bool blocked = false;
+
+				while (dx <= 0)
+				{
+					dx++;
+					var xMap = xLoc + dx * xx + dy * xy;
+					var yMap = yLoc + dx * yx + dy * yy;
+
+					var lSlope = (dx - 0.5) / (dy + 0.5);
+					var rSlope = (dx + 0.5) / (dy - 0.5);
+
+					if (start < rSlope)
+						continue;
+					if (end > lSlope)
+						break;
+
+					// The light is touching this square
+					if (dx * dx + dy * dy <= viewDistanceSquared && IsValidMapCoord(xMap, yMap))
+					{
+						viewSet.Add(ConvertXYToInt(xMap, yMap));
+					}
+					if (blocked)
+					{
+						if (checkBlocked(xMap, yMap, elevation))
+						{
+							newStart = rSlope;
+							continue;
+						}
+						else
+						{
+							blocked = false;
+							start = newStart;
+						}
+					}
+					else
+					{
+						if (checkBlocked(xMap, yMap, elevation) && j < viewDistance)
+						{
+							blocked = true;
+							CastLight(xLoc, yLoc, j + 1, start, lSlope, viewDistance, xx, xy, yx, yy,
+									  recursionNumber + 1, elevation, viewSet, checkBlocked);
+							newStart = rSlope;
+						}
+
+					}
+				}
+				if (blocked)
+					break;
+			}
+		}
+
+		private static readonly int[,] _octantTranslate = new int[4, 8] 
+		{
+			{1, 0, 0, -1, -1, 0, 0, 1},
+			{0, 1, -1, 0, 0, -1, 1, 0},
+			{0, 1, 1, 0, 0, -1, -1, 0},
+			{1, 0, 0, 1, -1, 0, 0, -1}
+		};
+
+		public List<Position> CalculateFOV(int xLoc, int yLoc, int viewDistance, int elevation, bool blindsight, bool trueseeing)
+		{
+			CheckBlockedFunction blockFunction = new CheckBlockedFunction(BlockTrueSeeing);
+			if (trueseeing)
+				blockFunction = new CheckBlockedFunction(BlockBlindSight);
+			if (blindsight)
+				blockFunction = new CheckBlockedFunction(BlockSight);
+
+			HashSet<int> viewSet = new HashSet<int>() {ConvertXYToInt(xLoc, yLoc) };
+
+			for (int i = 0; i < 8; i++)
+				CastLight(xLoc, yLoc, 1, 1.0, 0.0, viewDistance, _octantTranslate[0, i], _octantTranslate[1, i],
+						  _octantTranslate[2, i], _octantTranslate[3, i], 0, elevation, viewSet, blockFunction);
+
+			List<Position> returnList = new List<Position>();
+
+			foreach (int i in viewSet)
+				returnList.Add(new Position(i % _width, i / _width));
+
+			return returnList;
 		}
 
 	}
