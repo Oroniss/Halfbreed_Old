@@ -39,6 +39,21 @@ namespace Halfbreed.Entities
 
 			bool MadeValidMove = false;
 
+			System.DateTime startLOS = System.DateTime.Now;
+
+			var ViewList = GameEngine.CurrentLevel.CalculateFOV(_entity.XLoc, _entity.YLoc, 18, 
+			                                                    GameEngine.CurrentLevel.GetElevation(_entity.XLoc, 
+			                                                                                         _entity.YLoc),
+			                                                    false, false);
+			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("LOS TIME = {0}", (System.DateTime.Now - startLOS)));
+
+			if (_entity.HasTrait(EntityTraits.PLAYER))
+			{
+				foreach (Position position in ViewList)
+					GameEngine.CurrentLevel.revealTile(position.X, position.Y);
+				GameEngine.VisibleTiles = ViewList;
+			}
+
 			while (!MadeValidMove)
 			{
 				MainGraphicDisplay.UpdateGameScreen();
