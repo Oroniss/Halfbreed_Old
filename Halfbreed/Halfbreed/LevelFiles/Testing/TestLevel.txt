@@ -3,6 +3,7 @@ Wall Market Square Storage Facility - Temporary Storage
 25
 44
 -6
+0
 0.5
 ###
 0,WOODFLOOR
