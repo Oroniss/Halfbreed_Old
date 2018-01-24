@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Halfbreed
 {
 	public static class GameEngine
@@ -15,6 +16,7 @@ namespace Halfbreed
 		private static int _currentTime = 0;
 		private static int _currentDays; // TODO: Think this through a bit more carefully.
 		private static bool _quit;
+		private static List<Position> _visibleTiles = new List<Position>();
 
 		public static void SetupNewGame(Menus.NewGameParameters startingParameters)
 		{
@@ -81,6 +83,12 @@ namespace Halfbreed
 			SaveGameSummary summary = new SaveGameSummary(_gameId, _difficultySetting, _characterClass, _useAchievements,
 														  1, 1, true, System.DateTime.Now);
 			return summary;
+		}
+
+		public static List<Position> VisibleTiles
+		{
+			get { return _visibleTiles; }
+			set { _visibleTiles = value; }
 		}
 
 		public static void RunGame()
