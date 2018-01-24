@@ -26,6 +26,7 @@ namespace Halfbreed.Entities
 			inputComponent.SetManual();
 			_components[ComponentType.INPUT] = inputComponent;
 			_components[ComponentType.MOVEMENT] = new MovementComponent(this);
+			_components[ComponentType.SENSORY] = new SensoryComponent(this, 18);
 		}
 	}
 }
