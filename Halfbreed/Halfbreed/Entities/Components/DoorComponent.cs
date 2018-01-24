@@ -17,6 +17,7 @@
 			if (!isOpen)
 			{
 				_entity.AddTrait(EntityTraits.BLOCKMOVE);
+				_entity.AddTrait(EntityTraits.BLOCKALLSIGHT);
 				_entity.Symbol = '+';
 			}
 		}
@@ -46,6 +47,7 @@
 					_isOpen = false;
 					_entity.Symbol = '+';
 					_entity.AddTrait(EntityTraits.BLOCKMOVE);
+					_entity.AddTrait(EntityTraits.BLOCKALLSIGHT);
 				}
 				else
 					// TODO: Think this through a bit more carefully.
@@ -56,6 +58,7 @@
 				_isOpen = true;
 				_entity.Symbol = '-';
 				_entity.RemoveTrait(EntityTraits.BLOCKMOVE);
+				_entity.RemoveTrait(EntityTraits.BLOCKALLSIGHT);
 			}
 		}
 	}
