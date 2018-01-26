@@ -335,7 +335,7 @@ Broken Chest,PINE,36,18
 Broken Chest,PINE,42,21
 Chest,PINE,42,22
 Broken Door,PINE,32,22
-Brazier,TIN,30,5,isLit,True
+Brazier,TIN,30,5,IsLit
 Liquid,WATER,36,4
 Liquid,WATER,37,4
 Liquid,WATER,38,4
