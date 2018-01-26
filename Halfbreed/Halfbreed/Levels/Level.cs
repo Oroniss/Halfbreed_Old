@@ -25,6 +25,8 @@ namespace Halfbreed
 		private List<Entity> _entitiesFlaggedForDestruction;
 		private Dictionary<int, List<Entity>> _entityLocations;
 		private Dictionary<int, MapTileDetails> _tilesWithTileEntities;
+		private HashSet<int> _litTiles;
+		private Dictionary<LightSourceComponent, HashSet<int>> _lightSources;
 
 		public Level(string LevelFilePath)
 		{
@@ -47,6 +49,8 @@ namespace Halfbreed
 			_entitiesFlaggedForDestruction = new List<Entity>();
 			_entityLocations = new Dictionary<int, List<Entity>>();
 			_tilesWithTileEntities = new Dictionary<int, MapTileDetails>();
+			_litTiles = new HashSet<int>();
+			_lightSources = new Dictionary<LightSourceComponent, HashSet<int>>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -219,6 +223,13 @@ namespace Halfbreed
 			if (entity.HasComponent(ComponentType.TILE))
                 AddTileEntity(entity, index);
 
+			if (entity.HasComponent(ComponentType.LIGHTSOURCE))
+			{
+				var lightSource = (LightSourceComponent)entity.GetComponent(ComponentType.LIGHTSOURCE);
+				if (lightSource.IsLit)
+					UpdateLightSource(lightSource);
+			}
+
 			if (_entityLocations.ContainsKey(index))
 			{
 				_entityLocations[index].Add(entity);
@@ -232,6 +243,13 @@ namespace Halfbreed
 		{
 			if (entity.HasComponent(ComponentType.TILE))
                 RemoveTileEntity(entity, index);
+			
+			if (entity.HasComponent(ComponentType.LIGHTSOURCE))
+			{
+				var lightSource = (LightSourceComponent)entity.GetComponent(ComponentType.LIGHTSOURCE);
+				if (lightSource.IsLit)
+					UpdateLightSource(lightSource);
+			}
 
 			if (_entityLocations[index].Count == 1)
 				_entityLocations.Remove(index);
@@ -593,13 +611,23 @@ namespace Halfbreed
 			{1, 0, 0, 1, -1, 0, 0, -1}
 		};
 
+		public int Distance(int x1, int y1, int x2, int y2)
+		{
+			return (int)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
+		}
+
 		public List<Position> CalculateFOV(int xLoc, int yLoc, int viewDistance, int elevation, bool blindsight, 
 		                                   bool trueseeing, bool darkvision)
 		{
+			int modifiedViewDistance = viewDistance;
 			if (!darkvision && !blindsight)
-				viewDistance += _lightLevel;
+				modifiedViewDistance += _lightLevel;
 			if (!blindsight)
+			{
+				modifiedViewDistance += _smokeLevel;
 				viewDistance += _smokeLevel;
+			}
+			
 
 			CheckBlockedFunction blockFunction = new CheckBlockedFunction(BlockTrueSeeing);
 			if (trueseeing)
@@ -616,10 +644,52 @@ namespace Halfbreed
 			List<Position> returnList = new List<Position>();
 
 			foreach (int i in viewSet)
-				returnList.Add(new Position(i % _width, i / _width));
+				if(_litTiles.Contains(i) || Distance(xLoc, yLoc, i% _width, i / _width) < modifiedViewDistance)
+					returnList.Add(new Position(i % _width, i / _width));
 
 			return returnList;
 		}
 
+		public void UpdateLightSource(LightSourceComponent lightSource)
+		{
+			if (lightSource.IsLit)
+			{
+				var light = Illuminate(lightSource.Entity.XLoc, lightSource.Entity.YLoc, lightSource.LightRadius, 
+				                       GetElevation(lightSource.Entity.XLoc, lightSource.Entity.YLoc));
+				if (!_lightSources.ContainsKey(lightSource) || _lightSources[lightSource] != light)
+				{
+					_lightSources[lightSource] = light;
+					UpdateLitTiles();
+				}
+			}
+			else
+			{
+				if (_lightSources.ContainsKey(lightSource))
+				{
+					_lightSources.Remove(lightSource);
+                    UpdateLitTiles();
+				}
+			}
+
+		}
+		private void UpdateLitTiles()
+		{
+			_litTiles = new HashSet<int>();
+			foreach (HashSet<int> tiles in _lightSources.Values)
+				_litTiles.UnionWith(tiles);
+		}
+
+		private HashSet<int> Illuminate(int xLoc, int yLoc, int lightRadius, int elevation)
+		{
+			lightRadius += _smokeLevel;
+			var lightSet = new HashSet<int>() {ConvertXYToInt(xLoc, yLoc) };
+
+			for (int i = 0; i< 8; i++)
+				CastLight(xLoc, yLoc, 1, 1.0, 0.0, lightRadius, _octantTranslate[0, i], _octantTranslate[1, i],
+				          _octantTranslate[2, i], _octantTranslate[3, i], 0, elevation, lightSet, 
+				          new CheckBlockedFunction(BlockSight));
+
+			return lightSet;
+		}
 	}
 }
