@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Halfbreed.Entities
@@ -56,9 +56,22 @@ namespace Halfbreed.Entities
 			if (Array.IndexOf(allParams, "AddTrapComponent") != -1)
 			{
 				string trapType = allParams[Array.IndexOf(allParams, "TrapType") + 1];
-				int difficulty = Int32.Parse(allParams[Array.IndexOf(allParams, "TrapLevel") + 1]);
+				int difficulty = int.Parse(allParams[Array.IndexOf(allParams, "TrapLevel") + 1]);
 				_components[ComponentType.TRAP] = new TrapComponent(this, trapType, difficulty);
 				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("TriggerTrap");
+			}
+
+			// Light source component
+			if (Array.IndexOf(allParams, "AddLightSourceComponent") != -1)
+			{
+				string lightType = allParams[Array.IndexOf(allParams, "LightType") + 1];
+				int radius = int.Parse(allParams[Array.IndexOf(allParams, "Radius") + 1]);
+				int durationRemaining = int.Parse(allParams[Array.IndexOf(allParams, "DurationRemaining") + 1]);
+				bool permanent = (Array.IndexOf(allParams, "PermanentLight") != -1);
+				bool lit = (Array.IndexOf(allParams, "IsLit") != -1);
+
+				_components[ComponentType.LIGHTSOURCE] = new LightSourceComponent(this, lightType, radius, durationRemaining,
+																				  permanent, lit);
 			}
 		}
 
@@ -186,6 +199,17 @@ namespace Halfbreed.Entities
 		public void Update(int currentTime)
 		{
 			// TODO: Go through effects and check if any expire.
+
+			if (HasComponent(ComponentType.LIGHTSOURCE))
+			{
+				var lightSource = (LightSourceComponent)GetComponent(ComponentType.LIGHTSOURCE);
+				if (lightSource.IsLit)
+				{
+					lightSource.DecreaseDuration(1);
+					lightSource.UpdateLitTiles(GameEngine.CurrentLevel);
+				}
+			}
+
 			if (HasComponent(ComponentType.INPUT))
 			{
 				InputComponent inputComponent = (InputComponent)_components[ComponentType.INPUT];
