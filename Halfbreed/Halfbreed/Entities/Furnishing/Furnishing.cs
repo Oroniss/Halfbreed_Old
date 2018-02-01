@@ -28,7 +28,10 @@ namespace Halfbreed.Entities
 				AddTrait(trait);
 
 			if (template.HasTile)
-				_components[ComponentType.TILE] = new TileComponent(this, template.TileTypeName);
+			{
+				_hasTile = true;
+				_maptile = StaticData.GetMapTileDetails((Levels.TileType)Enum.Parse(typeof(Levels.TileType), template.TileTypeName));
+			}
 
 			_components[ComponentType.INTERACTIBLE] = new InteractibleComponent(this);
 
