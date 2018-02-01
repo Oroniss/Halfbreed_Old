@@ -24,9 +24,9 @@ namespace Halfbreed
 		private List<Entity> _entities;
 		private List<Entity> _entitiesFlaggedForDestruction;
 		private Dictionary<int, List<Entity>> _entityLocations;
-		private Dictionary<int, MapTileDetails> _tilesWithTileEntities;
 		private HashSet<int> _litTiles;
 		private Dictionary<LightSourceComponent, HashSet<int>> _lightSources;
+		private List<Entity> _concealedEntities;
 
 		public Level(string LevelFilePath)
 		{
@@ -48,9 +48,9 @@ namespace Halfbreed
 			_entities = new List<Entity>();
 			_entitiesFlaggedForDestruction = new List<Entity>();
 			_entityLocations = new Dictionary<int, List<Entity>>();
-			_tilesWithTileEntities = new Dictionary<int, MapTileDetails>();
 			_litTiles = new HashSet<int>();
 			_lightSources = new Dictionary<LightSourceComponent, HashSet<int>>();
+			_concealedEntities = new List<Entity>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -180,16 +180,30 @@ namespace Halfbreed
 		public Colors GetBGColor(int x, int y)
 		{
 			int index = ConvertXYToInt(x, y);
-			if (_tilesWithTileEntities.ContainsKey(index))
-				return _tilesWithTileEntities[index].BGColor;
+			if (_entityLocations.ContainsKey(index))
+			{
+				foreach (Entity entity in _entityLocations[index])
+				{
+					if (entity.HasTile)
+						return entity.TileDetails.BGColor;
+				}
+
+			}
 			return _mapGrid[index].BGColor;
 		}
 
 		public Colors GetFogColor(int x, int y)
 		{
 			int index = ConvertXYToInt(x, y);
-			if (_tilesWithTileEntities.ContainsKey(index))
-				return _tilesWithTileEntities[index].FogColor;
+			if (_entityLocations.ContainsKey(index))
+			{
+				foreach (Entity entity in _entityLocations[index])
+				{
+					if (entity.HasTile)
+						return entity.TileDetails.FogColor;
+				}
+
+			}
 			return _mapGrid[index].FogColor;
 		}
 
@@ -208,10 +222,14 @@ namespace Halfbreed
 
 			AddAtLocation(entity, index);
 			RegisterEntity(entity);
+			if (!entity.PlayerSpotted)
+				AddConcealedEntity(entity);
 		}
 
 		public void RemoveEntity(Entity entity)
 		{
+			if (!entity.PlayerSpotted)
+				RemoveConcealedEntity(entity);
 			int index = ConvertXYToInt(entity.XLoc, entity.YLoc);
 
 			RemoveFromLocation(entity, index);
@@ -220,9 +238,6 @@ namespace Halfbreed
 
 		private void AddAtLocation(Entity entity, int index)
 		{
-			if (entity.HasComponent(ComponentType.TILE))
-                AddTileEntity(entity, index);
-
 			if (entity.HasComponent(ComponentType.LIGHTSOURCE))
 			{
 				var lightSource = (LightSourceComponent)entity.GetComponent(ComponentType.LIGHTSOURCE);
@@ -241,9 +256,6 @@ namespace Halfbreed
 
 		private void RemoveFromLocation(Entity entity, int index)
 		{
-			if (entity.HasComponent(ComponentType.TILE))
-                RemoveTileEntity(entity, index);
-			
 			if (entity.HasComponent(ComponentType.LIGHTSOURCE))
 			{
 				var lightSource = (LightSourceComponent)entity.GetComponent(ComponentType.LIGHTSOURCE);
@@ -260,16 +272,6 @@ namespace Halfbreed
 			}
 		}
 
-		private void AddTileEntity(Entity entity, int index)
-		{
-			_tilesWithTileEntities[index] = ((TileComponent)entity.GetComponent(ComponentType.TILE)).MapTileDetails;
-		}
-
-		private void RemoveTileEntity(Entity entity, int index)
-		{
-			_tilesWithTileEntities.Remove(index);
-		}
-
 		private void RegisterEntity(Entity entity)
 		{
 			_entities.Add(entity);
@@ -278,6 +280,16 @@ namespace Halfbreed
 		private void DeregisterEntity(Entity entity)
 		{
 			_entities.Remove(entity);
+		}
+
+		private void AddConcealedEntity(Entity entity)
+		{
+			_concealedEntities.Add(entity);
+		}
+
+		private void RemoveConcealedEntity(Entity entity)
+		{
+			_concealedEntities.Remove(entity);
 		}
 
 		private int CalculateElevationDifference(int originIndex, int destinationIndex)
@@ -419,10 +431,15 @@ namespace Halfbreed
 
 		private MapTileDetails GetTileDetails(int index)
 		{
-			if (_tilesWithTileEntities.ContainsKey(index))
-				return _tilesWithTileEntities[index];
-			else
-				return _mapGrid[index];
+			if (_entityLocations.ContainsKey(index))
+			{
+				foreach (Entity entity in _entityLocations[index])
+				{
+					if (entity.HasTile)
+						return entity.TileDetails;
+				}
+			}
+			return _mapGrid[index];
 		}
 
 		public void ActivateEntities(int currentTime)
@@ -611,40 +628,80 @@ namespace Halfbreed
 			{1, 0, 0, 1, -1, 0, 0, -1}
 		};
 
+		// LOS is not symmetric, so the "viewing" entity needs to be x1,y1.
+		public bool InSight(int x1, int y1, int elevation, int x2, int y2, int viewDistance, bool blindsight,
+							bool trueSeeing, bool darkVision)
+		{
+			int actualViewDistance = ApplySmokeModifier(viewDistance, blindsight);
+			if (!_litTiles.Contains(ConvertXYToInt(x2, y2)))
+				actualViewDistance = ApplyDarknessModifier(actualViewDistance, darkVision, blindsight);
+			CheckBlockedFunction blockFunction = getBlockSightFunction(trueSeeing, blindsight);
+
+			if (Distance(x1, y1, x2, y2) > actualViewDistance)
+				return false;
+
+			var octant = 0;
+			if (Math.Abs(y1 - y2) < Math.Abs(x1 - x2))
+				octant += 1;
+			if (x2 - x1 > 0)
+				octant = 3 - octant;
+			if (y2 - y1 > 0)
+				octant = 7 - octant;
+
+			var viewSet = new HashSet<int>() { ConvertXYToInt(x1, y1)};
+
+            CastLight(x1, y1, 1, 1.0, 0.0, actualViewDistance, _octantTranslate[0, octant], _octantTranslate[1, octant],
+					  _octantTranslate[2, octant], _octantTranslate[3, octant], 0, elevation, viewSet, blockFunction);
+
+			return viewSet.Contains(ConvertXYToInt(x2, y2));
+		}
+
+		private CheckBlockedFunction getBlockSightFunction(bool trueSeeing, bool blindSight)
+		{
+			if (trueSeeing)
+				return new CheckBlockedFunction(BlockBlindSight);
+			if (blindSight)
+				return new CheckBlockedFunction(BlockSight);
+			return new CheckBlockedFunction(BlockTrueSeeing);
+		}
+
+		private int ApplyDarknessModifier(int viewDistance, bool darkVision, bool blindsight)
+		{
+			if (darkVision || blindsight)
+				return viewDistance;
+			return viewDistance += _lightLevel;
+		}
+
+		private int ApplySmokeModifier(int viewdistance, bool blindsight)
+		{
+			if (blindsight)
+				return viewdistance;
+			return viewdistance += _smokeLevel;
+		}
+
 		public int Distance(int x1, int y1, int x2, int y2)
 		{
 			return (int)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));
 		}
 
 		public List<Position> CalculateFOV(int xLoc, int yLoc, int viewDistance, int elevation, bool blindsight, 
-		                                   bool trueseeing, bool darkvision)
+		                                   bool trueSeeing, bool darkvision)
 		{
-			int modifiedViewDistance = viewDistance;
-			if (!darkvision && !blindsight)
-				modifiedViewDistance += _lightLevel;
-			if (!blindsight)
-			{
-				modifiedViewDistance += _smokeLevel;
-				viewDistance += _smokeLevel;
-			}
-			
-
-			CheckBlockedFunction blockFunction = new CheckBlockedFunction(BlockTrueSeeing);
-			if (trueseeing)
-				blockFunction = new CheckBlockedFunction(BlockBlindSight);
-			if (blindsight)
-				blockFunction = new CheckBlockedFunction(BlockSight);
+			int actualViewDistance = ApplyDarknessModifier(viewDistance, darkvision, blindsight);
+			actualViewDistance = ApplySmokeModifier(actualViewDistance, blindsight);
+			int lightDistance = ApplySmokeModifier(viewDistance, blindsight);
+			CheckBlockedFunction blockFunction = getBlockSightFunction(trueSeeing, blindsight);
 
 			HashSet<int> viewSet = new HashSet<int>() {ConvertXYToInt(xLoc, yLoc) };
 
 			for (int i = 0; i < 8; i++)
-				CastLight(xLoc, yLoc, 1, 1.0, 0.0, viewDistance, _octantTranslate[0, i], _octantTranslate[1, i],
+				CastLight(xLoc, yLoc, 1, 1.0, 0.0, lightDistance, _octantTranslate[0, i], _octantTranslate[1, i],
 						  _octantTranslate[2, i], _octantTranslate[3, i], 0, elevation, viewSet, blockFunction);
 
 			List<Position> returnList = new List<Position>();
 
 			foreach (int i in viewSet)
-				if(_litTiles.Contains(i) || Distance(xLoc, yLoc, i% _width, i / _width) < modifiedViewDistance)
+				if(_litTiles.Contains(i) || Distance(xLoc, yLoc, i% _width, i / _width) < actualViewDistance)
 					returnList.Add(new Position(i % _width, i / _width));
 
 			return returnList;
@@ -690,6 +747,29 @@ namespace Halfbreed
 				          new CheckBlockedFunction(BlockSight));
 
 			return lightSet;
+		}
+
+		public void ScanForConcealedEntities(Entity entity, int viewDistance, int detectionLevel)
+		{
+			var blindSight = entity.HasTrait(EntityTraits.BLINDSIGHT);
+			var darkVision = entity.HasTrait(EntityTraits.DARKVISION);
+			var trueSeeing = entity.HasTrait(EntityTraits.TRUESEEING);
+
+			for (int i = _concealedEntities.Count - 1; i >= 0; i--)
+			{
+				if (InSight(entity.XLoc, entity.YLoc, GetElevation(entity.XLoc, entity.YLoc), _concealedEntities[i].XLoc, 
+							_concealedEntities[i].YLoc, viewDistance, blindSight, trueSeeing, darkVision))
+				{
+					// TODO: This needs to be a proper check - should likely get placed on the concealed component in the end.
+					if (Distance(entity.XLoc, entity.YLoc, _concealedEntities[i].XLoc, _concealedEntities[i].YLoc) +
+					  _concealedEntities[i].ConcealedComponent.ConcealmentLevel <= detectionLevel)
+					{
+						_concealedEntities[i].ConcealedComponent.Reveal();
+						_concealedEntities[i].PlayerSpotted = true;
+						_concealedEntities.RemoveAt(i);
+					}
+				}
+			}
 		}
 	}
 }
