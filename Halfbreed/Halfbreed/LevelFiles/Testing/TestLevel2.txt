@@ -1,0 +1,867 @@
+Wall Market Square Storage Facility - Long-Term Storage
+48
+56
+-8
+0.5
+###
+0,WOOD_FLOOR
+1,WOOD_WALL
+###
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,0,0,1,1,0,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,1,1,1,1
+1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1
+1,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,1,1,1,1
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+###
+entityType,Door 2,xLoc,4,yLoc,39
+entityType,Door 1,xLoc,12,yLoc,28
+entityType,Door 1,xLoc,48,yLoc,28
+entityType,Door 1,xLoc,48,yLoc,19
+entityType,Door 2,xLoc,50,yLoc,14
+entityType,Door 1,xLoc,43,yLoc,10
+entityType,Door 1,xLoc,47,yLoc,2
+entityType,Broken Door 1,xLoc,27,yLoc,10
+entityType,Broken Door 1,xLoc,31,yLoc,2
+entityType,Broken Door 1,xLoc,35,yLoc,10
+entityType,Broken Door 1,xLoc,39,yLoc,2
+entityType,Broken Door 1,xLoc,51,yLoc,10
+entityType,Ruined Sack,xLoc,1,yLoc,31
+entityType,Ruined Sack,xLoc,2,yLoc,31
+entityType,Ruined Sack,xLoc,2,yLoc,32
+entityType,Ruined Sack,xLoc,3,yLoc,32
+entityType,Ruined Sack,xLoc,4,yLoc,32
+entityType,Ruined Sack,xLoc,5,yLoc,32
+entityType,Ruined Sack,xLoc,5,yLoc,33
+entityType,Ruined Sack,xLoc,6,yLoc,33
+entityType,Ruined Sack,xLoc,6,yLoc,34
+entityType,Ruined Sack,xLoc,6,yLoc,35
+entityType,Pile of Sacks,xLoc,3,yLoc,31
+entityType,Pile of Sacks,xLoc,4,yLoc,31
+entityType,Pile of Sacks,xLoc,5,yLoc,31
+entityType,Pile of Sacks,xLoc,6,yLoc,31
+entityType,Pile of Sacks,xLoc,7,yLoc,31
+entityType,Pile of Sacks,xLoc,6,yLoc,32
+entityType,Pile of Sacks,xLoc,7,yLoc,32
+entityType,Pile of Sacks,xLoc,7,yLoc,33
+entityType,Pile of Sacks,xLoc,7,yLoc,34
+entityType,Pile of Sacks,xLoc,7,yLoc,35
+entityType,Pile of Sacks,xLoc,4,yLoc,30
+entityType,Pile of Sacks,xLoc,4,yLoc,29
+entityType,Pile of Sacks,xLoc,4,yLoc,28
+entityType,Pile of Sacks,xLoc,5,yLoc,28
+entityType,Pile of Sacks,xLoc,6,yLoc,28
+entityType,Pile of Sacks,xLoc,7,yLoc,28
+entityType,Pile of Sacks,xLoc,8,yLoc,28
+entityType,Pile of Sacks,xLoc,9,yLoc,28
+entityType,Pile of Sacks,xLoc,10,yLoc,28
+entityType,Pile of Sacks,xLoc,11,yLoc,28
+entityType,Pile of Sacks,xLoc,13,yLoc,28
+entityType,Pile of Sacks,xLoc,14,yLoc,28
+entityType,Pile of Sacks,xLoc,13,yLoc,29
+entityType,Pile of Sacks,xLoc,14,yLoc,29
+entityType,Pile of Sacks,xLoc,15,yLoc,29
+entityType,Pile of Sacks,xLoc,13,yLoc,30
+entityType,Pile of Sacks,xLoc,14,yLoc,30
+entityType,Pile of Sacks,xLoc,15,yLoc,30
+entityType,Pile of Sacks,xLoc,13,yLoc,31
+entityType,Pile of Sacks,xLoc,13,yLoc,32
+entityType,Pile of Sacks,xLoc,14,yLoc,32
+entityType,Pile of Sacks,xLoc,13,yLoc,33
+entityType,Pile of Sacks,xLoc,14,yLoc,33
+entityType,Pile of Sacks,xLoc,15,yLoc,33
+entityType,Pile of Sacks,xLoc,13,yLoc,34
+entityType,Pile of Sacks,xLoc,14,yLoc,34
+entityType,Pile of Sacks,xLoc,15,yLoc,34
+entityType,Pile of Sacks,xLoc,13,yLoc,35
+entityType,Pile of Sacks,xLoc,14,yLoc,35
+entityType,Pile of Sacks,xLoc,15,yLoc,35
+entityType,Pile of Sacks,xLoc,13,yLoc,36
+entityType,Pile of Sacks,xLoc,14,yLoc,36
+entityType,Pile of Sacks,xLoc,13,yLoc,37
+entityType,Pile of Sacks,xLoc,14,yLoc,37
+entityType,Pile of Sacks,xLoc,13,yLoc,39
+entityType,Pile of Sacks,xLoc,13,yLoc,40
+entityType,Ruined Sack,xLoc,14,yLoc,31
+entityType,Ruined Sack,xLoc,15,yLoc,31
+entityType,Ruined Sack,xLoc,16,yLoc,31
+entityType,Ruined Sack,xLoc,16,yLoc,30
+entityType,Ruined Sack,xLoc,21,yLoc,30
+entityType,Ruined Sack,xLoc,15,yLoc,32
+entityType,Ruined Sack,xLoc,17,yLoc,32
+entityType,Ruined Sack,xLoc,16,yLoc,33
+entityType,Ruined Sack,xLoc,16,yLoc,34
+entityType,Ruined Sack,xLoc,16,yLoc,35
+entityType,Ruined Sack,xLoc,16,yLoc,36
+entityType,Ruined Sack,xLoc,15,yLoc,36
+entityType,Ruined Sack,xLoc,15,yLoc,37
+entityType,Ruined Sack,xLoc,13,yLoc,38
+entityType,Ruined Sack,xLoc,14,yLoc,38
+entityType,Ruined Sack,xLoc,14,yLoc,39
+entityType,Ruined Sack,xLoc,15,yLoc,39
+entityType,Ruined Sack,xLoc,14,yLoc,40
+entityType,Ruined Sack,xLoc,15,yLoc,40
+entityType,Ruined Sack,xLoc,11,yLoc,41
+entityType,Ruined Sack,xLoc,12,yLoc,41
+entityType,Ruined Sack,xLoc,13,yLoc,41
+entityType,Ruined Sack,xLoc,14,yLoc,41
+entityType,Broken Barrel,xLoc,15,yLoc,28
+entityType,Broken Barrel,xLoc,16,yLoc,28
+entityType,Broken Barrel,xLoc,16,yLoc,29
+entityType,Broken Barrel,xLoc,17,yLoc,28
+entityType,Broken Barrel,xLoc,17,yLoc,29
+entityType,Broken Barrel,xLoc,17,yLoc,30
+entityType,Barrel,xLoc,17,yLoc,31
+entityType,Broken Barrel,xLoc,18,yLoc,31
+entityType,Barrel,xLoc,19,yLoc,31
+entityType,Broken Barrel,xLoc,20,yLoc,31
+entityType,Broken Barrel,xLoc,21,yLoc,31
+entityType,Broken Barrel,xLoc,21,yLoc,28
+entityType,Broken Barrel,xLoc,21,yLoc,29
+entityType,Broken Barrel,xLoc,22,yLoc,28
+entityType,Barrel,xLoc,22,yLoc,29
+entityType,Barrel,xLoc,22,yLoc,30
+entityType,Broken Barrel,xLoc,23,yLoc,28
+entityType,Broken Barrel,xLoc,23,yLoc,29
+entityType,Barrel,xLoc,23,yLoc,30
+entityType,Broken Barrel,xLoc,24,yLoc,28
+entityType,Broken Barrel,xLoc,24,yLoc,29
+entityType,Broken Barrel,xLoc,25,yLoc,28
+entityType,Barrel,xLoc,1,yLoc,40
+entityType,Broken Barrel,xLoc,1,yLoc,41
+entityType,Broken Barrel,xLoc,1,yLoc,42
+entityType,Broken Barrel,xLoc,1,yLoc,43
+entityType,Broken Barrel,xLoc,1,yLoc,44
+entityType,Broken Barrel,xLoc,1,yLoc,45
+entityType,Broken Barrel,xLoc,2,yLoc,40
+entityType,Broken Barrel,xLoc,2,yLoc,41
+entityType,Barrel,xLoc,2,yLoc,42
+entityType,Broken Barrel,xLoc,2,yLoc,43
+entityType,Broken Barrel,xLoc,2,yLoc,44
+entityType,Barrel,xLoc,2,yLoc,45
+entityType,Broken Barrel,xLoc,3,yLoc,40
+entityType,Broken Barrel,xLoc,3,yLoc,41
+entityType,Broken Barrel,xLoc,3,yLoc,42
+entityType,Broken Barrel,xLoc,3,yLoc,43
+entityType,Broken Barrel,xLoc,3,yLoc,44
+entityType,Broken Barrel,xLoc,3,yLoc,45
+entityType,Broken Barrel,xLoc,4,yLoc,44
+entityType,Broken Barrel,xLoc,4,yLoc,45
+entityType,Broken Barrel,xLoc,5,yLoc,44
+entityType,Barrel,xLoc,5,yLoc,45
+entityType,Barrel,xLoc,6,yLoc,44
+entityType,Broken Barrel,xLoc,6,yLoc,45
+entityType,Broken Barrel,xLoc,7,yLoc,44
+entityType,Broken Barrel,xLoc,7,yLoc,45
+entityType,Broken Barrel,xLoc,6,yLoc,40
+entityType,Barrel,xLoc,7,yLoc,40
+entityType,Broken Barrel,xLoc,8,yLoc,41
+entityType,Broken Barrel,xLoc,9,yLoc,43
+entityType,Pile of Sacks,xLoc,14,yLoc,46
+entityType,Pile of Sacks,xLoc,15,yLoc,46
+entityType,Pile of Sacks,xLoc,16,yLoc,46
+entityType,Pile of Sacks,xLoc,16,yLoc,45
+entityType,Pile of Sacks,xLoc,17,yLoc,45
+entityType,Pile of Sacks,xLoc,18,yLoc,45
+entityType,Pile of Sacks,xLoc,19,yLoc,43
+entityType,Pile of Sacks,xLoc,19,yLoc,44
+entityType,Pile of Sacks,xLoc,19,yLoc,45
+entityType,Pile of Sacks,xLoc,19,yLoc,46
+entityType,Pile of Sacks,xLoc,20,yLoc,43
+entityType,Pile of Sacks,xLoc,20,yLoc,44
+entityType,Pile of Sacks,xLoc,20,yLoc,45
+entityType,Pile of Sacks,xLoc,20,yLoc,46
+entityType,Pile of Sacks,xLoc,21,yLoc,45
+entityType,Pile of Sacks,xLoc,21,yLoc,46
+entityType,Ruined Sack,xLoc,13,yLoc,45
+entityType,Ruined Sack,xLoc,14,yLoc,45
+entityType,Ruined Sack,xLoc,15,yLoc,45
+entityType,Ruined Sack,xLoc,15,yLoc,44
+entityType,Ruined Sack,xLoc,16,yLoc,44
+entityType,Ruined Sack,xLoc,17,yLoc,43
+entityType,Ruined Sack,xLoc,17,yLoc,44
+entityType,Ruined Sack,xLoc,18,yLoc,43
+entityType,Ruined Sack,xLoc,18,yLoc,44
+entityType,Ruined Sack,xLoc,21,yLoc,44
+entityType,Ruined Sack,xLoc,22,yLoc,44
+entityType,Ruined Sack,xLoc,22,yLoc,45
+entityType,Ruined Sack,xLoc,23,yLoc,45
+entityType,Ruined Sack,xLoc,24,yLoc,45
+entityType,Ruined Sack,xLoc,18,yLoc,40
+entityType,Ruined Sack,xLoc,18,yLoc,41
+entityType,Ruined Sack,xLoc,19,yLoc,41
+entityType,Ruined Sack,xLoc,19,yLoc,42
+entityType,Ruined Sack,xLoc,20,yLoc,41
+entityType,Ruined Sack,xLoc,20,yLoc,42
+entityType,Ruined Sack,xLoc,21,yLoc,41
+entityType,Ruined Sack,xLoc,20,yLoc,34
+entityType,Ruined Sack,xLoc,21,yLoc,37
+entityType,Ruined Sack,xLoc,22,yLoc,35
+entityType,Ruined Sack,xLoc,23,yLoc,33
+entityType,Ruined Sack,xLoc,24,yLoc,32
+entityType,Ruined Sack,xLoc,24,yLoc,33
+entityType,Ruined Sack,xLoc,25,yLoc,31
+entityType,Ruined Sack,xLoc,25,yLoc,32
+entityType,Ruined Sack,xLoc,25,yLoc,33
+entityType,Ruined Sack,xLoc,26,yLoc,31
+entityType,Ruined Sack,xLoc,29,yLoc,30
+entityType,Broken Barrel,xLoc,18,yLoc,38
+entityType,Barrel,xLoc,18,yLoc,39
+entityType,Barrel,xLoc,19,yLoc,38
+entityType,Broken Barrel,xLoc,19,yLoc,39
+entityType,Broken Barrel,xLoc,19,yLoc,40
+entityType,Barrel,xLoc,20,yLoc,38
+entityType,Barrel,xLoc,20,yLoc,39
+entityType,Broken Barrel,xLoc,20,yLoc,40
+entityType,Broken Barrel,xLoc,21,yLoc,39
+entityType,Barrel,xLoc,21,yLoc,40
+entityType,Broken Barrel,xLoc,23,yLoc,41
+entityType,Broken Barrel,xLoc,24,yLoc,46
+entityType,Broken Barrel,xLoc,25,yLoc,46
+entityType,Barrel,xLoc,26,yLoc,46
+entityType,Broken Barrel,xLoc,25,yLoc,42
+entityType,Barrel,xLoc,25,yLoc,43
+entityType,Broken Barrel,xLoc,26,yLoc,43
+entityType,Broken Barrel,xLoc,27,yLoc,43
+entityType,Barrel,xLoc,24,yLoc,37
+entityType,Barrel,xLoc,24,yLoc,38
+entityType,Broken Barrel,xLoc,24,yLoc,39
+entityType,Broken Barrel,xLoc,25,yLoc,36
+entityType,Broken Barrel,xLoc,25,yLoc,37
+entityType,Broken Barrel,xLoc,25,yLoc,38
+entityType,Broken Barrel,xLoc,25,yLoc,39
+entityType,Barrel,xLoc,26,yLoc,36
+entityType,Broken Barrel,xLoc,26,yLoc,38
+entityType,Broken Barrel,xLoc,26,yLoc,39
+entityType,Broken Barrel,xLoc,26,yLoc,40
+entityType,Broken Barrel,xLoc,27,yLoc,35
+entityType,Broken Barrel,xLoc,27,yLoc,36
+entityType,Barrel,xLoc,27,yLoc,40
+entityType,Broken Barrel,xLoc,27,yLoc,41
+entityType,Barrel,xLoc,28,yLoc,34
+entityType,Broken Barrel,xLoc,28,yLoc,35
+entityType,Broken Barrel,xLoc,28,yLoc,36
+entityType,Broken Barrel,xLoc,28,yLoc,40
+entityType,Barrel,xLoc,28,yLoc,41
+entityType,Broken Barrel,xLoc,29,yLoc,34
+entityType,Broken Barrel,xLoc,29,yLoc,35
+entityType,Barrel,xLoc,29,yLoc,36
+entityType,Barrel,xLoc,29,yLoc,40
+entityType,Broken Barrel,xLoc,29,yLoc,41
+entityType,Broken Barrel,xLoc,30,yLoc,35
+entityType,Barrel,xLoc,30,yLoc,36
+entityType,Broken Barrel,xLoc,30,yLoc,37
+entityType,Broken Barrel,xLoc,30,yLoc,38
+entityType,Broken Barrel,xLoc,30,yLoc,39
+entityType,Broken Barrel,xLoc,30,yLoc,40
+entityType,Barrel,xLoc,31,yLoc,35
+entityType,Barrel,xLoc,31,yLoc,36
+entityType,Broken Barrel,xLoc,31,yLoc,37
+entityType,Pile of Sacks,xLoc,34,yLoc,46
+entityType,Pile of Sacks,xLoc,35,yLoc,46
+entityType,Pile of Sacks,xLoc,36,yLoc,46
+entityType,Pile of Sacks,xLoc,37,yLoc,45
+entityType,Pile of Sacks,xLoc,38,yLoc,45
+entityType,Pile of Sacks,xLoc,39,yLoc,43
+entityType,Pile of Sacks,xLoc,39,yLoc,44
+entityType,Pile of Sacks,xLoc,39,yLoc,45
+entityType,Pile of Sacks,xLoc,39,yLoc,46
+entityType,Pile of Sacks,xLoc,40,yLoc,42
+entityType,Pile of Sacks,xLoc,40,yLoc,44
+entityType,Pile of Sacks,xLoc,40,yLoc,45
+entityType,Pile of Sacks,xLoc,40,yLoc,46
+entityType,Pile of Sacks,xLoc,41,yLoc,42
+entityType,Pile of Sacks,xLoc,41,yLoc,43
+entityType,Pile of Sacks,xLoc,41,yLoc,44
+entityType,Pile of Sacks,xLoc,41,yLoc,45
+entityType,Pile of Sacks,xLoc,41,yLoc,46
+entityType,Pile of Sacks,xLoc,42,yLoc,43
+entityType,Pile of Sacks,xLoc,42,yLoc,44
+entityType,Pile of Sacks,xLoc,42,yLoc,45
+entityType,Pile of Sacks,xLoc,43,yLoc,42
+entityType,Pile of Sacks,xLoc,43,yLoc,43
+entityType,Pile of Sacks,xLoc,43,yLoc,44
+entityType,Pile of Sacks,xLoc,43,yLoc,45
+entityType,Pile of Sacks,xLoc,44,yLoc,44
+entityType,Pile of Sacks,xLoc,44,yLoc,45
+entityType,Pile of Sacks,xLoc,44,yLoc,46
+entityType,Pile of Sacks,xLoc,45,yLoc,46
+entityType,Ruined Sack,xLoc,30,yLoc,43
+entityType,Ruined Sack,xLoc,30,yLoc,46
+entityType,Ruined Sack,xLoc,31,yLoc,46
+entityType,Ruined Sack,xLoc,32,yLoc,45
+entityType,Ruined Sack,xLoc,33,yLoc,45
+entityType,Ruined Sack,xLoc,34,yLoc,45
+entityType,Ruined Sack,xLoc,35,yLoc,45
+entityType,Ruined Sack,xLoc,36,yLoc,44
+entityType,Ruined Sack,xLoc,36,yLoc,45
+entityType,Ruined Sack,xLoc,37,yLoc,44
+entityType,Ruined Sack,xLoc,38,yLoc,42
+entityType,Ruined Sack,xLoc,38,yLoc,43
+entityType,Ruined Sack,xLoc,38,yLoc,44
+entityType,Ruined Sack,xLoc,39,yLoc,41
+entityType,Ruined Sack,xLoc,39,yLoc,42
+entityType,Ruined Sack,xLoc,40,yLoc,41
+entityType,Ruined Sack,xLoc,40,yLoc,43
+entityType,Ruined Sack,xLoc,41,yLoc,41
+entityType,Ruined Sack,xLoc,42,yLoc,41
+entityType,Ruined Sack,xLoc,43,yLoc,41
+entityType,Ruined Sack,xLoc,44,yLoc,42
+entityType,Ruined Sack,xLoc,44,yLoc,43
+entityType,Ruined Sack,xLoc,45,yLoc,43
+entityType,Ruined Sack,xLoc,45,yLoc,44
+entityType,Ruined Sack,xLoc,45,yLoc,45
+entityType,Ruined Sack,xLoc,46,yLoc,44
+entityType,Ruined Sack,xLoc,46,yLoc,45
+entityType,Ruined Sack,xLoc,46,yLoc,46
+entityType,Ruined Sack,xLoc,47,yLoc,45
+entityType,Ruined Sack,xLoc,48,yLoc,40
+entityType,Ruined Sack,xLoc,49,yLoc,40
+entityType,Ruined Sack,xLoc,49,yLoc,41
+entityType,Ruined Sack,xLoc,50,yLoc,41
+entityType,Ruined Sack,xLoc,50,yLoc,42
+entityType,Ruined Sack,xLoc,50,yLoc,43
+entityType,Ruined Sack,xLoc,49,yLoc,44
+entityType,Pile of Sacks,xLoc,50,yLoc,40
+entityType,Pile of Sacks,xLoc,51,yLoc,40
+entityType,Pile of Sacks,xLoc,51,yLoc,41
+entityType,Pile of Sacks,xLoc,51,yLoc,42
+entityType,Pile of Sacks,xLoc,51,yLoc,43
+entityType,Pile of Sacks,xLoc,50,yLoc,44
+entityType,Pile of Sacks,xLoc,51,yLoc,44
+entityType,Ruined Sack,xLoc,33,yLoc,39
+entityType,Ruined Sack,xLoc,33,yLoc,40
+entityType,Ruined Sack,xLoc,33,yLoc,41
+entityType,Broken Barrel,xLoc,34,yLoc,38
+entityType,Barrel,xLoc,34,yLoc,39
+entityType,Barrel,xLoc,34,yLoc,40
+entityType,Broken Barrel,xLoc,34,yLoc,41
+entityType,Broken Barrel,xLoc,35,yLoc,38
+entityType,Barrel,xLoc,35,yLoc,39
+entityType,Broken Barrel,xLoc,35,yLoc,40
+entityType,Broken Barrel,xLoc,35,yLoc,41
+entityType,Broken Barrel,xLoc,36,yLoc,38
+entityType,Broken Barrel,xLoc,36,yLoc,39
+entityType,Barrel,xLoc,36,yLoc,40
+entityType,Broken Barrel,xLoc,37,yLoc,39
+entityType,Barrel,xLoc,37,yLoc,40
+entityType,Barrel,xLoc,40,yLoc,37
+entityType,Broken Barrel,xLoc,41,yLoc,36
+entityType,Broken Barrel,xLoc,41,yLoc,37
+entityType,Broken Barrel,xLoc,41,yLoc,38
+entityType,Broken Barrel,xLoc,42,yLoc,35
+entityType,Broken Barrel,xLoc,42,yLoc,36
+entityType,Broken Barrel,xLoc,42,yLoc,38
+entityType,Broken Barrel,xLoc,43,yLoc,35
+entityType,Broken Barrel,xLoc,43,yLoc,36
+entityType,Broken Barrel,xLoc,43,yLoc,37
+entityType,Broken Barrel,xLoc,43,yLoc,38
+entityType,Barrel,xLoc,44,yLoc,35
+entityType,Barrel,xLoc,44,yLoc,36
+entityType,Broken Barrel,xLoc,44,yLoc,37
+entityType,Barrel,xLoc,45,yLoc,36
+entityType,Broken Barrel,xLoc,45,yLoc,37
+entityType,Pile of Sacks,xLoc,31,yLoc,28
+entityType,Pile of Sacks,xLoc,32,yLoc,28
+entityType,Pile of Sacks,xLoc,33,yLoc,28
+entityType,Pile of Sacks,xLoc,33,yLoc,29
+entityType,Pile of Sacks,xLoc,33,yLoc,32
+entityType,Pile of Sacks,xLoc,34,yLoc,28
+entityType,Pile of Sacks,xLoc,34,yLoc,29
+entityType,Pile of Sacks,xLoc,34,yLoc,30
+entityType,Pile of Sacks,xLoc,34,yLoc,31
+entityType,Pile of Sacks,xLoc,34,yLoc,33
+entityType,Pile of Sacks,xLoc,35,yLoc,28
+entityType,Pile of Sacks,xLoc,35,yLoc,30
+entityType,Pile of Sacks,xLoc,35,yLoc,31
+entityType,Pile of Sacks,xLoc,35,yLoc,32
+entityType,Pile of Sacks,xLoc,35,yLoc,33
+entityType,Pile of Sacks,xLoc,36,yLoc,28
+entityType,Pile of Sacks,xLoc,36,yLoc,30
+entityType,Pile of Sacks,xLoc,43,yLoc,28
+entityType,Pile of Sacks,xLoc,44,yLoc,28
+entityType,Pile of Sacks,xLoc,44,yLoc,29
+entityType,Pile of Sacks,xLoc,45,yLoc,28
+entityType,Ruined Sack,xLoc,31,yLoc,29
+entityType,Ruined Sack,xLoc,32,yLoc,29
+entityType,Ruined Sack,xLoc,32,yLoc,30
+entityType,Ruined Sack,xLoc,32,yLoc,32
+entityType,Ruined Sack,xLoc,33,yLoc,30
+entityType,Ruined Sack,xLoc,33,yLoc,31
+entityType,Ruined Sack,xLoc,33,yLoc,33
+entityType,Ruined Sack,xLoc,35,yLoc,29
+entityType,Ruined Sack,xLoc,36,yLoc,29
+entityType,Ruined Sack,xLoc,37,yLoc,28
+entityType,Ruined Sack,xLoc,37,yLoc,30
+entityType,Ruined Sack,xLoc,35,yLoc,34
+entityType,Ruined Sack,xLoc,36,yLoc,34
+entityType,Ruined Sack,xLoc,39,yLoc,33
+entityType,Ruined Sack,xLoc,40,yLoc,32
+entityType,Ruined Sack,xLoc,40,yLoc,33
+entityType,Ruined Sack,xLoc,40,yLoc,34
+entityType,Ruined Sack,xLoc,41,yLoc,29
+entityType,Ruined Sack,xLoc,41,yLoc,30
+entityType,Ruined Sack,xLoc,41,yLoc,31
+entityType,Ruined Sack,xLoc,41,yLoc,32
+entityType,Ruined Sack,xLoc,41,yLoc,33
+entityType,Ruined Sack,xLoc,42,yLoc,28
+entityType,Ruined Sack,xLoc,42,yLoc,29
+entityType,Ruined Sack,xLoc,42,yLoc,30
+entityType,Ruined Sack,xLoc,42,yLoc,31
+entityType,Ruined Sack,xLoc,43,yLoc,29
+entityType,Ruined Sack,xLoc,43,yLoc,30
+entityType,Ruined Sack,xLoc,43,yLoc,31
+entityType,Ruined Sack,xLoc,44,yLoc,30
+entityType,Ruined Sack,xLoc,45,yLoc,29
+entityType,Ruined Sack,xLoc,46,yLoc,28
+entityType,Ruined Sack,xLoc,46,yLoc,29
+entityType,Ruined Sack,xLoc,46,yLoc,32
+entityType,Ruined Sack,xLoc,46,yLoc,33
+entityType,Ruined Sack,xLoc,47,yLoc,31
+entityType,Ruined Sack,xLoc,47,yLoc,32
+entityType,Ruined Sack,xLoc,47,yLoc,33
+entityType,Ruined Sack,xLoc,47,yLoc,34
+entityType,Ruined Sack,xLoc,47,yLoc,35
+entityType,Pile of Sacks,xLoc,27,yLoc,15
+entityType,Pile of Sacks,xLoc,27,yLoc,16
+entityType,Pile of Sacks,xLoc,27,yLoc,17
+entityType,Pile of Sacks,xLoc,27,yLoc,18
+entityType,Pile of Sacks,xLoc,27,yLoc,19
+entityType,Pile of Sacks,xLoc,27,yLoc,20
+entityType,Pile of Sacks,xLoc,27,yLoc,21
+entityType,Pile of Sacks,xLoc,27,yLoc,22
+entityType,Pile of Sacks,xLoc,27,yLoc,23
+entityType,Pile of Sacks,xLoc,27,yLoc,24
+entityType,Pile of Sacks,xLoc,27,yLoc,25
+entityType,Pile of Sacks,xLoc,27,yLoc,26
+entityType,Pile of Sacks,xLoc,28,yLoc,15
+entityType,Pile of Sacks,xLoc,28,yLoc,16
+entityType,Pile of Sacks,xLoc,28,yLoc,17
+entityType,Pile of Sacks,xLoc,28,yLoc,18
+entityType,Pile of Sacks,xLoc,28,yLoc,19
+entityType,Pile of Sacks,xLoc,28,yLoc,20
+entityType,Pile of Sacks,xLoc,28,yLoc,21
+entityType,Pile of Sacks,xLoc,28,yLoc,22
+entityType,Pile of Sacks,xLoc,28,yLoc,23
+entityType,Pile of Sacks,xLoc,28,yLoc,24
+entityType,Pile of Sacks,xLoc,28,yLoc,25
+entityType,Pile of Sacks,xLoc,28,yLoc,26
+entityType,Pile of Sacks,xLoc,29,yLoc,15
+entityType,Pile of Sacks,xLoc,29,yLoc,16
+entityType,Pile of Sacks,xLoc,29,yLoc,20
+entityType,Pile of Sacks,xLoc,29,yLoc,21
+entityType,Pile of Sacks,xLoc,29,yLoc,22
+entityType,Pile of Sacks,xLoc,29,yLoc,23
+entityType,Pile of Sacks,xLoc,32,yLoc,13
+entityType,Pile of Sacks,xLoc,33,yLoc,13
+entityType,Pile of Sacks,xLoc,34,yLoc,13
+entityType,Pile of Sacks,xLoc,35,yLoc,13
+entityType,Pile of Sacks,xLoc,36,yLoc,13
+entityType,Pile of Sacks,xLoc,35,yLoc,18
+entityType,Pile of Sacks,xLoc,35,yLoc,19
+entityType,Pile of Sacks,xLoc,36,yLoc,17
+entityType,Pile of Sacks,xLoc,36,yLoc,18
+entityType,Pile of Sacks,xLoc,36,yLoc,19
+entityType,Pile of Sacks,xLoc,36,yLoc,20
+entityType,Pile of Sacks,xLoc,37,yLoc,17
+entityType,Pile of Sacks,xLoc,37,yLoc,19
+entityType,Pile of Sacks,xLoc,38,yLoc,17
+entityType,Pile of Sacks,xLoc,38,yLoc,18
+entityType,Pile of Sacks,xLoc,38,yLoc,19
+entityType,Pile of Sacks,xLoc,52,yLoc,22
+entityType,Pile of Sacks,xLoc,52,yLoc,23
+entityType,Pile of Sacks,xLoc,53,yLoc,22
+entityType,Pile of Sacks,xLoc,53,yLoc,23
+entityType,Ruined Sack,xLoc,29,yLoc,17
+entityType,Ruined Sack,xLoc,29,yLoc,18
+entityType,Ruined Sack,xLoc,29,yLoc,19
+entityType,Ruined Sack,xLoc,29,yLoc,24
+entityType,Ruined Sack,xLoc,29,yLoc,25
+entityType,Ruined Sack,xLoc,30,yLoc,20
+entityType,Ruined Sack,xLoc,30,yLoc,21
+entityType,Ruined Sack,xLoc,30,yLoc,22
+entityType,Ruined Sack,xLoc,30,yLoc,23
+entityType,Ruined Sack,xLoc,32,yLoc,12
+entityType,Ruined Sack,xLoc,33,yLoc,12
+entityType,Ruined Sack,xLoc,34,yLoc,12
+entityType,Ruined Sack,xLoc,34,yLoc,17
+entityType,Ruined Sack,xLoc,34,yLoc,18
+entityType,Ruined Sack,xLoc,34,yLoc,19
+entityType,Ruined Sack,xLoc,34,yLoc,20
+entityType,Ruined Sack,xLoc,35,yLoc,17
+entityType,Ruined Sack,xLoc,35,yLoc,20
+entityType,Ruined Sack,xLoc,35,yLoc,21
+entityType,Ruined Sack,xLoc,36,yLoc,16
+entityType,Ruined Sack,xLoc,36,yLoc,21
+entityType,Ruined Sack,xLoc,37,yLoc,16
+entityType,Ruined Sack,xLoc,37,yLoc,21
+entityType,Ruined Sack,xLoc,38,yLoc,16
+entityType,Ruined Sack,xLoc,38,yLoc,20
+entityType,Ruined Sack,xLoc,39,yLoc,17
+entityType,Ruined Sack,xLoc,39,yLoc,18
+entityType,Ruined Sack,xLoc,39,yLoc,19
+entityType,Ruined Sack,xLoc,40,yLoc,18
+entityType,Ruined Sack,xLoc,37,yLoc,24
+entityType,Ruined Sack,xLoc,38,yLoc,22
+entityType,Ruined Sack,xLoc,38,yLoc,23
+entityType,Ruined Sack,xLoc,38,yLoc,24
+entityType,Ruined Sack,xLoc,38,yLoc,25
+entityType,Ruined Sack,xLoc,39,yLoc,22
+entityType,Ruined Sack,xLoc,39,yLoc,23
+entityType,Ruined Sack,xLoc,39,yLoc,24
+entityType,Ruined Sack,xLoc,42,yLoc,24
+entityType,Ruined Sack,xLoc,43,yLoc,24
+entityType,Ruined Sack,xLoc,44,yLoc,24
+entityType,Ruined Sack,xLoc,45,yLoc,24
+entityType,Ruined Sack,xLoc,49,yLoc,21
+entityType,Ruined Sack,xLoc,49,yLoc,22
+entityType,Ruined Sack,xLoc,49,yLoc,23
+entityType,Ruined Sack,xLoc,50,yLoc,18
+entityType,Ruined Sack,xLoc,50,yLoc,22
+entityType,Ruined Sack,xLoc,51,yLoc,15
+entityType,Ruined Sack,xLoc,51,yLoc,16
+entityType,Ruined Sack,xLoc,52,yLoc,15
+entityType,Ruined Sack,xLoc,52,yLoc,18
+entityType,Ruined Sack,xLoc,52,yLoc,19
+entityType,Ruined Sack,xLoc,52,yLoc,21
+entityType,Ruined Sack,xLoc,53,yLoc,15
+entityType,Ruined Sack,xLoc,53,yLoc,16
+entityType,Ruined Sack,xLoc,53,yLoc,17
+entityType,Ruined Sack,xLoc,53,yLoc,18
+entityType,Ruined Sack,xLoc,53,yLoc,29
+entityType,Ruined Sack,xLoc,53,yLoc,21
+entityType,Barrel,xLoc,27,yLoc,13
+entityType,Barrel,xLoc,28,yLoc,13
+entityType,Broken Barrel,xLoc,33,yLoc,23
+entityType,Broken Barrel,xLoc,33,yLoc,24
+entityType,Broken Barrel,xLoc,33,yLoc,25
+entityType,Broken Barrel,xLoc,33,yLoc,26
+entityType,Broken Barrel,xLoc,34,yLoc,23
+entityType,Broken Barrel,xLoc,34,yLoc,24
+entityType,Broken Barrel,xLoc,34,yLoc,25
+entityType,Broken Barrel,xLoc,34,yLoc,26
+entityType,Barrel,xLoc,35,yLoc,23
+entityType,Barrel,xLoc,35,yLoc,24
+entityType,Broken Barrel,xLoc,35,yLoc,25
+entityType,Broken Barrel,xLoc,35,yLoc,26
+entityType,Barrel,xLoc,36,yLoc,24
+entityType,Broken Barrel,xLoc,36,yLoc,25
+entityType,Broken Barrel,xLoc,36,yLoc,26
+entityType,Broken Barrel,xLoc,37,yLoc,25
+entityType,Broken Barrel,xLoc,37,yLoc,26
+entityType,Broken Barrel,xLoc,41,yLoc,25
+entityType,Broken Barrel,xLoc,41,yLoc,26
+entityType,Broken Barrel,xLoc,42,yLoc,25
+entityType,Broken Barrel,xLoc,42,yLoc,26
+entityType,Broken Barrel,xLoc,43,yLoc,25
+entityType,Barrel,xLoc,43,yLoc,26
+entityType,Barrel,xLoc,44,yLoc,25
+entityType,Broken Barrel,xLoc,44,yLoc,26
+entityType,Broken Barrel,xLoc,45,yLoc,25
+entityType,Broken Barrel,xLoc,45,yLoc,26
+entityType,Barrel,xLoc,41,yLoc,15
+entityType,Broken Barrel,xLoc,41,yLoc,16
+entityType,Broken Barrel,xLoc,42,yLoc,15
+entityType,Broken Barrel,xLoc,42,yLoc,16
+entityType,Broken Barrel,xLoc,42,yLoc,17
+entityType,Broken Barrel,xLoc,42,yLoc,18
+entityType,Broken Barrel,xLoc,42,yLoc,19
+entityType,Broken Barrel,xLoc,42,yLoc,20
+entityType,Broken Barrel,xLoc,43,yLoc,15
+entityType,Broken Barrel,xLoc,43,yLoc,16
+entityType,Broken Barrel,xLoc,43,yLoc,17
+entityType,Broken Barrel,xLoc,43,yLoc,19
+entityType,Broken Barrel,xLoc,43,yLoc,20
+entityType,Broken Barrel,xLoc,44,yLoc,15
+entityType,Barrel,xLoc,44,yLoc,16
+entityType,Barrel,xLoc,44,yLoc,17
+entityType,Broken Barrel,xLoc,44,yLoc,18
+entityType,Barrel,xLoc,44,yLoc,19
+entityType,Broken Barrel,xLoc,44,yLoc,20
+entityType,Broken Barrel,xLoc,45,yLoc,15
+entityType,Broken Barrel,xLoc,45,yLoc,16
+entityType,Broken Barrel,xLoc,45,yLoc,17
+entityType,Broken Barrel,xLoc,45,yLoc,18
+entityType,Broken Barrel,xLoc,45,yLoc,19
+entityType,Broken Barrel,xLoc,45,yLoc,20
+entityType,Barrel,xLoc,44,yLoc,13
+entityType,Barrel,xLoc,45,yLoc,13
+entityType,Broken Barrel,xLoc,47,yLoc,13
+entityType,Broken Barrel,xLoc,48,yLoc,13
+entityType,Broken Barrel,xLoc,49,yLoc,13
+entityType,Barrel,xLoc,49,yLoc,15
+entityType,Broken Barrel,xLoc,47,yLoc,14
+entityType,Broken Barrel,xLoc,47,yLoc,15
+entityType,Broken Barrel,xLoc,47,yLoc,16
+entityType,Barrel,xLoc,47,yLoc,17
+entityType,Broken Barrel,xLoc,47,yLoc,18
+entityType,Broken Barrel,xLoc,47,yLoc,20
+entityType,Broken Barrel,xLoc,47,yLoc,21
+entityType,Broken Barrel,xLoc,47,yLoc,22
+entityType,Barrel,xLoc,47,yLoc,23
+entityType,Broken Barrel,xLoc,47,yLoc,24
+entityType,Broken Barrel,xLoc,47,yLoc,25
+entityType,Broken Barrel,xLoc,47,yLoc,26
+entityType,Pile of Sacks,xLoc,24,yLoc,1
+entityType,Pile of Sacks,xLoc,24,yLoc,2
+entityType,Pile of Sacks,xLoc,24,yLoc,3
+entityType,Pile of Sacks,xLoc,24,yLoc,4
+entityType,Pile of Sacks,xLoc,24,yLoc,5
+entityType,Pile of Sacks,xLoc,24,yLoc,6
+entityType,Pile of Sacks,xLoc,24,yLoc,7
+entityType,Pile of Sacks,xLoc,24,yLoc,8
+entityType,Pile of Sacks,xLoc,24,yLoc,9
+entityType,Pile of Sacks,xLoc,25,yLoc,1
+entityType,Pile of Sacks,xLoc,25,yLoc,2
+entityType,Pile of Sacks,xLoc,25,yLoc,3
+entityType,Pile of Sacks,xLoc,25,yLoc,4
+entityType,Pile of Sacks,xLoc,25,yLoc,5
+entityType,Pile of Sacks,xLoc,25,yLoc,6
+entityType,Pile of Sacks,xLoc,25,yLoc,7
+entityType,Pile of Sacks,xLoc,25,yLoc,8
+entityType,Pile of Sacks,xLoc,25,yLoc,9
+entityType,Pile of Sacks,xLoc,26,yLoc,1
+entityType,Pile of Sacks,xLoc,26,yLoc,2
+entityType,Pile of Sacks,xLoc,26,yLoc,3
+entityType,Pile of Sacks,xLoc,26,yLoc,4
+entityType,Pile of Sacks,xLoc,26,yLoc,5
+entityType,Pile of Sacks,xLoc,26,yLoc,6
+entityType,Pile of Sacks,xLoc,26,yLoc,7
+entityType,Pile of Sacks,xLoc,26,yLoc,8
+entityType,Pile of Sacks,xLoc,26,yLoc,9
+entityType,Pile of Sacks,xLoc,27,yLoc,1
+entityType,Pile of Sacks,xLoc,27,yLoc,2
+entityType,Pile of Sacks,xLoc,27,yLoc,3
+entityType,Pile of Sacks,xLoc,27,yLoc,4
+entityType,Pile of Sacks,xLoc,27,yLoc,6
+entityType,Ruined Sack,xLoc,27,yLoc,7
+entityType,Ruined Sack,xLoc,28,yLoc,1
+entityType,Ruined Sack,xLoc,28,yLoc,2
+entityType,Ruined Sack,xLoc,28,yLoc,3
+entityType,Ruined Sack,xLoc,28,yLoc,4
+entityType,Ruined Sack,xLoc,28,yLoc,5
+entityType,Ruined Sack,xLoc,28,yLoc,6
+entityType,Ruined Sack,xLoc,28,yLoc,9
+entityType,Ruined Sack,xLoc,29,yLoc,1
+entityType,Ruined Sack,xLoc,29,yLoc,2
+entityType,Ruined Sack,xLoc,29,yLoc,3
+entityType,Ruined Sack,xLoc,29,yLoc,4
+entityType,Ruined Sack,xLoc,29,yLoc,8
+entityType,Ruined Sack,xLoc,29,yLoc,9
+entityType,Ruined Sack,xLoc,30,yLoc,1
+entityType,Ruined Sack,xLoc,30,yLoc,6
+entityType,Ruined Sack,xLoc,30,yLoc,7
+entityType,Ruined Sack,xLoc,30,yLoc,8
+entityType,Ruined Sack,xLoc,30,yLoc,9
+entityType,Broken Barrel,xLoc,32,yLoc,1
+entityType,Barrel,xLoc,32,yLoc,3
+entityType,Broken Barrel,xLoc,32,yLoc,4
+entityType,Barrel,xLoc,32,yLoc,5
+entityType,Barrel,xLoc,32,yLoc,6
+entityType,Broken Barrel,xLoc,32,yLoc,7
+entityType,Broken Barrel,xLoc,32,yLoc,8
+entityType,Broken Barrel,xLoc,32,yLoc,9
+entityType,Broken Barrel,xLoc,33,yLoc,1
+entityType,Broken Barrel,xLoc,33,yLoc,3
+entityType,Barrel,xLoc,33,yLoc,4
+entityType,Barrel,xLoc,33,yLoc,5
+entityType,Broken Barrel,xLoc,33,yLoc,6
+entityType,Broken Barrel,xLoc,33,yLoc,7
+entityType,Broken Barrel,xLoc,33,yLoc,8
+entityType,Broken Barrel,xLoc,33,yLoc,9
+entityType,Broken Barrel,xLoc,37,yLoc,1
+entityType,Barrel,xLoc,37,yLoc,3
+entityType,Broken Barrel,xLoc,37,yLoc,4
+entityType,Barrel,xLoc,37,yLoc,5
+entityType,Broken Barrel,xLoc,37,yLoc,6
+entityType,Broken Barrel,xLoc,37,yLoc,7
+entityType,Broken Barrel,xLoc,37,yLoc,8
+entityType,Broken Barrel,xLoc,37,yLoc,9
+entityType,Barrel,xLoc,38,yLoc,1
+entityType,Broken Barrel,xLoc,38,yLoc,3
+entityType,Broken Barrel,xLoc,38,yLoc,4
+entityType,Broken Barrel,xLoc,38,yLoc,5
+entityType,Broken Barrel,xLoc,38,yLoc,6
+entityType,Broken Barrel,xLoc,38,yLoc,7
+entityType,Barrel,xLoc,38,yLoc,8
+entityType,Barrel,xLoc,38,yLoc,9
+entityType,Barrel,xLoc,34,yLoc,1
+entityType,Broken Barrel,xLoc,34,yLoc,7
+entityType,Broken Barrel,xLoc,34,yLoc,8
+entityType,Broken Barrel,xLoc,34,yLoc,9
+entityType,Broken Barrel,xLoc,35,yLoc,1
+entityType,Broken Barrel,xLoc,36,yLoc,1
+entityType,Pile of Sacks,xLoc,45,yLoc,1
+entityType,Pile of Sacks,xLoc,45,yLoc,2
+entityType,Pile of Sacks,xLoc,45,yLoc,3
+entityType,Pile of Sacks,xLoc,45,yLoc,4
+entityType,Pile of Sacks,xLoc,45,yLoc,5
+entityType,Pile of Sacks,xLoc,46,yLoc,1
+entityType,Pile of Sacks,xLoc,46,yLoc,2
+entityType,Pile of Sacks,xLoc,46,yLoc,3
+entityType,Pile of Sacks,xLoc,46,yLoc,4
+entityType,Pile of Sacks,xLoc,46,yLoc,5
+entityType,Ruined Sack,xLoc,40,yLoc,1
+entityType,Ruined Sack,xLoc,40,yLoc,9
+entityType,Ruined Sack,xLoc,41,yLoc,1
+entityType,Ruined Sack,xLoc,41,yLoc,4
+entityType,Ruined Sack,xLoc,41,yLoc,5
+entityType,Ruined Sack,xLoc,41,yLoc,7
+entityType,Ruined Sack,xLoc,41,yLoc,9
+entityType,Ruined Sack,xLoc,42,yLoc,4
+entityType,Ruined Sack,xLoc,42,yLoc,5
+entityType,Ruined Sack,xLoc,42,yLoc,9
+entityType,Ruined Sack,xLoc,44,yLoc,1
+entityType,Ruined Sack,xLoc,44,yLoc,2
+entityType,Ruined Sack,xLoc,44,yLoc,3
+entityType,Ruined Sack,xLoc,44,yLoc,8
+entityType,Ruined Sack,xLoc,44,yLoc,9
+entityType,Ruined Sack,xLoc,45,yLoc,8
+entityType,Ruined Sack,xLoc,45,yLoc,9
+entityType,Ruined Sack,xLoc,46,yLoc,6
+entityType,Ruined Sack,xLoc,46,yLoc,7
+entityType,Ruined Sack,xLoc,46,yLoc,8
+entityType,Ruined Sack,xLoc,46,yLoc,9
+entityType,Ruined Sack,xLoc,48,yLoc,7
+entityType,Ruined Sack,xLoc,48,yLoc,8
+entityType,Ruined Sack,xLoc,48,yLoc,9
+entityType,Ruined Sack,xLoc,52,yLoc,7
+entityType,Ruined Sack,xLoc,52,yLoc,8
+entityType,Ruined Sack,xLoc,52,yLoc,9
+entityType,Ruined Sack,xLoc,53,yLoc,7
+entityType,Ruined Sack,xLoc,53,yLoc,8
+entityType,Ruined Sack,xLoc,53,yLoc,9
+entityType,Ruined Sack,xLoc,54,yLoc,7
+entityType,Ruined Sack,xLoc,54,yLoc,8
+entityType,Ruined Sack,xLoc,54,yLoc,9
+entityType,Barrel,xLoc,48,yLoc,1
+entityType,Barrel,xLoc,49,yLoc,1
+entityType,Barrel,xLoc,50,yLoc,1
+entityType,Barrel,xLoc,51,yLoc,1
+entityType,Barrel,xLoc,52,yLoc,1
+entityType,Barrel,xLoc,53,yLoc,1
+entityType,Barrel,xLoc,54,yLoc,1
+###
+entityType,Green Mold,xLoc,14,yLoc,29
+entityType,Green Mold,xLoc,15,yLoc,31
+entityType,Green Mold,xLoc,13,yLoc,33
+entityType,Green Mold,xLoc,14,yLoc,33
+entityType,Green Mold,xLoc,13,yLoc,34
+entityType,Green Mold,xLoc,14,yLoc,34
+entityType,Green Mold,xLoc,13,yLoc,35
+entityType,Green Mold,xLoc,14,yLoc,35
+entityType,Green Mold,xLoc,27,yLoc,15
+entityType,Green Mold,xLoc,27,yLoc,16
+entityType,Green Mold,xLoc,27,yLoc,17
+entityType,Green Mold,xLoc,28,yLoc,15
+entityType,Green Mold,xLoc,36,yLoc,16
+entityType,Green Mold,xLoc,24,yLoc,2
+entityType,Green Mold,xLoc,24,yLoc,3
+entityType,Green Mold,xLoc,24,yLoc,5
+entityType,Green Mold,xLoc,24,yLoc,6
+entityType,Green Mold,xLoc,25,yLoc,3
+entityType,Green Mold,xLoc,25,yLoc,4
+entityType,Green Mold,xLoc,25,yLoc,5
+entityType,Virulent Green Mold,xLoc,24,yLoc,4
+entityType,Green Mold,xLoc,32,yLoc,3
+entityType,Green Mold,xLoc,32,yLoc,4
+entityType,Green Mold,xLoc,32,yLoc,5
+entityType,Green Mold,xLoc,32,yLoc,6
+entityType,Green Mold,xLoc,32,yLoc,7
+entityType,Green Mold,xLoc,32,yLoc,8
+entityType,Green Mold,xLoc,32,yLoc,9
+entityType,Green Mold,xLoc,33,yLoc,3
+entityType,Green Mold,xLoc,33,yLoc,4
+entityType,Green Mold,xLoc,33,yLoc,5
+entityType,Green Mold,xLoc,33,yLoc,6
+entityType,Green Mold,xLoc,33,yLoc,7
+entityType,Green Mold,xLoc,33,yLoc,8
+entityType,Green Mold,xLoc,33,yLoc,9
+entityType,Green Mold,xLoc,34,yLoc,1
+entityType,Green Mold,xLoc,34,yLoc,8
+entityType,Green Mold,xLoc,35,yLoc,1
+entityType,Green Mold,xLoc,36,yLoc,4
+entityType,Green Mold,xLoc,36,yLoc,5
+entityType,Green Mold,xLoc,37,yLoc,5
+entityType,Green Mold,xLoc,37,yLoc,6
+entityType,Green Mold,xLoc,37,yLoc,7
+entityType,Green Mold,xLoc,38,yLoc,1
+entityType,Green Mold,xLoc,38,yLoc,5
+entityType,Green Mold,xLoc,38,yLoc,6
+entityType,Green Mold,xLoc,38,yLoc,7
+entityType,Green Mold,xLoc,38,yLoc,9
+entityType,Rat Den,xLoc,21,yLoc,42
+entityType,Rat Den,xLoc,25,yLoc,39
+entityType,Rat Den,xLoc,29,yLoc,35
+entityType,Rat Den,xLoc,37,yLoc,38
+entityType,Rat Den,xLoc,33,yLoc,33
+entityType,Rat Den,xLoc,34,yLoc,31
+entityType,Rat Den,xLoc,36,yLoc,29
+entityType,Rat Den,xLoc,40,yLoc,33
+entityType,Rat Den,xLoc,41,yLoc,29
+entityType,Rat Den,xLoc,41,yLoc,31
+entityType,Rat Den,xLoc,44,yLoc,30
+entityType,Rat Den,xLoc,33,yLoc,13
+entityType,Rat Den,xLoc,50,yLoc,21
+entityType,Rat Den,xLoc,52,yLoc,16
+entityType,Rat Den,xLoc,53,yLoc,19
+entityType,Rat Den,xLoc,43,yLoc,1
+entityType,Rat Den,xLoc,45,yLoc,6
+entityType,Rat Den,xLoc,45,yLoc,7
+entityType,Rat Den,xLoc,46,yLoc,1
+entityType,Rat Den,xLoc,46,yLoc,2
+entityType,Rat Den,xLoc,46,yLoc,5
+entityType,Rat Den,xLoc,46,yLoc,9
+entityType,Rat Den,xLoc,48,yLoc,4
+entityType,Rat Den,xLoc,49,yLoc,9
+entityType,Rat Den,xLoc,54,yLoc,2
+entityType,Rat Den,xLoc,54,yLoc,3
+entityType,Rat Den,xLoc,54,yLoc,4
+entityType,Rat Den,xLoc,54,yLoc,5
+entityType,Rat Den,xLoc,54,yLoc,6
+entityType,Rat Lair,xLoc,53,yLoc,2
+###
+entityType,Stairs 2,xLoc,2,yLoc,33,newLevelId,WallMarketStorage_1,newXLoc,42,newYLoc,5
+###

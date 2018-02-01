@@ -23,9 +23,10 @@ namespace Halfbreed.Menus
 							{
 								parameters.GameId = UserDatabaseConnection.GenerateNextGameId();
 								GameEngine.SetupNewGame(parameters);
-								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/TestLevel";
-								GameEngine.LevelTransition(filePath, 42, 5);
-								MainGraphicDisplay.MapConsole.DrawMap(GameEngine.CurrentLevel, 5, 5);
+								//string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/TestLevel";
+								//GameEngine.LevelTransition(filePath, 42, 5);
+								string filePath = Directory.GetCurrentDirectory() + "/LevelFiles/Testing/TestLevel2";
+								GameEngine.LevelTransition(filePath, 49, 42);
 								UserDatabaseConnection.InsertNewSaveGameSummary(GameEngine.GenerateSaveSummary());
 								GameEngine.RunGame();
 							}
