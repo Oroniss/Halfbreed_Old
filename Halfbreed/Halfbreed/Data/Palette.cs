@@ -14,7 +14,7 @@ namespace Halfbreed
 			{Colors.DARKBROWN, new RLColor(109, 85, 5)},
 			{Colors.DARKWOODBROWN, new RLColor(139, 105, 20)},
 			{Colors.FADEDCLOTH, new RLColor(238, 220, 130)},
-			{Colors.LIGHTBROWN, new RLColor(218, 165, 32)},
+			{Colors.LIGHTBROWN, new RLColor(235, 165, 32)},
 			{Colors.OLDCLOTH, new RLColor(205, 190, 112)},
 			{Colors.REDBROWN, new RLColor(165, 102, 0)},
 			{Colors.TAN, new RLColor(210, 180, 140)},
