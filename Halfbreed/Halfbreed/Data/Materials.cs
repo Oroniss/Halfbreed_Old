@@ -30,6 +30,7 @@
 		FUR,
 		// Cloths
 		HESSION,
+		SACKCLOTH,
 		//
 		WATER
 	}
