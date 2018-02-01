@@ -43,13 +43,13 @@ namespace Halfbreed.Entities
 			{
 				System.DateTime startLOS = System.DateTime.Now;
 
-				var currentViewDistance = ((SensoryComponent)_entity.GetComponent(ComponentType.SENSORY)).CurrentViewDistance;
+				var sensoryComponent = (SensoryComponent)_entity.GetComponent(ComponentType.SENSORY);
 				var elevation = GameEngine.CurrentLevel.GetElevation(_entity.XLoc, _entity.YLoc);
 				var blindsight = _entity.HasTrait(EntityTraits.BLINDSIGHT);
 				var trueseeing = _entity.HasTrait(EntityTraits.TRUESEEING);
 				var darkvision = _entity.HasTrait(EntityTraits.DARKVISION);
 
-				var ViewList = GameEngine.CurrentLevel.CalculateFOV(_entity.XLoc, _entity.YLoc, currentViewDistance,
+				var ViewList = GameEngine.CurrentLevel.CalculateFOV(_entity.XLoc, _entity.YLoc, sensoryComponent.CurrentViewDistance,
 																	elevation, blindsight, trueseeing, darkvision);
 	
 				MainGraphicDisplay.TextConsole.AddOutputText(string.Format("LOS TIME = {0}", (System.DateTime.Now - startLOS)));
@@ -57,6 +57,8 @@ namespace Halfbreed.Entities
 				foreach (Position position in ViewList)
 					GameEngine.CurrentLevel.revealTile(position.X, position.Y);
 				GameEngine.VisibleTiles = ViewList;
+
+				GameEngine.CurrentLevel.ScanForConcealedEntities(_entity, sensoryComponent.CurrentViewDistance, sensoryComponent.DetectionLevel);
 			}
 
 			while (!MadeValidMove)
