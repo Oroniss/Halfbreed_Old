@@ -22,6 +22,13 @@ namespace Halfbreed.Entities
 
 		private List<EntityTraits> _traits;
 
+		private bool _hasTile;
+		private Levels.MapTileDetails _maptile;
+
+		private ConcealedComponent _concealedComponent;
+		private bool _isConcealed;
+		private bool _playerSpotted;
+
 		private Entity(string entityName, int xLoc, int yLoc, EntityTraits[] traits)
 		{
 			_entityId = GetNextId();
@@ -30,6 +37,10 @@ namespace Halfbreed.Entities
 			_yLoc = yLoc;
 			_components = new Dictionary<ComponentType, Component>();
 			_traits = new List<EntityTraits>();
+
+			_hasTile = false;
+			_isConcealed = false;
+			_playerSpotted = true;
 
 			foreach (EntityTraits trait in traits)
 				AddTrait(trait);
@@ -56,7 +67,7 @@ namespace Halfbreed.Entities
 			if (Array.IndexOf(allParams, "AddTrapComponent") != -1)
 			{
 				string trapType = allParams[Array.IndexOf(allParams, "TrapType") + 1];
-				int difficulty = int.Parse(allParams[Array.IndexOf(allParams, "TrapLevel") + 1]);
+				var difficulty = int.Parse(allParams[Array.IndexOf(allParams, "TrapLevel") + 1]);
 				_components[ComponentType.TRAP] = new TrapComponent(this, trapType, difficulty);
 				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("TriggerTrap");
 			}
@@ -72,6 +83,14 @@ namespace Halfbreed.Entities
 
 				_components[ComponentType.LIGHTSOURCE] = new LightSourceComponent(this, lightType, radius, durationRemaining,
 																				  permanent, lit);
+			}
+
+			if (Array.IndexOf(allParams, "Concealed") != -1)
+			{
+				// TODO: Set this up properly
+				_playerSpotted = false;
+				_isConcealed = true;
+				_concealedComponent = new ConcealedComponent(this, 1, "", ' ', (int)DisplayLayer.NOTDISPLAYED, true, "WOODWALL");
 			}
 		}
 
@@ -105,20 +124,60 @@ namespace Halfbreed.Entities
 
 		public DisplayLayer DisplayLayer
 		{
-			get {return _displayLayer;}
+			get {
+				if (!_playerSpotted)
+					return _concealedComponent.ConcealedDisplayLayer;
+				return _displayLayer;}
 			set { _displayLayer = value; }
 		}
 
 		public Colors FGColor
 		{
-			get {return _fgColor;}
+			get {
+				if (!_playerSpotted)
+					return _concealedComponent.ConcealedFGColor;
+				return _fgColor;}
 			set { _fgColor = value; }
 		}
 
 		public char Symbol
 		{
-			get { return _symbol; }
+			get {
+				if (!_playerSpotted)
+					return _concealedComponent.ConcealedSymbol;
+				return _symbol; }
 			set { _symbol = value; }
+		}
+
+		public bool Concealed
+		{
+			get { return _isConcealed; }
+		}
+
+		public bool PlayerSpotted
+		{
+			get { return _playerSpotted; }
+			set { _playerSpotted = value; }
+		}
+
+		public bool HasTile
+		{
+			get { return _hasTile || (!_playerSpotted && _concealedComponent.HasConcealedTile); }
+		}
+
+		public Levels.MapTileDetails TileDetails
+		{
+			get { if (!_playerSpotted && _concealedComponent.HasConcealedTile)
+					return _concealedComponent.ConcealedMapTile;
+				if (_hasTile)
+					return _maptile;
+				return null;
+			}
+		}
+
+		public ConcealedComponent ConcealedComponent
+		{
+			get { return _concealedComponent; }
 		}
 
 		public override string ToString()
