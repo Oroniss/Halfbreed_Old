@@ -8,6 +8,7 @@ namespace Halfbreed.Entities
 
 		int _viewDistanceBase;
 		int _viewDistanceModifiers;
+		int _detectionLevel;
 
 		public SensoryComponent(Entity entity, int viewDistance)
 			:base(entity)
@@ -15,6 +16,8 @@ namespace Halfbreed.Entities
 			_componentType = ComponentType.SENSORY;
 			_viewDistanceBase = viewDistance;
 			_viewDistanceModifiers = 0;
+			// TODO: Figure this out a bit more carefully
+			_detectionLevel = 2;
 		}
 
 		public int CurrentViewDistance
@@ -28,6 +31,11 @@ namespace Halfbreed.Entities
 		public void AddViewDistanceModifier(int modifier)
 		{
 			_viewDistanceModifiers += modifier;
+		}
+
+		public int DetectionLevel
+		{
+			get { return _detectionLevel; }
 		}
 	}
 }
