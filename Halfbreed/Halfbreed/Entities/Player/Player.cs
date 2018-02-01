@@ -13,6 +13,9 @@ namespace Halfbreed.Entities
 			_fgColor = Colors.BLACK;
 			_entityName = "Player"; // TODO: Think whether this is correct or not.
 
+			_isConcealed = false;
+			_playerSpotted = true;
+
 			_components = new Dictionary<ComponentType, Component>();
 			_traits = new List<EntityTraits>();
 			AddTrait(EntityTraits.PLAYER);
