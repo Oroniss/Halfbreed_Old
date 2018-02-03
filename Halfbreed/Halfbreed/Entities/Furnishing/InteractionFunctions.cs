@@ -9,6 +9,7 @@ namespace Halfbreed.Entities
 		{
 			{"NoUse", new InteractionFunction(NoUse)},
 			{"UseDoor", new InteractionFunction(UseDoor)},
+			{"UseLevelTransition", new InteractionFunction(UseLevelTransition)},
 			{"TriggerTrap", new InteractionFunction(TriggerTrap)}
 		};
 
@@ -27,6 +28,12 @@ namespace Halfbreed.Entities
 		{
 			TrapComponent trapComponent = (TrapComponent)interactible.GetComponent(ComponentType.TRAP);
 			trapComponent.TriggerTrap(actor);
+		}
+
+		private static void UseLevelTransition(Entity interactible, Entity actor, int currentTime)
+		{
+			LevelTransitionComponent transitionComponent = (LevelTransitionComponent)interactible.GetComponent(ComponentType.LEVELTRANSITION);
+			transitionComponent.MoveLevel(actor);
 		}
 
 	}
