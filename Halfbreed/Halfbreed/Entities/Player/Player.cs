@@ -6,8 +6,6 @@ namespace Halfbreed.Entities
 	{
 		public Entity(Menus.NewGameParameters playerParameters)
 		{
-			_entityId = GetNextId();
-
 			_displayLayer = DisplayLayer.PLAYER;
 			_symbol = '@';
 			_fgColor = Colors.BLACK;
