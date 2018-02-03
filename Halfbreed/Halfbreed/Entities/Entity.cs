@@ -5,11 +5,7 @@ namespace Halfbreed.Entities
 {
 	public partial class Entity : IComparable
 	{
-		private static int _currentMaxEntityId = 0;
-		private static List<int> _currentFreeEntityIds = new List<int>();
-
 		private string _entityName;
-		private int _entityId;
 
 		private Dictionary<ComponentType, Component> _components;
 
@@ -31,7 +27,6 @@ namespace Halfbreed.Entities
 
 		private Entity(string entityName, int xLoc, int yLoc, EntityTraits[] traits)
 		{
-			_entityId = GetNextId();
 			_entityName = entityName;
 			_xLoc = xLoc;
 			_yLoc = yLoc;
@@ -91,6 +86,17 @@ namespace Halfbreed.Entities
 				_playerSpotted = false;
 				_isConcealed = true;
 				_concealedComponent = new ConcealedComponent(this, 1, "", ' ', (int)DisplayLayer.NOTDISPLAYED, true, "WOODWALL");
+
+			}
+
+			if (Array.IndexOf(allParams, "LevelTransition") != -1)
+			{
+				AddTrait(EntityTraits.INDESTRUCTIBLE);
+				((InteractibleComponent)_components[ComponentType.INTERACTIBLE]).AddFunction("UseLevelTransition");
+				var destination = (Levels.LevelEnum)Enum.Parse(typeof(Levels.LevelEnum), allParams[Array.IndexOf(allParams, "DestinationLevel") + 1]);
+				var newXLoc = int.Parse(allParams[Array.IndexOf(allParams, "NewXLoc") + 1]);
+				var newYLoc = int.Parse(allParams[Array.IndexOf(allParams, "NewYLoc") + 1]);
+				_components[ComponentType.LEVELTRANSITION] = new LevelTransitionComponent(this, destination, newXLoc, newYLoc);
 			}
 		}
 
@@ -102,19 +108,6 @@ namespace Halfbreed.Entities
 			for (int i = 0; i < otherParameters.Length; i++)
 				returnArray[i + otherComponents.Length] = otherParameters[i];
 			return returnArray;
-		}
-
-		private static int GetNextId()
-		{
-			int toReturn = _currentMaxEntityId;
-			if (_currentFreeEntityIds.Count > 0)
-			{
-				toReturn = _currentFreeEntityIds[0];
-				_currentFreeEntityIds.Remove(toReturn);
-			}
-			else
-				_currentMaxEntityId++;
-			return toReturn;
 		}
 
 		public string EntityName
