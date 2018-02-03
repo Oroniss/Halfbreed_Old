@@ -51,6 +51,8 @@
 		BLINDSIGHT,
 
 		BLIND,
-		SCENT
+		SCENT,
+
+		INDESTRUCTIBLE
 	}
 }
