@@ -69,13 +69,14 @@ namespace Halfbreed
 			_quit = true;
 		}
 
-		public static void LevelTransition(string newLevelName, int newX, int newY)
+		public static void LevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
 		{
 			// TODO: Need to pack up the existing level too.
 			// TODO: Need to use correct update move function so that it moves all equipped items as well.
-			_currentLevel = new Level(newLevelName);
+			_currentLevel = new Level(newLevel);
 			_player.UpdatePosition(newX, newY);
 			_currentLevel.AddEntity(_player);
+			_visibleTiles = new List<Position>();
 		}
 
 		public static SaveGameSummary GenerateSaveSummary()
