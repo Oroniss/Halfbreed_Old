@@ -345,6 +345,7 @@ Liquid,WATER,38,5
 Liquid,WATER,36,6
 Liquid,WATER,37,6
 Liquid,WATER,38,6
+Stair Down,PINE,2,2,LevelTransition,DestinationLevel,TESTLEVEL2,NewXLoc,49,NewYLoc,42
 ###
 Rat Den,1,4
 Rat Den,9,2
@@ -358,7 +359,6 @@ Green Mold,42,18
 ###
 Pit Trap,40,4,TrapLevel,1
 Pit Trap,40,6,TrapLevel,2
-Flame Vent Trap,2,2,TrapLevel,5
 Flame Vent Trap,2,4,TrapLevel,5
 Flame Vent Trap,4,2,TrapLevel,6
 Flame Vent Trap,4,4,TrapLevel,6
