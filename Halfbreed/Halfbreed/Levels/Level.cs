@@ -7,7 +7,7 @@ using Halfbreed.Entities;
 namespace Halfbreed
 {
 	[Serializable]
-	public class Level
+	public partial class Level
 	{
 
 		private string _levelTitle;
@@ -28,10 +28,10 @@ namespace Halfbreed
 		private Dictionary<LightSourceComponent, HashSet<int>> _lightSources;
 		private List<Entity> _concealedEntities;
 
-		public Level(string LevelFilePath)
+		public Level(LevelEnum level)
 		{
 			// TODO: Move this to a separate function to allow easy switching to resources.
-			FileStream levelStream = File.Open(LevelFilePath + ".txt", FileMode.Open);
+			FileStream levelStream = File.Open(GetFilePath(level), FileMode.Open);
 			StreamReader LevelSpecificationFile = new StreamReader(levelStream);
 
 			Dictionary<int, TileType> tileDict = new Dictionary<int, TileType>();
@@ -454,6 +454,8 @@ namespace Halfbreed
 				_entitiesFlaggedForDestruction.RemoveAt(0);
 			}
 		}
+
+		//public void DestroyLevel
 
 		public bool IsPassible(int x, int y)
 		{
