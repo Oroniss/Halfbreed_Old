@@ -5,11 +5,12 @@ namespace Halfbreed.Tests
 	[TestFixture]
 	public class LevelCodeTests
 	{
-		private string testLevelMapFilePath = TestContext.CurrentContext.TestDirectory + "/LevelFiles/Testing/TestLevel";
+		private string _testContext = TestContext.CurrentContext.TestDirectory;
 
 		[SetUp]
 		public void SetupDatabaseConnection()
 		{
+			Level.SetToTestDirectory(_testContext);
 			StaticDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
 			StaticDatabaseConnection.openDBConnection();
 			StaticData.SetupDictionaries();
@@ -19,7 +20,7 @@ namespace Halfbreed.Tests
 		public void TestLevelMapConstruction()
 		{
 			// TODO: Put a test in that tries to load every level to make sure it parses.
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.AreEqual(25, testLevel.Height);
 			Assert.AreEqual(44, testLevel.Width);
@@ -29,7 +30,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestLevelMapIsValidMapCoords()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.IsTrue(testLevel.IsValidMapCoord(5, 5));
 			Assert.IsTrue(testLevel.IsValidMapCoord(0, 0));
@@ -49,7 +50,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestLevelMapGetTile()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(0, 0));
 			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(43, 24));
@@ -62,7 +63,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestRevealed()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.IsFalse(testLevel.isRevealed(0, 0));
 			Assert.IsFalse(testLevel.isRevealed(15, 15));
@@ -85,7 +86,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestDrawingEntities()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.IsTrue(testLevel.HasDrawingEntity(42, 19));
 			Assert.AreEqual('.', testLevel.GetDrawingEntity(42, 19).Symbol);
@@ -101,7 +102,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestPassible()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.IsTrue(testLevel.IsPassible(1, 1));
 			Assert.IsTrue(testLevel.IsPassible(42, 1));
@@ -116,7 +117,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestGetEntitiesWithComponent()
 		{
-			Level testLevel = new Level(testLevelMapFilePath);
+			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
 			Assert.AreEqual(2, testLevel.GetEntitiesWithComponent(16, 10, Entities.ComponentType.INTERACTIBLE).Count);
 			Assert.AreEqual(0, testLevel.GetEntitiesWithComponent(16, 10, Entities.ComponentType.MOVEON).Count);
