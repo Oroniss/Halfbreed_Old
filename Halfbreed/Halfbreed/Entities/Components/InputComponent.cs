@@ -121,6 +121,7 @@ namespace Halfbreed.Entities
 				}
 			}
 			MainGraphicDisplay.UpdateGameScreen();
+
 			_lastPlayerTurn = System.DateTime.Now;
 		}
 
