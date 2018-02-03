@@ -17,6 +17,7 @@ namespace Halfbreed.Entities
 		                         int concealedDisplayLayer, bool hasConcealedTile, string concealedTileName)
 			:base(entity)
 		{
+			_componentType = ComponentType.CONCEALED;
 			_concealmentLevel = concealmentLevel;
 			if (concealedFGColor != "")
 				_concealedFGColor = (Colors)System.Enum.Parse(typeof(Colors), concealedFGColor);
