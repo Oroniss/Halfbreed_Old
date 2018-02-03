@@ -785,6 +785,7 @@ Barrel,PINE,51,1
 Barrel,PINE,52,1
 Barrel,PINE,53,1
 Barrel,PINE,54,1
+Stair Up,PINE,2,33,LevelTransition,DestinationLevel,TESTLEVEL1,NewXLoc,42,NewYLoc,5
 ###
 Green Mold,14,29
 Green Mold,15,31
@@ -866,5 +867,4 @@ Rat Den,54,6
 Rat Lair,53,2
 ###
 ###
-Stairs 2,2,33,newLevelId,WallMarketStorage_1,newXLoc,42,newYLoc,5
 ###
