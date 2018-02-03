@@ -8,6 +8,7 @@
 		HARVESTINGNODE,
 		INPUT,
 		INTERACTIBLE, // For being interacted with - primarily Furnishings.
+		LEVELTRANSITION,
 		LIGHTSOURCE,
 		LIQUIDCURRENT,
 		MATERIAL,
