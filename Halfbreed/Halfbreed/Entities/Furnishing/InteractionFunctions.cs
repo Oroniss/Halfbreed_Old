@@ -1,39 +1,66 @@
 ﻿using System.Collections.Generic;
 
-namespace Halfbreed.Entities
+namespace Halfbreed.Entities.Furnishings
 {
-	public partial class InteractibleComponent
+	public static class InteractionFunctions
 	{
-		private static Dictionary<string, InteractionFunction> _interactionFunctionDictionary = new
-			Dictionary<string, InteractionFunction>()
+		static readonly Dictionary<string, InteractionFunction> _interactionFunctions = new Dictionary<string, InteractionFunction>()
 		{
-			{"NoUse", new InteractionFunction(NoUse)},
-			{"UseDoor", new InteractionFunction(UseDoor)},
-			{"UseLevelTransition", new InteractionFunction(UseLevelTransition)},
-			{"TriggerTrap", new InteractionFunction(TriggerTrap)}
+			// Default
+			{"No Use", new InteractionFunction(NoUse)},
+			// Furnishings
+			{"Door Use", new InteractionFunction(DoorUse)}
 		};
 
-		private static void UseDoor(Entity interactible, Entity actor, int currentTime)
+		public delegate void InteractionFunction(Furnishing furnishing, Actor actor, Level currentLevel);
+
+		public static InteractionFunction GetInteractionFunction(string functionName)
 		{
-			DoorComponent doorComponent = (DoorComponent)interactible.GetComponent(ComponentType.DOOR);
-			doorComponent.Use(actor, currentTime);
+			if (_interactionFunctions.ContainsKey(functionName))
+				return _interactionFunctions[functionName];
+			ErrorLogger.AddDebugText("Unknown interaction function name: " + functionName);
+			return _interactionFunctions["No Use"];
 		}
 
-		private static void NoUse(Entity interactible, Entity actor, int currentTime)
+		private static void NoUse(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
-			MainGraphicDisplay.TextConsole.AddOutputText("You can't do anything with that!");
+			MainGraphicDisplay.TextConsole.AddOutputText("You can't do anything with that");
 		}
 
-		private static void TriggerTrap(Entity interactible, Entity actor, int currentTime)
+		private static void DoorUse(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
-			TrapComponent trapComponent = (TrapComponent)interactible.GetComponent(ComponentType.TRAP);
-			trapComponent.TriggerTrap(actor);
-		}
+			if (furnishing.GetOtherAttributeValue("DoorOpen") == "Open")
+			{
+				if (currentLevel.BlockAllMovement(furnishing.XLoc, furnishing.YLoc))
+				{
+					MainGraphicDisplay.TextConsole.AddOutputText("Something is blocking the door");
+					return;
+				}
+				furnishing.AddTrait(Traits.Impassible);
+				furnishing.AddTrait(Traits.BlockLOS);
+				furnishing.Symbol = '+';
+				furnishing.SetOtherAttribute("DoorOpen", "Closed");
 
-		private static void UseLevelTransition(Entity interactible, Entity actor, int currentTime)
-		{
-			LevelTransitionComponent transitionComponent = (LevelTransitionComponent)interactible.GetComponent(ComponentType.LEVELTRANSITION);
-			transitionComponent.MoveLevel(actor);
+				if (actor.HasTrait(Traits.Player))
+					MainGraphicDisplay.TextConsole.AddOutputText("You close the door");
+			}
+			else
+			{
+				if (furnishing.HasOtherAttribute("DoorLocked") && furnishing.GetOtherAttributeValue("DoorLocked") == "True")
+				{
+					// TODO: Flesh this out.
+					MainGraphicDisplay.TextConsole.AddOutputText("The door is locked");
+					return;
+				}
+
+				furnishing.RemoveTrait(Traits.Impassible);
+				furnishing.RemoveTrait(Traits.BlockLOS);
+				furnishing.Symbol = '-';
+				furnishing.SetOtherAttribute("DoorOpen", "Open");
+
+				if (actor.HasTrait(Traits.Player))
+					MainGraphicDisplay.TextConsole.AddOutputText("You open the door");
+			}
 		}
 
 	}
