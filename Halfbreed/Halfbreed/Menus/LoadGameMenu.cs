@@ -4,7 +4,7 @@ namespace Halfbreed.Menus
 {
 	public class LoadGameMenu
 	{
-
+		/*
 		public int SelectSavedGame()
 		{
 			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
@@ -23,6 +23,7 @@ namespace Halfbreed.Menus
 
 			return currentSaves[selection].GameId;
 		}
+		*/
 	
 	
 	}
