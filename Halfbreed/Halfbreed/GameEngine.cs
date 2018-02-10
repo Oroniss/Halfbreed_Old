@@ -12,7 +12,7 @@ namespace Halfbreed
 		private static int _currentChapter = 1;
 		private static int _gameId;
 		private static string _versionNumber = "0.01";
-		private static Entities.Entity _player;
+		private static Entities.Player _player;
 		private static int _currentTime = 0;
 		private static int _currentDays; // TODO: Think this through a bit more carefully.
 		private static bool _quit;
@@ -24,7 +24,7 @@ namespace Halfbreed
 			_characterClass = startingParameters.CharacterClass;
 			_useAchievements = startingParameters.UseAchievements;
 			_gameId = startingParameters.GameId;
-			_player = new Entities.Entity(startingParameters);
+			_player = new Entities.Player(startingParameters);
 		}
 
 		public static int DifficultySetting
@@ -74,16 +74,9 @@ namespace Halfbreed
 			// TODO: Need to pack up the existing level too.
 			// TODO: Need to use correct update move function so that it moves all equipped items as well.
 			_currentLevel = new Level(newLevel);
-			_player.UpdatePosition(newX, newY);
-			_currentLevel.AddEntity(_player);
+			//_player.UpdatePosition(newX, newY);
+			//_currentLevel.AddEntity(_player);
 			_visibleTiles = new List<Position>();
-		}
-
-		public static SaveGameSummary GenerateSaveSummary()
-		{
-			SaveGameSummary summary = new SaveGameSummary(_gameId, _difficultySetting, _characterClass, _useAchievements,
-														  1, 1, true, System.DateTime.Now);
-			return summary;
 		}
 
 		public static List<Position> VisibleTiles
@@ -94,9 +87,14 @@ namespace Halfbreed
 
 		public static void RunGame()
 		{
+			MainGraphicDisplay.UpdateGameScreen();
+
+			var key = UserInputHandler.getNextKey();
+			return;
+
 			while (true)
 			{
-				_currentLevel.ActivateEntities(_currentTime);
+				//_currentLevel.ActivateEntities(_currentTime);
 				_currentTime++;
 				if (_quit)
 					return;
