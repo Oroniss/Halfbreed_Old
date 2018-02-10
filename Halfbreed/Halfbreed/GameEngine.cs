@@ -18,6 +18,11 @@ namespace Halfbreed
 		private static bool _quit;
 		private static List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
 
+		static Levels.LevelEnum _newLevel;
+		static int _newXLoc;
+		static int _newYLoc;
+		static bool _levelTransition;
+
 		public static void SetupNewGame(Menus.NewGameParameters startingParameters)
 		{
 			_difficultySetting = startingParameters.DifficultySetting;
@@ -69,6 +74,14 @@ namespace Halfbreed
 			_quit = true;
 		}
 
+		public static void InitiateLevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
+		{
+			_newLevel = newLevel;
+			_newXLoc = newX;
+			_newYLoc = newY;
+			_levelTransition = true;
+		}
+
 		public static void LevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
 		{
 			// TODO: Need to pack up the existing level too.
@@ -77,6 +90,7 @@ namespace Halfbreed
 			_player.UpdatePosition(newX, newY);
 			_currentLevel.AddActor(_player);
 			_visibleTiles = new List<XYCoordinateStruct>();
+			_levelTransition = false;
 		}
 
 		public static List<XYCoordinateStruct> VisibleTiles
@@ -87,14 +101,14 @@ namespace Halfbreed
 
 		public static void RunGame()
 		{
-			MainGraphicDisplay.UpdateGameScreen();
-
 			while (true)
 			{
 				_currentLevel.ActivateEntities();
 				_currentTime++;
 				if (_quit)
 					return;
+				if (_levelTransition)
+					LevelTransition(_newLevel, _newXLoc, _newYLoc);
 			}
 		}
 
