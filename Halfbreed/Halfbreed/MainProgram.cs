@@ -10,8 +10,13 @@ namespace Halfbreed
 
         public static void Main()
         {
-			StaticDatabaseConnection.openDBConnection();
-			StaticData.SetupDictionaries();
+			UserDataManager.SetupDirectoriesAndFiles();
+			var configParameters = UserDataManager.ReadConfigParameters();
+
+			UserInputHandler.ExtraKeys = configParameters.ExtraKeys;
+			UserDataManager.FullLogging = configParameters.FullLogging;
+			// TODO: Set the gm option here too.
+
 			// TODO: Pull these magic numbers out and line them up with the MainGraphicsDisplay
 			// TODO: Also sort out a config file to store them.
 			rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
@@ -51,7 +56,6 @@ namespace Halfbreed
 
 		public static void quit()
 		{
-			StaticDatabaseConnection.closeDBConnection();
 			rootConsole.Close();
 		}
 
