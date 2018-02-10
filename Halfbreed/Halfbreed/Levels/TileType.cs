@@ -2,12 +2,9 @@
 {
 	public enum TileType
 	{
-		WOODFLOOR,
-		WOODWALL,
-		WOODENDEBRIS,
-		PLATFORM,
-		PALLET,
-		OPENWATER,
-		PILEOFSACKS
+		WoodFloor,
+		WoodWall,
+		WoodenDebris,
+		OpenWater,
 	}
 }
