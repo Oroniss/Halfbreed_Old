@@ -131,6 +131,12 @@ namespace Halfbreed
 			return returnList;
 		}
 
+		// Private helper functions
+		int ConvertXYToInt(int x, int y)
+		{
+			return y * _width + x;
+		}
+
 		// Basic properties
 		public int Width
 		{
@@ -142,31 +148,84 @@ namespace Halfbreed
 			get { return _height; }
 		}
 
-		// Helper functions
-		int ConvertXYToInt(int x, int y)
+		public bool IsValidMapCoord(int x, int y)
 		{
-			return y * _width + x;
+			return x >= 0 && x < Width && y >= 0 && y < Height;
 		}
 
 		// Furnishings
+		public bool HasFurnishing(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _furnishings.ContainsKey(index);
+		}
+
+		public Furnishing GetFurnishing(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _furnishings[index];
+		}
+
 		public void AddFurnishing(Furnishing furnishing)
 		{
 			var index = ConvertXYToInt(furnishing.XLoc, furnishing.YLoc);
 			_furnishings[index] = furnishing;
 		}
 
+		public void RemoveFurnishing(Furnishing furnishing)
+		{
+			var index = ConvertXYToInt(furnishing.XLoc, furnishing.YLoc);
+			_furnishings.Remove(index);
+		}
+
 		// HarvestingNodes
+		public bool HasHarvestingNode(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _harvestingNodes.ContainsKey(index);
+		}
+
+		public HarvestingNode GetHarvestingNode(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _harvestingNodes[index];
+		}
+
 		public void AddHarvestingNode(HarvestingNode harvestingNode)
 		{
 			var index = ConvertXYToInt(harvestingNode.XLoc, harvestingNode.YLoc);
 			_harvestingNodes[index] = harvestingNode;
 		}
 
+		public void RemoveHarvestingNode(HarvestingNode harvestingNode)
+		{
+			var index = ConvertXYToInt(harvestingNode.XLoc, harvestingNode.YLoc);
+			_harvestingNodes.Remove(index);
+		}
+
 		// Actors
+		public bool HasActor(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _actors.ContainsKey(index);
+		}
+
+		public Actor GetActor(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _actors[index];
+		}
+
 		public void AddActor(Actor actor)
 		{
 			var index = ConvertXYToInt(actor.XLoc, actor.YLoc);
 			_actors[index] = actor;
+		}
+
+		public void RemoveActor(Actor actor)
+		{
+			var index = ConvertXYToInt(actor.XLoc, actor.YLoc);
+			_actors.Remove(index);
 		}
 
 		// Graphical functions
@@ -192,6 +251,14 @@ namespace Halfbreed
 			if (_furnishings.ContainsKey(index) && _furnishings[index].HasBGColor)
 				return _furnishings[index].BGColor;
 			return _mapGrid[index].BGColor;
+		}
+
+		public Colors GetFogColor(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			if (_furnishings.ContainsKey(index) && _furnishings[index].HasFogColor)
+				return _furnishings[index].FogColor;
+			return _mapGrid[index].FogColor;
 		}
 
 	}
