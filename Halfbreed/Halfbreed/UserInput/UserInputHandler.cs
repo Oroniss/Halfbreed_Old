@@ -9,7 +9,7 @@ namespace Halfbreed
     {
 		static bool _extraKeys;
 
-		private static Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>()
+		static Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>()
 		{
 			{RLKey.Number0, "0"}, {RLKey.Number1, "1"}, {RLKey.Number2, "2"}, {RLKey.Number3, "3"}, {RLKey.Number4, "4"},
 			{RLKey.Number5, "5"}, {RLKey.Number6, "6"}, {RLKey.Number7, "7"}, {RLKey.Number8, "8"}, {RLKey.Number9, "9"},
@@ -24,14 +24,16 @@ namespace Halfbreed
 			{RLKey.G, "G"}, {RLKey.K, "K"}, {RLKey.L, "L"}, {RLKey.X, "X"}
 		};
 
-        private static List<string> _queuedInput = new List<string>();
+        static List<string> _queuedInput = new List<string>();
 
-		private static Dictionary<string, int> _numberKeys = new Dictionary<string, int>
+		public static Dictionary<string, int> NumberKeys = new Dictionary<string, int>
 			{{"0", 0}, {"1", 1},  {"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}};
 
-		private static Dictionary<string, Direction> _directionKeys = new Dictionary<string, Direction>
-			{{"UP", new Direction(0, -1)}, {"DOWN", new Direction(0, 1)}, {"LEFT", new Direction(-1, 0)}, {"RIGHT", new Direction(1, 0)},
-			{"UP_LEFT", new Direction(-1, -1)}, {"UP_RIGHT", new Direction(1, -1)}, {"DOWN_LEFT", new Direction(-1, 1)}, {"DOWN_RIGHT", new Direction(1, 1)}};
+		public static Dictionary<string, XYCoordinateStruct> DirectionKeys = new Dictionary<string, XYCoordinateStruct>
+			{{"UP", new XYCoordinateStruct(0, -1)}, {"DOWN", new XYCoordinateStruct(0, 1)}, 
+			{"LEFT", new XYCoordinateStruct(-1, 0)}, {"RIGHT", new XYCoordinateStruct(1, 0)},
+			{"UP_LEFT", new XYCoordinateStruct(-1, -1)}, {"UP_RIGHT", new XYCoordinateStruct(1, -1)}, 
+			{"DOWN_LEFT", new XYCoordinateStruct(-1, 1)}, {"DOWN_RIGHT", new XYCoordinateStruct(1, 1)}};
 
         public static void addKeyboardInput(RLKey key)
         {
@@ -83,9 +85,9 @@ namespace Halfbreed
 
 				var key = getNextKey();
 
-				if (_numberKeys.ContainsKey(key))
+				if (NumberKeys.ContainsKey(key))
 				{
-					int num = _numberKeys[key];
+					int num = NumberKeys[key];
 					if (num == 0)
 					{
 						if ((page + 1) * 10 <= menuOptions.Count)
@@ -161,7 +163,7 @@ namespace Halfbreed
 			}
 		}
 
-		public static Direction GetDirection(string queryText, bool centre)
+		public static XYCoordinateClass GetDirection(string queryText, bool centre)
 		{
 			if (queryText == "")
 				queryText = "Which direction?";
@@ -171,10 +173,10 @@ namespace Halfbreed
 				MainGraphicDisplay.TextConsole.AddOutputText("Which direction");
 				var key = getNextKey();
 
-				if (_directionKeys.ContainsKey(key))
-					return _directionKeys[key];
+				if (DirectionKeys.ContainsKey(key))
+					return new XYCoordinateClass(DirectionKeys[key].X, DirectionKeys[key].Y);
 				if (key == "SPACE" && centre)
-					return new Direction(0, 0);
+					return new XYCoordinateClass(0, 0);
 				if (key == "ESCAPE")
 					return null;
 			}
