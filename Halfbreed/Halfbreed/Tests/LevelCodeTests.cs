@@ -52,12 +52,12 @@ namespace Halfbreed.Tests
 		{
 			Level testLevel = new Level(Levels.LevelEnum.TESTLEVEL1);
 
-			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(0, 0));
-			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetBGColor(43, 24));
-			Assert.AreEqual(Colors.WOODBROWN, testLevel.GetBGColor(1, 1));
-			Assert.AreEqual(Colors.REDBROWN, testLevel.GetBGColor(42, 1)); // Pallet is here.
-			Assert.AreEqual(Colors.DARKBROWN, testLevel.GetBGColor(37, 8)); // Debris
-			Assert.AreEqual(Colors.DARKBROWN, testLevel.GetBGColor(35, 10)); // Debris
+			Assert.AreEqual(Colors.DarkWoodBrown, testLevel.GetBGColor(0, 0));
+			Assert.AreEqual(Colors.DarkWoodBrown, testLevel.GetBGColor(43, 24));
+			Assert.AreEqual(Colors.WoodBrown, testLevel.GetBGColor(1, 1));
+			Assert.AreEqual(Colors.RedBrown, testLevel.GetBGColor(42, 1)); // Pallet is here.
+			Assert.AreEqual(Colors.DarkBrown, testLevel.GetBGColor(37, 8)); // Debris
+			Assert.AreEqual(Colors.DarkBrown, testLevel.GetBGColor(35, 10)); // Debris
 		}
 
 		[Test]
@@ -90,10 +90,10 @@ namespace Halfbreed.Tests
 
 			Assert.IsTrue(testLevel.HasDrawingEntity(42, 19));
 			Assert.AreEqual('.', testLevel.GetDrawingEntity(42, 19).Symbol);
-			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetDrawingEntity(42, 19).FGColor); // Pallet
+			Assert.AreEqual(Colors.DarkWoodBrown, testLevel.GetDrawingEntity(42, 19).FGColor); // Pallet
 			Assert.IsTrue(testLevel.HasDrawingEntity(24, 16));
 			Assert.AreEqual('#', testLevel.GetDrawingEntity(24, 16).Symbol);
-			Assert.AreEqual(Colors.DARKWOODBROWN, testLevel.GetDrawingEntity(24, 16).FGColor); // Chest
+			Assert.AreEqual(Colors.DarkWoodBrown, testLevel.GetDrawingEntity(24, 16).FGColor); // Chest
 
 			Assert.IsFalse(testLevel.HasDrawingEntity(4, 20));
 			Assert.IsFalse(testLevel.HasDrawingEntity(41, 5));

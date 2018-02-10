@@ -7,14 +7,6 @@ namespace Halfbreed.Tests
 	public class FurnishingTests
 	{
 
-		[SetUp]
-		public void OpenTestDatabases()
-		{
-			StaticDatabaseConnection.SetupTestContext(TestContext.CurrentContext.TestDirectory);
-			StaticDatabaseConnection.openDBConnection();
-			StaticData.SetupDictionaries();
-		}
-
 		[Test]
 		public void TestFurnishingBasics()
 		{
@@ -26,37 +18,32 @@ namespace Halfbreed.Tests
 			Assert.AreEqual(5, newPallet.XLoc);
 			Assert.AreEqual(Materials.HESSION, ((MaterialComponent)newPallet.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('.', newPallet.Symbol);
-			Assert.AreEqual(DisplayLayer.FURNISHING, newPallet.DisplayLayer);
-			Assert.IsTrue(newPallet.HasTrait(EntityTraits.FURNISHING));
-			Assert.IsFalse(newPallet.HasTrait(EntityTraits.RUINED));
-			Assert.IsTrue(newPallet.HasTrait(EntityTraits.IMMUNETOMENTAL));
-			Assert.IsTrue(newPallet.HasTrait(EntityTraits.IMMUNETOPOISON));
-			Assert.IsTrue(newPallet.HasTrait(EntityTraits.CLOTH));
-			Assert.IsTrue(newPallet.HasTrait(EntityTraits.ORGANIC));
+			Assert.IsTrue(newPallet.HasTrait(Traits.Furnishing));
+			Assert.IsFalse(newPallet.HasTrait(Traits.Ruined));
+			Assert.IsTrue(newPallet.HasTrait(Traits.ImmuneToMental));
+			Assert.IsTrue(newPallet.HasTrait(Traits.ImmuneToPoison));
+			Assert.IsTrue(newPallet.HasTrait(Traits.Cloth));
+			Assert.IsTrue(newPallet.HasTrait(Traits.Organic));
 
 			Assert.AreEqual(10, newDoor.YLoc);
 			Assert.AreEqual(10, newDoor.XLoc);
-			Assert.AreEqual(Materials.PINE, ((MaterialComponent)newDoor.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('+', newDoor.Symbol);
-			Assert.AreEqual(DisplayLayer.FURNISHING, newDoor.DisplayLayer);
-			Assert.IsTrue(newDoor.HasTrait(EntityTraits.FURNISHING));
-			Assert.IsFalse(newDoor.HasTrait(EntityTraits.IMMUNETOCOLD));
-			Assert.IsTrue(newDoor.HasTrait(EntityTraits.IMMUNETOMENTAL));
-			Assert.IsTrue(newDoor.HasTrait(EntityTraits.IMMUNETOPOISON));
-			Assert.IsTrue(newDoor.HasTrait(EntityTraits.WOOD));
-			Assert.IsTrue(newDoor.HasTrait(EntityTraits.ORGANIC));
+			Assert.IsTrue(newDoor.HasTrait(Traits.Furnishing));
+			Assert.IsFalse(newDoor.HasTrait(Traits.ImmuneToCold));
+			Assert.IsTrue(newDoor.HasTrait(Traits.ImmuneToMental));
+			Assert.IsTrue(newDoor.HasTrait(Traits.ImmuneToPoison));
+			Assert.IsTrue(newDoor.HasTrait(Traits.Wood));
+			Assert.IsTrue(newDoor.HasTrait(Traits.Organic));
 
 			Assert.AreEqual(8, newChest.YLoc);
 			Assert.AreEqual(12, newChest.XLoc);
-			Assert.AreEqual(Materials.TIN, ((MaterialComponent)newChest.GetComponent(ComponentType.MATERIAL)).Material);
 			Assert.AreEqual('#', newChest.Symbol);
-			Assert.AreEqual(DisplayLayer.FURNISHING, newPallet.DisplayLayer);
-			Assert.IsTrue(newChest.HasTrait(EntityTraits.FURNISHING));
-			Assert.IsFalse(newChest.HasTrait(EntityTraits.IMMUNETOFIRE));
-			Assert.IsTrue(newChest.HasTrait(EntityTraits.IMMUNETOMENTAL));
-			Assert.IsTrue(newChest.HasTrait(EntityTraits.IMMUNETOPOISON));
-			Assert.IsTrue(newChest.HasTrait(EntityTraits.METAL));
-			Assert.IsTrue(newChest.HasTrait(EntityTraits.INORGANIC));
+			Assert.IsTrue(newChest.HasTrait(Traits.Furnishing));
+			Assert.IsFalse(newChest.HasTrait(Traits.ImmuneToFire));
+			Assert.IsTrue(newChest.HasTrait(Traits.ImmuneToMental));
+			Assert.IsTrue(newChest.HasTrait(Traits.ImmuneToPoison));
+			Assert.IsTrue(newChest.HasTrait(Traits.Metal));
+			Assert.IsTrue(newChest.HasTrait(Traits.Inorganic));
 		}
 
 		[Test]
@@ -69,33 +56,26 @@ namespace Halfbreed.Tests
 
 			Assert.AreEqual(5, newDen.XLoc);
 			Assert.AreEqual(10, newDen.YLoc);
-			Assert.AreEqual(DisplayLayer.HARVESTABLE, newDen.DisplayLayer);
 			Assert.AreEqual(':', newDen.Symbol);
-			Assert.AreEqual(Colors.TAN, newDen.FGColor);
-			Assert.IsFalse(newDen.HasTrait(EntityTraits.INORGANIC));
-			Assert.IsTrue(newDen.HasTrait(EntityTraits.FURNISHING));
-			Assert.IsTrue(newDen.HasTrait(EntityTraits.ORGANIC));
-			Assert.IsTrue(newDen.HasTrait(EntityTraits.IMMUNETOMENTAL));
-			Assert.IsTrue(newDen.HasTrait(EntityTraits.ANIMAL));
+			Assert.AreEqual(Colors.Tan, newDen.FGColor);
+			Assert.IsFalse(newDen.HasTrait(Traits.Inorganic));
+			Assert.IsTrue(newDen.HasTrait(Traits.Furnishing));
+			Assert.IsTrue(newDen.HasTrait(Traits.Organic));
+			Assert.IsTrue(newDen.HasTrait(Traits.ImmuneToMental));
+			Assert.IsTrue(newDen.HasTrait(Traits.Animal));
 
 			Assert.AreEqual('}', newMold.Symbol);
-			Assert.AreEqual(Colors.PUTRIDGREEN, newMold.FGColor);
-			Assert.IsFalse(newMold.HasTrait(EntityTraits.ANIMAL));
-			Assert.IsTrue(newMold.HasTrait(EntityTraits.PLANT));
+			Assert.AreEqual(Colors.PutridGreen, newMold.FGColor);
+			Assert.IsFalse(newMold.HasTrait(Traits.Animal));
+			Assert.IsTrue(newMold.HasTrait(Traits.Plant));
 
 			Assert.AreEqual('*', newOre.Symbol);
-			Assert.AreEqual(Colors.BLACK, newOre.FGColor);
-			Assert.IsFalse(newOre.HasTrait(EntityTraits.ORGANIC));
-			Assert.IsTrue(newOre.HasTrait(EntityTraits.INORGANIC));
+			Assert.AreEqual(Colors.Black, newOre.FGColor);
+			Assert.IsFalse(newOre.HasTrait(Traits.Organic));
+			Assert.IsTrue(newOre.HasTrait(Traits.Inorganic));
 
 			Assert.AreEqual('*', newRichOre.Symbol);
-			Assert.AreEqual(Colors.GOLD, newRichOre.FGColor);
-}
-
-		[TearDown]
-		public void CloseDBConnection()
-		{
-			StaticDatabaseConnection.closeDBConnection();
+			Assert.AreEqual(Colors.Gold, newRichOre.FGColor);
 		}
 
 	}
