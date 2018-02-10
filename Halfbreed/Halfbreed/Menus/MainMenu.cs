@@ -21,13 +21,13 @@ namespace Halfbreed.Menus
 							NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 							if (!parameters.Cancel)
 							{
-								parameters.GameId = UserDatabaseConnection.GenerateNextGameId();
+								parameters.GameId = 0;  //UserDatabaseConnection.GenerateNextGameId();
 								GameEngine.SetupNewGame(parameters);
 								Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
 								GameEngine.LevelTransition(startingLevel, 42, 5);
 								//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
 								//GameEngine.LevelTransition(startingLevel, 49, 42);
-								UserDatabaseConnection.InsertNewSaveGameSummary(GameEngine.GenerateSaveSummary());
+								//UserDatabaseConnection.InsertNewSaveGameSummary(GameEngine.GenerateSaveSummary());
 								GameEngine.RunGame();
 							}
 							MainProgram.quit();
@@ -35,13 +35,18 @@ namespace Halfbreed.Menus
 						}
 					case 1:
 						{
-							int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
+							//int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
 							break;
 						}
 					case -1:
 						{
 							MainProgram.quit();
 							return;
+						}
+					case 5:
+						{
+							UserInputHandler.DisplayConfigMenu();
+							break;
 						}
 				}
 			}
