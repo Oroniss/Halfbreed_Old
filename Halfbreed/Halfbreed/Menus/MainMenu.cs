@@ -23,10 +23,10 @@ namespace Halfbreed.Menus
 							{
 								parameters.GameId = 0;  //UserDatabaseConnection.GenerateNextGameId();
 								GameEngine.SetupNewGame(parameters);
-								Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
-								GameEngine.LevelTransition(startingLevel, 42, 5);
-								//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
-								//GameEngine.LevelTransition(startingLevel, 49, 42);
+								//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
+								//GameEngine.LevelTransition(startingLevel, 42, 5);
+								Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
+								GameEngine.LevelTransition(startingLevel, 49, 42);
 								//UserDatabaseConnection.InsertNewSaveGameSummary(GameEngine.GenerateSaveSummary());
 								GameEngine.RunGame();
 							}
