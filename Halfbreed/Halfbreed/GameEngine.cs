@@ -74,8 +74,8 @@ namespace Halfbreed
 			// TODO: Need to pack up the existing level too.
 			// TODO: Need to use correct update move function so that it moves all equipped items as well.
 			_currentLevel = new Level(newLevel);
-			//_player.UpdatePosition(newX, newY);
-			//_currentLevel.AddEntity(_player);
+			_player.UpdatePosition(newX, newY);
+			_currentLevel.AddActor(_player);
 			_visibleTiles = new List<XYCoordinateStruct>();
 		}
 
@@ -89,12 +89,9 @@ namespace Halfbreed
 		{
 			MainGraphicDisplay.UpdateGameScreen();
 
-			var key = UserInputHandler.getNextKey();
-			return;
-
 			while (true)
 			{
-				//_currentLevel.ActivateEntities(_currentTime);
+				_currentLevel.ActivateEntities();
 				_currentTime++;
 				if (_quit)
 					return;
