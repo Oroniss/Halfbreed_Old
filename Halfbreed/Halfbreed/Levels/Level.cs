@@ -137,6 +137,22 @@ namespace Halfbreed
 			return y * _width + x;
 		}
 
+		bool HasTrait(int index, Traits trait)
+		{
+			return _mapGrid[index].HasTrait(trait) || 
+				(_actors.ContainsKey(index) && _actors[index].HasTrait(trait)) ||
+				(_furnishings.ContainsKey(index) && _furnishings[index].HasTrait(trait)) ||
+				(_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].HasTrait(trait));
+		}
+
+		int GetElevation(int index)
+		{
+			var elevation = _mapGrid[index].Elevation;
+			if (_furnishings.ContainsKey(index))
+				return Math.Max(elevation, _furnishings[index].Elevation);
+			return elevation;
+		}
+
 		// Basic properties
 		public int Width
 		{
@@ -228,6 +244,77 @@ namespace Halfbreed
 			_actors.Remove(index);
 		}
 
+		// Movement and passibility functions
+		public bool isPassible(int x, int y, bool walk, bool fly, bool swim)
+		{
+			var index = ConvertXYToInt(x, y);
+			if (BlockAllMovement(index))
+				return false;
+			return (walk && !HasTrait(index, Traits.BlockWalk)) || 
+			        (fly && !HasTrait(index, Traits.BlockFly)) || 
+			        (swim && !HasTrait(index, Traits.BlockSwim));
+		}
+
+		public bool isPassible(int x, int y, Actor actor)
+		{
+			return isPassible(x, y, actor.HasTrait(Traits.Walking), actor.HasTrait(Traits.Flying), actor.HasTrait(Traits.Swimming));
+		}
+
+		public bool BlockAllMovement(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return BlockAllMovement(index);
+		}
+
+		bool BlockAllMovement(int index)
+		{
+			return HasTrait(index, Traits.Impassible);
+		}
+
+		void MoveActor(int newX, int newY, Actor actor)
+		{
+			RemoveActor(actor);
+			actor.UpdatePosition(newX, newY);
+			AddActor(actor);
+		}
+
+		public bool MoveActorAttempt(int newX, int newY, Actor actor)
+		{
+			// TODO: Fix this up.
+			var currentIndex = ConvertXYToInt(actor.XLoc, actor.YLoc);
+			var newIndex = ConvertXYToInt(newX, newY);
+
+			if (actor.HasTrait(Traits.Flying) && !HasTrait(newIndex, Traits.BlockFly))
+			{
+				// TODO: Call flying functions here.
+	            MoveActor(newX, newY, actor);
+				return true;
+			}
+			if (actor.HasTrait(Traits.Walking) && !HasTrait(newIndex, Traits.BlockWalk))
+			{
+				var elevationDifference = GetElevation(newIndex) - GetElevation(currentIndex);
+				if (Math.Abs(elevationDifference) <= 1 || HasTrait(currentIndex, Traits.ElevationChange) || HasTrait(newIndex, Traits.ElevationChange))
+				{
+					// TODO: Call walking functions here.
+					MoveActor(newX, newY, actor);
+					return true;
+				}
+				if (elevationDifference > 1)
+					MainGraphicDisplay.TextConsole.AddOutputText("It's too high to climb up there");
+				else
+					MainGraphicDisplay.TextConsole.AddOutputText("Dropping down there would be too dangerous");
+				return false;
+			}
+			if (actor.HasTrait(Traits.Swimming) && !HasTrait(newIndex, Traits.BlockSwim))
+			{
+				// TODO: Call swimming functions here.
+				MoveActor(newX, newY, actor);
+				return true;
+			}
+
+			return false;
+		}
+
 		// Graphical functions
 		public bool HasDrawingEntity(int x, int y)
 		{
@@ -259,6 +346,17 @@ namespace Halfbreed
 			if (_furnishings.ContainsKey(index) && _furnishings[index].HasFogColor)
 				return _furnishings[index].FogColor;
 			return _mapGrid[index].FogColor;
+		}
+
+		// Turn management functions
+		public void ActivateEntities()
+		{
+			foreach (var index in new List<int>(_furnishings.Keys))
+				_furnishings[index].Update(this);
+			foreach (var index in new List<int>(_harvestingNodes.Keys))
+				_harvestingNodes[index].Update(this);
+			foreach (var index in new List<int>(_actors.Keys))
+				_actors[index].Update(this);
 		}
 
 	}
