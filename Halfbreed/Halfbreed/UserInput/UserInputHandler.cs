@@ -11,17 +11,23 @@ namespace Halfbreed
 
 		static Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>()
 		{
-			{RLKey.Number0, "0"}, {RLKey.Number1, "1"}, {RLKey.Number2, "2"}, {RLKey.Number3, "3"}, {RLKey.Number4, "4"},
-			{RLKey.Number5, "5"}, {RLKey.Number6, "6"}, {RLKey.Number7, "7"}, {RLKey.Number8, "8"}, {RLKey.Number9, "9"},
+			{RLKey.Number0, "0"}, {RLKey.Number1, "1"}, {RLKey.Number2, "2"}, {RLKey.Number3, "3"}, 
+			{RLKey.Number4, "4"}, {RLKey.Number5, "5"}, {RLKey.Number6, "6"}, {RLKey.Number7, "7"}, 
+			{RLKey.Number8, "8"}, {RLKey.Number9, "9"},
 
 			{RLKey.Left, "LEFT"}, {RLKey.Right, "RIGHT"}, {RLKey.Up, "UP"}, {RLKey.Down, "DOWN"},
-			{RLKey.Keypad1, "DOWN_LEFT"}, {RLKey.Keypad2, "DOWN"}, {RLKey.Keypad3, "DOWN_RIGHT"}, {RLKey.Keypad4, "LEFT"},
-			{RLKey.Keypad6, "RIGHT"}, {RLKey.Keypad7, "UP_LEFT"}, {RLKey.Keypad8, "UP"}, {RLKey.Keypad9, "UP_RIGHT"},
+			{RLKey.Keypad1, "DOWN_LEFT"}, {RLKey.Keypad2, "DOWN"}, {RLKey.Keypad3, "DOWN_RIGHT"}, 
+			{RLKey.Keypad4, "LEFT"}, {RLKey.Keypad6, "RIGHT"}, {RLKey.Keypad7, "UP_LEFT"}, {RLKey.Keypad8, "UP"}, 
+			{RLKey.Keypad9, "UP_RIGHT"},
 
 			{RLKey.Escape, "ESCAPE"}, {RLKey.Space, "SPACE"},
 
 			// TODO: Add the rest.
-			{RLKey.G, "G"}, {RLKey.K, "K"}, {RLKey.L, "L"}, {RLKey.X, "X"}
+			{RLKey.A, "A"}, {RLKey.B, "B"}, {RLKey.C, "C"}, {RLKey.D, "D"}, {RLKey.E, "E"}, {RLKey.F, "F"},
+			{RLKey.G, "G"}, {RLKey.H, "H"}, {RLKey.I, "I"}, {RLKey.J, "J"}, {RLKey.K, "K"}, {RLKey.L, "L"}, 
+			{RLKey.M, "M"}, {RLKey.N, "N"}, {RLKey.O, "O"}, {RLKey.P, "P"}, {RLKey.Q, "Q"}, {RLKey.R, "R"},
+			{RLKey.S, "S"}, {RLKey.T, "T"}, {RLKey.U, "U"}, {RLKey.V, "V"}, {RLKey.W, "W"}, {RLKey.X, "X"}, 
+			{RLKey.Y, "Y"}, {RLKey.Z, "Z"}
 		};
 
         static List<string> _queuedInput = new List<string>();
