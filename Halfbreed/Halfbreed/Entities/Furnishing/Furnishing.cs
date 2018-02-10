@@ -1,44 +1,73 @@
-﻿using System.Collections.Generic;
-using System;
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
-	public partial class Entity
+	public class Furnishing:Entity
 	{
-		private static List<EntityTraits> _furnishingTraits = new List<EntityTraits>() {
-			EntityTraits.IMMUNETODISEASE, EntityTraits.IMMUNETOMENTAL, EntityTraits.IMMUNETOPOISON };
+		private static List<Traits> _furnishingTraits = new List<Traits>() {
+			Traits.ImmuneToDisease, Traits.ImmuneToMental, Traits.ImmuneToPoison };
 
+		bool _hasBGColor;
+		Colors _bgColor;
+		bool _hasFogColor;
+		Colors _fogColor;
+		int _elevation;
 
-		public Entity(string furnishingName, Materials material, FurnishingTemplate template, 
-		              int xLoc, int yLoc, string[] otherParameters)
-			:this(furnishingName, xLoc, yLoc, template.Traits)
+		List<string> _interactionFunctions;
+
+		public Furnishing(string furnishingName, int xLoc, int yLoc, List<string> otherParameters)
+			:base(furnishingName, xLoc, yLoc, otherParameters)
 		{
-			foreach (EntityTraits trait in _furnishingTraits)
+			foreach (Traits trait in _furnishingTraits)
 				AddTrait(trait);
 
-			MaterialProperties properties = StaticData.GetProperties(material);
+			var template = EntityData.GetFurnishingDetails(furnishingName);
 
-			_displayLayer = DisplayLayer.FURNISHING;
-			_fgColor = properties.FGColor;
-			_symbol = template.Symbol;
+			_hasBGColor = template.HasBGColor;
+			_bgColor = template.BGColor;
+			_hasFogColor = template.HasFogColor;
+			_fogColor = template.FogColor;
+			_elevation = template.Elevation;
 
-			_components[ComponentType.MATERIAL] = new MaterialComponent(this, material);
+			// TODO: Call the setup function here too.
 
-			foreach (EntityTraits trait in properties.Traits)
-				AddTrait(trait);
-
-			if (template.HasTile)
-			{
-				_hasTile = true;
-				_maptile = StaticData.GetMapTileDetails((Levels.TileType)Enum.Parse(typeof(Levels.TileType), template.TileTypeName));
-			}
-
-			_components[ComponentType.INTERACTIBLE] = new InteractibleComponent(this);
-
-			SetupOtherComponents(template.OtherComponents, otherParameters);
 		}
 
+		public bool HasBGColor
+		{
+			get { return _hasBGColor; }
+		}
 
+		public bool HasFogColor
+		{
+			get { return _hasFogColor; }
+		}
+
+		public Colors BGColor
+		{
+			// TODO: Think about whether this should also check for concealed.
+			get
+			{
+				if (!_hasBGColor)
+					ErrorLogger.AddDebugText("Asked for BGColor on Entity without it: " + this.ToString());
+				return _bgColor;
+			}
+		}
+
+		public Colors FogColor
+		{
+			// TODO: Think about whether this should also check for concealed.
+			get
+			{
+				if (!_hasFogColor)
+					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this.ToString());
+				return _fogColor;
+			}
+		}
+
+		public int Elevation
+		{
+			get { return _elevation; }
+		}
 	}
-
 }
