@@ -1,16 +1,16 @@
-﻿namespace Halfbreed.Entities
+namespace Halfbreed.Entities
 {
 	public struct FurnishingTemplate
 	{
 		string _furnishingName;
 		char _symbol;
 		int _volume;
-		EntityTraits[] _traits;
+		Traits[] _traits;
 		bool _hasTile;
 		string _tileTypeName;
 		string[] _otherComponents;
 
-		public FurnishingTemplate(string furnishingName, char symbol, int volume, EntityTraits[] traits, bool hasTile, string tileTypeName,
+		public FurnishingTemplate(string furnishingName, char symbol, int volume, Traits[] traits, bool hasTile, string tileTypeName,
 		                         string[] otherComponents)
 		{
 			_furnishingName = furnishingName;
@@ -37,7 +37,7 @@
 			get { return _volume; }
 		}
 
-		public EntityTraits[] Traits
+		public Traits[] Traits
 		{
 			get { return _traits; }
 		}
