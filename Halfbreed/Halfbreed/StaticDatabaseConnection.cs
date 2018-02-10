@@ -38,12 +38,12 @@ namespace Halfbreed
 			ErrorLogger.AddDebugText("Tried to close already closed DB connection");
 		}
 
-		private static EntityTraits[] GetTraits(string traitAttribute)
+		private static Traits[] GetTraits(string traitAttribute)
 		{
 			string[] traitNames = traitAttribute.Trim().Split(',');
-			EntityTraits[] traits = new EntityTraits[traitNames.Length];
+			Traits[] traits = new Traits[traitNames.Length];
 			for (int i = 0; i < traitNames.Length; i++)
-				traits[i] = (EntityTraits)Enum.Parse(typeof(EntityTraits), traitNames[i]);
+				traits[i] = (Traits)Enum.Parse(typeof(Traits), traitNames[i]);
 			return traits;
 		}
 
@@ -80,7 +80,7 @@ namespace Halfbreed
 
 					Colors fgcolor = (Colors)Enum.Parse(typeof(Colors), reader.GetString(15));
 
-					EntityTraits[] traits = GetTraits(reader.GetString(16));
+					Traits[] traits = GetTraits(reader.GetString(16));
 					string adjective = reader.GetString(17);
 
 					materialDict.Add(material, new MaterialProperties(acid, cold, elec, fire, poison, disease, light,
@@ -140,7 +140,7 @@ namespace Halfbreed
 				string furnishingName = reader.GetString(0);
 				char symbol = reader.GetString(1)[0];
 				int volume = reader.GetInt32(2);
-				EntityTraits[] traits = GetTraits(reader.GetString(3));
+				Traits[] traits = GetTraits(reader.GetString(3));
 				bool hasTile = (reader.GetInt32(4) == 1);
 				string tileName = "";
 				if (hasTile)
