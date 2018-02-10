@@ -1,6 +1,6 @@
 using System;
 
-namespace Halfbreed
+namespace Halfbreed.UserData
 {
 	public struct SaveGameSummary
 	{
