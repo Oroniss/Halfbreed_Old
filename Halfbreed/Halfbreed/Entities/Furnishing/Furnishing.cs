@@ -33,6 +33,9 @@ namespace Halfbreed.Entities
 			_interactionFunctions = new List<string>();
 
 			FurnishingSetupFunctions.GetSetupFunction(furnishingName)(this, otherParameters);
+
+			if (otherParameters.Contains("LevelTransition"))
+				FurnishingSetupFunctions.GetSetupFunction("Level Transition Setup")(this, otherParameters);
 		}
 
 		public bool HasBGColor
@@ -84,6 +87,12 @@ namespace Halfbreed.Entities
 
 		public void InteractWith(Actor actor, Level level)
 		{
+			if (_interactionFunctions.Count == 0)
+			{
+				MainGraphicDisplay.TextConsole.AddOutputText("You can't do anything with that");
+				return;
+			}
+
 			for (int i = 0; i < _interactionFunctions.Count; i++)
 				InteractionFunctions.GetInteractionFunction(_interactionFunctions[i])(this, actor, level);
 		}
