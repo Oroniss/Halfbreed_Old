@@ -1,33 +1,22 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
-	public partial class Entity
+	public partial class Player:Actor
 	{
-		public Entity(Menus.NewGameParameters playerParameters)
+		public Player(Menus.NewGameParameters playerParameters)
+			:base("Player", 0 ,0 , new List<string>())
 		{
-			_displayLayer = DisplayLayer.PLAYER;
-			_symbol = '@';
-			_fgColor = Colors.BLACK;
-			_entityName = "Player"; // TODO: Think whether this is correct or not.
+			AddTrait(Traits.Player);
+			AddTrait(Traits.Walking);
+			AddTrait(Traits.Swimming);
+			AddTrait(Traits.Climbing);
 
-			_isConcealed = false;
-			_playerSpotted = true;
+		}
 
-			_components = new Dictionary<ComponentType, Component>();
-			_traits = new List<EntityTraits>();
-			AddTrait(EntityTraits.PLAYER);
-			AddTrait(EntityTraits.BLOCKMOVE);
-			AddTrait(EntityTraits.CANINTERACT);
-			AddTrait(EntityTraits.CANWALK);
-			AddTrait(EntityTraits.CANSWIM);
-			AddTrait(EntityTraits.CANCLIMB);
-
-			InputComponent inputComponent = new InputComponent(this);
-			inputComponent.SetManual();
-			_components[ComponentType.INPUT] = inputComponent;
-			_components[ComponentType.MOVEMENT] = new MovementComponent(this);
-			_components[ComponentType.SENSORY] = new SensoryComponent(this, 18);
+		protected override void GetNextMove(Level currentLevel)
+		{
+			MainGraphicDisplay.UpdateGameScreen();
 		}
 	}
 }
