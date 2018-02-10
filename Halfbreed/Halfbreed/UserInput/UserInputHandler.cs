@@ -7,27 +7,44 @@ namespace Halfbreed
 {
     public static class UserInputHandler
     {
-        private static List<RLKey> _queuedInput = new List<RLKey>();
+		static bool _extraKeys;
 
-		private static Dictionary<RLKey, int> _numberKeys = new Dictionary<RLKey, int>
-			{{RLKey.Number0, 0}, {RLKey.Number1, 1},  {RLKey.Number2, 2}, {RLKey.Number3, 3}, {RLKey.Number4, 4},
-			{RLKey.Number5, 5}, {RLKey.Number6, 6}, {RLKey.Number7, 7}, {RLKey.Number8, 8}, {RLKey.Number9, 9}};
+		private static Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>()
+		{
+			{RLKey.Number0, "0"}, {RLKey.Number1, "1"}, {RLKey.Number2, "2"}, {RLKey.Number3, "3"}, {RLKey.Number4, "4"},
+			{RLKey.Number5, "5"}, {RLKey.Number6, "6"}, {RLKey.Number7, "7"}, {RLKey.Number8, "8"}, {RLKey.Number9, "9"},
 
-		private static Dictionary<RLKey, Direction> _directionKeys = new Dictionary<RLKey, Direction>
-			{{RLKey.Up, new Direction(0, -1)}, {RLKey.Down, new Direction(0, 1)}, {RLKey.Left, new Direction(-1, 0)},
-			{RLKey.Right, new Direction(1, 0)}};
-		// TODO: Add the keypad keys here too.
-		// TODO: Make sure the laptop keys options changes this too.
+			{RLKey.Left, "LEFT"}, {RLKey.Right, "RIGHT"}, {RLKey.Up, "UP"}, {RLKey.Down, "DOWN"},
+			{RLKey.Keypad1, "DOWN_LEFT"}, {RLKey.Keypad2, "DOWN"}, {RLKey.Keypad3, "DOWN_RIGHT"}, {RLKey.Keypad4, "LEFT"},
+			{RLKey.Keypad6, "RIGHT"}, {RLKey.Keypad7, "UP_LEFT"}, {RLKey.Keypad8, "UP"}, {RLKey.Keypad9, "UP_RIGHT"},
+
+			{RLKey.Escape, "ESCAPE"}, {RLKey.Space, "SPACE"},
+
+			// TODO: Add the rest.
+			{RLKey.G, "G"}, {RLKey.K, "K"}, {RLKey.L, "L"}, {RLKey.X, "X"}
+		};
+
+        private static List<string> _queuedInput = new List<string>();
+
+		private static Dictionary<string, int> _numberKeys = new Dictionary<string, int>
+			{{"0", 0}, {"1", 1},  {"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}};
+
+		private static Dictionary<string, Direction> _directionKeys = new Dictionary<string, Direction>
+			{{"UP", new Direction(0, -1)}, {"DOWN", new Direction(0, 1)}, {"LEFT", new Direction(-1, 0)}, {"RIGHT", new Direction(1, 0)},
+			{"UP_LEFT", new Direction(-1, -1)}, {"UP_RIGHT", new Direction(1, -1)}, {"DOWN_LEFT", new Direction(-1, 1)}, {"DOWN_RIGHT", new Direction(1, 1)}};
 
         public static void addKeyboardInput(RLKey key)
         {
-            lock (_queuedInput)
-            {
-                _queuedInput.Add(key);
-            }
+			if (_keyDict.ContainsKey(key))
+			{
+				lock (_queuedInput)
+				{
+					_queuedInput.Add(_keyDict[key]);
+				}
+			}
         }
 
-        public static RLKey getNextKey()
+        public static string getNextKey()
         {
             while (true)
             {
@@ -35,7 +52,7 @@ namespace Halfbreed
                 {
                     if(_queuedInput.Count > 0)
                     {
-                        RLKey toReturn = _queuedInput[0];
+                        var toReturn = _queuedInput[0];
 						_queuedInput.RemoveAt(0);
                         return toReturn;
                     }
@@ -48,7 +65,7 @@ namespace Halfbreed
 		{
 			lock (_queuedInput)
 			{
-				_queuedInput = new List<RLKey>();
+				_queuedInput = new List<string>();
 			}
 		}
 
@@ -64,7 +81,7 @@ namespace Halfbreed
 				}
 				MainGraphicDisplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
 
-				RLKey key = getNextKey();
+				var key = getNextKey();
 
 				if (_numberKeys.ContainsKey(key))
 				{
@@ -84,17 +101,62 @@ namespace Halfbreed
 						}
 					}
 				}
-				if (key == RLKey.Left && page > 0)
+				if (key == "LEFT" && page > 0)
 				{
 					page--;
 				}
-				if (key == RLKey.Right && ((page + 1) * 10 < menuOptions.Count))
+				if (key == "RIGHT" && ((page + 1) * 10 < menuOptions.Count))
 				{
 					page++;
 				}
-				if (key == RLKey.Escape)
+				if (key == "ESCAPE")
 				{
 					return -1;
+				}
+			}
+		}
+
+		// TODO: See if this is something that comes up enough to generalise.
+		public static void DisplayConfigMenu()
+		{
+			var configParameters = UserDataManager.ReadConfigParameters();
+			var logging = configParameters.FullLogging;
+			var keys = configParameters.ExtraKeys;
+			var gm = configParameters.GMOptions;
+
+			var title = "Select Configuration Options";
+			var options = new List<string>() { "", "", "" };
+			var bottom = "Escape to exit";
+
+			while (true)
+			{
+				var loggingText = "Off";
+				if (logging)
+					loggingText = "On";
+				options[0] = string.Format("L: Toggle full game log - currently {0}", loggingText);
+				var keysText = "Off";
+				if (keys)
+					keysText = "On";
+				options[1] = string.Format("K: Toggle laptop keys - currently {0}", keysText);
+				var gmText = "Off";
+				if (gm)
+					gmText = "On";
+				options[2] = string.Format("G: Toggle GM Options - currently {0}", gmText);
+
+				MainGraphicDisplay.MenuConsole.DrawMenu(title, options, bottom);
+
+				var key = getNextKey();
+
+				if (key == "L")
+					logging = !logging;
+				if (key == "K")
+					keys = !keys;
+				if (key == "G")
+					gm = !gm;
+				if (key == "ESCAPE")
+				{
+					UserDataManager.WriteConfigFile(new UserData.ConfigParameters(keys, logging, gm));
+					return;
 				}
 			}
 		}
@@ -107,15 +169,47 @@ namespace Halfbreed
 			while (true)
 			{
 				MainGraphicDisplay.TextConsole.AddOutputText("Which direction");
-				RLKey key = getNextKey();
+				var key = getNextKey();
 
 				if (_directionKeys.ContainsKey(key))
 					return _directionKeys[key];
-				if (key == RLKey.Enter && centre)
+				if (key == "SPACE" && centre)
 					return new Direction(0, 0);
-				if (key == RLKey.Escape)
+				if (key == "ESCAPE")
 					return null;
 			}
+		}
+
+		public static bool ExtraKeys
+		{
+			get { return _extraKeys; }
+			set {
+				_extraKeys = value;
+				if (value)
+					AddExtraKeys();
+				else
+					RemoveExtraKeys();
+			}
+		}
+
+		static void AddExtraKeys()
+		{
+			_keyDict[RLKey.Semicolon] = "DOWN_LEFT";
+			_keyDict[RLKey.Quote] = "DOWN_RIGHT";
+			_keyDict[RLKey.BracketLeft] = "UP_LEFT";
+			_keyDict[RLKey.BracketRight] = "UP_RIGHT";
+		}
+
+		static void RemoveExtraKeys()
+		{
+			if (_keyDict.ContainsKey(RLKey.Semicolon))
+				_keyDict.Remove(RLKey.Semicolon);
+			if (_keyDict.ContainsKey(RLKey.Quote))
+				_keyDict.Remove(RLKey.Quote);
+			if (_keyDict.ContainsKey(RLKey.BracketLeft))
+				_keyDict.Remove(RLKey.BracketLeft);
+			if (_keyDict.ContainsKey(RLKey.BracketRight))
+				_keyDict.Remove(RLKey.BracketRight);
 		}
     }
 }
