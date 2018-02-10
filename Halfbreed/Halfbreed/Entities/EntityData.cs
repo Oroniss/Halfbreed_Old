@@ -12,6 +12,8 @@ namespace Halfbreed.Entities
 			{"Broken Wooden Chest", new EntityBasicDetails('/', "DarkWoodBrown", new string[]{"Ruined"})},
 			{"Broken Wooden Door", new EntityBasicDetails('/', "DarkWoodBrown", new string[]{"Ruined"})},
 			{"Pallet", new EntityBasicDetails('.', "DarkWoodBrown", new string[]{})},
+			{"Pile of Sacks", new EntityBasicDetails('_', "FadedCloth", new string[]{})},
+			{"Ruined Sack", new EntityBasicDetails('.', "FadedCloth", new string[]{"Ruined"})},
 			{"Tin Brazier", new EntityBasicDetails('*', "Tin", new string[]{})},
 			{"Wooden Barrel", new EntityBasicDetails('#', "DarkWoodBrown", new string[]{})},
 			{"Wooden Chest", new EntityBasicDetails('#', "DarkWoodBrown", new string[]{})},
@@ -19,10 +21,13 @@ namespace Halfbreed.Entities
 			{"Wooden Ladder", new EntityBasicDetails('\\', "DarkWoodBrown", new string[]{"ElevationChange"})},
 			{"Wooden Platform", new EntityBasicDetails('_', "DarkWoodBrown", new string[]{})},
 			{"Wooden Stair Down", new EntityBasicDetails('<', "DarkWoodBrown", new string[]{})},
+			{"Wooden Stair Up", new EntityBasicDetails('>', "DarkWoodBrown", new string[]{})},
 
 			// Harvesting Nodes
 			{"Rat Den", new EntityBasicDetails(':', "Tan", new string[]{"Organic", "Animal"})},
+			{"Rat Lair", new EntityBasicDetails(':', "DarkOrange", new string[]{"Organic", "Animal"})},
 			{"Green Mold", new EntityBasicDetails('}', "PutridGreen", new string[]{"Organic", "Plant"})},
+			{"Virulent Green Mold", new EntityBasicDetails('}', "VileGreen", new string[]{"Organic", "Plant"})},
 
 			// Actors
 
@@ -40,6 +45,7 @@ namespace Halfbreed.Entities
 			{"Default", new FurnishingDetails("", "", 0, "Default Furnishing Setup")},
 			// Regular furnishings
 			{"Pallet", new FurnishingDetails("RedBrown", "DarkWoodBrown", 1, "Default Furnishing Setup")},
+			{"Pile of Sacks", new FurnishingDetails("OldCloth", "OldCloth", 1, "Default Furnishing Setup")},
 			{"Wooden Door", new FurnishingDetails("", "", 0, "Door Setup")},
 			{"Wooden Platform", new FurnishingDetails("DarkBrown", "DarkWoodBrown", 2, "Default Furnishing Setup")}
 		};
