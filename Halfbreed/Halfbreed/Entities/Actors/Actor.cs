@@ -15,6 +15,12 @@ namespace Halfbreed.Entities
 			
 		}
 
+		public void UpdatePosition(int newX, int newY)
+		{
+			_xLoc = newX;
+			_yLoc = newY;
+		}
+
 		public override void Update(Level currentLevel)
 		{
 			base.Update(currentLevel);
