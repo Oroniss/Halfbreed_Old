@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using NUnit.Framework;
 using RLNET;
 
@@ -122,8 +122,8 @@ namespace Halfbreed.Tests
 
 			RLKey[] keyArray = new RLKey[] { RLKey.Up };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
-			Direction intendedDirection = new Direction(0, -1);
-			Direction actualDirection = UserInputHandler.GetDirection("", true);
+			XYCoordinateClass intendedDirection = new XYCoordinateClass(0, -1);
+			XYCoordinateClass actualDirection = UserInputHandler.GetDirection("", true);
 			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
 			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
 
@@ -131,7 +131,7 @@ namespace Halfbreed.Tests
 
 			keyArray = new RLKey[] { RLKey.Down };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
-			intendedDirection = new Direction(0, 1);
+			intendedDirection = new XYCoordinateClass(0, 1);
 			actualDirection = UserInputHandler.GetDirection("", true);
 			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
 			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
@@ -140,7 +140,7 @@ namespace Halfbreed.Tests
 
 			keyArray = new RLKey[] { RLKey.Number5, RLKey.Left };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
-			intendedDirection = new Direction(-1, 0);
+			intendedDirection = new XYCoordinateClass(-1, 0);
 			actualDirection = UserInputHandler.GetDirection("", true);
 			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
 			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
@@ -149,7 +149,7 @@ namespace Halfbreed.Tests
 
 			keyArray = new RLKey[] { RLKey.Enter };
 			KeyBoardInputSimulator.AddKeyBoardInput(keyArray);
-			intendedDirection = new Direction(0, 0);
+			intendedDirection = new XYCoordinateClass(0, 0);
 			actualDirection = UserInputHandler.GetDirection("", true);
 			Assert.AreEqual(intendedDirection.XDirection, actualDirection.XDirection);
 			Assert.AreEqual(intendedDirection.YDirection, actualDirection.YDirection);
