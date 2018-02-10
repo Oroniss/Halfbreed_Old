@@ -6,17 +6,18 @@ Wall Market Square Storage Facility - Temporary Storage
 0
 0.5
 ###
-0,WOODFLOOR
-1,WOODWALL
-2,WOODENDEBRIS
+0,WoodFloor
+1,WoodWall
+2,WoodenDebris
+3,OpenWater
 ###
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,1
-1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
-1,0,1,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,1
+1,0,1,0,0,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,0
+1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,0,0,0,1
 1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,1
 1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,2,2,2,0,0,1,0,0,1
@@ -36,316 +37,307 @@ Wall Market Square Storage Facility - Temporary Storage
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ###
-Chest,TIN,9,17
-Chest,PINE,1,1
-Chest,PINE,2,1
-Broken Chest,PINE,3,1
-Broken Chest,PINE,4,1
-Chest,PINE,5,1
-Broken Chest,PINE,6,1
-Broken Chest,PINE,7,1
-Broken Chest,PINE,1,5
-Chest,PINE,1,6
-Broken Chest,PINE,4,5
-Broken Chest,PINE,4,6
-Broken Chest,PINE,7,5
-Chest,PINE,7,6
-Door,PINE,8,2,Open
-Broken Door,PINE,8,3
-Pallet,PINE,2,6
-Pallet,PINE,3,6
-Pallet,PINE,5,6
-Pallet,PINE,6,6
-Ladder,PINE,12,1
-Ladder,PINE,19,1
-Platform,PINE,13,1
-Platform,PINE,14,1
-Platform,PINE,15,1
-Platform,PINE,16,1
-Platform,PINE,17,1
-Platform,PINE,18,1
-Platform,PINE,13,2
-Platform,PINE,14,2
-Platform,PINE,15,2
-Platform,PINE,16,2
-Platform,PINE,17,2
-Platform,PINE,18,2
-Platform,PINE,13,3
-Platform,PINE,14,3
-Platform,PINE,15,3
-Platform,PINE,16,3
-Platform,PINE,17,3
-Platform,PINE,18,3
-Platform,PINE,13,4
-Platform,PINE,14,4
-Platform,PINE,15,4
-Platform,PINE,16,4
-Platform,PINE,17,4
-Platform,PINE,18,4
-Pallet,PINE,12,6
-Pallet,PINE,13,6
-Pallet,PINE,14,6
-Pallet,PINE,12,7
-Pallet,PINE,13,7
-Pallet,PINE,14,7
-Pallet,PINE,12,8
-Pallet,PINE,12,9
-Pallet,PINE,12,10
-Pallet,PINE,12,11
-Pallet,PINE,14,9
-Pallet,PINE,15,9
-Pallet,PINE,16,9
-Pallet,PINE,17,9
-Pallet,PINE,14,10
-Pallet,PINE,15,10
-Pallet,PINE,16,10
-Pallet,PINE,17,10
-Pallet,PINE,14,11
-Pallet,PINE,15,11
-Pallet,PINE,16,11
-Pallet,PINE,17,11
-Broken Chest,PINE,17,6
-Broken Chest,PINE,17,7
-Broken Chest,PINE,18,6
-Chest,PINE,18,7
-Door,PINE,13,12
-Door,PINE,18,12,AddTrapComponent,TrapType,Swinging Blade,TrapLevel,1
-Pallet,PINE,9,14
-Pallet,PINE,10,14
-Pallet,PINE,11,14
-Pallet,PINE,9,15
-Pallet,PINE,10,15
-Pallet,PINE,9,16
-Pallet,PINE,10,16
-Pallet,PINE,15,14
-Pallet,PINE,16,14
-Pallet,PINE,9,18
-Pallet,PINE,10,18
-Pallet,PINE,11,18
-Pallet,PINE,12,18
-Pallet,PINE,13,18
-Pallet,PINE,14,18
-Pallet,PINE,15,18
-Pallet,PINE,16,18
-Pallet,PINE,17,18
-Pallet,PINE,18,18
-Pallet,PINE,19,14
-Pallet,PINE,19,15
-Pallet,PINE,19,16
-Pallet,PINE,19,17
-Pallet,PINE,19,18
-Broken Chest,PINE,19,20
-Chest,PINE,20,20
-Broken Chest,PINE,21,20
-Broken Chest,PINE,22,20
-Broken Chest,PINE,19,23
-Broken Chest,PINE,20,23
-Broken Chest,PINE,21,23
-Chest,PINE,22,23
-Broken Door,PINE,23,22
-Pallet,PINE,22,1
-Pallet,PINE,23,1
-Pallet,PINE,24,1
-Pallet,PINE,25,1
-Pallet,PINE,26,1
-Pallet,PINE,27,1
-Pallet,PINE,28,1
-Pallet,PINE,21,5
-Pallet,PINE,22,5
-Pallet,PINE,23,5
-Pallet,PINE,21,6
-Pallet,PINE,22,6
-Pallet,PINE,23,6
-Pallet,PINE,21,7
-Pallet,PINE,22,7
-Pallet,PINE,23,7
-Pallet,PINE,25,5
-Pallet,PINE,26,5
-Pallet,PINE,27,5
-Pallet,PINE,25,6
-Pallet,PINE,26,6
-Pallet,PINE,27,6
-Pallet,PINE,25,7
-Pallet,PINE,26,7
-Pallet,PINE,27,7
-Pallet,PINE,22,10
-Pallet,PINE,23,10
-Pallet,PINE,24,10
-Pallet,PINE,25,10
-Pallet,PINE,22,11
-Pallet,PINE,23,11
-Pallet,PINE,24,11
-Pallet,PINE,25,11
-Pallet,PINE,30,1
-Pallet,PINE,31,1
-Pallet,PINE,32,1
-Pallet,PINE,33,1
-Pallet,PINE,34,1
-Pallet,PINE,30,2
-Pallet,PINE,31,2
-Pallet,PINE,32,2
-Pallet,PINE,33,2
-Pallet,PINE,34,2
-Pallet,PINE,30,3
-Pallet,PINE,31,3
-Pallet,PINE,32,3
-Pallet,PINE,33,3
-Pallet,PINE,34,3
-Pallet,PINE,30,4
-Pallet,PINE,31,4
-Pallet,PINE,32,4
-Pallet,PINE,33,4
-Pallet,PINE,34,4
-Pallet,PINE,30,7
-Pallet,PINE,31,7
-Pallet,PINE,32,7
-Pallet,PINE,33,7
-Pallet,PINE,30,8
-Pallet,PINE,31,8
-Pallet,PINE,32,8
-Pallet,PINE,33,8
-Pallet,PINE,30,9
-Pallet,PINE,31,9
-Pallet,PINE,32,9
-Pallet,PINE,33,9
-Pallet,PINE,35,7
-Pallet,PINE,36,7
-Pallet,PINE,28,11
-Pallet,PINE,29,11
-Pallet,PINE,30,11
-Pallet,PINE,31,11
-Pallet,PINE,32,11
-Pallet,PINE,33,11
-Pallet,PINE,34,11
-Pallet,PINE,35,11
-Pallet,PINE,36,11
-Pallet,PINE,37,11
-Pallet,PINE,38,11
-Pallet,PINE,37,1
-Pallet,PINE,38,1
-Pallet,PINE,39,1
-Pallet,PINE,37,2
-Pallet,PINE,38,2
-Pallet,PINE,39,2
-Pallet,PINE,41,1
-Pallet,PINE,42,1
-Pallet,PINE,41,8
-Pallet,PINE,42,8
-Pallet,PINE,41,9
-Pallet,PINE,42,9
-Pallet,PINE,41,10
-Pallet,PINE,42,10
-Pallet,PINE,41,11
-Pallet,PINE,42,11
-Broken Door,PINE,26,12
-Broken Door,PINE,27,12
-Broken Door,PINE,39,12
-Broken Door,PINE,40,12
-Broken Chest,PINE,22,2
-Chest,PINE,23,2
-Broken Chest,PINE,24,2
-Broken Chest,PINE,25,9
-Chest,PINE,27,9
-Broken Chest,PINE,29,1
-Broken Chest,PINE,29,2
-Broken Chest,PINE,29,3
-Broken Chest,PINE,29,4
-Broken Chest,PINE,29,7
-Broken Chest,PINE,29,8
-Broken Chest,PINE,29,9
-Chest,PINE,36,1
-Broken Chest,PINE,36,2
-Pallet,PINE,24,13
-Pallet,PINE,24,14
-Pallet,PINE,24,15
-Pallet,PINE,24,18
-Pallet,PINE,25,18
-Pallet,PINE,26,18
-Pallet,PINE,28,13
-Pallet,PINE,28,14
-Pallet,PINE,28,15
-Pallet,PINE,28,16
-Pallet,PINE,28,17
-Pallet,PINE,28,18
-Broken Chest,PINE,25,13
-Broken Chest,PINE,25,14
-Broken Chest,PINE,25,15
-Chest,PINE,24,16
-Chest,PINE,24,17
-Broken Chest,PINE,25,17
-Broken Door,PINE,27,19
-Broken Door,PINE,27,21
-Pallet,PINE,35,13
-Pallet,PINE,36,13
-Pallet,PINE,37,13
-Pallet,PINE,38,13
-Pallet,PINE,35,14
-Pallet,PINE,36,14
-Pallet,PINE,37,14
-Pallet,PINE,38,14
-Pallet,PINE,35,15
-Pallet,PINE,36,15
-Pallet,PINE,37,15
-Pallet,PINE,38,15
-Pallet,PINE,35,16
-Pallet,PINE,36,16
-Pallet,PINE,37,16
-Pallet,PINE,38,16
-Pallet,PINE,41,13
-Pallet,PINE,42,13
-Pallet,PINE,41,14
-Pallet,PINE,42,14
-Pallet,PINE,41,15
-Pallet,PINE,42,15
-Pallet,PINE,41,16
-Pallet,PINE,42,16
-Broken Door,PINE,39,17
-Broken Door,PINE,40,17
-Pallet,PINE,33,18
-Pallet,PINE,34,18
-Pallet,PINE,35,18
-Pallet,PINE,33,19
-Pallet,PINE,34,19
-Pallet,PINE,35,19
-Pallet,PINE,33,20
-Pallet,PINE,34,20
-Pallet,PINE,35,20
-Pallet,PINE,33,21
-Pallet,PINE,34,21
-Pallet,PINE,35,21
-Pallet,PINE,37,18
-Pallet,PINE,38,18
-Pallet,PINE,41,18
-Pallet,PINE,42,18
-Pallet,PINE,41,19
-Pallet,PINE,42,19
-Pallet,PINE,41,20
-Pallet,PINE,42,20
-Pallet,PINE,33,23
-Pallet,PINE,34,23
-Pallet,PINE,35,23
-Pallet,PINE,36,23
-Pallet,PINE,37,23
-Pallet,PINE,38,23
-Pallet,PINE,39,23
-Pallet,PINE,40,23
-Pallet,PINE,41,23
-Pallet,PINE,42,23
-Broken Chest,PINE,36,18
-Broken Chest,PINE,42,21
-Chest,PINE,42,22
-Broken Door,PINE,32,22
-Brazier,TIN,30,5,IsLit
-Liquid,WATER,36,4
-Liquid,WATER,37,4
-Liquid,WATER,38,4
-Liquid,WATER,36,5
-Liquid,WATER,37,5
-Liquid,WATER,38,5
-Liquid,WATER,36,6
-Liquid,WATER,37,6
-Liquid,WATER,38,6
-Stair Down,PINE,2,2,LevelTransition,DestinationLevel,TESTLEVEL2,NewXLoc,49,NewYLoc,42
+Wooden Chest,9,17
+Wooden Chest,1,1
+Wooden Chest,2,1
+Broken Wooden Chest,3,1
+Broken Wooden Chest,4,1
+Wooden Chest,5,1
+Broken Wooden Chest,6,1
+Broken Wooden Chest,7,1
+Broken Wooden Chest,1,5
+Wooden Chest,1,6
+Broken Wooden Chest,4,5
+Broken Wooden Chest,4,6
+Broken Wooden Chest,7,5
+Wooden Chest,7,6
+Wooden Door,8,2,Open
+Broken Wooden Door,8,3
+Pallet,2,6
+Pallet,3,6
+Pallet,5,6
+Pallet,6,6
+Wooden Ladder,12,1
+Wooden Ladder,19,1
+Wooden Platform,13,1
+Wooden Platform,14,1
+Wooden Platform,15,1
+Wooden Platform,16,1
+Wooden Platform,17,1
+Wooden Platform,18,1
+Wooden Platform,13,2
+Wooden Platform,14,2
+Wooden Platform,15,2
+Wooden Platform,16,2
+Wooden Platform,17,2
+Wooden Platform,18,2
+Wooden Platform,13,3
+Wooden Platform,14,3
+Wooden Platform,15,3
+Wooden Platform,16,3
+Wooden Platform,17,3
+Wooden Platform,18,3
+Wooden Platform,13,4
+Wooden Platform,14,4
+Wooden Platform,15,4
+Wooden Platform,16,4
+Wooden Platform,17,4
+Wooden Platform,18,4
+Pallet,12,6
+Pallet,13,6
+Pallet,14,6
+Pallet,12,7
+Pallet,13,7
+Pallet,14,7
+Pallet,12,8
+Pallet,12,9
+Pallet,12,10
+Pallet,12,11
+Pallet,14,9
+Pallet,15,9
+Pallet,16,9
+Pallet,17,9
+Pallet,14,10
+Pallet,15,10
+Pallet,16,10
+Pallet,17,10
+Pallet,14,11
+Pallet,15,11
+Pallet,16,11
+Pallet,17,11
+Broken Wooden Chest,17,6
+Broken Wooden Chest,17,7
+Broken Wooden Chest,18,6
+Wooden Chest,18,7
+Wooden Door,13,12
+Wooden Door,18,12,AddTrapComponent,TrapType,Swinging Blade,TrapLevel,1
+Pallet,9,14
+Pallet,10,14
+Pallet,11,14
+Pallet,9,15
+Pallet,10,15
+Pallet,9,16
+Pallet,10,16
+Pallet,15,14
+Pallet,16,14
+Pallet,9,18
+Pallet,10,18
+Pallet,11,18
+Pallet,12,18
+Pallet,13,18
+Pallet,14,18
+Pallet,15,18
+Pallet,16,18
+Pallet,17,18
+Pallet,18,18
+Pallet,19,14
+Pallet,19,15
+Pallet,19,16
+Pallet,19,17
+Pallet,19,18
+Broken Wooden Chest,19,20
+Wooden Chest,20,20
+Broken Wooden Chest,21,20
+Broken Wooden Chest,22,20
+Broken Wooden Chest,19,23
+Broken Wooden Chest,20,23
+Broken Wooden Chest,21,23
+Wooden Chest,22,23
+Broken Wooden Door,23,22
+Pallet,22,1
+Pallet,23,1
+Pallet,24,1
+Pallet,25,1
+Pallet,26,1
+Pallet,27,1
+Pallet,28,1
+Pallet,21,5
+Pallet,22,5
+Pallet,23,5
+Pallet,21,6
+Pallet,22,6
+Pallet,23,6
+Pallet,21,7
+Pallet,22,7
+Pallet,23,7
+Pallet,25,5
+Pallet,26,5
+Pallet,27,5
+Pallet,25,6
+Pallet,26,6
+Pallet,27,6
+Pallet,25,7
+Pallet,26,7
+Pallet,27,7
+Pallet,22,10
+Pallet,23,10
+Pallet,24,10
+Pallet,25,10
+Pallet,22,11
+Pallet,23,11
+Pallet,24,11
+Pallet,25,11
+Pallet,30,1
+Pallet,31,1
+Pallet,32,1
+Pallet,33,1
+Pallet,34,1
+Pallet,30,2
+Pallet,31,2
+Pallet,32,2
+Pallet,33,2
+Pallet,34,2
+Pallet,30,3
+Pallet,31,3
+Pallet,32,3
+Pallet,33,3
+Pallet,34,3
+Pallet,30,4
+Pallet,31,4
+Pallet,32,4
+Pallet,33,4
+Pallet,34,4
+Pallet,30,7
+Pallet,31,7
+Pallet,32,7
+Pallet,33,7
+Pallet,30,8
+Pallet,31,8
+Pallet,32,8
+Pallet,33,8
+Pallet,30,9
+Pallet,31,9
+Pallet,32,9
+Pallet,33,9
+Pallet,35,7
+Pallet,36,7
+Pallet,28,11
+Pallet,29,11
+Pallet,30,11
+Pallet,31,11
+Pallet,32,11
+Pallet,33,11
+Pallet,34,11
+Pallet,35,11
+Pallet,36,11
+Pallet,37,11
+Pallet,38,11
+Pallet,37,1
+Pallet,38,1
+Pallet,39,1
+Pallet,37,2
+Pallet,38,2
+Pallet,39,2
+Pallet,41,1
+Pallet,42,1
+Pallet,41,8
+Pallet,42,8
+Pallet,41,9
+Pallet,42,9
+Pallet,41,10
+Pallet,42,10
+Pallet,41,11
+Pallet,42,11
+Broken Wooden Door,26,12
+Broken Wooden Door,27,12
+Broken Wooden Door,39,12
+Broken Wooden Door,40,12
+Broken Wooden Chest,22,2
+Wooden Chest,23,2
+Broken Wooden Chest,24,2
+Broken Wooden Chest,25,9
+Wooden Chest,27,9
+Broken Wooden Chest,29,1
+Broken Wooden Chest,29,2
+Broken Wooden Chest,29,3
+Broken Wooden Chest,29,4
+Broken Wooden Chest,29,7
+Broken Wooden Chest,29,8
+Broken Wooden Chest,29,9
+Wooden Chest,36,1
+Broken Wooden Chest,36,2
+Pallet,24,13
+Pallet,24,14
+Pallet,24,15
+Pallet,24,18
+Pallet,25,18
+Pallet,26,18
+Pallet,28,13
+Pallet,28,14
+Pallet,28,15
+Pallet,28,16
+Pallet,28,17
+Pallet,28,18
+Broken Wooden Chest,25,13
+Broken Wooden Chest,25,14
+Broken Wooden Chest,25,15
+Wooden Chest,24,16
+Wooden Chest,24,17
+Broken Wooden Chest,25,17
+Broken Wooden Door,27,19
+Broken Wooden Door,27,21
+Pallet,35,13
+Pallet,36,13
+Pallet,37,13
+Pallet,38,13
+Pallet,35,14
+Pallet,36,14
+Pallet,37,14
+Pallet,38,14
+Pallet,35,15
+Pallet,36,15
+Pallet,37,15
+Pallet,38,15
+Pallet,35,16
+Pallet,36,16
+Pallet,37,16
+Pallet,38,16
+Pallet,41,13
+Pallet,42,13
+Pallet,41,14
+Pallet,42,14
+Pallet,41,15
+Pallet,42,15
+Pallet,41,16
+Pallet,42,16
+Broken Wooden Door,39,17
+Broken Wooden Door,40,17
+Pallet,33,18
+Pallet,34,18
+Pallet,35,18
+Pallet,33,19
+Pallet,34,19
+Pallet,35,19
+Pallet,33,20
+Pallet,34,20
+Pallet,35,20
+Pallet,33,21
+Pallet,34,21
+Pallet,35,21
+Pallet,37,18
+Pallet,38,18
+Pallet,41,18
+Pallet,42,18
+Pallet,41,19
+Pallet,42,19
+Pallet,41,20
+Pallet,42,20
+Pallet,33,23
+Pallet,34,23
+Pallet,35,23
+Pallet,36,23
+Pallet,37,23
+Pallet,38,23
+Pallet,39,23
+Pallet,40,23
+Pallet,41,23
+Pallet,42,23
+Broken Wooden Chest,36,18
+Broken Wooden Chest,42,21
+Wooden Chest,42,22
+Broken Wooden Door,32,22
+Tin Brazier,30,5,IsLit
+Wooden Stair Down,2,2,LevelTransition,DestinationLevel,TESTLEVEL2,NewXLoc,49,NewYLoc,42
 ###
 Rat Den,1,4
 Rat Den,9,2
