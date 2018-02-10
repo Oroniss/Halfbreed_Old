@@ -1,6 +1,6 @@
 ﻿namespace Halfbreed
 {
-	public enum EntityTraits
+	public enum Traits
 	{
 		IMMUNETOACID,
 		IMMUNETOCOLD,
