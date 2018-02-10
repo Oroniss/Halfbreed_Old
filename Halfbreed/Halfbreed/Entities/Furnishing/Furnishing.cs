@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Halfbreed.Entities.Furnishings;
 
 namespace Halfbreed.Entities
 {
@@ -29,8 +30,9 @@ namespace Halfbreed.Entities
 			_fogColor = template.FogColor;
 			_elevation = template.Elevation;
 
-			// TODO: Call the setup function here too.
+			_interactionFunctions = new List<string>();
 
+			FurnishingSetupFunctions.GetSetupFunction(furnishingName)(this, otherParameters);
 		}
 
 		public bool HasBGColor
@@ -68,6 +70,22 @@ namespace Halfbreed.Entities
 		public int Elevation
 		{
 			get { return _elevation; }
+		}
+
+		public void AddInteractionFunction(string functionName)
+		{
+			_interactionFunctions.Add(functionName);
+		}
+
+		public void RemoveInteractionFunction(string functionName)
+		{
+			_interactionFunctions.Remove(functionName);
+		}
+
+		public void InteractWith(Actor actor, Level level)
+		{
+			for (int i = 0; i < _interactionFunctions.Count; i++)
+				InteractionFunctions.GetInteractionFunction(_interactionFunctions[i])(this, actor, level);
 		}
 	}
 }
