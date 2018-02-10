@@ -8,35 +8,34 @@ namespace Halfbreed
 		private static readonly Dictionary<Colors, RLColor> _colors = new Dictionary<Colors, RLColor>()
 		{
 			// Basics
-			{Colors.BLACK, new RLColor(0, 0, 0)},
-			{Colors.WHITE, new RLColor(255, 255, 255)},
+			{Colors.Black, new RLColor(0, 0, 0)},
+			{Colors.White, new RLColor(255, 255, 255)},
 			// Browns
-			{Colors.DARKBROWN, new RLColor(109, 85, 5)},
-			{Colors.DARKWOODBROWN, new RLColor(139, 105, 20)},
-			{Colors.FADEDCLOTH, new RLColor(238, 220, 130)},
-			{Colors.LIGHTBROWN, new RLColor(235, 165, 32)},
-			{Colors.OLDCLOTH, new RLColor(205, 190, 112)},
-			{Colors.REDBROWN, new RLColor(165, 102, 0)},
-			{Colors.TAN, new RLColor(210, 180, 140)},
-			{Colors.WOODBROWN, new RLColor(205, 155, 29)},
-			{Colors.WOODFOG, new RLColor(165, 125, 20)},
+			{Colors.DarkBrown, new RLColor(109, 85, 5)},
+			{Colors.DarkWoodBrown, new RLColor(139, 105, 20)},
+			{Colors.FadedCloth, new RLColor(238, 220, 130)},
+			{Colors.LightBrown, new RLColor(235, 165, 32)},
+			{Colors.OldCloth, new RLColor(205, 190, 112)},
+			{Colors.RedBrown, new RLColor(165, 102, 0)},
+			{Colors.Tan, new RLColor(210, 180, 140)},
+			{Colors.WoodBrown, new RLColor(205, 155, 29)},
+			{Colors.WoodFog, new RLColor(165, 125, 20)},
 			// Greens
-			{Colors.PUTRIDGREEN, new RLColor(193, 255, 193)},
-			{Colors.VILEGREEN, new RLColor(50, 205, 50)},
+			{Colors.PutridGreen, new RLColor(193, 255, 193)},
+			{Colors.VileGreen, new RLColor(50, 205, 50)},
 			// Metals
-			{Colors.COPPER, new RLColor(184, 115, 51)},
-			{Colors.GOLD, new RLColor()},
-			{Colors.LIGHTGREY, new RLColor(190, 190, 190)},
-			{Colors.SILVER, new RLColor()},
-			{Colors.STEELGREY, new RLColor(122, 122, 122)},
-			{Colors.TIN, new RLColor(211, 212, 213)},
+			{Colors.Copper, new RLColor(184, 115, 51)},
+			{Colors.Gold, new RLColor()},
+			{Colors.Silver, new RLColor(190, 190, 190)},
+			{Colors.SteelGrey, new RLColor(122, 122, 122)},
+			{Colors.Tin, new RLColor(211, 212, 213)},
 			// Oranges
-			{Colors.DARKORANGE, new RLColor(238, 154, 0)},
+			{Colors.DarkOrange, new RLColor(238, 154, 0)},
 			// Blues
-			{Colors.WATERBLUE, new RLColor(0, 0, 238)},
-			{Colors.DARKWATER, new RLColor(0, 0, 115)},
+			{Colors.WaterBlue, new RLColor(0, 0, 238)},
+			{Colors.DarkWater, new RLColor(0, 0, 115)},
 			// Reds
-			{Colors.RED, new RLColor(255, 0, 0)}
+			{Colors.Red, new RLColor(255, 0, 0)}
 		};
 
 		public static RLColor GetColor(Colors colorName)
@@ -54,34 +53,33 @@ namespace Halfbreed
 	public enum Colors
 	{
 		// Basics
-		BLACK,
-		WHITE,
+		Black,
+		White,
 		// Browns
-		DARKBROWN,
-		DARKWOODBROWN,
-		FADEDCLOTH,
-		LIGHTBROWN,
-		OLDCLOTH,
-		REDBROWN,
-		TAN,
-		WOODBROWN,
-		WOODFOG,
+		DarkBrown,
+		DarkWoodBrown,
+		FadedCloth,
+		LightBrown,
+		OldCloth,
+		RedBrown,
+		Tan,
+		WoodBrown,
+		WoodFog,
 		// Greens
-		PUTRIDGREEN,
-		VILEGREEN,
+		PutridGreen,
+		VileGreen,
 		// Metals
-		COPPER,
-		GOLD,
-		LIGHTGREY,
-		SILVER,
-		STEELGREY,
-		TIN,
+		Copper,
+		Gold,
+		Silver,
+		SteelGrey,
+		Tin,
 		// Oranges
-		DARKORANGE,
+		DarkOrange,
 		// Blues
-		WATERBLUE,
-		DARKWATER,
+		WaterBlue,
+		DarkWater,
 		// Reds
-		RED
+		Red
 	}
 }
