@@ -18,7 +18,7 @@ namespace Halfbreed
 		                                                          _menuConsoleHeight,
 		                                                          _menuConsoleXOffset,
 		                                                          _menuConsoleYOffset, 
-		                                                          Palette.GetColor(Colors.LIGHTGREY), 
+		                                                          Palette.GetColor(Colors.Silver), 
 		                                                          _backConsole);
 		
 		private static int _mapConsoleWidth = 80;
@@ -29,7 +29,7 @@ namespace Halfbreed
 		                                                       _mapConsoleHeight,
 															   _mapConsoleXOffset, 
 		                                                       _mapConsoleYOffset, 
-		                                                       Palette.GetColor(Colors.BLACK), 
+		                                                       Palette.GetColor(Colors.Black), 
 		                                                       _backConsole);
 
 		private static int _textConsoleWidth = 40;
@@ -40,7 +40,7 @@ namespace Halfbreed
 																  _textConsoleHeight,
 																  _textConsoleXOffset,
 																  _textConsoleYOffset,
-																  Palette.GetColor(Colors.BLACK),
+																  Palette.GetColor(Colors.Black),
 																  _backConsole);
 
 		public static bool IsDirty
