@@ -2,57 +2,59 @@
 {
 	public enum Traits
 	{
-		IMMUNETOACID,
-		IMMUNETOCOLD,
-		IMMUNETOFIRE,
-		IMMUNETOELEC,
-		IMMUNETOMENTAL,
-		IMMUNETOPOISON,
-		IMMUNETODISEASE,
+		ImmuneToAcid,
+		ImmuneToCold,
+		ImmuneToFire,
+		ImmuneToElectricity,
+		ImmuneToMental,
+		ImmuneToPoison,
+		ImmuneToDisease,
+		ImmuneToLight,
+		ImmuneToShadow,
 
-		IMMOBILISED,
+		Immobilised,
 
-		ORGANIC,
-		INORGANIC,
+		Organic,
+		Inorganic,
 
-		RUINED,
+		Ruined,
 
-		FURNISHING,
-		ELEVATIONCHANGE,
+		Furnishing,
+		ElevationChange,
 
-		WOOD,
-		METAL,
-		STONE,
-		GEM,
-		LEATHER,
-		CLOTH,
+		Wood,
+		Metal,
+		Stone,
+		Gem,
+		Leather,
+		Cloth,
 
-		ANIMAL,
-		PLANT,
-		LIQUID,
+		Animal,
+		Plant,
+		Liquid,
 
-		PLAYER,
-		CANINTERACT,
-		TRAP,
+		Player,
+		Trap,
 
-		CANWALK,
-		CANFLY,
-		CANSWIM,
-		CANCLIMB,
+		Walking,
+		Flying,
+		Swimming,
+		Climbing,
 
-		BLOCKMOVE,
+		BlockWalk,
+		BlockFly,
+		BlockSwim,
+		Impassible,
 
-		NATURALOPAQUE,
-		MAGICALOPAQUE,
-		BLOCKALLSIGHT,
+		BlockLOS,
 
-		DARKVISION,
-		TRUESEEING,
-		BLINDSIGHT,
+		DarkVision,
+		TrueSeeing,
+		BlindSight,
 
-		BLIND,
-		SCENT,
+		Blind,
+		Scent,
 
-		INDESTRUCTIBLE
+		Indestructible
 	}
 }
