@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed
 {
@@ -16,7 +16,7 @@ namespace Halfbreed
 		private static int _currentTime = 0;
 		private static int _currentDays; // TODO: Think this through a bit more carefully.
 		private static bool _quit;
-		private static List<Position> _visibleTiles = new List<Position>();
+		private static List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
 
 		public static void SetupNewGame(Menus.NewGameParameters startingParameters)
 		{
@@ -76,10 +76,10 @@ namespace Halfbreed
 			_currentLevel = new Level(newLevel);
 			//_player.UpdatePosition(newX, newY);
 			//_currentLevel.AddEntity(_player);
-			_visibleTiles = new List<Position>();
+			_visibleTiles = new List<XYCoordinateStruct>();
 		}
 
-		public static List<Position> VisibleTiles
+		public static List<XYCoordinateStruct> VisibleTiles
 		{
 			get { return _visibleTiles; }
 			set { _visibleTiles = value; }
