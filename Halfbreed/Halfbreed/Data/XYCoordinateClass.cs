@@ -1,24 +1,14 @@
 ﻿namespace Halfbreed
 {
-	public class Direction
+	public class XYCoordinateClass
 	{
-		readonly int _xDirection;
-		readonly int _yDirection;
+		public int X;
+		public int Y;
 
-		public Direction(int x, int y)
+		public XYCoordinateClass(int x, int y)
 		{
-			_xDirection = x;
-			_yDirection = y;
-		}
-
-		public int XDirection
-		{
-			get { return _xDirection; }
-		}
-
-		public int YDirection
-		{
-			get { return _yDirection; }
+			X = x;
+			Y = y;
 		}
 	}
 }
