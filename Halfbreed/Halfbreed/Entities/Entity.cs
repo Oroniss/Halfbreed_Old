@@ -7,8 +7,8 @@ namespace Halfbreed.Entities
 	{
 		string _entityName;
 
-		int _xLoc;
-		int _yLoc;
+		protected int _xLoc;
+		protected int _yLoc;
 
 		Colors _fgColor;
 		char _symbol;
