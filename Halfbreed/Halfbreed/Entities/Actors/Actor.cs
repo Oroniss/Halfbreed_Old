@@ -7,7 +7,7 @@ namespace Halfbreed.Entities
 		public Actor(string actorName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(actorName, xLoc, yLoc, otherParameters)
 		{
-			
+			AddTrait(Traits.Impassible);
 		}
 
 		protected virtual void GetNextMove(Level currentLevel)
