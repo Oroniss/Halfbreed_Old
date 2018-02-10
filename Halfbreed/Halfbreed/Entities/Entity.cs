@@ -117,6 +117,21 @@ namespace Halfbreed.Entities
 			return _traits.Contains(trait);
 		}
 
+		public bool HasOtherAttribute(string attributeName)
+		{
+			return _otherAttributes.ContainsKey(attributeName);
+		}
+
+		public void SetOtherAttribute(string attributeName, string attributeValue)
+		{
+			_otherAttributes[attributeName] = attributeValue;
+		}
+
+		public string GetOtherAttributeValue(string attributeName)
+		{
+			return _otherAttributes[attributeName];
+		}
+
 		public virtual void Update(Level currentLevel)
 		{
 			// TODO: Go through effects and check if any expire.
