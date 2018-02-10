@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities.Furnishings
 {
@@ -9,7 +10,8 @@ namespace Halfbreed.Entities.Furnishings
 			// Default
 			{"No Use", new InteractionFunction(NoUse)},
 			// Furnishings
-			{"Door Use", new InteractionFunction(DoorUse)}
+			{"Door Use", new InteractionFunction(DoorUse)},
+			{"LevelTransitionUse", new InteractionFunction(LevelTransitionUse)}
 		};
 
 		public delegate void InteractionFunction(Furnishing furnishing, Actor actor, Level currentLevel);
@@ -61,6 +63,15 @@ namespace Halfbreed.Entities.Furnishings
 				if (actor.HasTrait(Traits.Player))
 					MainGraphicDisplay.TextConsole.AddOutputText("You open the door");
 			}
+		}
+
+		private static void LevelTransitionUse(Furnishing furnishing, Actor actor, Level currentLevel)
+		{
+			var destinationLevel = (Levels.LevelEnum)Enum.Parse(typeof(Levels.LevelEnum),
+																furnishing.GetOtherAttributeValue("DestinationLevel"));
+			var newXLoc = int.Parse(furnishing.GetOtherAttributeValue("NewXLoc"));
+			var newYLoc = int.Parse(furnishing.GetOtherAttributeValue("NewYLoc"));
+			GameEngine.InitiateLevelTransition(destinationLevel, newXLoc, newYLoc);
 		}
 
 	}
