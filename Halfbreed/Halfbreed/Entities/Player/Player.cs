@@ -36,6 +36,37 @@ namespace Halfbreed.Entities
 					needsToMove = false;
 				}
 
+				if (key == "U")
+				{
+					var direction = UserInputHandler.GetDirection("Which direction?", true);
+					if (direction == null)
+					{
+						MainGraphicDisplay.TextConsole.AddOutputText("You change your mind");
+						continue;
+					}
+
+					if (currentLevel.HasFurnishing(_xLoc + direction.X, _yLoc + direction.Y))
+					{
+						var furnishing = currentLevel.GetFurnishing(_xLoc + direction.X, _yLoc + direction.Y);
+						if (furnishing.PlayerSpotted)
+						{
+							furnishing.InteractWith(this, currentLevel);
+							needsToMove = false;
+						}
+						else
+						{
+							MainGraphicDisplay.TextConsole.AddOutputText("There is nothing there to use");
+							continue;
+						}
+					}
+					else
+					{
+						MainGraphicDisplay.TextConsole.AddOutputText("There is nothing there to use");
+						continue;
+					}
+
+				}
+
 				if (key == "ESCAPE")
 				{
 					GameEngine.Quit();
