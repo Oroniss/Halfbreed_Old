@@ -1,11 +1,11 @@
 ﻿namespace Halfbreed
 {
-	public struct Position
+	public struct XYCoordinateStruct
 	{
 		public readonly int X;
 		public readonly int Y;
 
-		public Position(int x, int y)
+		public XYCoordinateStruct(int x, int y)
 		{
 			X = x;
 			Y = y;
