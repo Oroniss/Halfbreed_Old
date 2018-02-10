@@ -1,4 +1,4 @@
-﻿using RLNET;
+using RLNET;
 using System.Collections.Generic;
 
 namespace Halfbreed.Display
@@ -85,12 +85,12 @@ namespace Halfbreed.Display
 		{
 			Clear();
 
-			_console.Print(_textXOffset + (int)((_textWidth - 11) / 2), 1, "Message Log", Palette.GetColor(Colors.WHITE));
+			_console.Print(_textXOffset + (int)((_textWidth - 11) / 2), 1, "Message Log", Palette.GetColor(Colors.White));
 
 			for (int i = 0; i < _textHeight; i++)
 			{
 				int textIndex = (_currentIndex - 1 - i + _arrayLength) % _arrayLength;
-				_console.Print(_textXOffset, _textYOffset + i, _outputText[textIndex], Palette.GetColor(Colors.WHITE));
+				_console.Print(_textXOffset, _textYOffset + i, _outputText[textIndex], Palette.GetColor(Colors.White));
 			}
 
 			CopyToBackConsole();
