@@ -20,20 +20,15 @@ namespace Halfbreed.Display
 			{
 				for (int x = xLimits.Min; x < xLimits.Max; x++)
 				{
-					if (true) // (level.isRevealed(x, y))
+					if (level.IsRevealed(x, y))
 					{
 						_console.Set(x + xLimits.Offset, y + yLimits.Offset, null,
-									 Palette.GetColor(level.GetBackgroundColor(x, y)), ' ');
-					}
-					if (level.HasDrawingEntity(x, y))
-					{
-						Entities.Entity entity = level.GetDrawingEntity(x, y);
-						_console.Set(x + xLimits.Offset, y + yLimits.Offset, Palette.GetColor(entity.FGColor), null, entity.Symbol);
+									 Palette.GetColor(level.GetFogColor(x, y)), ' ');
 					}
 				}
 			}
-			/*
-			foreach (Position position in GameEngine.VisibleTiles)
+
+			foreach (var position in GameEngine.VisibleTiles)
 			{
 				_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, null,
 							 Palette.GetColor(level.GetBackgroundColor(position.X, position.Y)), ' ');
@@ -44,7 +39,7 @@ namespace Halfbreed.Display
 					_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, Palette.GetColor(entity.FGColor),
 								 null, entity.Symbol);
 				}
-			}*/
+			}
 
 			CopyToBackConsole();
 		}
