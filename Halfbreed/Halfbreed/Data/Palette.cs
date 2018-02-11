@@ -25,6 +25,7 @@ namespace Halfbreed
 			{Colors.VileGreen, new RLColor(50, 205, 50)},
 			// Metals
 			{Colors.Copper, new RLColor(184, 115, 51)},
+			{Colors.DarkGrey, new RLColor(75, 75, 75)},
 			{Colors.Gold, new RLColor()},
 			{Colors.Silver, new RLColor(190, 190, 190)},
 			{Colors.SteelGrey, new RLColor(122, 122, 122)},
@@ -70,6 +71,7 @@ namespace Halfbreed
 		VileGreen,
 		// Metals
 		Copper,
+		DarkGrey,
 		Gold,
 		Silver,
 		SteelGrey,
