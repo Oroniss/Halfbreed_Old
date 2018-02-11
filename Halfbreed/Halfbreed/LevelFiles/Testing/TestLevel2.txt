@@ -60,7 +60,7 @@ Wall Market Square Storage Facility - Long-Term Storage
 ###
 Wooden Door,4,39,Open
 Wooden Door,12,28
-Wooden Door,48,28,Concealed
+Wooden Door,48,28,Concealed,ConcealedTile,WoodWall,ConcealmentLevel,2
 Wooden Door,48,19
 Wooden Door,50,14,Open
 Wooden Door,43,10
