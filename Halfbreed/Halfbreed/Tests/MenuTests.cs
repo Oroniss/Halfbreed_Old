@@ -12,8 +12,8 @@ namespace Halfbreed.Tests
 		public void TestCharacterCreationMenu()
 		{
 			NewGameParameters ps = new NewGameParameters();
-			ps.CharacterClass = CharacterClasses.CLERIC;
-			Assert.AreEqual(ps.CharacterClass, CharacterClasses.CLERIC);
+			ps.CharacterClass = CharacterClasses.Cleric;
+			Assert.AreEqual(ps.CharacterClass, CharacterClasses.Cleric);
 
 			UserInputHandler.clearAllInput();
 
@@ -22,7 +22,7 @@ namespace Halfbreed.Tests
 			NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(3, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.NECROMANCER, GameEngine.CharacterClass);
+			Assert.AreEqual(CharacterClasses.Necromancer, GameEngine.CharacterClass);
 			Assert.IsTrue(GameEngine.UseAchievements);
 
 			UserInputHandler.clearAllInput();
@@ -32,7 +32,7 @@ namespace Halfbreed.Tests
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(1, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.THIEF, GameEngine.CharacterClass);
+			Assert.AreEqual(CharacterClasses.Thief, GameEngine.CharacterClass);
 			Assert.IsTrue(GameEngine.UseAchievements);
 
 			UserInputHandler.clearAllInput();
@@ -42,7 +42,7 @@ namespace Halfbreed.Tests
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(5, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.DRAGONLORD, GameEngine.CharacterClass);
+			Assert.AreEqual(CharacterClasses.Dragonlord, GameEngine.CharacterClass);
 			Assert.IsFalse(GameEngine.UseAchievements);
 
 			UserInputHandler.clearAllInput();
@@ -52,7 +52,7 @@ namespace Halfbreed.Tests
 			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(4, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.BARD, GameEngine.CharacterClass);
+			Assert.AreEqual(CharacterClasses.Bard, GameEngine.CharacterClass);
 			Assert.IsFalse(GameEngine.UseAchievements);
 
 			UserInputHandler.clearAllInput();
