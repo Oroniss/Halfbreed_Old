@@ -278,41 +278,74 @@ namespace Halfbreed
 			AddActor(actor);
 		}
 
-		public bool MoveActorAttempt(int newX, int newY, Actor actor)
+		public bool MoveActorAttempt(int destinationX, int destinationY, Actor actor)
 		{
-			// TODO: Fix this up.
-			var currentIndex = ConvertXYToInt(actor.XLoc, actor.YLoc);
-			var newIndex = ConvertXYToInt(newX, newY);
+			var originIndex = ConvertXYToInt(actor.XLoc, actor.YLoc);
+			var destinationIndex = ConvertXYToInt(destinationX, destinationY);
+			var originX = actor.XLoc;
+			var originY = actor.YLoc;
 
-			if (actor.HasTrait(Traits.Flying) && !HasTrait(newIndex, Traits.BlockFly))
+			if (actor.HasTrait(Traits.Flying) && !HasTrait(destinationIndex, Traits.BlockFly))
 			{
-				// TODO: Call flying functions here.
-	            MoveActor(newX, newY, actor);
-				return true;
-			}
-			if (actor.HasTrait(Traits.Walking) && !HasTrait(newIndex, Traits.BlockWalk))
-			{
-				var elevationDifference = GetElevation(newIndex) - GetElevation(currentIndex);
-				if (Math.Abs(elevationDifference) <= 1 || HasTrait(currentIndex, Traits.ElevationChange) || HasTrait(newIndex, Traits.ElevationChange))
+				if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 				{
-					// TODO: Call walking functions here.
-					MoveActor(newX, newY, actor);
+					MoveActor(destinationX, destinationY, actor);
+					ApplyMoveOnFunctions(destinationIndex, actor, originX, originY);
 					return true;
 				}
+				return false;
+			}
+			if (actor.HasTrait(Traits.Walking) && !HasTrait(destinationIndex, Traits.BlockWalk))
+			{
+				var elevationDifference = GetElevation(destinationIndex) - GetElevation(originIndex);
+
+				if (Math.Abs(elevationDifference) <= 1 || HasTrait(originIndex, Traits.ElevationChange) || HasTrait(destinationIndex, Traits.ElevationChange))
+				{
+					if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
+					{
+						MoveActor(destinationX, destinationY, actor);
+						ApplyMoveOnFunctions(destinationIndex, actor, originX, originY);
+						return true;
+					}
+					return false;
+				}
+	
 				if (elevationDifference > 1)
 					MainGraphicDisplay.TextConsole.AddOutputText("It's too high to climb up there");
 				else
 					MainGraphicDisplay.TextConsole.AddOutputText("Dropping down there would be too dangerous");
 				return false;
 			}
-			if (actor.HasTrait(Traits.Swimming) && !HasTrait(newIndex, Traits.BlockSwim))
+
+			if (actor.HasTrait(Traits.Swimming) && !HasTrait(destinationIndex, Traits.BlockSwim))
 			{
-				// TODO: Call swimming functions here.
-				MoveActor(newX, newY, actor);
-				return true;
+				if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
+				{
+					MoveActor(destinationX, destinationY, actor);
+					ApplyMoveOnFunctions(destinationIndex, actor, originX, originY);
+					return true;
+				}
+				return false;
 			}
 
 			return false;
+		}
+
+		bool ApplyMoveOffFunctions(int index, Actor actor, int destinationX, int destinationY)
+		{
+			// TODO: Call Tile functions.
+
+			if (_furnishings.ContainsKey(index))
+				return _furnishings[index].MoveOff(actor, this, destinationX, destinationY);
+			return true;
+		}
+
+		void ApplyMoveOnFunctions(int index, Actor actor, int originX, int originY)
+		{
+			// TODO: Call Tile functions.
+
+			if (_furnishings.ContainsKey(index))
+				_furnishings[index].MoveOn(actor, this, originX, originY);
 		}
 
 		// Graphical functions
