@@ -36,9 +36,8 @@ namespace Halfbreed.Entities
 			_defensiveStats = null;
 			_otherAttributes = new Dictionary<string, string>();
 
-			_isConcealed = otherParameters.Contains("Concealed");
-			_playerSpotted = !_isConcealed;
 			_destroyed = false;
+			_playerSpotted = true;
 
 			var basicDetails = EntityData.GetEntityDetails(entityName);
 			_symbol = basicDetails.Symbol;
@@ -70,6 +69,7 @@ namespace Halfbreed.Entities
 		public bool Concealed
 		{
 			get { return _isConcealed; }
+			set { _isConcealed = value; }
 		}
 
 		public bool PlayerSpotted
