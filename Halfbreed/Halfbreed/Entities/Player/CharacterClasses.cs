@@ -1,17 +1,19 @@
-﻿namespace Halfbreed
+﻿// Revised for version 0.2.
+
+namespace Halfbreed
 {
 	public enum CharacterClasses
 	{
-		CLERIC=2,
-		FIGHTER=3,
-		MAGE=5,
-		THIEF=7,
-		BARD=35,
-		BLACKGUARD=15,
-		DRUID=14,
-		NECROMANCER=10,
-		PALADIN=6,
-		RANGER=21,
-		DRAGONLORD=210
+		Cleric=2,
+		Fighter=3,
+		Mage=5,
+		Thief=7,
+		Bard=35,
+		Blackguard=15,
+		Druid=14,
+		Necromancer=10,
+		Paladin=6,
+		Ranger=21,
+		Dragonlord=210
 	}
 }
