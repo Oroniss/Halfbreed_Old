@@ -49,7 +49,7 @@ namespace Halfbreed.UserData
 				achString = "On";
 			
 			string[] items = new string[] {
-				EnumConverter.ConvertEnumToString(CharacterClass), 
+				CharacterClass.ToString(), 
 				DifficultySetting.ToString(),
 				achString, 
 				CurrentAct.ToString(),
