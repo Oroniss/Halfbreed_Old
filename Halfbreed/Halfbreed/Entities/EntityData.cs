@@ -23,6 +23,10 @@ namespace Halfbreed.Entities
 			{"Wooden Stair Down", new EntityBasicDetails('<', "DarkWoodBrown", new string[]{})},
 			{"Wooden Stair Up", new EntityBasicDetails('>', "DarkWoodBrown", new string[]{})},
 
+			// Traps
+			{"Pit Trap", new EntityBasicDetails('#', "SteelGrey", new string[]{})},
+			{"Flame Vent Trap", new EntityBasicDetails('^', "SteelGrey", new string[]{})},
+
 			// Harvesting Nodes
 			{"Rat Den", new EntityBasicDetails(':', "Tan", new string[]{"Organic", "Animal"})},
 			{"Rat Lair", new EntityBasicDetails(':', "DarkOrange", new string[]{"Organic", "Animal"})},
@@ -46,6 +50,7 @@ namespace Halfbreed.Entities
 			// Regular furnishings
 			{"Pallet", new FurnishingDetails("RedBrown", "DarkWoodBrown", 1, "Default Furnishing Setup")},
 			{"Pile of Sacks", new FurnishingDetails("OldCloth", "OldCloth", 1, "Default Furnishing Setup")},
+			{"Pit Trap", new FurnishingDetails("DarkGrey", "DarkGrey", -1, "Default Furnishing Setup")},
 			{"Wooden Door", new FurnishingDetails("", "", 0, "Door Setup")},
 			{"Wooden Platform", new FurnishingDetails("DarkBrown", "DarkWoodBrown", 2, "Default Furnishing Setup")}
 		};
