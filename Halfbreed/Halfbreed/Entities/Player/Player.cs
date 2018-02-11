@@ -16,6 +16,13 @@ namespace Halfbreed.Entities
 
 		protected override void GetNextMove(Level currentLevel)
 		{
+			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
+												   HasTrait(Traits.DarkVision), HasTrait(Traits.BlindSight));
+			foreach (XYCoordinateStruct tile in visibleTiles)
+				currentLevel.RevealTile(tile.X, tile.Y);
+
+			GameEngine.VisibleTiles = visibleTiles;
+
 			MainGraphicDisplay.UpdateGameScreen();
 			MainGraphicDisplay.TextConsole.AddOutputText("");
 
