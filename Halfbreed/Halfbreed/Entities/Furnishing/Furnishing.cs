@@ -13,6 +13,8 @@ namespace Halfbreed.Entities
 		bool _hasFogColor;
 		Colors _fogColor;
 		int _elevation;
+		string _moveOnFunction;
+		string _moveOffFunction;
 
 		bool _trapped;
 
@@ -89,6 +91,32 @@ namespace Halfbreed.Entities
 		{
 			get { return _trapped; }
 			set { _trapped = value; }
+		}
+
+		public string MoveOnFunction
+		{
+			get { return _moveOnFunction; }
+			set { _moveOnFunction = value; }
+		}
+
+		public string MoveOffFunction
+		{
+			get { return _moveOffFunction; }
+			set { _moveOffFunction = value; }
+		}
+
+		public bool MoveOff(Actor actor, Level currentLevel, int destinationX, int destinationY)
+		{
+			if (_moveOffFunction == null || _moveOffFunction == "")
+				return true;
+
+			return MovementFunctions.GetMoveOffFunction(_moveOffFunction)(this, actor, currentLevel, destinationX, destinationY);
+		}
+
+		public void MoveOn(Actor actor, Level currentLevel, int originX, int originY)
+		{
+			if (_moveOnFunction != null && _moveOnFunction != "")
+				MovementFunctions.GetMoveOnFunction(_moveOnFunction)(this, actor, currentLevel, originX, originY);
 		}
 
 		public int Elevation
