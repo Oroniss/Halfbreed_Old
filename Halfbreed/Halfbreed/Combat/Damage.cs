@@ -1,4 +1,6 @@
-﻿namespace Halfbreed.Combat
+﻿// Updated for version 0.2. No changes required.
+
+namespace Halfbreed.Combat
 {
 	public class Damage
 	{
