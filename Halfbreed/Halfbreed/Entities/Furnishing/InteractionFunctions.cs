@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 
 namespace Halfbreed.Entities.Furnishings
@@ -81,7 +81,7 @@ namespace Halfbreed.Entities.Furnishings
 		{
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
 
-			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.PHYSICAL, 5 * trapLevel));
+			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.Physical, 5 * trapLevel));
 			furnishing.RemoveInteractionFunction("Trigger Swinging Blade Trap");
 			furnishing.Trapped = false;
 		}
