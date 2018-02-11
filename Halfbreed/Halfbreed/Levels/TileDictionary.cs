@@ -7,7 +7,8 @@ namespace Halfbreed.Levels
 	{
 		static Dictionary<TileType, MapTileDetails> _tileDictionary = new Dictionary<TileType, MapTileDetails>()
 		{
-			{TileType.OpenWater, new MapTileDetails("Open Water", 0, "WaterBlue", "DarkWater", "", "", 
+			// TODO: Add functions to OpenWater
+			{TileType.OpenWater, new MapTileDetails("Open Water", 0, "WaterBlue", "DarkWater", null, null, 
 			                                        new string[]{"BlockWalk"})},
 			{TileType.WoodenDebris, new MapTileDetails("Wooden Debris", 20, "DarkBrown", "DarkWoodBrown", null, null, 
 			                                           new string[]{"Impassible", "BlockLOS"})},
