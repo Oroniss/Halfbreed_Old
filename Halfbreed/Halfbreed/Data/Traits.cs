@@ -1,60 +1,51 @@
-﻿namespace Halfbreed
+﻿// Revised for version 0.2
+
+namespace Halfbreed
 {
 	public enum Traits
 	{
+		Animal,
+		Blind,
+		BlindSight,
+		BlockFly,
+		BlockLOS,
+		BlockSwim,
+		BlockWalk,
+		Climbing,
+		Cloth,
+		DarkVision,
+		ElevationChange,
+		Flying,
+		Furnishing,
+		Gem,
+		Immobilised,
+		Impassible,
 		ImmuneToAcid,
 		ImmuneToCold,
-		ImmuneToFire,
-		ImmuneToElectricity,
-		ImmuneToMental,
-		ImmuneToPoison,
 		ImmuneToDisease,
+		ImmuneToElectricity,
+		ImmuneToFire,
 		ImmuneToLight,
+		ImmuneToMental,
+		ImmuneToNether,
+		ImmuneToPhysical,
+		ImmuneToPoison,
 		ImmuneToShadow,
-
-		Immobilised,
-
-		Organic,
+		Indestructible,
 		Inorganic,
-
-		Ruined,
-
-		Furnishing,
-		ElevationChange,
-
-		Wood,
-		Metal,
-		Stone,
-		Gem,
 		Leather,
-		Cloth,
-
-		Animal,
-		Plant,
 		Liquid,
-
+		Metal,
+		Plant,
 		Player,
-		Trap,
-
-		Walking,
-		Flying,
-		Swimming,
-		Climbing,
-
-		BlockWalk,
-		BlockFly,
-		BlockSwim,
-		Impassible,
-
-		BlockLOS,
-
-		DarkVision,
-		TrueSeeing,
-		BlindSight,
-
-		Blind,
+		Organic,
+		Ruined,
 		Scent,
-
-		Indestructible
+		Stone,
+		Swimming,
+		Trap,
+		TrueSeeing,
+		Walking,
+		Wood
 	}
 }
