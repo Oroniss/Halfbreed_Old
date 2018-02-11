@@ -14,7 +14,11 @@ namespace Halfbreed.Entities.Furnishings
 			{"Interaction Trap Setup", new FurnishingSetupFunction(InteractionTrapSetup)},
 
 			// Furnishing specific functions
-			{"Wooden Door", new FurnishingSetupFunction(DoorSetup)}
+			{"Wooden Door", new FurnishingSetupFunction(DoorSetup)},
+
+			// Traps
+			{"Pit Trap", new FurnishingSetupFunction(MovementTrapSetup)},
+			{"Flame Vent Trap", new FurnishingSetupFunction(MovementTrapSetup)}
 		};
 
 		public delegate void FurnishingSetupFunction(Furnishing furnishing, List<string> otherParameters);
@@ -47,7 +51,7 @@ namespace Halfbreed.Entities.Furnishings
 
 		private static void LevelTransitionSetup(Furnishing furnishing, List<string> otherParameters)
 		{
-			furnishing.AddInteractionFunction("LevelTransitionUse");
+			furnishing.AddInteractionFunction("Level Transition Use");
 			furnishing.SetOtherAttribute("DestinationLevel", otherParameters[otherParameters.IndexOf("DestinationLevel") + 1]);
 			furnishing.SetOtherAttribute("NewXLoc", otherParameters[otherParameters.IndexOf("NewXLoc") + 1]);
 			furnishing.SetOtherAttribute("NewYLoc", otherParameters[otherParameters.IndexOf("NewYLoc") + 1]);
@@ -57,6 +61,13 @@ namespace Halfbreed.Entities.Furnishings
 		{
 			var trapType = otherParameters[otherParameters.IndexOf("TrapType") + 1];
 			furnishing.AddInteractionFunction(string.Format("Trigger {0} Trap", trapType));
+			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
+			furnishing.Trapped = true;
+		}
+
+		private static void MovementTrapSetup(Furnishing furnishing, List<string> otherParameters)
+		{
+			furnishing.MoveOnFunction = string.Format("{0} Move On", furnishing.EntityName);
 			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
 			furnishing.Trapped = true;
 		}
