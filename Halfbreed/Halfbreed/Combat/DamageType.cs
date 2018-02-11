@@ -1,17 +1,19 @@
-﻿namespace Halfbreed.Combat
+﻿// Revised for version 0.2.
+
+namespace Halfbreed.Combat
 {
 	public enum DamageType
 	{
-		ACID,
-		COLD,
-		ELECTRICITY,
-		FIRE,
-		POISON,
-		DISEASE,
-		LIGHT,
-		SHADOW,
-		MENTAL,
-		PHYSICAL,
-		NETHER
+		Acid,
+		Cold,
+		Disease,
+		Electricity,
+		Fire,
+		Light,
+		Mental,
+		Physical,
+		Poison,
+		Shadow,
+		Nether
 	}
 }
