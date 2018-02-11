@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities.Furnishings
 {
@@ -12,6 +13,7 @@ namespace Halfbreed.Entities.Furnishings
 			// Other setup functions that can be added to any furnishing
 			{"Level Transition Setup", new FurnishingSetupFunction(LevelTransitionSetup)},
 			{"Interaction Trap Setup", new FurnishingSetupFunction(InteractionTrapSetup)},
+			{"Concealed Furnishing Setup", new FurnishingSetupFunction(ConcealedFurnishingSetup)},
 
 			// Furnishing specific functions
 			{"Wooden Door", new FurnishingSetupFunction(DoorSetup)},
@@ -70,6 +72,21 @@ namespace Halfbreed.Entities.Furnishings
 			furnishing.MoveOnFunction = string.Format("{0} Move On", furnishing.EntityName);
 			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
 			furnishing.Trapped = true;
+		}
+
+		private static void ConcealedFurnishingSetup(Furnishing furnishing, List<string> otherParameters)
+		{
+			furnishing.Concealed = true;
+			furnishing.PlayerSpotted = false;
+			furnishing.SetOtherAttribute("ConcealmentLevel", otherParameters[otherParameters.IndexOf("ConcealmentLevel") + 1]);
+
+			if (otherParameters.Contains("ConcealedTile"))
+			{
+				var tileName = otherParameters[otherParameters.IndexOf("ConcealedTile") + 1];
+				var tileDetails = Levels.TileDictionary.getTileDetails(tileName);
+				furnishing.SetOtherAttribute("ConcealedBGColor", tileDetails.BGColor.ToString());
+				furnishing.SetOtherAttribute("ConcealedFogColor", tileDetails.FogColor.ToString());
+			}
 		}
 	}
 
