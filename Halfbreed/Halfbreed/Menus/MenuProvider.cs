@@ -1,4 +1,6 @@
-﻿using Halfbreed.Menus;
+﻿// Revised for version 0.2. No changes required.
+
+using Halfbreed.Menus;
 
 namespace Halfbreed
 {
