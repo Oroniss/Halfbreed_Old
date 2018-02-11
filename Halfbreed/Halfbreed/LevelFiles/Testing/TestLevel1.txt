@@ -338,6 +338,11 @@ Wooden Chest,42,22
 Broken Wooden Door,32,22
 Tin Brazier,30,5,IsLit
 Wooden Stair Down,2,2,LevelTransition,DestinationLevel,TESTLEVEL2,NewXLoc,49,NewYLoc,42
+Pit Trap,40,4,TrapLevel,1
+Pit Trap,40,6,TrapLevel,2
+Flame Vent Trap,2,4,TrapLevel,5
+Flame Vent Trap,4,2,TrapLevel,6
+Flame Vent Trap,4,4,TrapLevel,6
 ###
 Rat Den,1,4
 Rat Den,9,2
@@ -349,11 +354,5 @@ Green Mold,19,22
 Green Mold,28,1
 Green Mold,42,18
 ###
-Pit Trap,40,4,TrapLevel,1
-Pit Trap,40,6,TrapLevel,2
-Flame Vent Trap,2,4,TrapLevel,5
-Flame Vent Trap,4,2,TrapLevel,6
-Flame Vent Trap,4,4,TrapLevel,6
 ###
-Stairs,2,2,newLevelId,WallMarketStorage_2,new49,new42
 ###
