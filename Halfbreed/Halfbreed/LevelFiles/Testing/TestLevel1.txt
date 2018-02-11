@@ -110,7 +110,7 @@ Broken Wooden Chest,17,7
 Broken Wooden Chest,18,6
 Wooden Chest,18,7
 Wooden Door,13,12
-Wooden Door,18,12,AddTrapComponent,TrapType,Swinging Blade,TrapLevel,1
+Wooden Door,18,12,Trapped,TrapType,Swinging Blade,TrapLevel,1
 Pallet,9,14
 Pallet,10,14
 Pallet,11,14
