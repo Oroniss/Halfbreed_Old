@@ -169,6 +169,24 @@ namespace Halfbreed
 			return x >= 0 && x < Width && y >= 0 && y < Height;
 		}
 
+		public int Elevation(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return GetElevation(index);
+		}
+
+		public bool IsRevealed(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _revealed[index];
+		}
+
+		public void RevealTile(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			_revealed[index] = true;
+		}
+
 		// Furnishings
 		public bool HasFurnishing(int x, int y)
 		{
@@ -346,6 +364,103 @@ namespace Halfbreed
 
 			if (_furnishings.ContainsKey(index))
 				_furnishings[index].MoveOn(actor, this, originX, originY);
+		}
+
+		// LOS and vision functions
+		bool BlockLOS(int index)
+		{
+			return HasTrait(index, Traits.BlockLOS);
+		}
+
+		bool BlockLOS(int x, int y, int elevation)
+		{
+			var index = ConvertXYToInt(x, y);
+			return elevation < GetElevation(index) || BlockLOS(index);
+		}
+
+		public List<XYCoordinateStruct> GetFOV(int x, int y, int elevation, int viewDistance, bool Darkvision, bool Blindsight)
+		{
+			if (!Blindsight)
+				viewDistance += _smokeLevel;
+
+			HashSet<int> viewSet = new HashSet<int>() {ConvertXYToInt(x, y) };
+			for (int octant = 0; octant < 8; octant++)
+			{
+				CastLight(x, y, 1, 1.0d, 0.0d, viewDistance, _octantTranslate[0, octant], _octantTranslate[1, octant],
+						  _octantTranslate[2, octant], _octantTranslate[3, octant], 0, elevation, viewSet);
+			}
+
+			// Adjust for lit tiles here.
+			var returnList = new List<XYCoordinateStruct>();
+			foreach (int index in viewSet)
+				returnList.Add(new XYCoordinateStruct(index % _width, index / _width));
+
+			return returnList;
+		}
+
+		void CastLight(int xLoc, int yLoc, int row, double start, double end, int viewDistance, int xx, int xy, int yx,
+					   int yy, int recursionNumber, int elevation, HashSet<int> viewSet)
+		{
+			if (start < end)
+				return;
+
+			var newStart = -1.0d;
+			var viewDistanceSquared = viewDistance * viewDistance;
+
+			for (int j = row; j < viewDistance + 1; j++)
+			{
+				var dx = -j - 1;
+				var dy = -j;
+				var blocked = false;
+
+				while (dx <= 0)
+				{
+					dx += 1;
+
+					var mapX = xLoc + dx * xx + dy * xy;
+					var mapY = yLoc + dx * yx + dy * yy;
+
+					var lSlope = (dx - 0.5) / (dy + 0.5);
+					var rSlope = (dx + 0.5) / (dy - 0.5);
+
+					if (start <= rSlope)
+						continue;
+					else if (end >= lSlope)
+						break;
+					else
+					{
+						// We can see this square
+						if (dy * dx + dy * dy < viewDistanceSquared && IsValidMapCoord(mapX, mapY))
+							viewSet.Add(ConvertXYToInt(mapX, mapY));
+						if (blocked)
+						{
+							// We are scanning blocked squares
+							if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
+							{
+								newStart = rSlope;
+								continue;
+							}
+							else
+							{
+								blocked = false;
+								start = newStart;
+							}
+						}
+						else if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
+						{
+							// Start a child scan
+							blocked = true;
+							CastLight(xLoc, yLoc, j + 1, start, lSlope, viewDistance, xx, xy, yx, yy, recursionNumber + 1, elevation, viewSet);
+							newStart = rSlope;
+						}
+					}
+				}
+				// Row is scanned  do next row unless last square was blocked.
+				if (blocked)
+				{
+					break;
+				}
+			}
 		}
 
 		// Graphical functions
