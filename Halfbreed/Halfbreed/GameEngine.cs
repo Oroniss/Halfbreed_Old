@@ -28,7 +28,7 @@ namespace Halfbreed
 			_difficultySetting = startingParameters.DifficultySetting;
 			_characterClass = startingParameters.CharacterClass;
 			_useAchievements = startingParameters.UseAchievements;
-			_gameId = startingParameters.GameId;
+			_gameId = startingParameters.GameID;
 			_player = new Entities.Player(startingParameters);
 		}
 
