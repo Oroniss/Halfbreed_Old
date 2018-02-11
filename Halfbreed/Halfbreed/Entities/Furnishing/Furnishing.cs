@@ -14,6 +14,8 @@ namespace Halfbreed.Entities
 		Colors _fogColor;
 		int _elevation;
 
+		bool _trapped;
+
 		List<string> _interactionFunctions;
 
 		public Furnishing(string furnishingName, int xLoc, int yLoc, List<string> otherParameters)
@@ -29,6 +31,7 @@ namespace Halfbreed.Entities
 			_hasFogColor = template.HasFogColor;
 			_fogColor = template.FogColor;
 			_elevation = template.Elevation;
+			_trapped = false;
 
 			_interactionFunctions = new List<string>();
 
@@ -48,6 +51,16 @@ namespace Halfbreed.Entities
 		public bool HasFogColor
 		{
 			get { return _hasFogColor; }
+		}
+
+		public override Colors FGColor
+		{
+			get
+			{
+				if (_trapped && PlayerSpotted)
+					return Colors.Red;
+				return base.FGColor;
+			}
 		}
 
 		public Colors BGColor
@@ -70,6 +83,12 @@ namespace Halfbreed.Entities
 					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this.ToString());
 				return _fogColor;
 			}
+		}
+
+		public bool Trapped
+		{
+			get { return _trapped; }
+			set { _trapped = value; }
 		}
 
 		public int Elevation
