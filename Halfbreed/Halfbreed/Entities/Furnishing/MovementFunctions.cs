@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities.Furnishings
 {
@@ -33,7 +33,7 @@ namespace Halfbreed.Entities.Furnishings
 				return;
 
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
-			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.PHYSICAL, 7 * trapLevel));
+			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.Physical, 7 * trapLevel));
 		}
 
 		private static void FlameVentTrapMoveOn(Furnishing furnishing, Actor actor, Level level, int originX, int originY)
@@ -42,7 +42,7 @@ namespace Halfbreed.Entities.Furnishings
 				return;
 
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
-			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.FIRE, 10 * trapLevel));
+			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.Fire, 10 * trapLevel));
 			furnishing.Trapped = false;
 			furnishing.MoveOnFunction = null;
 		}
