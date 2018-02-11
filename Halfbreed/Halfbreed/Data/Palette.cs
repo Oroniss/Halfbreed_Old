@@ -1,4 +1,6 @@
-﻿using RLNET;
+﻿// Revised for version 0.2.
+
+using RLNET;
 using System.Collections.Generic;
 
 namespace Halfbreed
@@ -33,8 +35,8 @@ namespace Halfbreed
 			// Oranges
 			{Colors.DarkOrange, new RLColor(238, 154, 0)},
 			// Blues
-			{Colors.WaterBlue, new RLColor(0, 0, 238)},
 			{Colors.DarkWater, new RLColor(0, 0, 115)},
+			{Colors.WaterBlue, new RLColor(0, 0, 238)},
 			// Reds
 			{Colors.Red, new RLColor(255, 0, 0)}
 		};
@@ -79,8 +81,8 @@ namespace Halfbreed
 		// Oranges
 		DarkOrange,
 		// Blues
-		WaterBlue,
 		DarkWater,
+		WaterBlue,
 		// Reds
 		Red
 	}
