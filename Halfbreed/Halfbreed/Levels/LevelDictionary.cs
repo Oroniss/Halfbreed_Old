@@ -13,7 +13,7 @@ namespace Halfbreed
 			{LevelEnum.TESTLEVEL2, "/LevelFiles/Testing/TestLevel2"}
 		};
 
-		string GetFilePath(LevelEnum level)
+		static string GetFilePath(LevelEnum level)
 		{
 			return _baseFilePath + _filePaths[level] + ".txt";
 		}
@@ -23,5 +23,12 @@ namespace Halfbreed
 			_baseFilePath = testFilePath;
 		}
 
+		static readonly int[,] _octantTranslate = new int[4, 8]
+		{
+			{1, 0, 0, -1, -1, 0, 0, 1},
+			{0, 1, -1, 0, 0, -1, 1, 0},
+			{0, 1, 1, 0, 0, -1, -1, 0},
+			{1, 0, 0, 1, -1, 0, 0, -1}
+		};
 	}
 }
