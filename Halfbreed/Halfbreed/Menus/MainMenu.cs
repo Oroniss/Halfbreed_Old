@@ -21,7 +21,7 @@ namespace Halfbreed.Menus
 							NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 							if (!parameters.Cancel)
 							{
-								parameters.GameId = 0;  //UserDatabaseConnection.GenerateNextGameId();
+								parameters.GameID = 0;  //UserDatabaseConnection.GenerateNextGameId();
 								GameEngine.SetupNewGame(parameters);
 								Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
 								GameEngine.LevelTransition(startingLevel, 42, 5);
