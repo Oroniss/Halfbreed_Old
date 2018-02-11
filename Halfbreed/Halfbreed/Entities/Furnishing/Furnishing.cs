@@ -36,6 +36,8 @@ namespace Halfbreed.Entities
 
 			if (otherParameters.Contains("LevelTransition"))
 				FurnishingSetupFunctions.GetSetupFunction("Level Transition Setup")(this, otherParameters);
+			if (otherParameters.Contains("Trapped"))
+				FurnishingSetupFunctions.GetSetupFunction("Interaction Trap Setup")(this, otherParameters);
 		}
 
 		public bool HasBGColor
