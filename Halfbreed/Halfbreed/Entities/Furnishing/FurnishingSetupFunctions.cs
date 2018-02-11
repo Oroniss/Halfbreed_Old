@@ -11,6 +11,7 @@ namespace Halfbreed.Entities.Furnishings
 
 			// Other setup functions that can be added to any furnishing
 			{"Level Transition Setup", new FurnishingSetupFunction(LevelTransitionSetup)},
+			{"Interaction Trap Setup", new FurnishingSetupFunction(InteractionTrapSetup)},
 
 			// Furnishing specific functions
 			{"Wooden Door", new FurnishingSetupFunction(DoorSetup)}
@@ -50,6 +51,14 @@ namespace Halfbreed.Entities.Furnishings
 			furnishing.SetOtherAttribute("DestinationLevel", otherParameters[otherParameters.IndexOf("DestinationLevel") + 1]);
 			furnishing.SetOtherAttribute("NewXLoc", otherParameters[otherParameters.IndexOf("NewXLoc") + 1]);
 			furnishing.SetOtherAttribute("NewYLoc", otherParameters[otherParameters.IndexOf("NewYLoc") + 1]);
+		}
+
+		private static void InteractionTrapSetup(Furnishing furnishing, List<string> otherParameters)
+		{
+			var trapType = otherParameters[otherParameters.IndexOf("TrapType") + 1];
+			furnishing.AddInteractionFunction(string.Format("Trigger {0} Trap", trapType));
+			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
+			furnishing.Trapped = true;
 		}
 	}
 
