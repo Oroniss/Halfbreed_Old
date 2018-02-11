@@ -4,10 +4,13 @@ namespace Halfbreed.Entities
 {
 	public class Actor:Entity
 	{
+		int _viewDistance;
+
 		public Actor(string actorName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(actorName, xLoc, yLoc, otherParameters)
 		{
 			AddTrait(Traits.Impassible);
+			_viewDistance = 18;
 		}
 
 		protected virtual void GetNextMove(Level currentLevel)
@@ -27,6 +30,11 @@ namespace Halfbreed.Entities
 
 			if (!_destroyed)
 				GetNextMove(currentLevel);
+		}
+
+		public int ViewDistance
+		{
+			get { return _viewDistance; }
 		}
 	}
 }
