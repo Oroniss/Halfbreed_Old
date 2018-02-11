@@ -31,7 +31,7 @@ namespace Halfbreed.Display
 					_console.Print(5, 10 + 4 * i, options[i], Palette.GetColor(Colors.Black));
 			}
 
-			_console.Print(5, 80, bottom, Palette.GetColor(Colors.Black));
+			_console.Print(5, 60, bottom, Palette.GetColor(Colors.Black));
 
 			CopyToBackConsole();
 		}
