@@ -11,7 +11,10 @@ namespace Halfbreed.Entities.Furnishings
 			{"No Use", new InteractionFunction(NoUse)},
 			// Furnishings
 			{"Door Use", new InteractionFunction(DoorUse)},
-			{"LevelTransitionUse", new InteractionFunction(LevelTransitionUse)}
+			{"Level Transition Use", new InteractionFunction(LevelTransitionUse)},
+
+			// Traps
+			{"Trigger Swinging Blade Trap", new InteractionFunction(TriggerSwingingBladeTrap)}
 		};
 
 		public delegate void InteractionFunction(Furnishing furnishing, Actor actor, Level currentLevel);
@@ -72,6 +75,15 @@ namespace Halfbreed.Entities.Furnishings
 			var newXLoc = int.Parse(furnishing.GetOtherAttributeValue("NewXLoc"));
 			var newYLoc = int.Parse(furnishing.GetOtherAttributeValue("NewYLoc"));
 			GameEngine.InitiateLevelTransition(destinationLevel, newXLoc, newYLoc);
+		}
+
+		private static void TriggerSwingingBladeTrap(Furnishing furnishing, Actor actor, Level currentLevel)
+		{
+			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
+
+			actor.ProcessDamage(furnishing, new Combat.Damage(Combat.DamageType.PHYSICAL, 5 * trapLevel));
+			furnishing.RemoveInteractionFunction("Trigger Swinging Blade Trap");
+			furnishing.Trapped = false;
 		}
 
 	}
