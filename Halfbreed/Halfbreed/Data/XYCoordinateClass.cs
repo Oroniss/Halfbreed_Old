@@ -1,4 +1,6 @@
-﻿namespace Halfbreed
+﻿// Revised for version 0.2. No changes required.
+
+namespace Halfbreed
 {
 	public class XYCoordinateClass
 	{
