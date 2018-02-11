@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using Halfbreed.Entities.Furnishings;
 
 namespace Halfbreed.Entities
@@ -43,16 +44,18 @@ namespace Halfbreed.Entities
 				FurnishingSetupFunctions.GetSetupFunction("Level Transition Setup")(this, otherParameters);
 			if (otherParameters.Contains("Trapped"))
 				FurnishingSetupFunctions.GetSetupFunction("Interaction Trap Setup")(this, otherParameters);
+			if (otherParameters.Contains("Concealed"))
+				FurnishingSetupFunctions.GetSetupFunction("Concealed Furnishing Setup")(this, otherParameters);
 		}
 
 		public bool HasBGColor
 		{
-			get { return _hasBGColor; }
+			get { return _hasBGColor || (!PlayerSpotted && HasOtherAttribute("ConcealedBGColor")); }
 		}
 
 		public bool HasFogColor
 		{
-			get { return _hasFogColor; }
+			get { return _hasFogColor || (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor")); }
 		}
 
 		public override Colors FGColor
@@ -67,9 +70,9 @@ namespace Halfbreed.Entities
 
 		public Colors BGColor
 		{
-			// TODO: Think about whether this should also check for concealed.
 			get
-			{
+			{	if (!PlayerSpotted && HasOtherAttribute("ConcealedBGColor"))
+					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedBGColor"));
 				if (!_hasBGColor)
 					ErrorLogger.AddDebugText("Asked for BGColor on Entity without it: " + this.ToString());
 				return _bgColor;
@@ -78,9 +81,10 @@ namespace Halfbreed.Entities
 
 		public Colors FogColor
 		{
-			// TODO: Think about whether this should also check for concealed.
 			get
 			{
+				if (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor"))
+					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedFogColor"));
 				if (!_hasFogColor)
 					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this.ToString());
 				return _fogColor;
