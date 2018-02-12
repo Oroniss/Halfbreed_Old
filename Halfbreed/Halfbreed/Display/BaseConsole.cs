@@ -1,4 +1,6 @@
-﻿using RLNET;
+﻿// Cleaned up for version 0.02. No changes required.
+
+using RLNET;
 
 namespace Halfbreed.Display
 {
