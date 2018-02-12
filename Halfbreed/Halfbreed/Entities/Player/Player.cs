@@ -4,6 +4,8 @@ namespace Halfbreed.Entities
 {
 	public class Player:Actor
 	{
+		int _lightRadius = 0;
+
 		public Player(Menus.NewGameParameters playerParameters)
 			:base("Player", 0 ,0 , new List<string>())
 		{
@@ -16,8 +18,10 @@ namespace Halfbreed.Entities
 
 		protected override void GetNextMove(Level currentLevel)
 		{
-			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
-												   HasTrait(Traits.DarkVision), HasTrait(Traits.BlindSight));
+			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance, 
+			                                       _lightRadius, HasTrait(Traits.DarkVision), 
+			                                       HasTrait(Traits.BlindSight));
+			
 			foreach (XYCoordinateStruct tile in visibleTiles)
 				currentLevel.RevealTile(tile.X, tile.Y);
 
@@ -72,6 +76,21 @@ namespace Halfbreed.Entities
 						continue;
 					}
 
+				}
+
+				if (key == "S")
+				{
+					var tileSet = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
+									   _lightRadius, HasTrait(Traits.DarkVision),
+									   HasTrait(Traits.BlindSight));
+					var concealedEntities = currentLevel.GetConcealedEntities(tileSet);
+					foreach (var entity in concealedEntities)
+					{
+						entity.PlayerSpotted = true;  // TODO: Flesh this out properly.
+						MainGraphicDisplay.TextConsole.AddOutputText("You spot " + entity.ToString());
+					}
+
+					needsToMove = false;
 				}
 
 				if (key == "ESCAPE")
