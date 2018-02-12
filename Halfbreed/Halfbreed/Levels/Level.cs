@@ -187,6 +187,17 @@ namespace Halfbreed
 			_revealed[index] = true;
 		}
 
+		public int Distance(int x1, int y1, int x2, int y2)
+		{
+			return (int)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2) + 
+			                      Math.Pow(Elevation(x1, y1) - Elevation(x2, y2), 2));
+		}
+
+		public int Distance(Entity entity1, Entity entity2)
+		{
+			return Distance(entity1.XLoc, entity1.YLoc, entity2.XLoc, entity2.YLoc);
+		}
+
 		// Furnishings
 		public bool HasFurnishing(int x, int y)
 		{
@@ -378,10 +389,16 @@ namespace Halfbreed
 			return elevation < GetElevation(index) || BlockLOS(index);
 		}
 
-		public List<XYCoordinateStruct> GetFOV(int x, int y, int elevation, int viewDistance, bool Darkvision, bool Blindsight)
+		public List<XYCoordinateStruct> GetFOV(int x, int y, int elevation, int viewDistance, int lightRadius, 
+		                                       bool Darkvision, bool Blindsight)
 		{
 			if (!Blindsight)
 				viewDistance += _smokeLevel;
+			if (!Darkvision)
+			{
+				viewDistance += _lightLevel;
+				viewDistance = Math.Max(viewDistance, lightRadius);
+			}
 
 			HashSet<int> viewSet = new HashSet<int>() {ConvertXYToInt(x, y) };
 			for (int octant = 0; octant < 8; octant++)
@@ -461,6 +478,22 @@ namespace Halfbreed
 					break;
 				}
 			}
+		}
+
+		public List<Entity> GetConcealedEntities(List<XYCoordinateStruct> visibleTiles)
+		{
+			var returnList = new List<Entity>();
+			foreach (var tile in visibleTiles)
+			{
+				var index = ConvertXYToInt(tile.X, tile.Y);
+				if (_furnishings.ContainsKey(index) && _furnishings[index].Concealed)
+					returnList.Add(_furnishings[index]);
+				if (_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].Concealed)
+					returnList.Add(_harvestingNodes[index]);
+				if (_actors.ContainsKey(index) && _actors[index].Concealed)
+					returnList.Add(_actors[index]);
+			}
+			return returnList;
 		}
 
 		// Graphical functions
