@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using RLNET;
 using Halfbreed.Display;
 
@@ -6,42 +8,30 @@ namespace Halfbreed
     public static class MainGraphicDisplay
     {
 		// TODO: Eventually these should probably go in a settings file or similar.
-		private static int _backConsoleWidth = 160;
-		private static int _backConsoleHeight = 80;
-		private static BackConsole _backConsole = new BackConsole(_backConsoleWidth, _backConsoleHeight);
+		static readonly int WINDOWWIDTH = 160;
+		static readonly int WINDOWHEIGHT = 80;
+		static BackConsole _backConsole = new BackConsole(WINDOWWIDTH, WINDOWHEIGHT);
 
-		private static int _menuConsoleWidth = _backConsoleWidth - 4;
-		private static int _menuConsoleHeight = _backConsoleHeight - 4;
-		private static int _menuConsoleXOffset = 2;
-		private static int _menuConsoleYOffset = 2;
-		private static MenuConsole _menuConsole = new MenuConsole(_menuConsoleWidth,
-		                                                          _menuConsoleHeight,
-		                                                          _menuConsoleXOffset,
-		                                                          _menuConsoleYOffset, 
-		                                                          Palette.GetColor(Colors.Silver), 
-		                                                          _backConsole);
-		
-		private static int _mapConsoleWidth = 80;
-		private static int _mapConsoleHeight = 80;
-		private static int _mapConsoleXOffset = 0;
-		private static int _mapConsoleYOffset = 0;
-		private static MapConsole _mapConsole = new MapConsole(_mapConsoleWidth, 
-		                                                       _mapConsoleHeight,
-															   _mapConsoleXOffset, 
-		                                                       _mapConsoleYOffset, 
-		                                                       Palette.GetColor(Colors.Black), 
-		                                                       _backConsole);
+		static readonly int MENUOFFSET = 2;
+		static readonly int MENUCONSOLEWIDTH = WINDOWWIDTH - 2 * MENUOFFSET;
+		static readonly int MENUCONSOLEHEIGHT = WINDOWHEIGHT - 2 * MENUOFFSET;
+		static RLColor MENUCONSOLEBACKCOLOR = Palette.GetColor(Colors.Silver);
+		static MenuConsole _menuConsole = new MenuConsole(MENUCONSOLEWIDTH, MENUCONSOLEHEIGHT, MENUOFFSET, MENUOFFSET, 
+		                                                  MENUCONSOLEBACKCOLOR, _backConsole);
+		static readonly int MAPCONSOLEHEIGHT = WINDOWHEIGHT;
+		static readonly int MAPCONSOLEWIDTH = MAPCONSOLEHEIGHT;
+		static readonly int MAPCONSOLEOFFSET = 0;
+		static readonly RLColor MAPCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static MapConsole _mapConsole = new MapConsole(MAPCONSOLEWIDTH, MAPCONSOLEHEIGHT, MAPCONSOLEOFFSET, 
+		                                               MAPCONSOLEOFFSET, MAPCONSOLEBACKCOLOR, _backConsole);
 
-		private static int _textConsoleWidth = 40;
-		private static int _textConsoleHeight = 80;
-		private static int _textConsoleXOffset = 120;
-		private static int _textConsoleYOffset = 0;
-		private static TextConsole _textConsole = new TextConsole(_textConsoleWidth,
-																  _textConsoleHeight,
-																  _textConsoleXOffset,
-																  _textConsoleYOffset,
-																  Palette.GetColor(Colors.Black),
-																  _backConsole);
+		static readonly int TEXTCONSOLEWIDTH = 40;
+		static readonly int TEXTCONSOLEHEIGHT = WINDOWHEIGHT;
+		static readonly int TEXTCONSOLEXOFFSET = MAPCONSOLEWIDTH + 40; // TODO: Refactor this to add CharacterConsole Width
+		static readonly int TEXTCONSOLEYOFFSET = 0;
+		static readonly RLColor TEXTCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static TextConsole _textConsole = new TextConsole(TEXTCONSOLEWIDTH, TEXTCONSOLEHEIGHT, TEXTCONSOLEXOFFSET,
+														  TEXTCONSOLEYOFFSET, TEXTCONSOLEBACKCOLOR, _backConsole);
 
 		public static bool IsDirty
 		{
@@ -58,7 +48,7 @@ namespace Halfbreed
 		{
 			lock (_backConsole)
 			{
-				RLConsole.Blit(_backConsole, 0, 0, _backConsoleWidth, _backConsoleHeight, destination, 0, 0);
+				RLConsole.Blit(_backConsole, 0, 0, WINDOWWIDTH, WINDOWHEIGHT, destination, 0, 0);
 				_backConsole.SetClean();
 			}
 			return destination;
