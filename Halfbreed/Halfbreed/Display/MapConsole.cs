@@ -30,7 +30,7 @@ namespace Halfbreed.Display
 				}
 			}
 
-			foreach (var position in GameEngine.VisibleTiles)
+			foreach (var position in MainProgram.VisibleTiles)
 			{
 				_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, null,
 							 Palette.GetColor(level.GetBackgroundColor(position.X, position.Y)), ' ');
