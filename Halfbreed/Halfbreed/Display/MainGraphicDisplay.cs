@@ -72,7 +72,7 @@ namespace Halfbreed
 		public static void UpdateGameScreen()
 		{
 			_textConsole.DrawOutputText();
-			_mapConsole.DrawMap(GameEngine.CurrentLevel, GameEngine.Player.XLoc, GameEngine.Player.YLoc);
+			_mapConsole.DrawMap(MainProgram.CurrentLevel, MainProgram.Player.XLoc, MainProgram.Player.YLoc);
 		}
 
     }
