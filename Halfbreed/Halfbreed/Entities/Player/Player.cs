@@ -6,7 +6,7 @@ namespace Halfbreed.Entities
 	{
 		int _lightRadius = 0;
 
-		public Player(Menus.NewGameParameters playerParameters)
+		public Player(GameData playerParameters)
 			:base("Player", 0 ,0 , new List<string>())
 		{
 			AddTrait(Traits.Player);
@@ -25,7 +25,7 @@ namespace Halfbreed.Entities
 			foreach (XYCoordinateStruct tile in visibleTiles)
 				currentLevel.RevealTile(tile.X, tile.Y);
 
-			GameEngine.VisibleTiles = visibleTiles;
+			MainProgram.VisibleTiles = visibleTiles;
 
 			MainGraphicDisplay.UpdateGameScreen();
 			MainGraphicDisplay.TextConsole.AddOutputText("");
@@ -47,7 +47,7 @@ namespace Halfbreed.Entities
 
 				if (key == "ESCAPE")
 				{
-					GameEngine.Quit();
+					MainProgram.Quit();
 					return;
 				}
 			}
