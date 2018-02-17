@@ -30,8 +30,6 @@ namespace Halfbreed
 			{RLKey.Y, "Y"}, {RLKey.Z, "Z"}
 		};
 
-        static List<string> _queuedInput = new List<string>();
-
 		public static Dictionary<string, int> NumberKeys = new Dictionary<string, int>
 			{{"0", 0}, {"1", 1},  {"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}};
 
@@ -41,16 +39,23 @@ namespace Halfbreed
 			{"UP_LEFT", new XYCoordinateStruct(-1, -1)}, {"UP_RIGHT", new XYCoordinateStruct(1, -1)}, 
 			{"DOWN_LEFT", new XYCoordinateStruct(-1, 1)}, {"DOWN_RIGHT", new XYCoordinateStruct(1, 1)}};
 
-        public static void addKeyboardInput(RLKey key)
+		static List<string> _queuedInput = new List<string>();
+
+
+		public static void addKeyboardInput(RLKey key)
         {
 			if (_keyDict.ContainsKey(key))
 			{
 				lock (_queuedInput)
-				{
 					_queuedInput.Add(_keyDict[key]);
-				}
 			}
         }
+
+		public static void addKeyboardInput(string key)
+		{
+			lock(_queuedInput)
+				_queuedInput.Add(key);
+		}
 
         public static string getNextKey()
         {
@@ -72,9 +77,7 @@ namespace Halfbreed
 		public static void clearAllInput()
 		{
 			lock (_queuedInput)
-			{
 				_queuedInput = new List<string>();
-			}
 		}
 
 		public static int SelectFromMenu(string title, List<String> menuOptions, string bottom)
