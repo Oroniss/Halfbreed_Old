@@ -1,3 +1,5 @@
+// Tidied up for Version 0.2. - No changes.
+
 using System.Collections.Generic;
 
 namespace Halfbreed.Entities
