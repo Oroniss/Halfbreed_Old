@@ -92,7 +92,7 @@ namespace Halfbreed.Display
 		{
 			Clear();
 
-			var messageLogTitle = string.Format("Message Log - Current Turn: {0}", GameEngine.CurrentTime);
+			var messageLogTitle = string.Format("Message Log - Current Turn: {0}", MainProgram.CurrentTime);
 			_console.Print(_textXOffset + ((_textWidth - messageLogTitle.Length) / 2), 1, 
 			               messageLogTitle, Palette.GetColor(Colors.White));
 
