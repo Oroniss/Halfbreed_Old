@@ -9,7 +9,7 @@ namespace Halfbreed
 	public static class UserDataManager
 	{
 		static bool _fullLogging;
-		
+
 		static string _configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "config.hb");
 		static readonly ConfigParameters _defaultConfigParameters = new ConfigParameters(false, false, false);
 
@@ -21,6 +21,8 @@ namespace Halfbreed
 				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Saves"));
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "UserData")))
 				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "UserData"));
+			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Logs")))
+				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Logs"));
 
 			if (!File.Exists(_configFilePath))
 				CreateNewConfigFile();
@@ -75,6 +77,7 @@ namespace Halfbreed
 
 		public static bool FullLogging
 		{
+			get { return _fullLogging; }
 			set { _fullLogging = value;}
 		}
 	}
