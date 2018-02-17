@@ -11,7 +11,7 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestCharacterCreationMenu()
 		{
-			NewGameParameters ps = new NewGameParameters();
+            Menus.GameData ps = new Menus.GameData();
 			ps.CharacterClass = CharacterClasses.Cleric;
 			Assert.AreEqual(ps.CharacterClass, CharacterClasses.Cleric);
 
@@ -19,7 +19,7 @@ namespace Halfbreed.Tests
 
 			RLKey[] keys = new RLKey[] { RLKey.Number3, RLKey.Number4, RLKey.Number1 };
 			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			NewGameParameters parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
+            Menus.GameData parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 			GameEngine.SetupNewGame(parameters);
 			Assert.AreEqual(3, GameEngine.DifficultySetting);
 			Assert.AreEqual(CharacterClasses.Necromancer, GameEngine.CharacterClass);
