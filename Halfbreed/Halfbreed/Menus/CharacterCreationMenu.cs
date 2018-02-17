@@ -1,5 +1,3 @@
-// Revised for version 0.2.
-
 using System.Collections.Generic;
 
 namespace Halfbreed.Menus
@@ -19,88 +17,43 @@ namespace Halfbreed.Menus
 		readonly List<string> _hl5classes = new List<string> { "Dragonlord" };
 
 
-		public NewGameParameters StartNewGame()
+		public GameData StartNewGame()
 		{
-			NewGameParameters parameters = new NewGameParameters();
+			GameData parameters = new GameData();
 
-			ChooseDifficulty(parameters);
-
-			if (parameters.Cancel)
-				return parameters;
-
-			ChooseCharacterClass(parameters);
-
-			if (parameters.Cancel)
-				return parameters;
-
-			ChooseUseAchievements(parameters);
-
-			return parameters;
-		}
-
-		void ChooseDifficulty(NewGameParameters parameters)
-		{
-			var selection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", 
+			var difficultySelection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", 
 			                                                _difficultySettings,
 														    "Escape to quit.");
-			if (selection == -1)
-				parameters.Cancel = true;
-			else
-				parameters.DifficultySetting = selection + 1;
-		}
 
-		void ChooseCharacterClass(NewGameParameters parameters)
-		{
+			if (difficultySelection == -1)
+				return null;
+			parameters.DifficultySetting = difficultySelection + 1;
+
+
 			var classList = _hl12classes;
 			if (parameters.DifficultySetting == 3 || parameters.DifficultySetting == 4)
 				classList = _hl34classes;
 			if (parameters.DifficultySetting == 5)
 				classList = _hl5classes;
 
-			var selection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
+			var classSelection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
 
-			if (selection == -1)
-				parameters.Cancel = true;
+			if (classSelection == -1)
+				return null;
+			parameters.CharacterClass = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), 
+				                                                                      classList[classSelection]);
+			
+			var useAchivementSelection = UserInputHandler.SelectFromMenu(
+				"Willst thou make use of the work of thy predecessors",
+				new List<string> { "Yes", "No" }, "Escape to Quit");
+
+			if (useAchivementSelection == -1)
+				return null;
 			else
-				parameters.CharacterClass = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), 
-				                                                                      classList[selection]);
+				parameters.UseAchievements = (useAchivementSelection == 0);
+
+			return parameters;
 		}
 
-		void ChooseUseAchievements(NewGameParameters parameters)
-		{
-			var selection = UserInputHandler.SelectFromMenu("Willst thou make use of the work of thy predecessors",
-															new List<string> { "Yes", "No" }, "Escape to Quit");
-
-			if (selection == -1)
-				parameters.Cancel = true;
-			else
-				parameters.UseAchievements = (selection == 0);
-		}
-	}
-
-	[System.Serializable]
-	public class NewGameParameters
-	{
-		public bool Cancel;
-		public int DifficultySetting;
-		public CharacterClasses CharacterClass;
-		public bool UseAchievements;
-		public int GameID;
-
-		public NewGameParameters()
-		{
-			Cancel = false;
-			DifficultySetting = 1;
-			CharacterClass = CharacterClasses.Fighter;
-			UseAchievements = true;
-		}
-
-		public NewGameParameters(int difficulty, CharacterClasses characterClass, bool useAchievements, int gameId)
-		{
-			DifficultySetting = difficulty;
-			CharacterClass = characterClass;
-			UseAchievements = useAchievements;
-			GameID = gameId;
-		}
 	}
 }
