@@ -74,7 +74,7 @@ namespace Halfbreed.Entities.Furnishings
 																furnishing.GetOtherAttributeValue("DestinationLevel"));
 			var newXLoc = int.Parse(furnishing.GetOtherAttributeValue("NewXLoc"));
 			var newYLoc = int.Parse(furnishing.GetOtherAttributeValue("NewYLoc"));
-			GameEngine.InitiateLevelTransition(destinationLevel, newXLoc, newYLoc);
+			MainProgram.LevelTransition(destinationLevel, newXLoc, newYLoc);
 		}
 
 		private static void TriggerSwingingBladeTrap(Furnishing furnishing, Actor actor, Level currentLevel)
