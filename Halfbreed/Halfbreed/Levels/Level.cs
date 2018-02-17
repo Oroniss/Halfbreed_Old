@@ -537,7 +537,11 @@ namespace Halfbreed
 			foreach (var index in new List<int>(_harvestingNodes.Keys))
 				_harvestingNodes[index].Update(this);
 			foreach (var index in new List<int>(_actors.Keys))
-				_actors[index].Update(this);
+			{
+				if (!_actors[index].HasTrait(Traits.Player))
+					_actors[index].Update(this);
+			}
+			MainProgram.Player.Update(this);
 		}
 
 	}
