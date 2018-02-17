@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Tidied up for version 0.2.
+
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
@@ -10,7 +12,7 @@ namespace Halfbreed.Entities
 			:base(actorName, xLoc, yLoc, otherParameters)
 		{
 			AddTrait(Traits.Impassible);
-			_viewDistance = 18;
+			_viewDistance = 18; // Fix this properly later on.
 		}
 
 		protected virtual void GetNextMove(Level currentLevel)
