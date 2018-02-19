@@ -49,8 +49,12 @@ namespace Halfbreed.Menus
 
 			if (useAchivementSelection == -1)
 				return null;
-			else
-				parameters.UseAchievements = (useAchivementSelection == 0);
+			parameters.UseAchievements = (useAchivementSelection == 0);
+
+			var characterNote = UserInputHandler.GetText("Specify Character Note");
+			if (characterNote == null)
+				return null;
+			parameters.CharacterNote = characterNote;
 
 			return parameters;
 		}
