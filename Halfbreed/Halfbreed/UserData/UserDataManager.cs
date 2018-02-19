@@ -13,6 +13,10 @@ namespace Halfbreed
 		static string _configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "config.hb");
 		static readonly ConfigParameters _defaultConfigParameters = new ConfigParameters(false, false, false);
 
+		static readonly SortedDictionary<int, SaveGameSummary> _defaultSaveSummary = 
+			new SortedDictionary<int, SaveGameSummary>();
+		static string _saveSummaryFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Userdata", "SSF.hb");
+
 		public static void SetupDirectoriesAndFiles()
 		{
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Config")))
@@ -26,11 +30,18 @@ namespace Halfbreed
 
 			if (!File.Exists(_configFilePath))
 				CreateNewConfigFile();
+			if (!File.Exists(_saveSummaryFilePath))
+				CreateNewSaveSummaryFile();
 		}
 
 		static void CreateNewConfigFile()
 		{
 			WriteConfigFile(_defaultConfigParameters);
+		}
+
+		static void CreateNewSaveSummaryFile()
+		{
+			WriteSummaryFile(_defaultSaveSummary);
 		}
 
 		public static void WriteConfigFile(ConfigParameters configParameters)
@@ -50,29 +61,47 @@ namespace Halfbreed
 			return configParameters;
 		}
 
-		public static void WriteSaveGameSummary()
+		public static void WriteSaveGameSummary(SaveGameSummary summary)
 		{
-
+			var saveSummaries = ReadSummaryFile();
+			saveSummaries[summary.GameData.GameID] = summary;
+			WriteSummaryFile(saveSummaries);
 		}
 
-		public static void ReadSaveGameSummary()
+		public static List<SaveGameSummary> GetCurrentSaves()
 		{
-
+			var returnList = new List<SaveGameSummary>();
+			var saveSummaries = ReadSummaryFile();
+			foreach (int summaryID in saveSummaries.Keys)
+			{
+				if (saveSummaries[summaryID].StillAlive)
+					returnList.Add(saveSummaries[summaryID]);
+			}
+			return returnList;
 		}
 
-		public static void GetNextGameId()
+		public static int GetNextGameId()
 		{
-
+			var saveSummaries = ReadSummaryFile();
+			return saveSummaries.Count;
+			// TODO: Add check to make sure it's not actually in the save summary dict.
 		}
 
-		static void ReadAllGameSummaries()
+		static SortedDictionary<int, SaveGameSummary> ReadSummaryFile()
 		{
-			
+			var fileStream = File.OpenRead(_saveSummaryFilePath);
+			var serialiser = new BinaryFormatter();
+			var saveSummaries = (SortedDictionary<int, SaveGameSummary>)serialiser.Deserialize(fileStream);
+			fileStream.Close();
+			return saveSummaries;
 		}
 
-		static void WriteAllGameSummaries()
+		static void WriteSummaryFile(SortedDictionary<int, SaveGameSummary> saveSummaries)
 		{
-			
+			var fileStream = File.OpenWrite(_saveSummaryFilePath);
+			var serialiser = new BinaryFormatter();
+			serialiser.Serialize(fileStream, saveSummaries);
+			fileStream.Close();
 		}
 
 		public static bool FullLogging
