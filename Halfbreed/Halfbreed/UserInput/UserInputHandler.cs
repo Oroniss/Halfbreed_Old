@@ -20,7 +20,7 @@ namespace Halfbreed
 			{RLKey.Keypad4, "LEFT"}, {RLKey.Keypad6, "RIGHT"}, {RLKey.Keypad7, "UP_LEFT"}, {RLKey.Keypad8, "UP"}, 
 			{RLKey.Keypad9, "UP_RIGHT"},
 
-			{RLKey.Escape, "ESCAPE"}, {RLKey.Space, "SPACE"},
+			{RLKey.Escape, "ESCAPE"}, {RLKey.Space, "SPACE"}, {RLKey.Enter, "ENTER"}, {RLKey.BackSpace, "BACKSPACE"},
 
 			// TODO: Add the rest.
 			{RLKey.A, "A"}, {RLKey.B, "B"}, {RLKey.C, "C"}, {RLKey.D, "D"}, {RLKey.E, "E"}, {RLKey.F, "F"},
@@ -38,6 +38,10 @@ namespace Halfbreed
 			{"LEFT", new XYCoordinateStruct(-1, 0)}, {"RIGHT", new XYCoordinateStruct(1, 0)},
 			{"UP_LEFT", new XYCoordinateStruct(-1, -1)}, {"UP_RIGHT", new XYCoordinateStruct(1, -1)}, 
 			{"DOWN_LEFT", new XYCoordinateStruct(-1, 1)}, {"DOWN_RIGHT", new XYCoordinateStruct(1, 1)}};
+
+		public static HashSet<string> LetterKeys = new HashSet<string>()
+		{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
+		"V", "W", "X", "Y", "Z"};
 
 		static List<string> _queuedInput = new List<string>();
 
@@ -188,6 +192,32 @@ namespace Halfbreed
 					return new XYCoordinateClass(0, 0);
 				if (key == "ESCAPE")
 					return null;
+			}
+		}
+
+		public static string GetText(string headerText)
+		{
+			var currentText = "";
+			while (true)
+			{
+				MainGraphicDisplay.MenuConsole.DrawMenu(headerText, new List<string>() { currentText }, 
+				                                        "Escape to cancel");
+				var key = getNextKey();
+				var converter = new System.Globalization.CultureInfo("en-US");
+
+				if (LetterKeys.Contains(key) && currentText.Length <= 30)
+				{
+					currentText += key.ToLower(); // ToLower required since all caps strings are changed.
+					currentText = converter.TextInfo.ToTitleCase(currentText);
+				}
+				if (key == "SPACE")
+					currentText += " ";
+				if (key == "BACKSPACE")
+					currentText = currentText.Substring(0, currentText.Length - 1);
+				if (key == "ESCAPE")
+					return null;
+				if (key == "ENTER")
+					return currentText;
 			}
 		}
 
