@@ -21,9 +21,10 @@ namespace Halfbreed.Menus
 							if (parameters == null)
 								return -1;
 
-							// Create new save game summary.
-							// Return game id.
-							return 0;
+							parameters.GameID = UserDataManager.GetNextGameId();
+							var saveGame = new UserData.SaveGameSummary(parameters, "TESTLEVEL1", true, System.DateTime.Now);
+							UserDataManager.WriteSaveGameSummary(saveGame);
+							return parameters.GameID;
 						}
 					case 1:
 						{
