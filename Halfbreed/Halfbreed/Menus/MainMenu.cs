@@ -28,9 +28,8 @@ namespace Halfbreed.Menus
 						}
 					case 1:
 						{
-							//int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
-							// return gameId;
-							break;
+							int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
+							return gameId;
 						}
 					case 5:
 						{
