@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using Halfbreed.UserData;
 
 namespace Halfbreed.Menus
 {
 	public class LoadGameMenu
 	{
-		/*
+		
 		public int SelectSavedGame()
 		{
-			List<SaveGameSummary> currentSaves = UserDatabaseConnection.GetSaveGameSummaries();
+			List<SaveGameSummary> currentSaves = UserDataManager.GetCurrentSaves();
 			List<string> saveStrings = new List<string>();
 			foreach (SaveGameSummary saveSummary in currentSaves)
 				saveStrings.Add(saveSummary.ToString());
@@ -21,9 +22,9 @@ namespace Halfbreed.Menus
 			if (selection == -1)
 				return -1;
 
-			return currentSaves[selection].GameId;
+			return currentSaves[selection].GameData.GameID;
 		}
-		*/
+
 	
 	
 	}
