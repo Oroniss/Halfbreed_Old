@@ -45,8 +45,8 @@ namespace Halfbreed.UserData
 				};
 
 			string returnString = "Character Class: {0}, Difficulty: {1}, Use Previous Achievements: {2}" +
-				"\n, Current Level: {3}, Last Save Time: {4}." +
-				"\n, {5}";
+				"\nCurrent Level: {3}, Last Save Time: {4}." +
+				"\n{5}";
 			
 			return string.Format(returnString, items);
 		}
