@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
+	[Serializable]
 	public abstract class Entity
 	{
 		string _entityName;
