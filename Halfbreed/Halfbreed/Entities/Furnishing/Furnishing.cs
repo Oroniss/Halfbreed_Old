@@ -4,6 +4,7 @@ using Halfbreed.Entities.Furnishings;
 
 namespace Halfbreed.Entities
 {
+	[Serializable]
 	public class Furnishing:Entity
 	{
 		private static List<Traits> _furnishingTraits = new List<Traits>() {
