@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities
 {
+	[Serializable]
 	public class Player:Actor
 	{
 		int _lightRadius = 0;
