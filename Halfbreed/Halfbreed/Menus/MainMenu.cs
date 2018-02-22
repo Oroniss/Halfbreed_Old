@@ -4,8 +4,8 @@ namespace Halfbreed.Menus
 {
 	public class MainMenu
 	{
-		static List<string> _mainMenuOptions = new List<string>{"New Game", "Load Game", "View Achievements",
-			"Clear Achievements", "View Commands", "Config"};
+		static List<string> _mainMenuOptions = new List<string>{"New Game", "Load Game", "Delete Save Game", 
+			"View Achievements", "Clear Achievements", "View Commands", "Config"};
 
 		public int DisplayMainMenu()
 		{
@@ -22,16 +22,25 @@ namespace Halfbreed.Menus
 								return -1;
 
 							parameters.GameID = UserDataManager.GetNextGameId();
-							var saveGame = new UserData.SaveGameSummary(parameters, "TESTLEVEL1", true, System.DateTime.Now);
+							var saveGame = new UserData.SaveGameSummary(parameters, "NEWGAME", true, System.DateTime.Now);
 							UserDataManager.WriteSaveGameSummary(saveGame);
 							return parameters.GameID;
 						}
 					case 1:
 						{
 							int gameId = MenuProvider.LoadGameMenu.SelectSavedGame();
+							if (gameId == -1)
+								break;
 							return gameId;
 						}
-					case 5:
+					case 2:
+						{
+							int gameID = MenuProvider.LoadGameMenu.DeleteSavedGame();
+							if (gameID != -1)
+								UserDataManager.DeleteSaveGame(gameID);
+							break;
+						}
+					case 6:
 						{
 							UserInputHandler.DisplayConfigMenu();
 							break;
