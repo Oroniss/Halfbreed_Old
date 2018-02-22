@@ -14,7 +14,7 @@ namespace Halfbreed
 		private int _threatLevel;
 		private int _height;
 		private int _width;
-		private MapTileDetails[] _mapGrid;
+		private MapTileDetails[] _mapGrid; // TODO: Figure out how to serialise this?
 		private bool[] _revealed;
 
 		private int _lightLevel;
@@ -154,6 +154,11 @@ namespace Halfbreed
 		}
 
 		// Basic properties
+		public string Title
+		{
+			get { return _levelTitle; }
+		}
+
 		public int Width
 		{
 			get { return _width; }
@@ -544,5 +549,21 @@ namespace Halfbreed
 			MainProgram.Player.Update(this);
 		}
 
+		// Serialisation functions
+		public TileType[] GetTileMap()
+		{
+			var returnArray = new TileType[_height * _width];
+			for (var i = 0; i < returnArray.Length; i++)
+				returnArray[i] = _mapGrid[i].TileType;
+			_mapGrid = null;
+			return returnArray;
+		}
+
+		public void SetTileMap(TileType[] tileMap)
+		{
+			_mapGrid = new MapTileDetails[_width * _height];
+			for (var i = 0; i < tileMap.Length; i++)
+				_mapGrid[i] = TileDictionary.getTileDetails(tileMap[i]);
+		}
 	}
 }
