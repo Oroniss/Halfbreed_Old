@@ -6,6 +6,7 @@ namespace Halfbreed.Levels
 
 	public class MapTileDetails
 	{
+		public readonly TileType TileType;
 		public readonly string Name;
 		public readonly int Elevation;
 		public readonly Colors BGColor;
@@ -14,9 +15,10 @@ namespace Halfbreed.Levels
 		public readonly string MoveOffFunction;
 		readonly List<Traits> _traits;
 
-		public MapTileDetails(string name, int elevation, string bgColorName, string fogColorName, 
+		public MapTileDetails(TileType tileType, string name, int elevation, string bgColorName, string fogColorName, 
 		                      string moveOnFunction, string moveOffFunction, string[] traits)
 		{
+			TileType = tileType;
 			Name = name;
 			Elevation = elevation;
 			BGColor = (Colors)Enum.Parse(typeof(Colors), bgColorName);
