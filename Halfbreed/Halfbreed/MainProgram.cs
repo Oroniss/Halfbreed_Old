@@ -30,7 +30,6 @@ namespace Halfbreed
 			// TODO: Set the gm option here too.
 
 			// TODO: Pull these magic numbers out and line them up with the MainGraphicsDisplay
-			// TODO: Also sort out a config file to store them.
 			rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
 
             rootConsole.Update += RootConsoleUpdate;
@@ -70,12 +69,21 @@ namespace Halfbreed
 			}
 
 			// Load up gameID.
-			GameData newParams = new GameData();
-			SetupNewGame(newParams);
-			Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
-			LevelTransition(startingLevel, 42, 5);
+			var gameState = UserDataManager.GetGameState(gameId);
+			if (gameState.Summary.CurrentLevelName == "NEWGAME")
+			{
+				SetupNewGame(gameState.Summary.GameData);
+				Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
+				LevelTransition(startingLevel, 42, 5);
+			}
+			else
+			{
+				LoadGame(gameState);
+				_player.Update(_currentLevel);
+			}
 			//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
 			//GameEngine.LevelTransition(startingLevel, 49, 42);
+
 			RunGame();
 			Quit();
 
@@ -89,7 +97,10 @@ namespace Halfbreed
 				_currentTime++;
 
 				if (_quit)
+				{
+					SaveGame();
 					return;
+				}
 			}
 		}
 
@@ -97,6 +108,25 @@ namespace Halfbreed
 		{
 			_quit = true;
 			rootConsole.Close();
+		}
+
+		static void SaveGame()
+		{
+			_currentLevel.RemoveActor(_player);
+			var summary = new UserData.SaveGameSummary(_gameData, _currentLevel.Title, true, DateTime.Now);
+			var mapGrid = _currentLevel.GetTileMap();
+			var saveGame = new UserData.SaveGame(summary, _currentLevel, _player, _currentTime, mapGrid);
+			UserDataManager.SaveGame(saveGame);
+		}
+
+		static void LoadGame(UserData.SaveGame gameState)
+		{
+			_currentLevel = gameState.CurrentLevel;
+			_player = gameState.Player;
+			_currentTime = gameState.CurrentTime;
+			_gameData = gameState.Summary.GameData;
+			_currentLevel.SetTileMap(gameState.MapGrid);
+			_currentLevel.AddActor(_player);
 		}
 
 		public static void LevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
@@ -139,7 +169,7 @@ namespace Halfbreed
 		}
     }
 
-	[System.Serializable]
+	[Serializable]
 	public class GameData
 	{
 		public int DifficultySetting;
