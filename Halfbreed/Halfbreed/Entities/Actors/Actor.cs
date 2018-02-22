@@ -1,9 +1,11 @@
 ﻿// Tidied up for version 0.2.
 
 using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities
 {
+	[Serializable]
 	public class Actor:Entity
 	{
 		int _viewDistance;
