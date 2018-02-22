@@ -17,12 +17,14 @@ namespace Halfbreed
 			new SortedDictionary<int, SaveGameSummary>();
 		static string _saveSummaryFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Userdata", "SSF.hb");
 
+		static string _saveFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "Saves");
+
 		public static void SetupDirectoriesAndFiles()
 		{
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Config")))
 				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Config"));
-			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Saves")))
-				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Saves"));
+			if (!Directory.Exists(_saveFileFolder))
+				Directory.CreateDirectory(_saveFileFolder);
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "UserData")))
 				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "UserData"));
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Logs")))
@@ -68,6 +70,36 @@ namespace Halfbreed
 			WriteSummaryFile(saveSummaries);
 		}
 
+		public static void SaveGame(SaveGame gameState)
+		{
+			WriteSaveGameSummary(gameState.Summary);
+			var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", gameState.Summary.GameData.GameID));
+			var fileStream = File.OpenWrite(filePath);
+			var serialiser = new BinaryFormatter();
+			serialiser.Serialize(fileStream, gameState);
+			fileStream.Close();
+		}
+
+		public static SaveGame GetGameState(int gameID)
+		{
+			SaveGame gameState = null;
+			var summary = ReadSummaryFile()[gameID];
+			// TODO: Perform a check to see if the character is actually dead - also consider GM options, etc.
+			if (summary.CurrentLevelName == "NEWGAME")
+			{
+				gameState = new SaveGame(summary, null, null, 0, null);
+			}
+			else
+			{
+				var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", summary.GameData.GameID));
+				var fileStream = File.OpenRead(filePath);
+				var serialiser = new BinaryFormatter();
+				gameState = (SaveGame)serialiser.Deserialize(fileStream);
+				fileStream.Close();
+			}
+			return gameState;
+		}
+
 		public static List<SaveGameSummary> GetCurrentSaves()
 		{
 			var returnList = new List<SaveGameSummary>();
@@ -78,6 +110,16 @@ namespace Halfbreed
 					returnList.Add(saveSummaries[summaryID]);
 			}
 			return returnList;
+		}
+
+		public static void DeleteSaveGame(int gameID)
+		{
+			var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", gameID));
+			if (Directory.Exists(filePath))
+				Directory.Delete(filePath);
+			var summaryDict = ReadSummaryFile();
+			summaryDict[gameID].StillAlive = false;
+			WriteSummaryFile(summaryDict);
 		}
 
 		public static int GetNextGameId()
