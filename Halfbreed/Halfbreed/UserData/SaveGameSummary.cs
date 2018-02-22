@@ -3,7 +3,7 @@ using System;
 namespace Halfbreed.UserData
 {
 	[Serializable]
-	public struct SaveGameSummary
+	public class SaveGameSummary
 	{
 		public GameData GameData;
 		public string CurrentLevelName;
