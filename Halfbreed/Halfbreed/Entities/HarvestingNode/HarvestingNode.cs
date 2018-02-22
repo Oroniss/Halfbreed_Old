@@ -1,9 +1,11 @@
-// Tidied up for Version 0.2. - No changes.
+// Tidied up for Version 0.2.
 
 using System.Collections.Generic;
+using System;
 
 namespace Halfbreed.Entities
 {
+	[Serializable]
 	public class HarvestingNode:Entity
 	{
 
