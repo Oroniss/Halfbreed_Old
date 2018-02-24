@@ -115,8 +115,8 @@ namespace Halfbreed
 		public static void DeleteSaveGame(int gameID)
 		{
 			var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", gameID));
-			if (Directory.Exists(filePath))
-				Directory.Delete(filePath);
+			if (File.Exists(filePath))
+				File.Delete(filePath);
 			var summaryDict = ReadSummaryFile();
 			summaryDict[gameID].StillAlive = false;
 			WriteSummaryFile(summaryDict);
