@@ -1,3 +1,5 @@
+// Revised for version 0.2.
+
 using System;
 
 namespace Halfbreed.UserData
@@ -28,14 +30,14 @@ namespace Halfbreed.UserData
 
 		public override string ToString()
 		{
-			DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
 			dtDateTime = dtDateTime.AddSeconds(LastSaveTime).ToLocalTime();
 
-			string achString = "Off";
+			var achString = "Off";
 			if (GameData.UseAchievements)
 				achString = "On";
 
-			string[] items = new string[] {
+			var items = new string[] {
 				GameData.CharacterClass.ToString(),
 				GameData.DifficultySetting.ToString(),
 				achString,
@@ -44,7 +46,7 @@ namespace Halfbreed.UserData
 				GameData.CharacterNote
 				};
 
-			string returnString = "Character Class: {0}, Difficulty: {1}, Use Previous Achievements: {2}" +
+			var returnString = "Character Class: {0}, Difficulty: {1}, Use Previous Achievements: {2}" +
 				"\nCurrent Level: {3}, Last Save Time: {4}." +
 				"\n{5}";
 			

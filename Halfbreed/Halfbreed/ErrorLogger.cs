@@ -1,4 +1,6 @@
-﻿namespace Halfbreed
+﻿// Revised for version 0.2.
+
+namespace Halfbreed
 {
 	public static class ErrorLogger
 	{

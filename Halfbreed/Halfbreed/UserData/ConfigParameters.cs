@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Revised for version 0.2.
+
+using System;
 
 namespace Halfbreed.UserData
 {

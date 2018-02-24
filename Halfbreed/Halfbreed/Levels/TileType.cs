@@ -1,10 +1,12 @@
-﻿namespace Halfbreed.Levels
+﻿// Revised for version 0.2.
+
+namespace Halfbreed.Levels
 {
 	public enum TileType
 	{
-		WoodFloor,
-		WoodWall,
-		WoodenDebris,
 		OpenWater,
+		WoodenDebris,
+		WoodWall,
+		WoodFloor,
 	}
 }

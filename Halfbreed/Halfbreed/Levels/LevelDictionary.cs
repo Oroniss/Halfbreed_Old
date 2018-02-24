@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Revised for version 0.2 - No changes required.
+
+using System.Collections.Generic;
 using Halfbreed.Levels;
 
 namespace Halfbreed

@@ -1,3 +1,5 @@
+// Revised for version 0.2.
+
 using System;
 using System.Collections.Generic;
 
@@ -37,5 +39,7 @@ namespace Halfbreed.Levels
 		{
 			return _traits.Contains(trait);
 		}
+
+		// TODO: Add the movement functions in here.
 	}
 }
