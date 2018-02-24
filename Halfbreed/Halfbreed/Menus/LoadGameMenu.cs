@@ -1,11 +1,11 @@
+// Updated for version 0.2.
+
 using System.Collections.Generic;
-using Halfbreed.UserData;
 
 namespace Halfbreed.Menus
 {
 	public class LoadGameMenu
 	{
-		
 		public int SelectSavedGame()
 		{
 			return DisplaySaveMenu("Select your champion");
@@ -18,9 +18,9 @@ namespace Halfbreed.Menus
 
 		int DisplaySaveMenu(string menuText)
 		{
-			List<SaveGameSummary> currentSaves = UserDataManager.GetCurrentSaves();
-			List<string> saveStrings = new List<string>();
-			foreach (SaveGameSummary saveSummary in currentSaves)
+			var currentSaves = UserDataManager.GetCurrentSaves();
+			var saveStrings = new List<string>();
+			foreach (var saveSummary in currentSaves)
 				saveStrings.Add(saveSummary.ToString());
 			
 			if (currentSaves.Count == 0)
@@ -32,8 +32,6 @@ namespace Halfbreed.Menus
 				return -1;
 
 			return currentSaves[selection].GameData.GameID;
-			
 		}
-	
 	}
 }
