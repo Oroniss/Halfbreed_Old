@@ -1,3 +1,5 @@
+// Updated for version 0.2.
+
 using System.Collections.Generic;
 
 namespace Halfbreed.Menus
@@ -21,43 +23,77 @@ namespace Halfbreed.Menus
 		{
 			GameData parameters = new GameData();
 
-			var difficultySelection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?", 
-			                                                _difficultySettings,
-														    "Escape to quit.");
+			parameters = SelectDifficultySetting(parameters);
+
+			if (parameters != null)
+				parameters = SelectCharacterClass(parameters);
+
+			if (parameters != null)
+				parameters = SelectUseAchievements(parameters);
+
+			if (parameters != null)
+				parameters = SetCharacterNote(parameters);
+
+			// TODO: Display starting character text.
+			// TODO: Can't allocate stat points here so that needs to happen in new game part of main program.
+
+			return parameters;
+
+		}
+
+		GameData SelectDifficultySetting(GameData newGameParameters)
+		{
+			var difficultySelection = UserInputHandler.SelectFromMenu("How great a challenge dost thou seek?",
+														_difficultySettings,
+														"Escape to quit.");
 
 			if (difficultySelection == -1)
 				return null;
-			parameters.DifficultySetting = difficultySelection + 1;
+			newGameParameters.DifficultySetting = difficultySelection + 1;
+			return newGameParameters;
+		}
 
-
-			var classList = _hl12classes;
-			if (parameters.DifficultySetting == 3 || parameters.DifficultySetting == 4)
-				classList = _hl34classes;
-			if (parameters.DifficultySetting == 5)
-				classList = _hl5classes;
-
+		GameData SelectCharacterClass(GameData newGameParameters)
+		{
+			var classList = GetClassList(newGameParameters.DifficultySetting);
 			var classSelection = UserInputHandler.SelectFromMenu("What is thy calling", classList, "Escape to Quit");
 
 			if (classSelection == -1)
 				return null;
-			parameters.CharacterClass = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), 
+			newGameParameters.CharacterClass = (CharacterClasses)System.Enum.Parse(typeof(CharacterClasses), 
 				                                                                      classList[classSelection]);
-			
+			return newGameParameters;
+		}
+
+		List<string> GetClassList(int difficultySetting)
+		{
+			var classList = _hl12classes;
+			if (difficultySetting == 3 || difficultySetting == 4)
+				classList = _hl34classes;
+			if (difficultySetting == 5)
+				classList = _hl5classes;
+			return classList;
+		}
+
+		GameData SelectUseAchievements(GameData newGameParameters)
+		{
 			var useAchivementSelection = UserInputHandler.SelectFromMenu(
-				"Willst thou make use of the work of thy predecessors",
-				new List<string> { "Yes", "No" }, "Escape to Quit");
+			"Willst thou make use of the work of thy predecessors",
+			new List<string> { "Yes", "No" }, "Escape to Quit");
 
 			if (useAchivementSelection == -1)
 				return null;
-			parameters.UseAchievements = (useAchivementSelection == 0);
+			newGameParameters.UseAchievements = (useAchivementSelection == 0);
+			return newGameParameters;
+		}
 
+		GameData SetCharacterNote(GameData newGameParameters)
+		{
 			var characterNote = UserInputHandler.GetText("Specify Character Note");
 			if (characterNote == null)
 				return null;
-			parameters.CharacterNote = characterNote;
-
-			return parameters;
+			newGameParameters.CharacterNote = characterNote;
+			return newGameParameters;
 		}
-
 	}
 }
