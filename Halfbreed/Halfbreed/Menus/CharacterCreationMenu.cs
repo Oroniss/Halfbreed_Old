@@ -1,4 +1,4 @@
-// Updated for version 0.2.
+// Updated for version 0.02.
 
 using System.Collections.Generic;
 
@@ -18,6 +18,32 @@ namespace Halfbreed.Menus
 					"Bard", "Blackguard", "Druid", "Necromancer", "Paladin", "Ranger"};
 		readonly List<string> _hl5classes = new List<string> { "Dragonlord" };
 
+		readonly List<string> _startGameText1 = new List<string>
+		{
+			"A Halfbreed. That's what you are. What you always will be.",
+			"Outcast before you were even born, for the blood that runs in your veins.",
+			"Your bond with the Aethyr gives you strength, power, but never once",
+			"have you counted it a blessing.",
+			"Your sister was taken the moment you were born, but your mother escaped with",
+			"you, raised you on her own.",
+			"Eventually the legion found her and took her off in chains.",
+			"You fended for yourself for a time, learning, growing stronger.",
+			"In the end they caught you as well.",
+			"You surprised them then, with your strength and your rage.",
+			"They were expecting a frightened girl, but the fury overcame the fear",
+			"and two of them died on your blade.",
+			"They made you pay for that on your journey.",
+			"Now you have arrived here, Outcasts' Isle, the final destination for all Halfbreeds.",
+			"They don't let your kind leave, not even the 'good' ones.",
+			"Still, you have too many questions to stay, questions about your mother, your sister.",
+			"Questions about your father.",
+			"Important questions, and you won't find the answers on Outcasts' Isle.",
+			"The world may have condemned you to this rock, but after all the world has done to you,",
+			"you care little for its plans.",
+			"You step off the boat, telling the captain to save you a berth for the return journey.",
+			"You won't be staying here long."
+		};
+
 
 		public GameData StartNewGame()
 		{
@@ -34,11 +60,9 @@ namespace Halfbreed.Menus
 			if (parameters != null)
 				parameters = SetCharacterNote(parameters);
 
-			// TODO: Display starting character text.
-			// TODO: Can't allocate stat points here so that needs to happen in new game part of main program.
+			DisplayNewGameText();
 
 			return parameters;
-
 		}
 
 		GameData SelectDifficultySetting(GameData newGameParameters)
@@ -94,6 +118,12 @@ namespace Halfbreed.Menus
 				return null;
 			newGameParameters.CharacterNote = characterNote;
 			return newGameParameters;
+		}
+
+		void DisplayNewGameText()
+		{
+			MainGraphicDisplay.MenuConsole.DrawTextBlock("", _startGameText1, "Press any key to continue");
+			UserInputHandler.getNextKey();
 		}
 	}
 }
