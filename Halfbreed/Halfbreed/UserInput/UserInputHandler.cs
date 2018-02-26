@@ -94,7 +94,7 @@ namespace Halfbreed
 				{
 					currentDisplay.Add(((i % 10 + 1) % 10).ToString() + ": " + menuOptions[i]);
 				}
-				MainGraphicDisplay.MenuConsole.DrawMenu(title, currentDisplay, bottom);
+				MainGraphicDisplay.MenuConsole.DrawTextBlock(title, currentDisplay, bottom);
 
 				var key = getNextKey();
 
@@ -158,7 +158,7 @@ namespace Halfbreed
 					gmText = "On";
 				options[2] = string.Format("G: Toggle GM Options - currently {0}", gmText);
 
-				MainGraphicDisplay.MenuConsole.DrawMenu(title, options, bottom);
+				MainGraphicDisplay.MenuConsole.DrawTextBlock(title, options, bottom);
 
 				var key = getNextKey();
 
@@ -200,7 +200,7 @@ namespace Halfbreed
 			var currentText = "";
 			while (true)
 			{
-				MainGraphicDisplay.MenuConsole.DrawMenu(headerText, new List<string>() { currentText }, 
+				MainGraphicDisplay.MenuConsole.DrawTextBlock(headerText, new List<string>() { currentText }, 
 				                                        "Escape to cancel");
 				var key = getNextKey();
 				var converter = new System.Globalization.CultureInfo("en-US");
