@@ -77,11 +77,7 @@ namespace Halfbreed
 				LevelTransition(startingLevel, 42, 5);
 			}
 			else
-			{
 				LoadGame(gameState);
-				_player.Update(_currentLevel);
-				_currentTime++;
-			}
 			//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
 			//GameEngine.LevelTransition(startingLevel, 49, 42);
 
@@ -94,6 +90,7 @@ namespace Halfbreed
 		{
 			while (true)
 			{
+				_player.Update(_currentLevel);
 				_currentLevel.ActivateEntities();
 				_currentTime++;
 
@@ -113,26 +110,24 @@ namespace Halfbreed
 
 		static void SaveGame()
 		{
-			_currentLevel.RemoveActor(_player);
 			var summary = new UserData.SaveGameSummary(_gameData, _currentLevel.Title, true, DateTime.Now);
-			var mapGrid = _currentLevel.GetTileMap();
-			var saveGame = new UserData.SaveGame(summary, _currentLevel, _player, _currentTime, mapGrid);
+			var levelDetails = _currentLevel.GetSerialisationDetails();
+			var saveGame = new UserData.SaveGame(summary, levelDetails, _player, _currentTime);
 			UserDataManager.SaveGame(saveGame);
 		}
 
 		static void LoadGame(UserData.SaveGame gameState)
 		{
-			_currentLevel = gameState.CurrentLevel;
+			_currentLevel = new Level(gameState.CurrentLevelDetails);
 			_player = gameState.Player;
 			_currentTime = gameState.CurrentTime;
 			_gameData = gameState.Summary.GameData;
-			_currentLevel.SetTileMap(gameState.MapGrid);
 			_currentLevel.AddActor(_player);
 		}
 
 		public static void LevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
 		{
-			// TODO: Need to use correct update move function so that it moves all equipped items as well.
+			// TODO: Need to use correct update move function so that it moves all minions as well.
 			_currentLevel = new Level(newLevel);
 			_player.UpdatePosition(newX, newY);
 			_currentLevel.AddActor(_player);
