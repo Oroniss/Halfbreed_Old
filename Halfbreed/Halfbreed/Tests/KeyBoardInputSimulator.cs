@@ -1,4 +1,4 @@
-﻿// Updated for version 0.2
+﻿// Updated for version 0.02
 
 namespace Halfbreed.Tests
 {

@@ -10,19 +10,19 @@ namespace Halfbreed
 		// TODO: Eventually these should probably go in a settings file or similar.
 		static readonly int WINDOWWIDTH = 160;
 		static readonly int WINDOWHEIGHT = 80;
-		static BackConsole _backConsole = new BackConsole(WINDOWWIDTH, WINDOWHEIGHT);
+		static readonly BackConsole _backConsole = new BackConsole(WINDOWWIDTH, WINDOWHEIGHT);
 
 		static readonly int MENUOFFSET = 2;
 		static readonly int MENUCONSOLEWIDTH = WINDOWWIDTH - 2 * MENUOFFSET;
 		static readonly int MENUCONSOLEHEIGHT = WINDOWHEIGHT - 2 * MENUOFFSET;
-		static RLColor MENUCONSOLEBACKCOLOR = Palette.GetColor(Colors.Silver);
-		static MenuConsole _menuConsole = new MenuConsole(MENUCONSOLEWIDTH, MENUCONSOLEHEIGHT, MENUOFFSET, MENUOFFSET, 
-		                                                  MENUCONSOLEBACKCOLOR, _backConsole);
+		static readonly RLColor MENUCONSOLEBACKCOLOR = Palette.GetColor(Colors.Silver);
+		static readonly MenuConsole _menuConsole = new MenuConsole(MENUCONSOLEWIDTH, MENUCONSOLEHEIGHT, MENUOFFSET, 
+		                                                           MENUOFFSET, MENUCONSOLEBACKCOLOR, _backConsole);
 		static readonly int MAPCONSOLEHEIGHT = WINDOWHEIGHT;
 		static readonly int MAPCONSOLEWIDTH = MAPCONSOLEHEIGHT;
 		static readonly int MAPCONSOLEOFFSET = 0;
 		static readonly RLColor MAPCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
-		static MapConsole _mapConsole = new MapConsole(MAPCONSOLEWIDTH, MAPCONSOLEHEIGHT, MAPCONSOLEOFFSET, 
+		static readonly MapConsole _mapConsole = new MapConsole(MAPCONSOLEWIDTH, MAPCONSOLEHEIGHT, MAPCONSOLEOFFSET, 
 		                                               MAPCONSOLEOFFSET, MAPCONSOLEBACKCOLOR, _backConsole);
 
 		static readonly int TEXTCONSOLEWIDTH = 40;
@@ -30,8 +30,9 @@ namespace Halfbreed
 		static readonly int TEXTCONSOLEXOFFSET = MAPCONSOLEWIDTH + 40; // TODO: Refactor this to add CharacterConsole Width
 		static readonly int TEXTCONSOLEYOFFSET = 0;
 		static readonly RLColor TEXTCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
-		static TextConsole _textConsole = new TextConsole(TEXTCONSOLEWIDTH, TEXTCONSOLEHEIGHT, TEXTCONSOLEXOFFSET,
-														  TEXTCONSOLEYOFFSET, TEXTCONSOLEBACKCOLOR, _backConsole);
+		static readonly TextConsole _textConsole = new TextConsole(TEXTCONSOLEWIDTH, TEXTCONSOLEHEIGHT, 
+		                                                           TEXTCONSOLEXOFFSET, TEXTCONSOLEYOFFSET, 
+		                                                           TEXTCONSOLEBACKCOLOR, _backConsole);
 
 		public static bool IsDirty
 		{

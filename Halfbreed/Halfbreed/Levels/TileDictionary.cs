@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2.
+﻿// Revised for version 0.02.
 
 using System.Collections.Generic;
 
@@ -6,7 +6,7 @@ namespace Halfbreed.Levels
 {
 	public static class TileDictionary
 	{
-		static Dictionary<TileType, MapTileDetails> _tileDictionary = new Dictionary<TileType, MapTileDetails>()
+		static readonly Dictionary<TileType, MapTileDetails> _tileDictionary = new Dictionary<TileType, MapTileDetails>
 		{
 			// TODO: Add functions to OpenWater
 			{TileType.OpenWater, new MapTileDetails(TileType.OpenWater, "Open Water", 0, "WaterBlue", "DarkWater", 

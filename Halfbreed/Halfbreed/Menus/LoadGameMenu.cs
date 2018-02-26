@@ -1,4 +1,4 @@
-// Updated for version 0.2.
+// Updated for version 0.02.
 
 using System.Collections.Generic;
 
@@ -26,7 +26,7 @@ namespace Halfbreed.Menus
 			if (currentSaves.Count == 0)
 				menuText = "Sorry, there are no surviving champions";
 
-			int selection = UserInputHandler.SelectFromMenu(menuText, saveStrings, "Escape to Cancel");
+			var selection = UserInputHandler.SelectFromMenu(menuText, saveStrings, "Escape to Cancel");
 
 			if (selection == -1)
 				return -1;

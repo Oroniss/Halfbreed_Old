@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿// Tidied up for version 0.02.
+
+using System.Collections.Generic;
 
 namespace Halfbreed.Menus
 {
 	public class ViewKeysDisplay
 	{
-		readonly List<string> _keys = new List<string>()
+		readonly List<string> _keys = new List<string>
 		{
 			"A:  Display the active ability menu",
 			"B:  Display the contents of your backpack",

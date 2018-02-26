@@ -15,8 +15,8 @@ namespace Halfbreed.Display
 		{
 			Clear();
 
-			MapDrawingLimits xLimits = getDrawingLimits(level.Width, _console.Width, xCentre);
-			MapDrawingLimits yLimits = getDrawingLimits(level.Height, _console.Height, yCentre);
+			var xLimits = getDrawingLimits(level.Width, _console.Width, xCentre);
+			var yLimits = getDrawingLimits(level.Height, _console.Height, yCentre);
 
 			for (int y = yLimits.Min; y < yLimits.Max; y++)
 			{
@@ -37,7 +37,7 @@ namespace Halfbreed.Display
 
 				if (level.HasDrawingEntity(position.X, position.Y))
 				{
-					Entities.Entity entity = level.GetDrawingEntity(position.X, position.Y);
+					var entity = level.GetDrawingEntity(position.X, position.Y);
 					_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, Palette.GetColor(entity.FGColor),
 								 null, entity.Symbol);
 				}
@@ -46,7 +46,7 @@ namespace Halfbreed.Display
 			CopyToBackConsole();
 		}
 
-		private MapDrawingLimits getDrawingLimits(int levelSize, int consoleSize, int drawingCentre)
+		MapDrawingLimits getDrawingLimits(int levelSize, int consoleSize, int drawingCentre)
 		{
 			int drawingSize = consoleSize - 4;
 			int drawingMin = 0;
@@ -83,7 +83,7 @@ namespace Halfbreed.Display
 		}
 	}
 
-	internal struct MapDrawingLimits
+	struct MapDrawingLimits
 	{
 		public int Min;
 		public int Max;

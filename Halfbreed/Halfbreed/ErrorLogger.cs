@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2.
+﻿// Revised for version 0.02.
 
 namespace Halfbreed
 {

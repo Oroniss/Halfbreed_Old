@@ -9,7 +9,7 @@ namespace Halfbreed
 	{
 		static string _baseFilePath = System.IO.Directory.GetCurrentDirectory();
 
-		static Dictionary<LevelEnum, string> _filePaths = new Dictionary<LevelEnum, string>()
+		static Dictionary<LevelEnum, string> _filePaths = new Dictionary<LevelEnum, string>
 		{
 			{LevelEnum.TESTLEVEL1, "/LevelFiles/Testing/TestLevel1"},
 			{LevelEnum.TESTLEVEL2, "/LevelFiles/Testing/TestLevel2"}

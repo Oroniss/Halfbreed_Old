@@ -14,7 +14,7 @@ namespace Halfbreed.Display
 		readonly BackConsole _backConsole;
 		protected RLConsole _console;
 
-		public BaseConsole(int width, int height, int left, int top, RLColor backColor, BackConsole backConsole)
+		protected BaseConsole(int width, int height, int left, int top, RLColor backColor, BackConsole backConsole)
 		{
 			_height = height;
 			_width = width;

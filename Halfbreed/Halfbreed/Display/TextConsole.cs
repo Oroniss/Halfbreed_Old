@@ -1,4 +1,4 @@
-// Updated for version 0.2.
+// Updated for version 0.02.
 
 using RLNET;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Halfbreed.Display
 {
 	public class TextConsole:BaseConsole
 	{
-		string[] _outputText;
+		readonly string[] _outputText;
 		int _currentIndex;
 
 		readonly int _textXOffset = 1; // 1 Blank on the left

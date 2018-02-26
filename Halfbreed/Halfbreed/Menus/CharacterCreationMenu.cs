@@ -47,7 +47,7 @@ namespace Halfbreed.Menus
 
 		public GameData StartNewGame()
 		{
-			GameData parameters = new GameData();
+			var parameters = new GameData();
 
 			parameters = SelectDifficultySetting(parameters);
 
