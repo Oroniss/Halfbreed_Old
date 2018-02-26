@@ -87,7 +87,7 @@ namespace Halfbreed
 			// TODO: Perform a check to see if the character is actually dead - also consider GM options, etc.
 			if (summary.CurrentLevelName == "NEWGAME")
 			{
-				gameState = new SaveGame(summary, null, null, 0, null);
+				gameState = new SaveGame(summary, null, null, 0);
 			}
 			else
 			{
