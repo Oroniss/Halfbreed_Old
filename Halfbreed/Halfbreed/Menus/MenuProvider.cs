@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2. No changes required.
+﻿// Revised for version 0.02.
 
 using Halfbreed.Menus;
 
@@ -6,9 +6,10 @@ namespace Halfbreed
 {
 	public static class MenuProvider
 	{
-		private static CharacterCreationMenu _characterCreationMenu = null;
-		private static LoadGameMenu _loadGameMenu = null;
-		private static MainMenu _mainMenu = null;
+		static CharacterCreationMenu _characterCreationMenu = null;
+		static LoadGameMenu _loadGameMenu = null;
+		static MainMenu _mainMenu = null;
+		static ViewKeysDisplay _viewKeysMenu = null;
 
 		public static CharacterCreationMenu CharacterCreationMenu
 		{
@@ -36,6 +37,16 @@ namespace Halfbreed
 				if (_mainMenu == null)
 					_mainMenu = new MainMenu();
 				return _mainMenu;
+			}
+		}
+
+		public static ViewKeysDisplay ViewKeysDisplay
+		{
+			get
+			{
+				if (_viewKeysMenu == null)
+					_viewKeysMenu = new ViewKeysDisplay();
+				return _viewKeysMenu;
 			}
 		}
 
