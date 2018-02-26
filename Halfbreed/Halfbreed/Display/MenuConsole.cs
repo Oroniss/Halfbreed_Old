@@ -1,4 +1,4 @@
-// Tidied up for version 0.2.
+// Tidied up for version 0.02.
 
 using RLNET;
 using System.Collections.Generic;
@@ -13,31 +13,38 @@ namespace Halfbreed.Display
 		}
 
 
-		public void DrawMenu(string title, List<string> options, string bottom)
+		public void DrawTextBlock(string title, List<string> options, string bottom)
 		{
 			Clear();
 
-			_console.Print(5, 5, title, Palette.GetColor(Colors.Black));
-
-			// TODO: Figure out whether we can dynamically space the menu between 1 and 4 spaces.
-			// TODO: Split each piece out and put them in a new array - then use the length of the new array to sort it out.
-			for (var i = 0; i < options.Count; i++)
+			if (options.Count > (_console.Height - 5))
 			{
-				if (options[i].Contains("\n"))
-				{
-					var pieces = options[i].Split('\n');
-
-					if (pieces.Length > 4)
-						ErrorLogger.AddDebugText("Two many lines in menu item" + pieces.ToString());
-
-					for (var j = 0; j < pieces.Length; j++)
-						_console.Print(5, 10 + 5 * i + j, pieces[j], Palette.GetColor(Colors.Black));
-				}
-				else
-					_console.Print(5, 10 + 5 * i, options[i], Palette.GetColor(Colors.Black));
+				ErrorLogger.AddDebugText("Too many menu items for menu: " + title);
+				return;
 			}
 
-			_console.Print(5, 70, bottom, Palette.GetColor(Colors.Black));
+			var lineSpacing = System.Math.Min(_console.Height / (options.Count + 5), 5);
+
+			_console.Print(5, lineSpacing, title, Palette.GetColor(Colors.Black));
+
+			for (var line = 0; line < options.Count; line++)
+			{
+				if (options[line].Contains("\n"))
+				{
+					var pieces = options[line].Split('\n');
+
+					if (pieces.Length > lineSpacing)
+						ErrorLogger.AddDebugText("Too many lines in menu item" + pieces);
+
+					for (var linePiece = 0; linePiece < pieces.Length; linePiece++)
+						_console.Print(5, lineSpacing * (line + 3) + linePiece, pieces[linePiece], 
+						               Palette.GetColor(Colors.Black));
+				}
+				else
+					_console.Print(5, lineSpacing * (line + 3), options[line], Palette.GetColor(Colors.Black));
+			}
+
+			_console.Print(5, _console.Height - lineSpacing, bottom, Palette.GetColor(Colors.Black));
 
 			CopyToBackConsole();
 		}
