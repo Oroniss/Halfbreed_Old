@@ -1,4 +1,4 @@
-﻿// Tidied up for version 0.02. No changes required.
+﻿// Tidied up for version 0.02.
 
 using RLNET;
 
@@ -30,7 +30,7 @@ namespace Halfbreed.Display
 				}
 			}
 
-			foreach (var position in MainProgram.VisibleTiles)
+			foreach (var position in MainProgram.CurrentLevel.VisibleTiles)
 			{
 				_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, null,
 							 Palette.GetColor(level.GetBackgroundColor(position.X, position.Y)), ' ');
