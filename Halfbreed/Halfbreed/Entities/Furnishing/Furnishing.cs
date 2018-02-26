@@ -75,7 +75,7 @@ namespace Halfbreed.Entities
 			{	if (!PlayerSpotted && HasOtherAttribute("ConcealedBGColor"))
 					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedBGColor"));
 				if (!_hasBGColor)
-					ErrorLogger.AddDebugText("Asked for BGColor on Entity without it: " + this.ToString());
+					ErrorLogger.AddDebugText("Asked for BGColor on Entity without it: " + this);
 				return _bgColor;
 			}
 		}
@@ -87,7 +87,7 @@ namespace Halfbreed.Entities
 				if (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor"))
 					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedFogColor"));
 				if (!_hasFogColor)
-					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this.ToString());
+					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this);
 				return _fogColor;
 			}
 		}
