@@ -29,23 +29,29 @@ namespace Halfbreed.Entities
 
 			MainProgram.VisibleTiles = visibleTiles;
 
-			MainGraphicDisplay.UpdateGameScreen();
 			MainGraphicDisplay.TextConsole.AddOutputText("");
 
 			var madeValidMove = false;
 
 			while (!madeValidMove)
 			{
+				MainGraphicDisplay.UpdateGameScreen();
 				var key = UserInputHandler.getNextKey();
 
 				if (UserInputHandler.DirectionKeys.ContainsKey(key))
 					madeValidMove = Move(currentLevel, key);
+
+				if (key == "K")
+					madeValidMove = DisplayKeys();
 
 				if (key == "U")
 					madeValidMove = InteractWithFurnishing(currentLevel);
 
 				if (key == "S")
 					madeValidMove = Search(currentLevel);
+
+				if (key == "SPACE")
+					madeValidMove = true;
 
 				if (key == "ESCAPE")
 				{
@@ -102,6 +108,12 @@ namespace Halfbreed.Entities
 			}
 	
 			return true;
+		}
+
+		bool DisplayKeys()
+		{
+			MenuProvider.ViewKeysDisplay.ViewKeys();
+			return false;
 		}
 	}
 }
