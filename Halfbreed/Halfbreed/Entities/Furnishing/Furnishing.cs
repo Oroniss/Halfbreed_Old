@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System.Collections.Generic;
 using System;
 using Halfbreed.Entities.Furnishings;
@@ -7,20 +9,21 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Furnishing:Entity
 	{
-		private static List<Traits> _furnishingTraits = new List<Traits>() {
+		static readonly List<Traits> _furnishingTraits = new List<Traits> {
 			Traits.ImmuneToDisease, Traits.ImmuneToMental, Traits.ImmuneToPoison };
 
 		bool _hasBGColor;
 		Colors _bgColor;
 		bool _hasFogColor;
 		Colors _fogColor;
-		int _elevation;
-		string _moveOnFunction;
-		string _moveOffFunction;
 
 		bool _trapped;
 
-		List<string> _interactionFunctions;
+		int _elevation;
+
+		string _moveOnFunction;
+		string _moveOffFunction;
+		readonly List<string> _interactionFunctions;
 
 		public Furnishing(string furnishingName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(furnishingName, xLoc, yLoc, otherParameters)
@@ -74,8 +77,6 @@ namespace Halfbreed.Entities
 			get
 			{	if (!PlayerSpotted && HasOtherAttribute("ConcealedBGColor"))
 					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedBGColor"));
-				if (!_hasBGColor)
-					ErrorLogger.AddDebugText("Asked for BGColor on Entity without it: " + this);
 				return _bgColor;
 			}
 		}
@@ -86,8 +87,6 @@ namespace Halfbreed.Entities
 			{
 				if (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor"))
 					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedFogColor"));
-				if (!_hasFogColor)
-					ErrorLogger.AddDebugText("Asked for FogColor on Entity without it: " + this);
 				return _fogColor;
 			}
 		}
@@ -112,16 +111,18 @@ namespace Halfbreed.Entities
 
 		public bool MoveOff(Actor actor, Level currentLevel, int destinationX, int destinationY)
 		{
-			if (_moveOffFunction == null || _moveOffFunction == "")
+			if (string.IsNullOrEmpty(_moveOffFunction))
 				return true;
 
-			return MovementFunctions.GetMoveOffFunction(_moveOffFunction)(this, actor, currentLevel, destinationX, destinationY);
+			return MovementFunctions.GetMoveOffFunction(_moveOffFunction)(this, actor, currentLevel, destinationX, 
+			                                                              destinationY);
 		}
 
 		public void MoveOn(Actor actor, Level currentLevel, int originX, int originY)
 		{
-			if (_moveOnFunction != null && _moveOnFunction != "")
-				MovementFunctions.GetMoveOnFunction(_moveOnFunction)(this, actor, currentLevel, originX, originY);
+			if (!string.IsNullOrEmpty(_moveOnFunction))
+				MovementFunctions.GetMoveOnFunction(_moveOnFunction)(this, actor, currentLevel, originX, 
+				                                                     originY);
 		}
 
 		public int Elevation

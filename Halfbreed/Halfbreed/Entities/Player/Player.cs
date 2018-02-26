@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System.Collections.Generic;
 using System;
 
@@ -6,16 +8,23 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Player:Actor
 	{
+		CharacterClasses _characterClass;
+		int _difficultySetting;
+		bool _useAchievements;
+
 		int _lightRadius = 0;
 
 		public Player(GameData playerParameters)
 			:base("Player", 0 ,0 , new List<string>())
 		{
+			_characterClass = playerParameters.CharacterClass;
+			_difficultySetting = playerParameters.DifficultySetting;
+			_useAchievements = playerParameters.UseAchievements;
+
 			AddTrait(Traits.Player);
 			AddTrait(Traits.Walking);
 			AddTrait(Traits.Swimming);
 			AddTrait(Traits.Climbing);
-
 		}
 
 		protected override void GetNextMove(Level currentLevel)
@@ -23,16 +32,13 @@ namespace Halfbreed.Entities
 			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance, 
 			                                       _lightRadius, HasTrait(Traits.DarkVision), 
 			                                       HasTrait(Traits.BlindSight));
-			
 			foreach (XYCoordinateStruct tile in visibleTiles)
 				currentLevel.RevealTile(tile.X, tile.Y);
-
 			MainProgram.VisibleTiles = visibleTiles;
 
 			MainGraphicDisplay.TextConsole.AddOutputText("");
 
-			var madeValidMove = false;
-
+			bool madeValidMove = false;
 			while (!madeValidMove)
 			{
 				MainGraphicDisplay.UpdateGameScreen();
@@ -44,14 +50,14 @@ namespace Halfbreed.Entities
 				if (key == "K")
 					madeValidMove = DisplayKeys();
 
-				if (key == "U")
-					madeValidMove = InteractWithFurnishing(currentLevel);
-
 				if (key == "S")
 					madeValidMove = Search(currentLevel);
 
+				if (key == "U")
+					madeValidMove = InteractWithFurnishing(currentLevel);
+
 				if (key == "SPACE")
-					madeValidMove = true;
+					madeValidMove = Pause();
 
 				if (key == "ESCAPE")
 				{
@@ -69,6 +75,28 @@ namespace Halfbreed.Entities
 				currentLevel.MoveActorAttempt(_xLoc + direction.X, _yLoc + direction.Y, this);
 			else
 				MainGraphicDisplay.TextConsole.AddOutputText("You can't move there");
+			return true;
+		}
+
+
+		bool DisplayKeys()
+		{
+			MenuProvider.ViewKeysDisplay.ViewKeys();
+			return false;
+		}
+
+		bool Search(Level currentLevel)
+		{
+			var tileSet = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
+											  _lightRadius, HasTrait(Traits.DarkVision), HasTrait(Traits.BlindSight));
+
+			var concealedEntities = currentLevel.GetConcealedEntities(tileSet);
+			foreach (var entity in concealedEntities)
+			{
+				entity.PlayerSpotted = true;  // TODO: Flesh this out properly.
+				MainGraphicDisplay.TextConsole.AddOutputText("You spot " + entity);
+			}
+
 			return true;
 		}
 
@@ -95,25 +123,10 @@ namespace Halfbreed.Entities
 			return false;
 		}
 
-		bool Search(Level currentLevel)
+		bool Pause()
 		{
-			var tileSet = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
-									    	  _lightRadius, HasTrait(Traits.DarkVision), HasTrait(Traits.BlindSight));
-
-			var concealedEntities = currentLevel.GetConcealedEntities(tileSet);
-			foreach (var entity in concealedEntities)
-			{
-				entity.PlayerSpotted = true;  // TODO: Flesh this out properly.
-				MainGraphicDisplay.TextConsole.AddOutputText("You spot " + entity.ToString());
-			}
-	
+			MainGraphicDisplay.TextConsole.AddOutputText("You pause for a moment");
 			return true;
-		}
-
-		bool DisplayKeys()
-		{
-			MenuProvider.ViewKeysDisplay.ViewKeys();
-			return false;
 		}
 	}
 }

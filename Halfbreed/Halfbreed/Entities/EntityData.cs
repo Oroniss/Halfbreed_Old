@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿// Tidied up for version 0.02.
+
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities
 {
 	public static class EntityData
 	{
-		private static Dictionary<string, EntityBasicDetails> _entityBasicDetails = new Dictionary<string, EntityBasicDetails>()
+		static readonly Dictionary<string, EntityBasicDetails> _entityBasicDetails = 
+			new Dictionary<string, EntityBasicDetails>
 		{
 			// Furnishings
 			{"Broken Wooden Barrel", new EntityBasicDetails('/', "DarkWoodBrown", new string[]{"Ruined"})},
@@ -43,7 +46,8 @@ namespace Halfbreed.Entities
 			return _entityBasicDetails[entityName];
 		}
 
-		private static Dictionary<string, FurnishingDetails> _furnishingDetails = new Dictionary<string, FurnishingDetails>()
+		static readonly Dictionary<string, FurnishingDetails> _furnishingDetails = 
+			new Dictionary<string, FurnishingDetails>
 		{
 			{"Default", new FurnishingDetails("", "", 0, "Default Furnishing Setup")},
 			// Regular furnishings

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Tidied up for version 0.02. No changes required.
+
+using System;
 namespace Halfbreed
 {
 	public class FurnishingDetails

@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿// Tidied up for version 0.02.
+
+using System.Collections.Generic;
 
 namespace Halfbreed.Entities.Furnishings
 {
 	public static class FurnishingSetupFunctions
 	{
-		static readonly Dictionary<string, FurnishingSetupFunction> _setupFunctions = new Dictionary<string, FurnishingSetupFunction>()
+		static readonly Dictionary<string, FurnishingSetupFunction> _setupFunctions = 
+			new Dictionary<string, FurnishingSetupFunction>
 		{
 			// The default setup
 			{"Default Furnishing Setup", new FurnishingSetupFunction(DefaultFurnishingSetup)},
@@ -31,11 +34,16 @@ namespace Halfbreed.Entities.Furnishings
 			return _setupFunctions["Default Furnishing Setup"];
 		}
 
-		private static void DefaultFurnishingSetup(Furnishing furnishing, List<string> otherParameters)
+		static string GetValueOf(string parameterName, List<string> otherParameters)
+		{
+			return otherParameters[otherParameters.IndexOf(parameterName) + 1];
+		}
+
+		static void DefaultFurnishingSetup(Furnishing furnishing, List<string> otherParameters)
 		{
 		}
 
-		private static void DoorSetup(Furnishing furnishing, List<string> otherParameters)
+		static void DoorSetup(Furnishing furnishing, List<string> otherParameters)
 		{
 			furnishing.AddInteractionFunction("Door Use");
 
@@ -50,38 +58,38 @@ namespace Halfbreed.Entities.Furnishings
 			}
 		}
 
-		private static void LevelTransitionSetup(Furnishing furnishing, List<string> otherParameters)
+		static void LevelTransitionSetup(Furnishing furnishing, List<string> otherParameters)
 		{
 			furnishing.AddInteractionFunction("Level Transition Use");
-			furnishing.SetOtherAttribute("DestinationLevel", otherParameters[otherParameters.IndexOf("DestinationLevel") + 1]);
-			furnishing.SetOtherAttribute("NewXLoc", otherParameters[otherParameters.IndexOf("NewXLoc") + 1]);
-			furnishing.SetOtherAttribute("NewYLoc", otherParameters[otherParameters.IndexOf("NewYLoc") + 1]);
+			furnishing.SetOtherAttribute("DestinationLevel", GetValueOf("DestinationLevel", otherParameters));
+			furnishing.SetOtherAttribute("NewXLoc", GetValueOf("NewXLoc", otherParameters));
+			furnishing.SetOtherAttribute("NewYLoc", GetValueOf("NewYLoc", otherParameters));
 		}
 
-		private static void InteractionTrapSetup(Furnishing furnishing, List<string> otherParameters)
+		static void InteractionTrapSetup(Furnishing furnishing, List<string> otherParameters)
 		{
-			var trapType = otherParameters[otherParameters.IndexOf("TrapType") + 1];
+			var trapType = GetValueOf("TrapType", otherParameters);
 			furnishing.AddInteractionFunction(string.Format("Trigger {0} Trap", trapType));
-			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
+			furnishing.SetOtherAttribute("TrapLevel", GetValueOf("TrapLevel", otherParameters));
 			furnishing.Trapped = true;
 		}
 
-		private static void MovementTrapSetup(Furnishing furnishing, List<string> otherParameters)
+		static void MovementTrapSetup(Furnishing furnishing, List<string> otherParameters)
 		{
 			furnishing.MoveOnFunction = string.Format("{0} Move On", furnishing.EntityName);
-			furnishing.SetOtherAttribute("TrapLevel", otherParameters[otherParameters.IndexOf("TrapLevel") + 1]);
+			furnishing.SetOtherAttribute("TrapLevel", GetValueOf("TrapLevel", otherParameters));
 			furnishing.Trapped = true;
 		}
 
-		private static void ConcealedFurnishingSetup(Furnishing furnishing, List<string> otherParameters)
+		static void ConcealedFurnishingSetup(Furnishing furnishing, List<string> otherParameters)
 		{
 			furnishing.Concealed = true;
 			furnishing.PlayerSpotted = false;
-			furnishing.SetOtherAttribute("ConcealmentLevel", otherParameters[otherParameters.IndexOf("ConcealmentLevel") + 1]);
+			furnishing.SetOtherAttribute("ConcealmentLevel", GetValueOf("ConcealmentLevel", otherParameters));
 
 			if (otherParameters.Contains("ConcealedTile"))
 			{
-				var tileName = otherParameters[otherParameters.IndexOf("ConcealedTile") + 1];
+				var tileName = GetValueOf("ConcealedTile", otherParameters);
 				var tileDetails = Levels.TileDictionary.getTileDetails(tileName);
 				furnishing.SetOtherAttribute("ConcealedBGColor", tileDetails.BGColor.ToString());
 				furnishing.SetOtherAttribute("ConcealedFogColor", tileDetails.FogColor.ToString());

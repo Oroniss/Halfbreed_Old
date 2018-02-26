@@ -1,4 +1,4 @@
-﻿// Tidied up for version 0.2.
+﻿// Tidied up for version 0.02.
 
 using System.Collections.Generic;
 using System;
@@ -8,7 +8,7 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Actor:Entity
 	{
-		int _viewDistance;
+		readonly int _viewDistance;
 
 		public Actor(string actorName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(actorName, xLoc, yLoc, otherParameters)

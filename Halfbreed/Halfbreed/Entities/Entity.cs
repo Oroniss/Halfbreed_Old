@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System;
 using System.Collections.Generic;
 
@@ -84,7 +86,7 @@ namespace Halfbreed.Entities
 			return _entityName;
 		}
 
-		public string GetDescription()
+		public virtual string GetDescription()
 		{
 			return _entityName;
 		}
@@ -141,9 +143,8 @@ namespace Halfbreed.Entities
 		public virtual Combat.Damage ProcessDamage(Entity attacker, Combat.Damage Damage)
 		{
 			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("{0} takes {1} points of {2} damage",
-																	   this, Damage.FinalDamageAmount, Damage.DamageType));
+														 this, Damage.FinalDamageAmount, Damage.DamageType));
 			return Damage;
 		}
-
 	}
 }

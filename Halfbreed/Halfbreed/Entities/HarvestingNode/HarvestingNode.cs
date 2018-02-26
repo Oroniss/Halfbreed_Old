@@ -1,4 +1,4 @@
-// Tidied up for Version 0.2.
+// Tidied up for Version 0.02.
 
 using System.Collections.Generic;
 using System;

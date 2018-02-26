@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System.Collections.Generic;
 using System;
 
@@ -5,7 +7,8 @@ namespace Halfbreed.Entities.Furnishings
 {
 	public static class InteractionFunctions
 	{
-		static readonly Dictionary<string, InteractionFunction> _interactionFunctions = new Dictionary<string, InteractionFunction>()
+		static readonly Dictionary<string, InteractionFunction> _interactionFunctions = 
+			new Dictionary<string, InteractionFunction>
 		{
 			// Default
 			{"No Use", new InteractionFunction(NoUse)},
@@ -27,12 +30,12 @@ namespace Halfbreed.Entities.Furnishings
 			return _interactionFunctions["No Use"];
 		}
 
-		private static void NoUse(Furnishing furnishing, Actor actor, Level currentLevel)
+		static void NoUse(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
 			MainGraphicDisplay.TextConsole.AddOutputText("You can't do anything with that");
 		}
 
-		private static void DoorUse(Furnishing furnishing, Actor actor, Level currentLevel)
+		static void DoorUse(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
 			if (furnishing.GetOtherAttributeValue("DoorOpen") == "Open")
 			{
@@ -51,7 +54,8 @@ namespace Halfbreed.Entities.Furnishings
 			}
 			else
 			{
-				if (furnishing.HasOtherAttribute("DoorLocked") && furnishing.GetOtherAttributeValue("DoorLocked") == "True")
+				if (furnishing.HasOtherAttribute("DoorLocked") && 
+				    furnishing.GetOtherAttributeValue("DoorLocked") == "True")
 				{
 					// TODO: Flesh this out.
 					MainGraphicDisplay.TextConsole.AddOutputText("The door is locked");
@@ -68,7 +72,7 @@ namespace Halfbreed.Entities.Furnishings
 			}
 		}
 
-		private static void LevelTransitionUse(Furnishing furnishing, Actor actor, Level currentLevel)
+		static void LevelTransitionUse(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
 			var destinationLevel = (Levels.LevelEnum)Enum.Parse(typeof(Levels.LevelEnum),
 																furnishing.GetOtherAttributeValue("DestinationLevel"));
@@ -77,7 +81,7 @@ namespace Halfbreed.Entities.Furnishings
 			MainProgram.LevelTransition(destinationLevel, newXLoc, newYLoc);
 		}
 
-		private static void TriggerSwingingBladeTrap(Furnishing furnishing, Actor actor, Level currentLevel)
+		static void TriggerSwingingBladeTrap(Furnishing furnishing, Actor actor, Level currentLevel)
 		{
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
 
@@ -85,6 +89,5 @@ namespace Halfbreed.Entities.Furnishings
 			furnishing.RemoveInteractionFunction("Trigger Swinging Blade Trap");
 			furnishing.Trapped = false;
 		}
-
 	}
 }
