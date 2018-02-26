@@ -1,4 +1,6 @@
-﻿using Halfbreed.UserData;
+﻿// Tidied up for version 0.02.
+
+using Halfbreed.UserData;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Halfbreed
 
 		static string _saveFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "Saves");
 
+		// Initial setup
 		public static void SetupDirectoriesAndFiles()
 		{
 			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Config")))
@@ -46,6 +49,7 @@ namespace Halfbreed
 			WriteSummaryFile(_defaultSaveSummary);
 		}
 
+		// Update config parameters.
 		public static void WriteConfigFile(ConfigParameters configParameters)
 		{
 			var fileStream = File.OpenWrite(_configFilePath);
@@ -63,6 +67,7 @@ namespace Halfbreed
 			return configParameters;
 		}
 
+		// Save and load game.
 		public static void WriteSaveGameSummary(SaveGameSummary summary)
 		{
 			var saveSummaries = ReadSummaryFile();
@@ -73,7 +78,8 @@ namespace Halfbreed
 		public static void SaveGame(SaveGame gameState)
 		{
 			WriteSaveGameSummary(gameState.Summary);
-			var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", gameState.Summary.GameData.GameID));
+			var filePath = Path.Combine(_saveFileFolder, string.Format("GID{0}.hbs", 
+			                                                           gameState.Summary.GameData.GameID));
 			var fileStream = File.OpenWrite(filePath);
 			var serialiser = new BinaryFormatter();
 			serialiser.Serialize(fileStream, gameState);
@@ -146,6 +152,7 @@ namespace Halfbreed
 			fileStream.Close();
 		}
 
+		// Logging - if it ends up being used at all.
 		public static bool FullLogging
 		{
 			get { return _fullLogging; }
