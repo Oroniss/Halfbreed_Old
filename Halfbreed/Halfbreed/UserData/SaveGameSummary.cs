@@ -30,7 +30,7 @@ namespace Halfbreed.UserData
 
 		public override string ToString()
 		{
-			var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+			var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 			dtDateTime = dtDateTime.AddSeconds(LastSaveTime).ToLocalTime();
 
 			var achString = "Off";
