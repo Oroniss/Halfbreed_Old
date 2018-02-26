@@ -1,4 +1,4 @@
-﻿// Cleaned up for version 0.02. No changes required.
+﻿// Cleaned up for version 0.02.
 
 using RLNET;
 
@@ -6,12 +6,12 @@ namespace Halfbreed.Display
 {
 	public abstract class BaseConsole
 	{
-		int _height;
-		int _width;
-		int _top;
-		int _left;
-		RLColor _backColor;
-		BackConsole _backConsole;
+		readonly int _height;
+		readonly int _width;
+		readonly int _top;
+		readonly int _left;
+		readonly RLColor _backColor;
+		readonly BackConsole _backConsole;
 		protected RLConsole _console;
 
 		public BaseConsole(int width, int height, int left, int top, RLColor backColor, BackConsole backConsole)
