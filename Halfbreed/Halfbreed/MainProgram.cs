@@ -1,24 +1,33 @@
+// Tidied for version 0.02.
+
 using System;
 using System.Threading;
-using System.Collections.Generic;
 using RLNET;
 
 namespace Halfbreed
 {
     public static class MainProgram
     {
-		static string _versionNumber = "0.01";
+		static readonly string _versionNumber = "0.01";
+
+		static readonly string _fontName = "terminal8x8.png";
+		static readonly int _consoleWidth = 160;
+		static readonly int _consoleHeight = 80;
+		static readonly int _fontSize = 8;
+		static readonly float _scale = 1.0f;
+		static readonly string _windowTitle = "Halfbreed";
+
+		static readonly Levels.LevelEnum _startingLevel = Levels.LevelEnum.TESTLEVEL1; // TODO: Add a function to change these from GM Menu.
+		static readonly int _startingXLoc = 42;
+		static readonly int _startingYLoc = 5;
 
 		static RLRootConsole rootConsole;
 		static bool _quit;
 
 		static GameData _gameData;
-
 		static Entities.Player _player;
 		static Level _currentLevel;
 		static int _currentTime;
-
-		static List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
 
         public static void Main()
         {
@@ -29,13 +38,13 @@ namespace Halfbreed
 			UserDataManager.FullLogging = configParameters.FullLogging;
 			// TODO: Set the gm option here too.
 
-			// TODO: Pull these magic numbers out and line them up with the MainGraphicsDisplay
-			rootConsole = new RLRootConsole("terminal8x8.png", 160, 80, 8, 8, 1, "Halfbreed");
+			rootConsole = new RLRootConsole(_fontName, _consoleWidth, _consoleHeight, _fontSize, _fontSize, _scale,
+											_windowTitle);
 
             rootConsole.Update += RootConsoleUpdate;
             rootConsole.Render += RootConsoleRender;
 
-			Thread mainLoopThread = new Thread(RunStartMenu);
+			var mainLoopThread = new Thread(RunStartMenu);
 			mainLoopThread.Start();
             rootConsole.Run();
         }
@@ -52,7 +61,7 @@ namespace Halfbreed
 
         static void RootConsoleUpdate(object sender, EventArgs e)
         {
-            RLKeyPress key = rootConsole.Keyboard.GetKeyPress();
+            var key = rootConsole.Keyboard.GetKeyPress();
             if (key != null)
             {
 				UserInputHandler.addKeyboardInput(key.Key);
@@ -68,18 +77,14 @@ namespace Halfbreed
 				return;
 			}
 
-			// Load up gameID.
 			var gameState = UserDataManager.GetGameState(gameId);
 			if (gameState.Summary.CurrentLevelName == "NEWGAME")
 			{
 				SetupNewGame(gameState.Summary.GameData);
-				Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL1;
-				LevelTransition(startingLevel, 42, 5);
+				LevelTransition(_startingLevel, _startingXLoc, _startingYLoc);
 			}
 			else
 				LoadGame(gameState);
-			//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
-			//GameEngine.LevelTransition(startingLevel, 49, 42);
 
 			RunGame();
 			Quit();
@@ -131,6 +136,8 @@ namespace Halfbreed
 			_currentLevel = new Level(newLevel);
 			_player.UpdatePosition(newX, newY);
 			_currentLevel.AddActor(_player);
+			_player.UpdateVisibleTiles(_currentLevel);
+			MainGraphicDisplay.UpdateGameScreen();
 		}
 
 		static void SetupNewGame(GameData startingParameters)
@@ -158,38 +165,5 @@ namespace Halfbreed
 			get { return _currentTime; }
 		}
 
-		public static List<XYCoordinateStruct> VisibleTiles
-		{
-			get { return _visibleTiles; }
-			set { _visibleTiles = value; }
-		}
     }
-
-	[Serializable]
-	public class GameData
-	{
-		public int DifficultySetting;
-		public CharacterClasses CharacterClass;
-		public bool UseAchievements;
-		public string CharacterNote;
-		public int GameID;
-
-		public GameData()
-		{
-			DifficultySetting = 1;
-			CharacterClass = CharacterClasses.Fighter;
-			UseAchievements = true;
-			CharacterNote = "";
-		}
-
-		public GameData(int difficulty, CharacterClasses characterClass, bool useAchievements, string characterNote,
-		                int gameId)
-		{
-			DifficultySetting = difficulty;
-			CharacterClass = characterClass;
-			UseAchievements = useAchievements;
-			CharacterNote = characterNote;
-			GameID = gameId;
-		}
-	}
 }
