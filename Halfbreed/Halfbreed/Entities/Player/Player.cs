@@ -29,12 +29,7 @@ namespace Halfbreed.Entities
 
 		protected override void GetNextMove(Level currentLevel)
 		{
-			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance, 
-			                                       _lightRadius, HasTrait(Traits.DarkVision), 
-			                                       HasTrait(Traits.BlindSight));
-			foreach (XYCoordinateStruct tile in visibleTiles)
-				currentLevel.RevealTile(tile.X, tile.Y);
-			MainProgram.VisibleTiles = visibleTiles;
+			UpdateVisibleTiles(currentLevel);
 
 			MainGraphicDisplay.TextConsole.AddOutputText("");
 
@@ -65,6 +60,16 @@ namespace Halfbreed.Entities
 					return;
 				}
 			}
+		}
+
+		public void UpdateVisibleTiles(Level currentLevel)
+		{
+			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
+									   _lightRadius, HasTrait(Traits.DarkVision),
+									   HasTrait(Traits.BlindSight));
+			foreach (XYCoordinateStruct tile in visibleTiles)
+				currentLevel.RevealTile(tile.X, tile.Y);
+			currentLevel.VisibleTiles = visibleTiles;
 		}
 
 		bool Move(Level currentLevel, string key)
