@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,16 +30,15 @@ namespace Halfbreed
 		// Standard constructor
 		public Level(LevelEnum level)
 		{
-			FileStream levelStream = File.Open(GetFilePath(level), FileMode.Open);
-			StreamReader LevelSpecificationFile = new StreamReader(levelStream);
+			var levelStream = File.Open(GetFilePath(level), FileMode.Open);
+			var LevelSpecificationFile = new StreamReader(levelStream);
 
-			Dictionary<int, TileType> tileDict = new Dictionary<int, TileType>();
+			var tileDict = new Dictionary<int, TileType>();
 
 			_levelTitle = LevelSpecificationFile.ReadLine();
 			_threatLevel = int.Parse(LevelSpecificationFile.ReadLine());
 			_height = int.Parse(LevelSpecificationFile.ReadLine());
 			_width = int.Parse(LevelSpecificationFile.ReadLine());
-
 			_lightLevel = int.Parse(LevelSpecificationFile.ReadLine());
 			_smokeLevel = int.Parse(LevelSpecificationFile.ReadLine());
 
@@ -45,7 +46,6 @@ namespace Halfbreed
 			_furnishings = new SortedDictionary<int, Furnishing>();
 			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
 			_actors = new SortedDictionary<int, Actor>();
-
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -76,7 +76,6 @@ namespace Halfbreed
 			LevelSpecificationFile.ReadLine();
 			// TODO: Throw an exception if it isn't "###"
 
-
 			// Furnishings
 			const int FURNISHINGPREFIXLENGTH = 3;
 			while (true)
@@ -98,7 +97,7 @@ namespace Halfbreed
 			const int HARVESTINGNODEPREFIXLENGTH = 3;
 			while (true)
 			{
-				string line = LevelSpecificationFile.ReadLine().Trim();
+				var line = LevelSpecificationFile.ReadLine().Trim();
 				if (LineIsBreakPoint(line))
 					break;
 
@@ -113,7 +112,6 @@ namespace Halfbreed
 			}
 
 			levelStream.Close();
-
 		}
 
 		// Constructor for save games.
@@ -328,7 +326,8 @@ namespace Halfbreed
 
 		public bool isPassible(int x, int y, Actor actor)
 		{
-			return isPassible(x, y, actor.HasTrait(Traits.Walking), actor.HasTrait(Traits.Flying), actor.HasTrait(Traits.Swimming));
+			return isPassible(x, y, actor.HasTrait(Traits.Walking), actor.HasTrait(Traits.Flying),
+			                  actor.HasTrait(Traits.Swimming));
 		}
 
 		public bool BlockAllMovement(int x, int y)
@@ -442,7 +441,7 @@ namespace Halfbreed
 				viewDistance = Math.Max(viewDistance, lightRadius);
 			}
 
-			HashSet<int> viewSet = new HashSet<int>() { ConvertXYToInt(x, y) };
+			var viewSet = new HashSet<int> { ConvertXYToInt(x, y) };
 			for (int octant = 0; octant < 8; octant++)
 			{
 				CastLight(x, y, 1, 1.0d, 0.0d, viewDistance, _octantTranslate[0, octant], _octantTranslate[1, octant],
@@ -483,34 +482,29 @@ namespace Halfbreed
 
 					if (start <= rSlope)
 						continue;
-					else if (end >= lSlope)
+					if (end >= lSlope)
 						break;
-					else
+					
+					// We can see this square
+					if (dy * dx + dy * dy < viewDistanceSquared && IsValidMapCoord(mapX, mapY))
+						viewSet.Add(ConvertXYToInt(mapX, mapY));
+					if (blocked)
 					{
-						// We can see this square
-						if (dy * dx + dy * dy < viewDistanceSquared && IsValidMapCoord(mapX, mapY))
-							viewSet.Add(ConvertXYToInt(mapX, mapY));
-						if (blocked)
+						// We are scanning blocked squares
+						if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
 						{
-							// We are scanning blocked squares
-							if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
-							{
-								newStart = rSlope;
-								continue;
-							}
-							else
-							{
-								blocked = false;
-								start = newStart;
-							}
-						}
-						else if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
-						{
-							// Start a child scan
-							blocked = true;
-							CastLight(xLoc, yLoc, j + 1, start, lSlope, viewDistance, xx, xy, yx, yy, recursionNumber + 1, elevation, viewSet);
 							newStart = rSlope;
+							continue;
 						}
+						blocked = false;
+						start = newStart;
+					}
+					else if (!IsValidMapCoord(mapX, mapY) || BlockLOS(mapX, mapY, elevation))
+					{
+						// Start a child scan
+						blocked = true;
+						CastLight(xLoc, yLoc, j + 1, start, lSlope, viewDistance, xx, xy, yx, yy, recursionNumber + 1, elevation, viewSet);
+						newStart = rSlope;
 					}
 				}
 				// Row is scanned  do next row unless last square was blocked.
@@ -603,7 +597,7 @@ namespace Halfbreed
 			details.HarvestingNodes = new HarvestingNode[arraySize];
 			details.Actors = new Actor[arraySize];
 
-			for (var i = 0; i < arraySize; i++)
+			for (int i = 0; i < arraySize; i++)
 			{
 				details.MapGrid[i] = _mapGrid[i].TileType;
 				details.Revealed[i] = _revealed[i];

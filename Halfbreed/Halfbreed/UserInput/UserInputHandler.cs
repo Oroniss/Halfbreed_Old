@@ -1,3 +1,5 @@
+// Tidied up for version 0.02.
+
 using System;
 using System.Threading;
 using System.Collections.Generic;
@@ -7,9 +9,11 @@ namespace Halfbreed
 {
     public static class UserInputHandler
     {
+		const int MAXTEXTLENGTH = 40;
+
 		static bool _extraKeys;
 
-		static Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>()
+		static readonly Dictionary<RLKey, string> _keyDict = new Dictionary<RLKey, string>
 		{
 			{RLKey.Number0, "0"}, {RLKey.Number1, "1"}, {RLKey.Number2, "2"}, {RLKey.Number3, "3"}, 
 			{RLKey.Number4, "4"}, {RLKey.Number5, "5"}, {RLKey.Number6, "6"}, {RLKey.Number7, "7"}, 
@@ -21,8 +25,9 @@ namespace Halfbreed
 			{RLKey.Keypad9, "UP_RIGHT"},
 
 			{RLKey.Escape, "ESCAPE"}, {RLKey.Space, "SPACE"}, {RLKey.Enter, "ENTER"}, {RLKey.BackSpace, "BACKSPACE"},
+			{RLKey.Minus, "MINUS"}, {RLKey.Plus, "EQUALS"}, {RLKey.Tab, "TAB"}, {RLKey.Comma, "COMMA"},
+			{RLKey.Period, "PERIOD"}, {RLKey.Slash, "SLASH"},
 
-			// TODO: Add the rest.
 			{RLKey.A, "A"}, {RLKey.B, "B"}, {RLKey.C, "C"}, {RLKey.D, "D"}, {RLKey.E, "E"}, {RLKey.F, "F"},
 			{RLKey.G, "G"}, {RLKey.H, "H"}, {RLKey.I, "I"}, {RLKey.J, "J"}, {RLKey.K, "K"}, {RLKey.L, "L"}, 
 			{RLKey.M, "M"}, {RLKey.N, "N"}, {RLKey.O, "O"}, {RLKey.P, "P"}, {RLKey.Q, "Q"}, {RLKey.R, "R"},
@@ -30,16 +35,16 @@ namespace Halfbreed
 			{RLKey.Y, "Y"}, {RLKey.Z, "Z"}
 		};
 
-		public static Dictionary<string, int> NumberKeys = new Dictionary<string, int>
+		public static readonly Dictionary<string, int> NumberKeys = new Dictionary<string, int>
 			{{"0", 0}, {"1", 1},  {"2", 2}, {"3", 3}, {"4", 4}, {"5", 5}, {"6", 6}, {"7", 7}, {"8", 8}, {"9", 9}};
 
-		public static Dictionary<string, XYCoordinateStruct> DirectionKeys = new Dictionary<string, XYCoordinateStruct>
+		public static readonly Dictionary<string, XYCoordinateStruct> DirectionKeys = new Dictionary<string, XYCoordinateStruct>
 			{{"UP", new XYCoordinateStruct(0, -1)}, {"DOWN", new XYCoordinateStruct(0, 1)}, 
 			{"LEFT", new XYCoordinateStruct(-1, 0)}, {"RIGHT", new XYCoordinateStruct(1, 0)},
 			{"UP_LEFT", new XYCoordinateStruct(-1, -1)}, {"UP_RIGHT", new XYCoordinateStruct(1, -1)}, 
 			{"DOWN_LEFT", new XYCoordinateStruct(-1, 1)}, {"DOWN_RIGHT", new XYCoordinateStruct(1, 1)}};
 
-		public static HashSet<string> LetterKeys = new HashSet<string>()
+		public static readonly HashSet<string> LetterKeys = new HashSet<string>
 		{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
 		"V", "W", "X", "Y", "Z"};
 
@@ -61,6 +66,12 @@ namespace Halfbreed
 				_queuedInput.Add(key);
 		}
 
+		public static void clearAllInput()
+		{
+			lock (_queuedInput)
+				_queuedInput = new List<string>();
+		}
+
         public static string getNextKey()
         {
             while (true)
@@ -77,12 +88,6 @@ namespace Halfbreed
                 Thread.Yield();
             }
         }
-
-		public static void clearAllInput()
-		{
-			lock (_queuedInput)
-				_queuedInput = new List<string>();
-		}
 
 		public static int SelectFromMenu(string title, List<string> menuOptions, string bottom)
 		{
@@ -131,6 +136,56 @@ namespace Halfbreed
 			}
 		}
 
+		public static XYCoordinateClass GetDirection(string queryText, bool centre)
+		{
+			if (queryText == "")
+				queryText = "Which direction?";
+
+			while (true)
+			{
+				MainGraphicDisplay.TextConsole.AddOutputText(queryText);
+				var key = getNextKey();
+
+				if (DirectionKeys.ContainsKey(key))
+					return new XYCoordinateClass(DirectionKeys[key].X, DirectionKeys[key].Y);
+				if (key == "SPACE" && centre)
+					return new XYCoordinateClass(0, 0);
+				if (key == "ESCAPE")
+					return null;
+			}
+		}
+
+		public static XYCoordinateClass GetDirection()
+		{
+			return GetDirection("", true);
+		}
+
+		public static string GetText(string headerText)
+		{
+			var currentText = "";
+			while (true)
+			{
+				MainGraphicDisplay.MenuConsole.DrawTextBlock(headerText, new List<string> { currentText },
+														"Escape to cancel");
+				var key = getNextKey();
+				var converter = new System.Globalization.CultureInfo("en-US");
+
+				if (LetterKeys.Contains(key) && currentText.Length <= MAXTEXTLENGTH)
+				{
+					currentText += key.ToLower(); // ToLower required since all caps strings are changed.
+					currentText = converter.TextInfo.ToTitleCase(currentText);
+				}
+				if (key == "SPACE")
+					currentText += " ";
+				if (key == "BACKSPACE")
+					currentText = currentText.Substring(0, currentText.Length - 1);
+				if (key == "ESCAPE")
+					return null;
+				if (key == "ENTER")
+					return currentText;
+			}
+		}
+
 		// TODO: See if this is something that comes up enough to generalise.
 		public static void DisplayConfigMenu()
 		{
@@ -140,7 +195,7 @@ namespace Halfbreed
 			var gm = configParameters.GMOptions;
 
 			var title = "Select Configuration Options";
-			var options = new List<string>() { "", "", "" };
+			var options = new List<string> { "", "", "" };
 			var bottom = "Escape to exit";
 
 			while (true)
@@ -173,51 +228,6 @@ namespace Halfbreed
 					UserDataManager.WriteConfigFile(new UserData.ConfigParameters(keys, logging, gm));
 					return;
 				}
-			}
-		}
-
-		public static XYCoordinateClass GetDirection(string queryText, bool centre)
-		{
-			if (queryText == "")
-				queryText = "Which direction?";
-
-			while (true)
-			{
-				MainGraphicDisplay.TextConsole.AddOutputText("Which direction");
-				var key = getNextKey();
-
-				if (DirectionKeys.ContainsKey(key))
-					return new XYCoordinateClass(DirectionKeys[key].X, DirectionKeys[key].Y);
-				if (key == "SPACE" && centre)
-					return new XYCoordinateClass(0, 0);
-				if (key == "ESCAPE")
-					return null;
-			}
-		}
-
-		public static string GetText(string headerText)
-		{
-			var currentText = "";
-			while (true)
-			{
-				MainGraphicDisplay.MenuConsole.DrawTextBlock(headerText, new List<string>() { currentText }, 
-				                                        "Escape to cancel");
-				var key = getNextKey();
-				var converter = new System.Globalization.CultureInfo("en-US");
-
-				if (LetterKeys.Contains(key) && currentText.Length <= 30)
-				{
-					currentText += key.ToLower(); // ToLower required since all caps strings are changed.
-					currentText = converter.TextInfo.ToTitleCase(currentText);
-				}
-				if (key == "SPACE")
-					currentText += " ";
-				if (key == "BACKSPACE")
-					currentText = currentText.Substring(0, currentText.Length - 1);
-				if (key == "ESCAPE")
-					return null;
-				if (key == "ENTER")
-					return currentText;
 			}
 		}
 
