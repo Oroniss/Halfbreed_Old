@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2 - No changes required.
+﻿// Revised for version 0.02.
 
 using System.Collections.Generic;
 using Halfbreed.Levels;
@@ -25,8 +25,7 @@ namespace Halfbreed
 			_baseFilePath = testFilePath;
 		}
 
-		static readonly int[,] _octantTranslate = new int[4, 8]
-		{
+		static readonly int[,] _octantTranslate = {
 			{1, 0, 0, -1, -1, 0, 0, 1},
 			{0, 1, -1, 0, 0, -1, 1, 0},
 			{0, 1, 1, 0, 0, -1, -1, 0},
