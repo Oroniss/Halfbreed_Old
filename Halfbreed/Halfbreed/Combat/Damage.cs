@@ -1,4 +1,4 @@
-﻿// Updated for version 0.2. No changes required.
+﻿// Updated for version 0.02. No changes required.
 
 namespace Halfbreed.Combat
 {
