@@ -84,12 +84,12 @@ namespace Halfbreed
 				_queuedInput = new List<string>();
 		}
 
-		public static int SelectFromMenu(string title, List<String> menuOptions, string bottom)
+		public static int SelectFromMenu(string title, List<string> menuOptions, string bottom)
 		{
 			int page = 0;
 			while (true)
 			{
-				List<String> currentDisplay = new List<string>();
+				var currentDisplay = new List<string>();
 				for (int i = 10 * page; i < Math.Min(10 * (page + 1), menuOptions.Count); i++)
 				{
 					currentDisplay.Add(((i % 10 + 1) % 10).ToString() + ": " + menuOptions[i]);
