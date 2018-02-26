@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2.
+﻿// Revised for version 0.02.
 
 using System;
 
@@ -8,19 +8,17 @@ namespace Halfbreed.UserData
 	public class SaveGame
 	{
 		public SaveGameSummary Summary;
-		public Level CurrentLevel;
+		public LevelSerialisationDetails CurrentLevelDetails;
 		public Entities.Player Player;
 		public int CurrentTime;
-		public Levels.TileType[] MapGrid;
 
-		public SaveGame(SaveGameSummary summary, Level currentLevel, Entities.Player player, int currentTime,
-		               Levels.TileType[] mapGrid)
+		public SaveGame(SaveGameSummary summary, LevelSerialisationDetails currentLevelDetails, Entities.Player player, 
+		                int currentTime)
 		{
 			Summary = summary;
-			CurrentLevel = currentLevel;
+			CurrentLevelDetails = currentLevelDetails;
 			Player = player;
 			CurrentTime = currentTime;
-			MapGrid = mapGrid;
 		}
 	}
 }
