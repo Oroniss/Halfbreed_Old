@@ -23,6 +23,8 @@ namespace Halfbreed
 		SortedDictionary<int, HarvestingNode> _harvestingNodes;
 		SortedDictionary<int, Actor> _actors;
 
+		List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
+
 		// Standard constructor
 		public Level(LevelEnum level)
 		{
@@ -219,6 +221,12 @@ namespace Halfbreed
 		{
 			var index = ConvertXYToInt(x, y);
 			_revealed[index] = true;
+		}
+
+		public List<XYCoordinateStruct> VisibleTiles
+		{
+			get { return _visibleTiles; }
+			set { _visibleTiles = value; }
 		}
 
 		public int Distance(int x1, int y1, int x2, int y2)
