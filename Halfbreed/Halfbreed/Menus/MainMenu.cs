@@ -40,6 +40,11 @@ namespace Halfbreed.Menus
 								UserDataManager.DeleteSaveGame(gameID);
 							break;
 						}
+					case 5:
+						{
+							MenuProvider.ViewKeysDisplay.ViewKeys();
+							break;
+						}
 					case 6:
 						{
 							UserInputHandler.DisplayConfigMenu();
