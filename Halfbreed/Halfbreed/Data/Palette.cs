@@ -1,4 +1,4 @@
-﻿// Revised for version 0.2.
+﻿// Revised for version 0.02.
 
 using RLNET;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ namespace Halfbreed
 {
 	public static class Palette
 	{
-		private static readonly Dictionary<Colors, RLColor> _colors = new Dictionary<Colors, RLColor>()
+		static readonly Dictionary<Colors, RLColor> _colors = new Dictionary<Colors, RLColor>
 		{
 			// Basics
 			{Colors.Black, new RLColor(0, 0, 0)},
