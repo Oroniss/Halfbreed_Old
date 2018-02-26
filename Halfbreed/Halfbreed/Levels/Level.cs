@@ -6,29 +6,26 @@ using Halfbreed.Entities;
 
 namespace Halfbreed
 {
-	[Serializable]
 	public partial class Level
 	{
+		string _levelTitle;
+		int _threatLevel;
+		int _height;
+		int _width;
+		int _lightLevel;
+		int _smokeLevel;
 
-		private string _levelTitle;
-		private int _threatLevel;
-		private int _height;
-		private int _width;
-		private MapTileDetails[] _mapGrid; // TODO: Figure out how to serialise this?
-		private bool[] _revealed;
-
-		private int _lightLevel;
-		private int _smokeLevel;
-		private float _anathemaMultiplier;
+		MapTileDetails[] _mapGrid;
+		bool[] _revealed;
 
 		SortedDictionary<int, object> _triggers; // TODO: Swap to Triggers later
 		SortedDictionary<int, Furnishing> _furnishings;
 		SortedDictionary<int, HarvestingNode> _harvestingNodes;
 		SortedDictionary<int, Actor> _actors;
 
+		// Standard constructor
 		public Level(LevelEnum level)
 		{
-			// TODO: Move this to a separate function to allow easy switching to resources.
 			FileStream levelStream = File.Open(GetFilePath(level), FileMode.Open);
 			StreamReader LevelSpecificationFile = new StreamReader(levelStream);
 
@@ -41,7 +38,6 @@ namespace Halfbreed
 
 			_lightLevel = int.Parse(LevelSpecificationFile.ReadLine());
 			_smokeLevel = int.Parse(LevelSpecificationFile.ReadLine());
-			_anathemaMultiplier = float.Parse(LevelSpecificationFile.ReadLine());
 
 			_triggers = new SortedDictionary<int, object>();
 			_furnishings = new SortedDictionary<int, Furnishing>();
@@ -118,6 +114,39 @@ namespace Halfbreed
 
 		}
 
+		// Constructor for save games.
+		public Level(LevelSerialisationDetails details)
+		{
+			_levelTitle = details.LevelTitle;
+			_threatLevel = details.ThreatLevel;
+			_height = details.Height;
+			_width = details.Width;
+			_lightLevel = details.LightLevel;
+			_smokeLevel = details.SmokeLevel;
+
+			var arraySize = _height * _width;
+			_mapGrid = new MapTileDetails[arraySize];
+			_revealed = new bool[arraySize];
+			_triggers = new SortedDictionary<int, object>();
+			_furnishings = new SortedDictionary<int, Furnishing>();
+			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
+			_actors = new SortedDictionary<int, Actor>();
+
+			for (int i = 0; i < arraySize; i++)
+			{
+				_mapGrid[i] = TileDictionary.getTileDetails(details.MapGrid[i]);
+				_revealed[i] = details.Revealed[i];
+				if (details.Triggers[i] != null)
+					_triggers[i] = details.Triggers[i];
+				if (details.Furnishings[i] != null)
+					_furnishings[i] = details.Furnishings[i];
+				if (details.HarvestingNodes[i] != null)
+					_harvestingNodes[i] = details.HarvestingNodes[i];
+				if (details.Actors[i] != null)
+					_actors[i] = details.Actors[i];
+			}
+		}
+
 		bool LineIsBreakPoint(string line)
 		{
 			return line.Substring(0, 3) == "###";
@@ -139,7 +168,7 @@ namespace Halfbreed
 
 		bool HasTrait(int index, Traits trait)
 		{
-			return _mapGrid[index].HasTrait(trait) || 
+			return _mapGrid[index].HasTrait(trait) ||
 				(_actors.ContainsKey(index) && _actors[index].HasTrait(trait)) ||
 				(_furnishings.ContainsKey(index) && _furnishings[index].HasTrait(trait)) ||
 				(_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].HasTrait(trait));
@@ -194,8 +223,8 @@ namespace Halfbreed
 
 		public int Distance(int x1, int y1, int x2, int y2)
 		{
-			return (int)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2) + 
-			                      Math.Pow(Elevation(x1, y1) - Elevation(x2, y2), 2));
+			return (int)Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2) +
+								  Math.Pow(Elevation(x1, y1) - Elevation(x2, y2), 2));
 		}
 
 		public int Distance(Entity entity1, Entity entity2)
@@ -284,9 +313,9 @@ namespace Halfbreed
 			var index = ConvertXYToInt(x, y);
 			if (BlockAllMovement(index))
 				return false;
-			return (walk && !HasTrait(index, Traits.BlockWalk)) || 
-			        (fly && !HasTrait(index, Traits.BlockFly)) || 
-			        (swim && !HasTrait(index, Traits.BlockSwim));
+			return (walk && !HasTrait(index, Traits.BlockWalk)) ||
+					(fly && !HasTrait(index, Traits.BlockFly)) ||
+					(swim && !HasTrait(index, Traits.BlockSwim));
 		}
 
 		public bool isPassible(int x, int y, Actor actor)
@@ -343,7 +372,7 @@ namespace Halfbreed
 					}
 					return false;
 				}
-	
+
 				if (elevationDifference > 1)
 					MainGraphicDisplay.TextConsole.AddOutputText("It's too high to climb up there");
 				else
@@ -394,8 +423,8 @@ namespace Halfbreed
 			return elevation < GetElevation(index) || BlockLOS(index);
 		}
 
-		public List<XYCoordinateStruct> GetFOV(int x, int y, int elevation, int viewDistance, int lightRadius, 
-		                                       bool Darkvision, bool Blindsight)
+		public List<XYCoordinateStruct> GetFOV(int x, int y, int elevation, int viewDistance, int lightRadius,
+											   bool Darkvision, bool Blindsight)
 		{
 			if (!Blindsight)
 				viewDistance += _smokeLevel;
@@ -405,14 +434,13 @@ namespace Halfbreed
 				viewDistance = Math.Max(viewDistance, lightRadius);
 			}
 
-			HashSet<int> viewSet = new HashSet<int>() {ConvertXYToInt(x, y) };
+			HashSet<int> viewSet = new HashSet<int>() { ConvertXYToInt(x, y) };
 			for (int octant = 0; octant < 8; octant++)
 			{
 				CastLight(x, y, 1, 1.0d, 0.0d, viewDistance, _octantTranslate[0, octant], _octantTranslate[1, octant],
 						  _octantTranslate[2, octant], _octantTranslate[3, octant], 0, elevation, viewSet);
 			}
 
-			// Adjust for lit tiles here.
 			var returnList = new List<XYCoordinateStruct>();
 			foreach (int index in viewSet)
 				returnList.Add(new XYCoordinateStruct(index % _width, index / _width));
@@ -546,24 +574,69 @@ namespace Halfbreed
 				if (!_actors[index].HasTrait(Traits.Player))
 					_actors[index].Update(this);
 			}
-			MainProgram.Player.Update(this);
 		}
 
 		// Serialisation functions
-		public TileType[] GetTileMap()
+		public LevelSerialisationDetails GetSerialisationDetails()
 		{
-			var returnArray = new TileType[_height * _width];
-			for (var i = 0; i < returnArray.Length; i++)
-				returnArray[i] = _mapGrid[i].TileType;
-			_mapGrid = null;
-			return returnArray;
-		}
+			var details = new LevelSerialisationDetails();
+			details.LevelTitle = _levelTitle;
+			details.ThreatLevel = _threatLevel;
+			details.Height = _height;
+			details.Width = _width;
+			details.LightLevel = _lightLevel;
+			details.SmokeLevel = _smokeLevel;
 
-		public void SetTileMap(TileType[] tileMap)
-		{
-			_mapGrid = new MapTileDetails[_width * _height];
-			for (var i = 0; i < tileMap.Length; i++)
-				_mapGrid[i] = TileDictionary.getTileDetails(tileMap[i]);
+			var arraySize = _height * _width;
+			details.MapGrid = new TileType[arraySize];
+			details.Revealed = new bool[arraySize];
+			details.Triggers = new object[arraySize];
+			details.Furnishings = new Furnishing[arraySize];
+			details.HarvestingNodes = new HarvestingNode[arraySize];
+			details.Actors = new Actor[arraySize];
+
+			for (var i = 0; i < arraySize; i++)
+			{
+				details.MapGrid[i] = _mapGrid[i].TileType;
+				details.Revealed[i] = _revealed[i];
+				if (_triggers.ContainsKey(i))
+					details.Triggers[i] = _triggers[i];
+				else
+					details.Triggers[i] = null;
+				if (_furnishings.ContainsKey(i))
+					details.Furnishings[i] = _furnishings[i];
+				else
+					details.Furnishings[i] = null;
+				if (_harvestingNodes.ContainsKey(i))
+					details.HarvestingNodes[i] = _harvestingNodes[i];
+				else
+					details.HarvestingNodes[i] = null;
+				if (_actors.ContainsKey(i) && !_actors[i].HasTrait(Traits.Player))
+					details.Actors[i] = _actors[i];
+				else
+					details.Actors[i] = null;
+			}
+
+			return details;
 		}
+	}
+
+	[Serializable]
+	public class LevelSerialisationDetails
+	{
+		public string LevelTitle;
+		public int ThreatLevel;
+		public int Height;
+		public int Width;
+		public int LightLevel;
+		public int SmokeLevel;
+
+		public TileType[] MapGrid;
+		public bool[] Revealed;
+
+		public object[] Triggers; // TODO: Swap to Triggers later
+		public Furnishing[] Furnishings;
+		public HarvestingNode[] HarvestingNodes;
+		public Actor[] Actors;
 	}
 }
