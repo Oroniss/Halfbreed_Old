@@ -80,6 +80,7 @@ namespace Halfbreed
 			{
 				LoadGame(gameState);
 				_player.Update(_currentLevel);
+				_currentTime++;
 			}
 			//Levels.LevelEnum startingLevel = Levels.LevelEnum.TESTLEVEL2;
 			//GameEngine.LevelTransition(startingLevel, 49, 42);
