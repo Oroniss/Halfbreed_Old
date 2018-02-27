@@ -1,6 +1,7 @@
-using RLNET;
-using System;
+﻿// Revised for version 0.02.
+
 using NUnit.Framework;
+using System;
 
 namespace Halfbreed.Tests
 {
@@ -8,15 +9,15 @@ namespace Halfbreed.Tests
 	public class DataTests
 	{
 		[Test]
-		public void PaletteTest()
+		public void TestPalette()
 		{
-			Assert.AreEqual(new RLColor(190, 190, 190), Palette.GetColor(Colors.Silver));
-			Assert.AreEqual(new RLColor(255, 255, 255), Palette.GetColor(Colors.White));
-			Assert.AreEqual(new RLColor(193, 255, 193), Palette.GetColor(Colors.PutridGreen));
-
+			// Check each option in the Enum is covered
+			foreach (Colors color in Enum.GetValues(typeof(Colors)))
+				Palette.GetColor(color);
 			Assert.AreEqual(Enum.GetValues(typeof(Colors)).Length, Palette.NumberOfColors);
-
 		}
 
+		// Classes untested - GameData, XYCoordinateClass, XYCoordinateStruct - doesn't seem much point if they
+		// don't have any functionality.
 	}
 }
