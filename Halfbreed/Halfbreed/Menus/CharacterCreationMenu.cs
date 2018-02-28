@@ -60,7 +60,8 @@ namespace Halfbreed.Menus
 			if (parameters != null)
 				parameters = SetCharacterNote(parameters);
 
-			DisplayNewGameText();
+			if (parameters != null)
+				DisplayNewGameText();
 
 			return parameters;
 		}
