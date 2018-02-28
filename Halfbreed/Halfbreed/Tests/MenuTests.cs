@@ -1,79 +1,83 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Halfbreed.Menus;
-using RLNET;
+using System.Collections.Generic;
 
 namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class MenuTests
 	{
-
 		[Test]
 		public void TestCharacterCreationMenu()
 		{
-            Menus.GameData ps = new Menus.GameData();
-			ps.CharacterClass = CharacterClasses.Cleric;
-			Assert.AreEqual(ps.CharacterClass, CharacterClasses.Cleric);
+			var menu = new CharacterCreationMenu();
+
+			// Test regular functionality
+			var keyBoardInput = new string[] { "1", "4", "1", "T", "E", "S", "T", "ENTER", "ENTER" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			var newGameParams = menu.StartNewGame();
+
+			Assert.AreEqual(1, newGameParams.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.Thief, newGameParams.CharacterClass);
+			Assert.IsTrue(newGameParams.UseAchievements);
+			Assert.AreEqual("Test", newGameParams.CharacterNote);
+
+			// Test another set of regular functionality
+			keyBoardInput = new string[] { "3", "5", "2", "T", "E", "ENTER", "ENTER" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+
+			Assert.AreEqual(3, newGameParams.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.Paladin, newGameParams.CharacterClass);
+			Assert.IsFalse(newGameParams.UseAchievements);
+			Assert.AreEqual("Te", newGameParams.CharacterNote);
+
+			// Test with innapropriate inputs.
+			keyBoardInput = new string[] { "6", "0", "2", "5", "1", "3", "1", "T", "E", "ENTER", "ENTER" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+
+			Assert.AreEqual(2, newGameParams.DifficultySetting);
+			Assert.AreEqual(CharacterClasses.Cleric, newGameParams.CharacterClass);
+			Assert.IsTrue(newGameParams.UseAchievements);
+			Assert.AreEqual("Te", newGameParams.CharacterNote);
+
+			// Test exiting behaves correctly.
+			UserInputHandler.clearAllInput();
+			keyBoardInput = new string[] { "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+			Assert.IsNull(newGameParams);
 
 			UserInputHandler.clearAllInput();
-
-			RLKey[] keys = new RLKey[] { RLKey.Number3, RLKey.Number4, RLKey.Number1 };
-			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-            Menus.GameData parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetupNewGame(parameters);
-			Assert.AreEqual(3, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.Necromancer, GameEngine.CharacterClass);
-			Assert.IsTrue(GameEngine.UseAchievements);
+			keyBoardInput = new string[] { "1", "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+			Assert.IsNull(newGameParams);
 
 			UserInputHandler.clearAllInput();
-
-			keys = new RLKey[] { RLKey.Number1, RLKey.Number4, RLKey.Number1 };
-			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetupNewGame(parameters);
-			Assert.AreEqual(1, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.Thief, GameEngine.CharacterClass);
-			Assert.IsTrue(GameEngine.UseAchievements);
+			keyBoardInput = new string[] {"3", "6", "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+			Assert.IsNull(newGameParams);
 
 			UserInputHandler.clearAllInput();
-
-			keys = new RLKey[] { RLKey.Number5, RLKey.Number1, RLKey.Number2 };
-			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetupNewGame(parameters);
-			Assert.AreEqual(5, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.Dragonlord, GameEngine.CharacterClass);
-			Assert.IsFalse(GameEngine.UseAchievements);
-
-			UserInputHandler.clearAllInput();
-
-			keys = new RLKey[] { RLKey.Number6, RLKey.Number4, RLKey.Number7, RLKey.Number1, RLKey.Number3, RLKey.Number2 };
-			KeyBoardInputSimulator.AddKeyBoardInput(keys);
-			parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
-			GameEngine.SetupNewGame(parameters);
-			Assert.AreEqual(4, GameEngine.DifficultySetting);
-			Assert.AreEqual(CharacterClasses.Bard, GameEngine.CharacterClass);
-			Assert.IsFalse(GameEngine.UseAchievements);
-
-			UserInputHandler.clearAllInput();
+			keyBoardInput = new string[] { "5", "1", "1", "H", "E", "L", "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+			newGameParams = menu.StartNewGame();
+			Assert.IsNull(newGameParams);
 		}
 
 		[Test]
 		public void TestLoadGameMenu()
 		{
-			// Need to swap the database context across.
-
-			UserInputHandler.clearAllInput();
-
-			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Number2);
-			//Assert.AreEqual(2, MenuProvider.LoadGameMenu.SelectSavedGame());
-
-			UserInputHandler.clearAllInput();
-
-			KeyBoardInputSimulator.AddKeyBoardInput(RLKey.Number1);
-			//Assert.AreEqual(1, MenuProvider.LoadGameMenu.SelectSavedGame());
-
+			// This one may need the extended test setup to create/copy configuration files.
 		}
 
+		[Test]
+		public void TestMainMenu()
+		{
+			// This one likely will as well.
+		}
 	}
 }
