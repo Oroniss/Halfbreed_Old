@@ -22,7 +22,7 @@ namespace Halfbreed.Menus
 						{
 							var parameters = MenuProvider.CharacterCreationMenu.StartNewGame();
 							if (parameters == null)
-								return -1;
+								break;
 
 							parameters.GameID = UserDataManager.GetNextGameId();
 							var saveGame = new UserData.SaveGameSummary(parameters, "NEWGAME", true, 
