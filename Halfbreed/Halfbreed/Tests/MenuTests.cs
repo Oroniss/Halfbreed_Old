@@ -1,12 +1,22 @@
 ﻿using NUnit.Framework;
 using Halfbreed.Menus;
-using System.Collections.Generic;
+using System.IO;
 
 namespace Halfbreed.Tests
 {
 	[TestFixture]
 	public class MenuTests
 	{
+		[SetUp]
+		public void CreateWorkingFiles()
+		{
+			var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "UnitTestFiles");
+			if (!Directory.Exists(filePath))
+				Directory.CreateDirectory(filePath);
+			UserDataManager.SetTestHomeDirectory(filePath);
+			UserDataManager.SetupDirectoriesAndFiles();
+		}
+
 		[Test]
 		public void TestCharacterCreationMenu()
 		{
@@ -71,13 +81,57 @@ namespace Halfbreed.Tests
 		[Test]
 		public void TestLoadGameMenu()
 		{
-			// This one may need the extended test setup to create/copy configuration files.
+			// Create summary files
+			var gameData1 = new GameData(1, CharacterClasses.Fighter, true, "", 0);
+			var summary1 = new UserData.SaveGameSummary(gameData1, "TestLevel1", true, 100000000);
+			UserDataManager.WriteSaveGameSummary(summary1);
+			var gameData2 = new GameData(3, CharacterClasses.Bard, false, "Testing A Bard", 1);
+			var summary2 = new UserData.SaveGameSummary(gameData2, "TestLevel2", true, 0);
+			UserDataManager.WriteSaveGameSummary(summary2);
+
+			// Test regular selection
+			UserInputHandler.clearAllInput();
+			var keyBoardInput = new string[] { "1"};
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+
+			var menu = new LoadGameMenu();
+			var gameID = menu.SelectSavedGame();
+			Assert.AreEqual(0, gameID);
+
+			// Test invalid selections
+			UserInputHandler.clearAllInput();
+			keyBoardInput = new string[] { "4", "LEFT", "2" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+
+			gameID = menu.SelectSavedGame();
+			Assert.AreEqual(1, gameID);
+
+			// Test non-selection
+			UserInputHandler.clearAllInput();
+			keyBoardInput = new string[] { "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+
+			gameID = menu.SelectSavedGame();
+			Assert.AreEqual(-1, gameID);
+
+			// Delete a save game summary and check it still worked
+			UserInputHandler.clearAllInput();
+			keyBoardInput = new string[] { "1", "2", "ESCAPE" };
+			KeyBoardInputSimulator.AddKeyBoardInput(keyBoardInput);
+
+			gameID = menu.DeleteSavedGame();
+			UserDataManager.DeleteSaveGame(gameID);
+			gameID = menu.SelectSavedGame();
+
+			Assert.AreEqual(-1, gameID);
 		}
 
-		[Test]
-		public void TestMainMenu()
+		[TearDown]
+		public void CleanupTestFiles()
 		{
-			// This one likely will as well.
+			var filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "UnitTestFiles");
+			if (Directory.Exists(filePath))
+				Directory.Delete(filePath, true);
 		}
 	}
 }

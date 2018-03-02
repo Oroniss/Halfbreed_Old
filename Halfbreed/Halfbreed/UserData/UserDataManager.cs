@@ -12,31 +12,40 @@ namespace Halfbreed
 	{
 		static bool _fullLogging;
 
-		static string _configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "config.hb");
-		static readonly ConfigParameters _defaultConfigParameters = new ConfigParameters(false, false, false);
+		static string _homeDirectory = Directory.GetCurrentDirectory();
+		static string _configFilePath;
+		static string _saveSummaryFilePath;
+		static string _saveFileFolder;
 
+		static readonly ConfigParameters _defaultConfigParameters = new ConfigParameters(false, false, false);
 		static readonly SortedDictionary<int, SaveGameSummary> _defaultSaveSummary = 
 			new SortedDictionary<int, SaveGameSummary>();
-		static string _saveSummaryFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Userdata", "SSF.hb");
-
-		static string _saveFileFolder = Path.Combine(Directory.GetCurrentDirectory(), "Saves");
 
 		// Initial setup
 		public static void SetupDirectoriesAndFiles()
 		{
-			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Config")))
-				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Config"));
+			SetFilePaths();
+
+			if (!Directory.Exists(Path.Combine(_homeDirectory, "Config")))
+				Directory.CreateDirectory(Path.Combine(_homeDirectory, "Config"));
 			if (!Directory.Exists(_saveFileFolder))
 				Directory.CreateDirectory(_saveFileFolder);
-			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "UserData")))
-				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "UserData"));
-			if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Logs")))
-				Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Logs"));
+			if (!Directory.Exists(Path.Combine(_homeDirectory, "UserData")))
+				Directory.CreateDirectory(Path.Combine(_homeDirectory, "UserData"));
+			if (!Directory.Exists(Path.Combine(_homeDirectory, "Logs")))
+				Directory.CreateDirectory(Path.Combine(_homeDirectory, "Logs"));
 
 			if (!File.Exists(_configFilePath))
 				CreateNewConfigFile();
 			if (!File.Exists(_saveSummaryFilePath))
 				CreateNewSaveSummaryFile();
+		}
+
+		static void SetFilePaths()
+		{
+			_configFilePath = Path.Combine(_homeDirectory, "Config", "config.hb");
+			_saveSummaryFilePath = Path.Combine(_homeDirectory, "Userdata", "SSF.hb");
+			_saveFileFolder = Path.Combine(_homeDirectory, "Saves");
 		}
 
 		static void CreateNewConfigFile()
@@ -157,6 +166,12 @@ namespace Halfbreed
 		{
 			get { return _fullLogging; }
 			set { _fullLogging = value;}
+		}
+
+		// Testing functionality
+		public static void SetTestHomeDirectory(string testLocation)
+		{
+			_homeDirectory = testLocation;
 		}
 	}
 }
