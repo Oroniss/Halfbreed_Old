@@ -8,7 +8,7 @@ namespace Halfbreed
 {
     public static class MainProgram
     {
-		static readonly string _versionNumber = "0.01";
+		static readonly string _versionNumber = "0.02";
 
 		static readonly string _fontName = "terminal8x8.png";
 		static readonly int _consoleWidth = 160;
