@@ -1,153 +1,170 @@
-﻿
-Means:
-
-On exit of level - save or continue.
-All load games restart in the town hub for the chapter.
-The deck should reset between levels as well.
-Anathema is only for the current level and resets as well.
-The variation within a level needs to increase to improve replayability.
-
-So - what needs to get saved?
-
-Achievements/Unlocks
-Equipment/Items/Money
-Abilities and setup
-Quests/Progress
-
-Means logging is only for the game experience for a single level.
+﻿Next Steps:
 
 
+Dice and basic check mechanic - add player character class and initial ability setup here.
+Actor primary stats.
+Entity Defensive stats.
+RNG and level generation - think about randomising turn order - in a reproducible way.
+Get Description.
+Also add beginning of an Examine function.
+Add in actors.
+Give player a simple attack.
+Current effect.
+Conditions.
+
+Logging - figure out it's purpose.
+Improve serialisation process.
+The two things need to provide some degree of resilience in case of system crash/shutdown.
+Also need to be there for debugging purposes.
+
+Look for any situations which may be non-deterministic and which could affect state.
+
+Tests for
+
+Last two user input tests.
+Entities
+MainProgram
+Levels
+UserData
 
 
-Next Steps:
+version 0.04
+player
+skills/stats
+rest
+anathema
+spend xp.
 
+version 0.05
+Items
+Containers
+Inventory
+Equipment
+Harvestables
 
-Start on Actors - at least need to get the player in.
+version 0.06
+monsters
+AI
+monster abilities
 
-Then actually implement save games.
+version 0.07
+town
+quests
+merchants
+conversation
+training
 
-Then begin filling out interactions between the entity classes.
-Timing and action queue.
+version 0.08
+achievements
+crafting
 
-Movement/Interaction.
+version 0.09
+tidy up code and refactor.
+streamline any remaining workflows/pipelines.
 
-Then stats and process damage.
-Then start thinking about randomisation.
+version 0.10
+Get actual levels/balance game working.
+HL1/2 Fighter - town + Wall Market.
 
-Then traps and hazards, liquid, etc.
+version 0.11
+Add HL1/2 Cleric, HL3/4 Paladin - Barracks, Traitors
 
-Then vision and perception.
+version 0.12
+Add HL1/2 Mage, HL3/4 Necromancer - Abyssal Plaza, Farmlands, Forrester's Hold, Far Camp, Kobold Fortress Southern out door zones.
 
-Then concealment and light sources.
+version 0.13
+Add HL1/2 Thief, HL3/4 Druid - Sea Cave, Remaining outdoor zones.
 
+version 0.14
+Add HL3/4 Ranger & Bard - Barrows, Tower, Tree & Rock.
 
-Make an Enum of levels - setup a dictionary somewhere.
-Then write a test that creates each one and check it parses.
+version 0.15
+Add HL3/4 Blackguard, all remaining zones apart from Dragonlord
 
-Then do Level Transition.
-Make sure it builds into save games properly.
-Then add logging.
+version 0.16
+Add HL5 Dragonlord, any remaining zones
 
-Fix up the initial process - fill out some starting menu options.
-Setup a config and a key binding option.
-Add the new game text to new game process.
+version 0.17
+Finish/tidy - any refactoring done, do some balance testing and tuning. Send to other people.
+Really need to nail down the architecture completely before it starts going beyond Ch1.
 
-
-Entity Components Remaining.
-
-Damageable.
-Description.
-Concealed.
-Light Source.
-Container.
-CurrentEffect.
-Update. - Should go on everything, even if not an actor - can just check for Actor component if need be.
-
-
-Would probably prefer 3-4 base entity types.
-With possibly 3-4 additional types - things like trapped, light, fluid, etc.
-
-
-
-Actor
-Furnishing - Trap, Harvestable, Liquid.
-Item - Equipment, Consumable, Resource, Money, QuestItem.
-
-
-Furnishing
-
-Interaction + trigger
-Movement + trigger
-Liquid
-
-Item
-
-Carryable
-Equipable
-Usable
-Resource
-Quantity
-Identified
-Cursed
-Weight
-QuestItem
-
-Actor
-
-Action Block
-Ability Block
-Skill Block
-Input Source - AI or Player
-Conversation - Quest, Merchant, Trainer
-PrimaryStats
-SecondaryStats
+In particular - given how the enums are breaking serialisation - need to sort these out pretty thoroughly.
 
 
 
-What ultimately is the game supposed to be?
-Roguelike, CCG, RPG, loot finder, achievement system?
-Slot abilities ALA path to exile?
-Find them and build a deck - essentially the same.
 
-Select trees on rest?
-That limits each slot to 8? Then trigger runes when they are activated.
-Allow hot-keys to be setup for common abilities.
+Powers:
 
-Give weapon basic attack and up to 3 other abilities?
-Give shield up to 2 abilites (1h weapon is 2, 2h weapon is 4).
+Driven by training:
 
-Becomes 4 from 16 groups, 2 from 12 groups, 2 from 2 groups for Dragonlord - every other is much easier.
-Need to make sure there is some relevance to every group for every class that can use it.
+10 ranks of training improves the progression track/adds some effects.
+Training requires a trainer and some xp to spend.
+Training is for individual abilities, not just trees.
 
-Advanced classes are 4 from 8 and 2 from 2, easy enough.
+Generic stuff can go in the stat tree - other stuff should come on gear.
 
-Now much happier about random distribution of ability related stuff.
-Make it set abilities - trained upgrades and skillup through practice?
+Stat gives the type of dice - (max of 5, extra dice are unupgraded d3s).
+Equipment (or other gear) gives the defensive stats.
+Defender always uses five dice and selects a number equal to the attacker, choosing the best.
+Dice cancel each other one-for-one, rather than all contributing to a pool.
+The faces for each die can be upgraded.
 
-When do runes recharge?
-On level change, on rest or something else?
+Cleric - Presence: d8, d8, d4, d4, Mind: d6, d6 Might: d6, d6, Agility: d3.
+Fighter - Might: d8, d6, d6 Agility: d8, d6 Mind: d6 Presence: d4, d4
+Mage - Mind: d10, d10, d6, d6 Presence: d6, d4 Agility: d4 Might: d3
+Thief - Agility: d10, d6, d6 Might: d6, d6 Mind: d6, d4 Presence: d4
 
-What are the main collectibles then?
+Bard - Presence: d10, d6 Mind: d8, d4 Agility: d8, d4 Might: d4, d4
+Blackguard - Might: d12, d8 Mind: d12, d8 Presence: d3 Agility: d3
+Druid - Presence: d10, d6, d4 Agility: d8, d6 Mind: d6, d4 Might: d4
+Necromancer - Mind: d8, d8, d6 Presence: d8, d6, d6 Agility: d4 Might: d3
+Paladin - Might: d8, d8, d4 Presence: d8, d8, d4 Agility: d4 Mind: d4
+Ranger - Agility: d10, d8, d6 Might: d8, d6 Presence: d6 Mind: d3
 
-Recipes
-Set/Rare/Unique items
+Dragonlord - Presence: d10 Might: d10 Mind: d10 Agility: d10
 
-Can a rune item be a part of the game.
-I.e. have a way of upgrading the runes on the item - more powerful, frequent, etc.
-Should be stuff that is common to every ability, recharge, power level, etc.
-Applies to all runes in a tier.
+HL1: d8 defense to acid, cold, elec, fire, light, shadow - d12 to poison, disease, mental. Vulnerability 1 nether.
+HL2: d8 defense to poison, disease, mental. Vulnerability 1 nether.
+HL3: Vulnerability 1 nether.
+HL4: vulnerability 1 to acid, cold, elec, fire, nether.
+HL5: vulnerability 1 to all except physical - vulnerability 2 to nether.
 
-Have it so that even if they recharge, it takes time. This is another aspect to the runes.
+A 1 subtracts 1 from every dice rolled - think through a bit more.
 
-4 Parts - frequency of use, ease of recharge, primary power level, secondary power level.
-Means power level gets driven from rune, stat and passive - looks pretty similar to old setup.
-Passive is split between xp based and achievement based.
-XP based is 1-100, therefore 1 to 6 times - achievement based adds up to 2 * additional.
-Each point buys + 5%.
-Runes are  1 to 3 times.
-Stats are 1 to 3 times.
-Make frequency of use set - just have recharge change.
-Split them out by skill - recharge, power level, 3 "addon effects".
-Gets back to roughly where we were before - but a cleaner mechanic.
+Upgrade - set path: 
+First round +1: 4, 3, 2, 1, 5, 6, 7, 8, 9, 10, 11, 12.
+Second round +1: 4, 5, 6, 7, 8, 9, 10, 11, 12.
+Third round +1: 7, 8, 9.
+Third round +2: 10, 11, 12.
+Fourth round +3: 11, 12.
+Fifth round +6: 12.
 
-Flat modification to defensive stats needs to be for difficulty - not ACT.
+Ordering +1: 4, 3, 2, 5, 6, 4, 7, 8, 5, 6, 9, 10, 7, 8, 9, 10, 11, 12, 1, 7, 8, 11, 12, 9.
+Ordering +2: 12, 11, 10.
+Ordering +3: 12, 11.
+Ordering +6: 12.  
+
+Final progression: 2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 18, 25.
+
+Each ability/check needs to have a progression:
+Win by 1 - x, 3, etc.
+
+Gear then means: Chestpiece drives defensive abilities.
+Weapon/shield drives offensive abilities.
+
+Other gear drives defensive stats and hp.
+Runes on the armour can upgrade the defensive dice.
+
+140 dice upgrades - each character starts with 16 completed.
+600 point upgrades
+
+There needs to be a variety of other things to buy in each primary stat tree.
+Passives, bonuses, re-rolls, flip dice, etc.
+
+Non-combat skills get trained, but one track per skill - not per individual ability.
+They serve as pre-requisites for various abilities, along with improving the track.
+Tools and crafting stations also play a role.
+
+Weapon/armour skills are now universal - everyone can use an equipment, although
+different types tend to be more effective than others for certain classes.
+They also use the main runes for their abilities - so they grant options instead of being required.
