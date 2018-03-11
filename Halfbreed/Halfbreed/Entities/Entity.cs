@@ -21,9 +21,9 @@ namespace Halfbreed.Entities
 		bool _isConcealed;
 		bool _playerSpotted;
 		protected bool _destroyed;
+		protected DefensiveStatBlock _defensiveStats; // Needs to be protected for some overrides of process damage.
 
 		List<object> _effects;
-		object _defensiveStats;
 
 		Dictionary<string, string> _otherAttributes;
 
@@ -142,9 +142,48 @@ namespace Halfbreed.Entities
 
 		public virtual Combat.Damage ProcessDamage(Entity attacker, Combat.Damage Damage)
 		{
+			var defensiveDice = getDefensiveStat(Damage.DamageType).GetDefensiveDice();
+
+			var reduction = 0;
+			for (int i = 0; i < 5; i++)
+				reduction -= defensiveDice[i].Roll();
+
+			Damage.ModifyDamage(reduction);
+
 			MainGraphicDisplay.TextConsole.AddOutputText(string.Format("{0} takes {1} points of {2} damage",
 														 this, Damage.FinalDamageAmount, Damage.DamageType));
 			return Damage;
+		}
+
+		DefensiveStat getDefensiveStat(Combat.DamageType damageType)
+		{
+			switch (damageType)
+			{
+				case Combat.DamageType.Acid:
+					return _defensiveStats.AcidResist;
+				case Combat.DamageType.Cold:
+					return _defensiveStats.ColdResist;
+				case Combat.DamageType.Electricity:
+					return _defensiveStats.ElectricityResist;
+				case Combat.DamageType.Fire:
+					return _defensiveStats.FireResist;
+				case Combat.DamageType.Disease:
+					return _defensiveStats.DiseaseResist;
+				case Combat.DamageType.Poison:
+					return _defensiveStats.PoisonResist;
+				case Combat.DamageType.Light:
+					return _defensiveStats.LightResist;
+				case Combat.DamageType.Shadow:
+					return _defensiveStats.ShadowResist;
+				case Combat.DamageType.Physical:
+					return _defensiveStats.PhysicalResist;
+				case Combat.DamageType.Mental:
+					return _defensiveStats.MentalResist;
+				case Combat.DamageType.Nether:
+					return _defensiveStats.NetherResist;
+			}
+			// TODO: Print error here.
+			return _defensiveStats.PhysicalResist;
 		}
 	}
 }
