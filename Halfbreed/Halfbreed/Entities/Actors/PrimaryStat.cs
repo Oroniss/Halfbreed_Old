@@ -1,6 +1,6 @@
 ﻿namespace Halfbreed
 {
-	public enum PrimaryStatType
+	public enum PrimaryStat
 	{
 		Agility,
 		Might,
