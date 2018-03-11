@@ -34,6 +34,18 @@ namespace Halfbreed
 		                                                           TEXTCONSOLEXOFFSET, TEXTCONSOLEYOFFSET, 
 		                                                           TEXTCONSOLEBACKCOLOR, _backConsole);
 
+		static readonly int CHARACTERCONSOLEWIDTH = 40;
+		static readonly int CHARACTERCONSOLEHEIGHT = WINDOWHEIGHT;
+		static readonly int CHARACTERCONSOLEXOFFSET = MAPCONSOLEWIDTH;
+		static readonly int CHARACTERCONSOLEYOFFSET = 0;
+		static readonly RLColor CHARACTERCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static readonly CharacterConsole _characterConsole = new CharacterConsole(CHARACTERCONSOLEWIDTH,
+																				  CHARACTERCONSOLEHEIGHT,
+																				  CHARACTERCONSOLEXOFFSET,
+																				  CHARACTERCONSOLEYOFFSET,
+																				  CHARACTERCONSOLEBACKCOLOR,
+																				  _backConsole);
+
 		public static bool IsDirty
 		{
 			get
@@ -70,10 +82,16 @@ namespace Halfbreed
 			get { return _textConsole; }
 		}
 
+		public static CharacterConsole CharacterConsole
+		{
+			get { return _characterConsole; }
+		}
+
 		public static void UpdateGameScreen()
 		{
 			_textConsole.DrawOutputText();
 			_mapConsole.DrawMap(MainProgram.CurrentLevel, MainProgram.Player.XLoc, MainProgram.Player.YLoc);
+			_characterConsole.DrawCharacter(null);
 		}
 
     }
