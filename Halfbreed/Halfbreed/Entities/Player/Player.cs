@@ -25,6 +25,15 @@ namespace Halfbreed.Entities
 			AddTrait(Traits.Walking);
 			AddTrait(Traits.Swimming);
 			AddTrait(Traits.Climbing);
+
+			_primaryStats = new PrimaryStatBlock(PlayerSetupData.GetCharacterStartingStats(_characterClass), 1);
+			foreach (var upgrade in PlayerSetupData.GetCharacterStartingUpgrades(_characterClass))
+				UpgradePrimaryStatDice(upgrade);
+		}
+
+		public CharacterClasses CharacterClass
+		{
+			get { return _characterClass; }
 		}
 
 		protected override void GetNextMove(Level currentLevel)
@@ -132,6 +141,11 @@ namespace Halfbreed.Entities
 		{
 			MainGraphicDisplay.TextConsole.AddOutputText("You pause for a moment");
 			return true;
+		}
+
+		public PrimaryStatBlock PrimaryStats
+		{
+			get { return _primaryStats; }
 		}
 	}
 }
