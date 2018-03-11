@@ -3,7 +3,7 @@
 namespace Halfbreed
 {
 	[Serializable]
-	public class Dice
+	public class Dice:IComparable
 	{
 		static int[,] _upgradeBonuses = new int[,]
 		{
@@ -56,9 +56,14 @@ namespace Halfbreed
 			_upgradeLevel = upgradeLevel;
 		}
 
-		public string DiceType
+		public DiceType DiceType
 		{
-			get { return "D" + ((int)_diceType).ToString();}
+			get { return _diceType; } // { return "D" + ((int)_diceType).ToString();}
+		}
+
+		public override string ToString()
+		{
+			return string.Format("D{0}|{1}", (int)DiceType, UpgradeLevel);
 		}
 
 		public int UpgradeLevel
@@ -89,6 +94,14 @@ namespace Halfbreed
 		{
 			var roll = _diceRoller.Next((int)_diceType);
 			return roll + _upgradeBonuses[_upgradeLevel - 1, roll] + 1;
+		}
+
+		public int CompareTo(object other)
+		{
+			var otherDice = (Dice)other;
+			if (_diceType == otherDice.DiceType)
+				return _upgradeLevel.CompareTo(otherDice.UpgradeLevel);
+			return _diceType.CompareTo(otherDice.DiceType);
 		}
 
 		public static void SetSeed(int newSeed)
