@@ -29,6 +29,9 @@ namespace Halfbreed.Entities
 			_primaryStats = new PrimaryStatBlock(PlayerSetupData.GetCharacterStartingStats(_characterClass), 1);
 			foreach (var upgrade in PlayerSetupData.GetCharacterStartingUpgrades(_characterClass))
 				UpgradePrimaryStatDice(upgrade);
+
+			//foreach (var resist in PlayerSetupData.GetStartingResistanceModifiers(_difficultySetting))
+			//	AddDefensiveDice(resist.Resist, resist.DiceType, resist.UpgradeLevel);
 		}
 
 		public CharacterClasses CharacterClass
@@ -146,6 +149,11 @@ namespace Halfbreed.Entities
 		public PrimaryStatBlock PrimaryStats
 		{
 			get { return _primaryStats; }
+		}
+
+		public DefensiveStatBlock DefensiveStats
+		{
+			get { return _defensiveStats; }
 		}
 	}
 }
