@@ -12,39 +12,24 @@ namespace Halfbreed.Entities
 		{
 			_dice = new List<Dice>();
 			for (int i = 0; i < 5; i++)
-				_dice.Add(new Dice(DiceType.D3, 1));
+				_dice.Add(new Dice(DiceType.D3));
 		}
 
-		void OrderDice()
+		public void UpgradeDice(int diceNumber)
 		{
-			_dice.Sort();
-			_dice.Reverse();
-		}
-
-		public void AddDefensiveDice(DiceType diceType, int upgradeLevel)
-		{
-			_dice.Add(new Dice(diceType, upgradeLevel));
-			OrderDice();
-		}
-
-		public void RemoveDefensiveDice(DiceType diceType, int upgradeLevel)
-		{
-			for (int i = 0; i < _dice.Count; i++)
+			if (diceNumber > 5 || diceNumber < 1)
 			{
-				if (_dice[i].DiceType == diceType && _dice[i].UpgradeLevel == upgradeLevel)
-				{
-					_dice.RemoveAt(i); // No need to sort here.
-					return;
-				}
+				ErrorLogger.AddDebugText(string.Format("Invalid dice number: {0}", diceNumber));
+				return;
 			}
-			// TODO: Print an error message here.
+			_dice[diceNumber - 1].UpgradeDiceType();
 		}
 
 		public Dice[] GetDefensiveDice()
 		{
 			var returnArray = new Dice[5];
 			for (int i = 0; i < 5; i++)
-				returnArray[i] = new Dice(_dice[i].DiceType, _dice[i].UpgradeLevel);
+				returnArray[i] = new Dice(_dice[i].DiceType);
 			return returnArray;
 		}
 	}
