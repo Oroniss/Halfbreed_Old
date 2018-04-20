@@ -20,8 +20,11 @@ namespace Halfbreed.Entities
 
 		bool _isConcealed;
 		bool _playerSpotted;
+
 		protected bool _destroyed;
 		protected DefensiveStatBlock _defensiveStats; // Needs to be protected for some overrides of process damage.
+		protected int _maxHealth;
+		protected int _currentHealth;
 
 		List<object> _effects;
 
@@ -36,7 +39,7 @@ namespace Halfbreed.Entities
 			_traits = new List<Traits>();
 
 			_effects = null;
-			_defensiveStats = null;
+			_defensiveStats = new DefensiveStatBlock();
 			_otherAttributes = new Dictionary<string, string>();
 
 			_destroyed = false;
@@ -146,7 +149,7 @@ namespace Halfbreed.Entities
 
 			var reduction = 0;
 			for (int i = 0; i < 5; i++)
-				reduction -= defensiveDice[i].Roll();
+				reduction -= (int)defensiveDice[i].Roll(0);
 
 			Damage.ModifyDamage(reduction);
 
@@ -154,6 +157,8 @@ namespace Halfbreed.Entities
 														 this, Damage.FinalDamageAmount, Damage.DamageType));
 			return Damage;
 		}
+
+
 
 		DefensiveStat getDefensiveStat(Combat.DamageType damageType)
 		{
