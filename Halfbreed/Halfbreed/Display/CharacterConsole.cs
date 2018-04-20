@@ -20,28 +20,50 @@ namespace Halfbreed.Display
 			_console.Print(2, 1, "Aleasha Silverstar", Palette.GetColor(Colors.White));
 			_console.Print(2, 3, player.CharacterClass.ToString(), Palette.GetColor(Colors.White));
 
-			DrawPrimaryStats(player);
+			DrawPrimaryStats(player, 8);
+			DrawResists(player, 14);
 
 			CopyToBackConsole();
 		}
 
-		void DrawPrimaryStats(Player player)
+		void DrawPrimaryStats(Player player, int startingYOffset)
 		{
 			var stats = player.PrimaryStats;
 
-			DrawPrimaryStat("Agil:", stats.Agility(), 0, 8);
-			DrawPrimaryStat("Mght:", stats.Might(), 0, 9);
-			DrawPrimaryStat("Mind:", stats.Mind(), 0, 10);
-			DrawPrimaryStat("Pres:", stats.Presence(), 0, 11);
-
-
+			DrawDiceArray("Agil:", stats.Agility(), 0, startingYOffset);
+			DrawDiceArray("Mght:", stats.Might(), 0, startingYOffset + 1);
+			DrawDiceArray("Mind:", stats.Mind(), 0, startingYOffset + 2);
+			DrawDiceArray("Pres:", stats.Presence(), 0, startingYOffset + 3);
 		}
 
-		void DrawPrimaryStat(string stat, Dice[] dice, int x, int y)
+		void DrawResists(Player player, int startingYOffset)
 		{
-			var topString = string.Format("{0} {1,6} {2,6} {3,6} {4,6} {5,6}", stat, dice[0], 
-			                              dice[1], dice[2], dice[3], dice[4]);
-			_console.Print(x, y, topString, Palette.GetColor(Colors.White));
+			var resists = player.DefensiveStats;
+
+            DrawDiceArray("Phys:", resists.PhysicalResist.GetDefensiveDice(), 0, startingYOffset);
+            DrawDiceArray("Ment:", resists.MentalResist.GetDefensiveDice(), 0, startingYOffset + 1);
+			DrawDiceArray("Acid:", resists.AcidResist.GetDefensiveDice(), 0, startingYOffset + 2);
+            DrawDiceArray("Cold:", resists.ColdResist.GetDefensiveDice(), 0, startingYOffset + 3);
+            DrawDiceArray("Elec:", resists.ElectricityResist.GetDefensiveDice(), 0, startingYOffset + 4);
+            DrawDiceArray("Fire:", resists.FireResist.GetDefensiveDice(), 0, startingYOffset + 5);
+            DrawDiceArray("Pois:", resists.PoisonResist.GetDefensiveDice(), 0, startingYOffset + 6);
+            DrawDiceArray("Dsea:", resists.DiseaseResist.GetDefensiveDice(), 0, startingYOffset + 7);
+            DrawDiceArray("Lght:", resists.LightResist.GetDefensiveDice(), 0, startingYOffset + 8);
+            DrawDiceArray("Shad:", resists.ShadowResist.GetDefensiveDice(), 0, startingYOffset + 9);
+            DrawDiceArray("Neth:", resists.NetherResist.GetDefensiveDice(), 0, startingYOffset + 10);
 		}
+
+		void DrawDiceArray(string stat, Dice[] dice, int x, int y)
+		{
+			_console.Print(x, y, stat, Palette.GetColor(Colors.White));
+			for (int i = 0; i < 5; i++)
+				DrawDie(dice[i], x + 6 + 7 * i, y);
+		}
+
+		void DrawDie(Dice die, int x, int y)
+		{
+			_console.Print(x, y, die.ToString(), Palette.GetColor(Colors.White));
+		}
+
 	}
 }
