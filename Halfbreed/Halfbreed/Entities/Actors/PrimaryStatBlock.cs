@@ -20,10 +20,10 @@ namespace Halfbreed.Entities
 
 			for (int i = 0; i < _agility.Length; i++)
 			{
-				_agility[i] = new Dice(DiceType.D3, 1);
-				_might[i] = new Dice(DiceType.D3, 1);
-				_mind[i] = new Dice(DiceType.D3, 1);
-				_presence[i] = new Dice(DiceType.D3, 1);
+				_agility[i] = new Dice(DiceType.D3);
+				_might[i] = new Dice(DiceType.D3);
+				_mind[i] = new Dice(DiceType.D3);
+				_presence[i] = new Dice(DiceType.D3);
 			}
 		}
 
