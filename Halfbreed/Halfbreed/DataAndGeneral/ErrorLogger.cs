@@ -7,7 +7,12 @@ namespace Halfbreed
 
 		public static void AddDebugText(string text)
 		{
-			// TODO: Fix this up properly.
+			AddDebugText(text, "White");
+		}
+
+		public static void AddDebugText(string text, string colorName)
+		{
+			// TODO: Fix this properly.
 			System.Console.WriteLine(text);
 		}
 	}
