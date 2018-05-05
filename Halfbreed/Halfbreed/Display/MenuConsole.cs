@@ -25,7 +25,7 @@ namespace Halfbreed.Display
 
 			var lineSpacing = System.Math.Min(_console.Height / (options.Count + 5), 5);
 
-			_console.Print(5, lineSpacing, title, Palette.GetColor(Colors.Black));
+			_console.Print(5, lineSpacing, title, Palette.GetColor("Black"));
 
 			for (var line = 0; line < options.Count; line++)
 			{
@@ -38,13 +38,13 @@ namespace Halfbreed.Display
 
 					for (var linePiece = 0; linePiece < pieces.Length; linePiece++)
 						_console.Print(5, lineSpacing * (line + 3) + linePiece, pieces[linePiece], 
-						               Palette.GetColor(Colors.Black));
+						               Palette.GetColor("Black"));
 				}
 				else
-					_console.Print(5, lineSpacing * (line + 3), options[line], Palette.GetColor(Colors.Black));
+					_console.Print(5, lineSpacing * (line + 3), options[line], Palette.GetColor("Black"));
 			}
 
-			_console.Print(5, _console.Height - lineSpacing, bottom, Palette.GetColor(Colors.Black));
+			_console.Print(5, _console.Height - lineSpacing, bottom, Palette.GetColor("Black"));
 
 			CopyToBackConsole();
 		}

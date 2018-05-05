@@ -1,6 +1,4 @@
-﻿// Revised for version 0.02.
-
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 
 namespace Halfbreed.Tests
@@ -8,15 +6,7 @@ namespace Halfbreed.Tests
 	[TestFixture]
 	public class DataTests
 	{
-		[Test]
-		public void TestPalette()
-		{
-			// Check each option in the Enum is covered
-			foreach (Colors color in Enum.GetValues(typeof(Colors)))
-				Palette.GetColor(color);
-			Assert.AreEqual(Enum.GetValues(typeof(Colors)).Length, Palette.NumberOfColors);
-		}
-
+		/**
 		[Test]
 		public void TestDice()
 		{
@@ -55,6 +45,7 @@ namespace Halfbreed.Tests
 			for (int i = 0; i< 10; i++)
 				Assert.AreEqual(results[i], d12.Roll());
 		}
+		*/
 
 		// Classes untested - GameData, XYCoordinateClass, XYCoordinateStruct - doesn't seem much point if they
 		// don't have any functionality.

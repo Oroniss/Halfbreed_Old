@@ -11,8 +11,8 @@ namespace Halfbreed.Levels
 		public readonly TileType TileType;
 		public readonly string Name;
 		public readonly int Elevation;
-		public readonly Colors BGColor;
-		public readonly Colors FogColor;
+		public readonly string BGColorName;
+		public readonly string FogColorName;
 		public readonly string MoveOnFunction;
 		public readonly string MoveOffFunction;
 		readonly List<Traits> _traits;
@@ -23,8 +23,8 @@ namespace Halfbreed.Levels
 			TileType = tileType;
 			Name = name;
 			Elevation = elevation;
-			BGColor = (Colors)Enum.Parse(typeof(Colors), bgColorName);
-			FogColor = (Colors)Enum.Parse(typeof(Colors), fogColorName);
+			BGColorName = bgColorName;
+			FogColorName = fogColorName;
 			MoveOnFunction = moveOnFunction;
 			MoveOffFunction = moveOffFunction;
 

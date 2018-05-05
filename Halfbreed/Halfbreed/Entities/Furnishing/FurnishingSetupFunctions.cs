@@ -1,4 +1,4 @@
-﻿// Tidied up for version 0.02.
+// Tidied up for version 0.02.
 
 using System.Collections.Generic;
 
@@ -91,8 +91,8 @@ namespace Halfbreed.Entities.Furnishings
 			{
 				var tileName = GetValueOf("ConcealedTile", otherParameters);
 				var tileDetails = Levels.TileDictionary.getTileDetails(tileName);
-				furnishing.SetOtherAttribute("ConcealedBGColor", tileDetails.BGColor.ToString());
-				furnishing.SetOtherAttribute("ConcealedFogColor", tileDetails.FogColor.ToString());
+				furnishing.SetOtherAttribute("ConcealedBGColor", tileDetails.BGColorName.ToString());
+				furnishing.SetOtherAttribute("ConcealedFogColor", tileDetails.FogColorName.ToString());
 			}
 		}
 	}

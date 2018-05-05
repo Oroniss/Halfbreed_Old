@@ -94,12 +94,12 @@ namespace Halfbreed.Display
 
 			var messageLogTitle = string.Format("Message Log - Current Turn: {0}", MainProgram.CurrentTime);
 			_console.Print(_textXOffset + ((_textWidth - messageLogTitle.Length) / 2), 1, 
-			               messageLogTitle, Palette.GetColor(Colors.White));
+			               messageLogTitle, Palette.GetColor("White"));
 
 			for (int i = 0; i < _textHeight; i++)
 			{
 				int textIndex = (_currentIndex - 1 - i + _ARRAYLENGTH) % _ARRAYLENGTH;
-				_console.Print(_textXOffset, _textYOffset + i, _outputText[textIndex], Palette.GetColor(Colors.White));
+				_console.Print(_textXOffset, _textYOffset + i, _outputText[textIndex], Palette.GetColor("White"));
 			}
 
 			CopyToBackConsole();

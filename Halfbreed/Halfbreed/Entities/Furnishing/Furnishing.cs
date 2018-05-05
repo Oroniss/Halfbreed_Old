@@ -13,9 +13,9 @@ namespace Halfbreed.Entities
 			Traits.ImmuneToDisease, Traits.ImmuneToMental, Traits.ImmuneToPoison };
 
 		bool _hasBGColor;
-		Colors _bgColor;
+		string _bgColorName;
 		bool _hasFogColor;
-		Colors _fogColor;
+		string _fogColorName;
 
 		bool _trapped;
 
@@ -34,9 +34,9 @@ namespace Halfbreed.Entities
 			var template = EntityData.GetFurnishingDetails(furnishingName);
 
 			_hasBGColor = template.HasBGColor;
-			_bgColor = template.BGColor;
+			_bgColorName = template.BGColorName;
 			_hasFogColor = template.HasFogColor;
-			_fogColor = template.FogColor;
+			_fogColorName = template.FogColorName;
 			_elevation = template.Elevation;
 			_trapped = false;
 
@@ -62,32 +62,32 @@ namespace Halfbreed.Entities
 			get { return _hasFogColor || (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor")); }
 		}
 
-		public override Colors FGColor
+		public override string FGColorName
 		{
 			get
 			{
 				if (_trapped && PlayerSpotted)
-					return Colors.Red;
-				return base.FGColor;
+					return "Red";
+				return base.FGColorName;
 			}
 		}
 
-		public Colors BGColor
+		public string BGColorName
 		{
 			get
 			{	if (!PlayerSpotted && HasOtherAttribute("ConcealedBGColor"))
-					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedBGColor"));
-				return _bgColor;
+					return GetOtherAttributeValue("ConcealedBGColor");
+				return _bgColorName;
 			}
 		}
 
-		public Colors FogColor
+		public string FogColorName
 		{
 			get
 			{
 				if (!PlayerSpotted && HasOtherAttribute("ConcealedFogColor"))
-					return (Colors)Enum.Parse(typeof(Colors), GetOtherAttributeValue("ConcealedFogColor"));
-				return _fogColor;
+					return GetOtherAttributeValue("ConcealedFogColor");
+				return _fogColorName;
 			}
 		}
 

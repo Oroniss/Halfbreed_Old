@@ -548,20 +548,20 @@ namespace Halfbreed
 			return _furnishings[index];
 		}
 
-		public Colors GetBackgroundColor(int x, int y)
+		public string GetBackgroundColor(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
 			if (_furnishings.ContainsKey(index) && _furnishings[index].HasBGColor)
-				return _furnishings[index].BGColor;
-			return _mapGrid[index].BGColor;
+				return _furnishings[index].BGColorName;
+			return _mapGrid[index].BGColorName;
 		}
 
-		public Colors GetFogColor(int x, int y)
+		public string GetFogColor(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
 			if (_furnishings.ContainsKey(index) && _furnishings[index].HasFogColor)
-				return _furnishings[index].FogColor;
-			return _mapGrid[index].FogColor;
+				return _furnishings[index].FogColorName;
+			return _mapGrid[index].FogColorName;
 		}
 
 		// Turn management functions

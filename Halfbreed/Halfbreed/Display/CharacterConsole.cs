@@ -17,8 +17,8 @@ namespace Halfbreed.Display
 
 			Clear();
 
-			_console.Print(2, 1, "Aleasha Silverstar", Palette.GetColor(Colors.White));
-			_console.Print(2, 3, player.CharacterClass.ToString(), Palette.GetColor(Colors.White));
+			_console.Print(2, 1, "Aleasha Silverstar", Palette.GetColor("White"));
+			_console.Print(2, 3, player.CharacterClass.ToString(), Palette.GetColor("White"));
 
 			DrawPrimaryStats(player, 8);
 			DrawResists(player, 14);
@@ -55,14 +55,14 @@ namespace Halfbreed.Display
 
 		void DrawDiceArray(string stat, Dice[] dice, int x, int y)
 		{
-			_console.Print(x, y, stat, Palette.GetColor(Colors.White));
+			_console.Print(x, y, stat, Palette.GetColor("White"));
 			for (int i = 0; i < 5; i++)
-				DrawDie(dice[i], x + 6 + 7 * i, y);
+				DrawDie(dice[i], x + 6 + 4 * i, y);
 		}
 
 		void DrawDie(Dice die, int x, int y)
 		{
-			_console.Print(x, y, die.ToString(), Palette.GetColor(Colors.White));
+			_console.Print(x, y, die.ToString(), Palette.GetColor("White"));
 		}
 
 	}

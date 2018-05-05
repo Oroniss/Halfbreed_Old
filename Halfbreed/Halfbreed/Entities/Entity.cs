@@ -13,7 +13,7 @@ namespace Halfbreed.Entities
 		protected int _xLoc;
 		protected int _yLoc;
 
-		Colors _fgColor;
+		string _fgColorName;
 		char _symbol;
 
 		List<Traits> _traits;
@@ -47,7 +47,7 @@ namespace Halfbreed.Entities
 
 			var basicDetails = EntityData.GetEntityDetails(entityName);
 			_symbol = basicDetails.Symbol;
-			_fgColor = basicDetails.FGColor;
+			_fgColorName = basicDetails.FGColorName;
 			foreach (Traits trait in basicDetails.Traits)
 				AddTrait(trait);
 
@@ -58,9 +58,9 @@ namespace Halfbreed.Entities
 			get { return _entityName; }
 		}
 
-		public virtual Colors FGColor
+		public virtual string FGColorName
 		{
-			get { return _fgColor; }
+			get { return _fgColorName; }
 		}
 
 		public char Symbol

@@ -15,13 +15,13 @@ namespace Halfbreed
 		static readonly int MENUOFFSET = 2;
 		static readonly int MENUCONSOLEWIDTH = WINDOWWIDTH - 2 * MENUOFFSET;
 		static readonly int MENUCONSOLEHEIGHT = WINDOWHEIGHT - 2 * MENUOFFSET;
-		static readonly RLColor MENUCONSOLEBACKCOLOR = Palette.GetColor(Colors.Silver);
+		static readonly RLColor MENUCONSOLEBACKCOLOR = Palette.GetColor("Silver");
 		static readonly MenuConsole _menuConsole = new MenuConsole(MENUCONSOLEWIDTH, MENUCONSOLEHEIGHT, MENUOFFSET, 
 		                                                           MENUOFFSET, MENUCONSOLEBACKCOLOR, _backConsole);
 		static readonly int MAPCONSOLEHEIGHT = WINDOWHEIGHT;
 		static readonly int MAPCONSOLEWIDTH = MAPCONSOLEHEIGHT;
 		static readonly int MAPCONSOLEOFFSET = 0;
-		static readonly RLColor MAPCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static readonly RLColor MAPCONSOLEBACKCOLOR = Palette.GetColor("Black");
 		static readonly MapConsole _mapConsole = new MapConsole(MAPCONSOLEWIDTH, MAPCONSOLEHEIGHT, MAPCONSOLEOFFSET, 
 		                                               MAPCONSOLEOFFSET, MAPCONSOLEBACKCOLOR, _backConsole);
 
@@ -29,7 +29,7 @@ namespace Halfbreed
 		static readonly int TEXTCONSOLEHEIGHT = WINDOWHEIGHT;
 		static readonly int TEXTCONSOLEXOFFSET = MAPCONSOLEWIDTH + 40; // TODO: Refactor this to add CharacterConsole Width
 		static readonly int TEXTCONSOLEYOFFSET = 0;
-		static readonly RLColor TEXTCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static readonly RLColor TEXTCONSOLEBACKCOLOR = Palette.GetColor("Black");
 		static readonly TextConsole _textConsole = new TextConsole(TEXTCONSOLEWIDTH, TEXTCONSOLEHEIGHT, 
 		                                                           TEXTCONSOLEXOFFSET, TEXTCONSOLEYOFFSET, 
 		                                                           TEXTCONSOLEBACKCOLOR, _backConsole);
@@ -38,7 +38,7 @@ namespace Halfbreed
 		static readonly int CHARACTERCONSOLEHEIGHT = WINDOWHEIGHT;
 		static readonly int CHARACTERCONSOLEXOFFSET = MAPCONSOLEWIDTH;
 		static readonly int CHARACTERCONSOLEYOFFSET = 0;
-		static readonly RLColor CHARACTERCONSOLEBACKCOLOR = Palette.GetColor(Colors.Black);
+		static readonly RLColor CHARACTERCONSOLEBACKCOLOR = Palette.GetColor("Black");
 		static readonly CharacterConsole _characterConsole = new CharacterConsole(CHARACTERCONSOLEWIDTH,
 																				  CHARACTERCONSOLEHEIGHT,
 																				  CHARACTERCONSOLEXOFFSET,

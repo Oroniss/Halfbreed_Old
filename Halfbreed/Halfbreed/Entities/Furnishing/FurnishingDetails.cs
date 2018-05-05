@@ -6,28 +6,28 @@ namespace Halfbreed
 	public class FurnishingDetails
 	{
 		public readonly bool HasBGColor;
-		public readonly Colors BGColor;
+		public readonly string BGColorName;
 		public readonly bool HasFogColor;
-		public readonly Colors FogColor;
+		public readonly string FogColorName;
 		public readonly int Elevation;
 		public readonly string SetupFunction;
 
-		public FurnishingDetails(string bgColor, string fogColor, int elevation, string setupFunction)
+		public FurnishingDetails(string bgColorName, string fogColorName, int elevation, string setupFunction)
 		{
-			if (bgColor == "")
+			if (bgColorName == "")
 				HasBGColor = false;
 			else
 			{
 				HasBGColor = true;
-				BGColor = (Colors)Enum.Parse(typeof(Colors), bgColor);
+				BGColorName = bgColorName;
 			}
 
-			if (fogColor == "")
+			if (fogColorName == "")
 				HasFogColor = false;
 			else
 			{
 				HasFogColor = true;
-				FogColor = (Colors)Enum.Parse(typeof(Colors), fogColor);
+				FogColorName = fogColorName;
 			}
 
 			Elevation = elevation;

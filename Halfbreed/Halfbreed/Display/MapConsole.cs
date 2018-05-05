@@ -1,4 +1,4 @@
-﻿// Tidied up for version 0.02.
+// Tidied up for version 0.02.
 
 using RLNET;
 
@@ -38,7 +38,7 @@ namespace Halfbreed.Display
 				if (level.HasDrawingEntity(position.X, position.Y))
 				{
 					var entity = level.GetDrawingEntity(position.X, position.Y);
-					_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, Palette.GetColor(entity.FGColor),
+					_console.Set(position.X + xLimits.Offset, position.Y + yLimits.Offset, Palette.GetColor(entity.FGColorName),
 								 null, entity.Symbol);
 				}
 			}
