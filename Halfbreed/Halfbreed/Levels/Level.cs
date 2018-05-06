@@ -20,7 +20,7 @@ namespace Halfbreed
 
 		SortedDictionary<int, object> _triggers; // TODO: Swap to Triggers later
 		SortedDictionary<int, Furnishing> _furnishings;
-		SortedDictionary<int, HarvestingNode> _harvestingNodes;
+		SortedDictionary<int, int> _harvestingNodes;
 		SortedDictionary<int, int> _actors;
 
 		List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
@@ -42,7 +42,7 @@ namespace Halfbreed
 
 			_triggers = new SortedDictionary<int, object>();
 			_furnishings = new SortedDictionary<int, Furnishing>();
-			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
+			_harvestingNodes = new SortedDictionary<int, int>();
 			_actors = new SortedDictionary<int, int>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
@@ -127,7 +127,7 @@ namespace Halfbreed
 			_revealed = new bool[arraySize];
 			_triggers = new SortedDictionary<int, object>();
 			_furnishings = new SortedDictionary<int, Furnishing>();
-			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
+			_harvestingNodes = details.HarvestingNodes;
 			_actors = details.Actors;
 
 			for (int i = 0; i < arraySize; i++)
@@ -138,8 +138,6 @@ namespace Halfbreed
 					_triggers[i] = details.Triggers[i];
 				if (details.Furnishings[i] != null)
 					_furnishings[i] = details.Furnishings[i];
-				if (details.HarvestingNodes[i] != null)
-					_harvestingNodes[i] = details.HarvestingNodes[i];
 			}
 		}
 
@@ -167,7 +165,7 @@ namespace Halfbreed
 			return _mapGrid[index].HasTrait(trait) ||
 				                  (_actors.ContainsKey(index) && GetActor(index).HasTrait(trait)) ||
 				(_furnishings.ContainsKey(index) && _furnishings[index].HasTrait(trait)) ||
-				(_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].HasTrait(trait));
+				                  (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).HasTrait(trait));
 		}
 
 		int GetElevation(int index)
@@ -269,13 +267,18 @@ namespace Halfbreed
 		public HarvestingNode GetHarvestingNode(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return _harvestingNodes[index];
+			return GetHarvestingNode(index);
+		}
+
+		HarvestingNode GetHarvestingNode(int index)
+		{
+			return HarvestingNode.GetHarvestingNode(_harvestingNodes[index]);
 		}
 
 		public void AddHarvestingNode(HarvestingNode harvestingNode)
 		{
 			var index = ConvertXYToInt(harvestingNode.XLoc, harvestingNode.YLoc);
-			_harvestingNodes[index] = harvestingNode;
+			_harvestingNodes[index] = harvestingNode.HarvestingId;
 		}
 
 		public void RemoveHarvestingNode(HarvestingNode harvestingNode)
@@ -527,8 +530,8 @@ namespace Halfbreed
 				var index = ConvertXYToInt(tile.X, tile.Y);
 				if (_furnishings.ContainsKey(index) && _furnishings[index].Concealed)
 					returnList.Add(_furnishings[index]);
-				if (_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].Concealed)
-					returnList.Add(_harvestingNodes[index]);
+				if (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).Concealed)
+					returnList.Add(GetHarvestingNode(index));
 				if (_actors.ContainsKey(index) && GetActor(index).Concealed)
 					returnList.Add(GetActor(index));
 			}
@@ -548,7 +551,7 @@ namespace Halfbreed
 			if (_actors.ContainsKey(index))
 				return GetActor(index);
 			if (_harvestingNodes.ContainsKey(index))
-				return _harvestingNodes[index];
+				return GetHarvestingNode(index);
 			return _furnishings[index];
 		}
 
@@ -574,7 +577,7 @@ namespace Halfbreed
 			foreach (var index in new List<int>(_furnishings.Keys))
 				_furnishings[index].Update(this);
 			foreach (var index in new List<int>(_harvestingNodes.Keys))
-				_harvestingNodes[index].Update(this);
+				GetHarvestingNode(index).Update(this);
 			foreach (var index in new List<int>(_actors.Keys))
 			{
 				if (!GetActor(index).HasTrait("Player"))
@@ -598,8 +601,11 @@ namespace Halfbreed
 			details.Revealed = new bool[arraySize];
 			details.Triggers = new object[arraySize];
 			details.Furnishings = new Furnishing[arraySize];
-			details.HarvestingNodes = new HarvestingNode[arraySize];
-			details.Actors = new SortedDictionary<int, int>();
+			details.HarvestingNodes = _harvestingNodes;
+			details.Actors = _actors;
+
+			int playerIndex = ConvertXYToInt(MainProgram.Player.XLoc, MainProgram.Player.YLoc);
+			details.Actors.Remove(playerIndex);
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -613,12 +619,6 @@ namespace Halfbreed
 					details.Furnishings[i] = _furnishings[i];
 				else
 					details.Furnishings[i] = null;
-				if (_harvestingNodes.ContainsKey(i))
-					details.HarvestingNodes[i] = _harvestingNodes[i];
-				else
-					details.HarvestingNodes[i] = null;
-				if (_actors.ContainsKey(i) && !GetActor(i).HasTrait("Player"))
-					details.Actors[i] = _actors[i];
 			}
 
 			return details;
@@ -640,7 +640,7 @@ namespace Halfbreed
 
 		public object[] Triggers; // TODO: Swap to Triggers later
 		public Furnishing[] Furnishings;
-		public HarvestingNode[] HarvestingNodes;
+		public SortedDictionary<int, int> HarvestingNodes;
 		public SortedDictionary<int, int> Actors;
 	}
 }
