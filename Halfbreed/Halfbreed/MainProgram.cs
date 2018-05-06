@@ -115,16 +115,26 @@ namespace Halfbreed
 		{
 			var summary = new UserData.SaveGameSummary(_gameData, _currentLevel.Title, true, DateTime.Now);
 			var levelDetails = _currentLevel.GetSerialisationDetails();
-			var saveGame = new UserData.SaveGame(summary, levelDetails, _player, _currentTime);
+			var saveGame = new UserData.SaveGame(summary, levelDetails, _currentTime, 
+			                                     Entities.Furnishing.GetSaveData(),
+			                                     Entities.HarvestingNode.GetSaveData(),
+			                                     Entities.NPC.GetSaveData(),
+			                                     Entities.Player.GetSaveData());
 			UserDataManager.SaveGame(saveGame);
 		}
 
 		static void LoadGame(UserData.SaveGame gameState)
 		{
 			_currentLevel = new Level(gameState.CurrentLevelDetails);
-			_player = gameState.Player;
 			_currentTime = gameState.CurrentTime;
 			_gameData = gameState.Summary.GameData;
+
+			Entities.Furnishing.LoadSaveData(gameState.FurnishingDetails);
+			Entities.HarvestingNode.LoadSaveData(gameState.HarvestingNodeDetails);
+			Entities.NPC.LoadSaveData(gameState.NPCDetails);
+			Entities.Player.LoadSaveData(gameState.PlayerDetails);
+
+			_player = Entities.Player.GetPlayer(0);
 			_currentLevel.AddPlayer(_player);
 		}
 

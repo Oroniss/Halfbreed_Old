@@ -38,5 +38,17 @@ namespace Halfbreed.Entities
 		{
 			return harvestingNodes[id];
 		}
+
+		public static HarvestingNodeSave GetSaveData()
+		{
+			return new HarvestingNodeSave(harvestingNodes, maxHarvestingId, unusedHarvestingIds);
+		}
+
+		public static void LoadSaveData(HarvestingNodeSave save)
+		{
+			harvestingNodes = save.HarvestingNodes;
+			maxHarvestingId = save.MaxId;
+			unusedHarvestingIds = save.UnusedIds;
+		}
 	}
 }

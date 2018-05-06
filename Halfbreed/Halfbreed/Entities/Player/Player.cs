@@ -181,5 +181,17 @@ namespace Halfbreed.Entities
 		{
 			return players[id];
 		}
+
+		public static PlayerSave GetSaveData()
+		{
+			return new PlayerSave(players, maxPlayerId, unusedPlayerIds);
+		}
+
+		public static void LoadSaveData(PlayerSave save)
+		{
+			players = save.Players;
+			maxPlayerId = save.MaxId;
+			unusedPlayerIds = save.UnusedIds;
+		}
 	}
 }

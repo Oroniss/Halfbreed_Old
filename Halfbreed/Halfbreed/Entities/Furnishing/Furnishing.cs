@@ -7,7 +7,7 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Furnishing:Entity
 	{
-		static Dictionary<int, Furnishing> furnishings = new Dictionary<int, Furnishing>();
+		static SortedDictionary<int, Furnishing> furnishings = new SortedDictionary<int, Furnishing>();
 		static int maxFurnishingId = 0;
 		static List<int> unusedFurnishingIds = new List<int>();
 
@@ -176,6 +176,18 @@ namespace Halfbreed.Entities
 		public static Furnishing GetFurnishing(int id)
 		{
 			return furnishings[id];
+		}
+
+		public static FurnishingSave GetSaveData()
+		{
+			return new FurnishingSave(furnishings, maxFurnishingId, unusedFurnishingIds);
+		}
+
+		public static void LoadSaveData(FurnishingSave save)
+		{
+			furnishings = save.Furnishings;
+			maxFurnishingId = save.MaxId;
+			unusedFurnishingIds = save.UnusedIds;
 		}
 	}
 }

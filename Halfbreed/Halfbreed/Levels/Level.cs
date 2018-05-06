@@ -131,7 +131,7 @@ namespace Halfbreed
 			_furnishings = details.Furnishings;
 			_harvestingNodes = details.HarvestingNodes;
 			_npcs = details.Npcs;
-			_players = new SortedDictionary<int, int>();
+			_players = details.Players;
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -652,9 +652,7 @@ namespace Halfbreed
 			details.Furnishings = _furnishings;
 			details.HarvestingNodes = _harvestingNodes;
 			details.Npcs = _npcs;
-
-			int playerIndex = ConvertXYToInt(MainProgram.Player.XLoc, MainProgram.Player.YLoc);
-			details.Npcs.Remove(playerIndex);
+			details.Players = _players;
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -683,5 +681,6 @@ namespace Halfbreed
 		public SortedDictionary<int, int> Furnishings;
 		public SortedDictionary<int, int> HarvestingNodes;
 		public SortedDictionary<int, int> Npcs;
+		public SortedDictionary<int, int> Players;
 	}
 }

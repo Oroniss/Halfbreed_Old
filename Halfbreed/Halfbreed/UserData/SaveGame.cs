@@ -1,6 +1,4 @@
-﻿// Revised for version 0.02.
-
-using System;
+﻿using System;
 
 namespace Halfbreed.UserData
 {
@@ -9,16 +7,27 @@ namespace Halfbreed.UserData
 	{
 		public SaveGameSummary Summary;
 		public LevelSerialisationDetails CurrentLevelDetails;
-		public Entities.Player Player;
 		public int CurrentTime;
+		public Entities.FurnishingSave FurnishingDetails;
+		public Entities.HarvestingNodeSave HarvestingNodeDetails;
+		public Entities.NPCSave NPCDetails;
+		public Entities.PlayerSave PlayerDetails;
 
-		public SaveGame(SaveGameSummary summary, LevelSerialisationDetails currentLevelDetails, Entities.Player player, 
-		                int currentTime)
+		public SaveGame(SaveGameSummary summary, LevelSerialisationDetails currentLevelDetails, 
+		                int currentTime,
+						Entities.FurnishingSave furnishingDetails,
+		                Entities.HarvestingNodeSave harvestingNodeDetails,
+		               	Entities.NPCSave npcDetails,
+		                Entities.PlayerSave playerDetails)
 		{
 			Summary = summary;
 			CurrentLevelDetails = currentLevelDetails;
-			Player = player;
 			CurrentTime = currentTime;
+
+			FurnishingDetails = furnishingDetails;
+			HarvestingNodeDetails = harvestingNodeDetails;
+			NPCDetails = npcDetails;
+			PlayerDetails = playerDetails;
 		}
 	}
 }
