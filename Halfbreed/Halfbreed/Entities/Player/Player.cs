@@ -6,6 +6,12 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Player:Actor
 	{
+		static SortedDictionary<int, Player> players = new SortedDictionary<int, Player>();
+		static int maxPlayerId = 0;
+		static List<int> unusedPlayerIds = new List<int>();
+
+		readonly int _playerId;
+
 		CharacterClasses _characterClass;
 		int _difficultySetting;
 		bool _useAchievements;
@@ -15,6 +21,18 @@ namespace Halfbreed.Entities
 		public Player(GameData playerParameters)
 			:base("Player", 0 ,0 , new List<string>())
 		{
+			if (unusedPlayerIds.Count > 0)
+			{
+				_playerId = unusedPlayerIds[0];
+				unusedPlayerIds.RemoveAt(0);
+			}
+			else
+			{
+				_playerId = maxPlayerId;
+				maxPlayerId++;
+			}
+			players[_playerId] = this;
+
 			_characterClass = playerParameters.CharacterClass;
 			_difficultySetting = playerParameters.DifficultySetting;
 			_useAchievements = playerParameters.UseAchievements;
@@ -30,6 +48,11 @@ namespace Halfbreed.Entities
 
 			//foreach (var resist in PlayerSetupData.GetStartingResistanceModifiers(_difficultySetting))
 			//	AddDefensiveDice(resist.Resist, resist.DiceType, resist.UpgradeLevel);
+		}
+
+		public int PlayerId
+		{ 
+			get { return _playerId; }
 		}
 
 		public CharacterClasses CharacterClass
@@ -152,6 +175,11 @@ namespace Halfbreed.Entities
 		public DefensiveStatBlock DefensiveStats
 		{
 			get { return _defensiveStats; }
+		}
+
+		public static Player GetPlayer(int id)
+		{
+			return players[id];
 		}
 	}
 }

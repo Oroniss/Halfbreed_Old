@@ -21,7 +21,8 @@ namespace Halfbreed
 		SortedDictionary<int, int> _triggers; // TODO: Swap to Triggers later
 		SortedDictionary<int, int> _furnishings;
 		SortedDictionary<int, int> _harvestingNodes;
-		SortedDictionary<int, int> _actors;
+		SortedDictionary<int, int> _npcs;
+		SortedDictionary<int, int> _players;
 
 		List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
 
@@ -43,7 +44,8 @@ namespace Halfbreed
 			_triggers = new SortedDictionary<int, int>();
 			_furnishings = new SortedDictionary<int, int>();
 			_harvestingNodes = new SortedDictionary<int, int>();
-			_actors = new SortedDictionary<int, int>();
+			_npcs = new SortedDictionary<int, int>();
+			_players = new SortedDictionary<int, int>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -128,7 +130,8 @@ namespace Halfbreed
 			_triggers = details.Triggers;
 			_furnishings = details.Furnishings;
 			_harvestingNodes = details.HarvestingNodes;
-			_actors = details.Actors;
+			_npcs = details.Npcs;
+			_players = new SortedDictionary<int, int>();
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -159,7 +162,7 @@ namespace Halfbreed
 		bool HasTrait(int index, string trait)
 		{
 			return _mapGrid[index].HasTrait(trait) ||
-				                  (_actors.ContainsKey(index) && GetActor(index).HasTrait(trait)) ||
+				                  (_npcs.ContainsKey(index) && GetNpc(index).HasTrait(trait)) ||
 				                  (_furnishings.ContainsKey(index) && GetFurnishing(index).HasTrait(trait)) ||
 				                  (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).HasTrait(trait));
 		}
@@ -289,36 +292,65 @@ namespace Halfbreed
 		}
 
 		// Actors
-		public bool HasActor(int x, int y)
+		public bool HasNpc(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return _actors.ContainsKey(index);
+			return _npcs.ContainsKey(index);
 		}
 
-		public Actor GetActor(int x, int y)
+		public Actor GetNpc(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return GetActor(index);
+			return GetNpc(index);
 		}
 
-		Actor GetActor(int index)
+		Actor GetNpc(int index)
 		{
-			if (_actors.ContainsKey(index))
-				return Actor.GetActor(_actors[index]);
-			Console.WriteLine(index);
+			if (_npcs.ContainsKey(index))
+				return NPC.GetNpc(_npcs[index]);
 			return null;
 		}
 
-		public void AddActor(Actor actor)
+		public void AddNpc(NPC npc)
 		{
-			var index = ConvertXYToInt(actor.XLoc, actor.YLoc);
-			_actors[index] = actor.ActorId;
+			var index = ConvertXYToInt(npc.XLoc, npc.YLoc);
+			_npcs[index] = npc.NpcId;
 		}
 
-		public void RemoveActor(Actor actor)
+		public void RemoveNpc(NPC npc)
 		{
-			var index = ConvertXYToInt(actor.XLoc, actor.YLoc);
-			_actors.Remove(index);
+			var index = ConvertXYToInt(npc.XLoc, npc.YLoc);
+			_npcs.Remove(index);
+		}
+
+		// Player stuff
+		public bool HasPlayer(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return _players.ContainsKey(index);
+		}
+
+		public Player GetPlayer(int x, int y)
+		{
+			var index = ConvertXYToInt(x, y);
+			return GetPlayer(index);
+		}
+
+		public Player GetPlayer(int index)
+		{
+			return Player.GetPlayer(_players[index]);
+		}
+
+		public void AddPlayer(Player player)
+		{
+			var index = ConvertXYToInt(player.XLoc, player.YLoc);
+			_players[index] = player.PlayerId;
+		}
+
+		public void RemovePlayer(Player player)
+		{
+			var index = ConvertXYToInt(player.XLoc, player.YLoc);
+			_players.Remove(index);
 		}
 
 		// Movement and passibility functions
@@ -351,9 +383,24 @@ namespace Halfbreed
 
 		void MoveActor(int newX, int newY, Actor actor)
 		{
-			RemoveActor(actor);
-			actor.UpdatePosition(newX, newY);
-			AddActor(actor);
+			if (actor.HasTrait("Player"))
+				MovePlayer(newX, newY, (Player)actor);
+			else
+				MoveNpc(newX, newY, (NPC)actor);
+		}
+
+		void MoveNpc(int newX, int newY, NPC npc)
+		{
+			RemoveNpc(npc);
+			npc.UpdatePosition(newX, newY);
+			AddNpc(npc);
+		}
+
+		void MovePlayer(int newX, int newY, Player player)
+		{
+			RemovePlayer(player);
+			player.UpdatePosition(newX, newY);
+			AddPlayer(player);
 		}
 
 		public bool MoveActorAttempt(int destinationX, int destinationY, Actor actor)
@@ -381,7 +428,7 @@ namespace Halfbreed
 				{
 					if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 					{
-						MoveActor(destinationX, destinationY, actor);
+	                    MoveActor(destinationX, destinationY, actor);
 						ApplyMoveOnFunctions(destinationIndex, actor, originX, originY);
 						return true;
 					}
@@ -399,7 +446,7 @@ namespace Halfbreed
 			{
 				if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 				{
-					MoveActor(destinationX, destinationY, actor);
+                    MoveActor(destinationX, destinationY, actor);
 					ApplyMoveOnFunctions(destinationIndex, actor, originX, originY);
 					return true;
 				}
@@ -533,8 +580,9 @@ namespace Halfbreed
 					returnList.Add(GetFurnishing(index));
 				if (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).Concealed)
 					returnList.Add(GetHarvestingNode(index));
-				if (_actors.ContainsKey(index) && GetActor(index).Concealed)
-					returnList.Add(GetActor(index));
+				if (_npcs.ContainsKey(index) && GetNpc(index).Concealed)
+					returnList.Add(GetNpc(index));
+				// TODO: Add Player here.
 			}
 			return returnList;
 		}
@@ -543,14 +591,17 @@ namespace Halfbreed
 		public bool HasDrawingEntity(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return _actors.ContainsKey(index) || _harvestingNodes.ContainsKey(index) || _furnishings.ContainsKey(index);
+			return _npcs.ContainsKey(index) || _harvestingNodes.ContainsKey(index) || 
+				        _furnishings.ContainsKey(index) || _players.ContainsKey(index);
 		}
 
 		public Entity GetDrawingEntity(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			if (_actors.ContainsKey(index))
-				return GetActor(index);
+			if (_players.ContainsKey(index))
+				return GetPlayer(index);
+			if (_npcs.ContainsKey(index))
+				return GetNpc(index);
 			if (_harvestingNodes.ContainsKey(index))
 				return GetHarvestingNode(index);
 			return GetFurnishing(index);
@@ -579,11 +630,8 @@ namespace Halfbreed
 				GetFurnishing(index).Update(this);
 			foreach (var index in new List<int>(_harvestingNodes.Keys))
 				GetHarvestingNode(index).Update(this);
-			foreach (var index in new List<int>(_actors.Keys))
-			{
-				if (!GetActor(index).HasTrait("Player"))
-					GetActor(index).Update(this);
-			}
+			foreach (var index in new List<int>(_npcs.Keys))
+				GetNpc(index).Update(this);
 		}
 
 		// Serialisation functions
@@ -603,10 +651,10 @@ namespace Halfbreed
 			details.Triggers = _triggers;
 			details.Furnishings = _furnishings;
 			details.HarvestingNodes = _harvestingNodes;
-			details.Actors = _actors;
+			details.Npcs = _npcs;
 
 			int playerIndex = ConvertXYToInt(MainProgram.Player.XLoc, MainProgram.Player.YLoc);
-			details.Actors.Remove(playerIndex);
+			details.Npcs.Remove(playerIndex);
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -634,6 +682,6 @@ namespace Halfbreed
 		public SortedDictionary<int, int> Triggers; // TODO: Swap to Triggers later
 		public SortedDictionary<int, int> Furnishings;
 		public SortedDictionary<int, int> HarvestingNodes;
-		public SortedDictionary<int, int> Actors;
+		public SortedDictionary<int, int> Npcs;
 	}
 }

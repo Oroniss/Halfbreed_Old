@@ -1,5 +1,3 @@
-// Tidied for version 0.02.
-
 using System;
 using System.Threading;
 using RLNET;
@@ -127,7 +125,7 @@ namespace Halfbreed
 			_player = gameState.Player;
 			_currentTime = gameState.CurrentTime;
 			_gameData = gameState.Summary.GameData;
-			_currentLevel.AddActor(_player);
+			_currentLevel.AddPlayer(_player);
 		}
 
 		public static void LevelTransition(Levels.LevelEnum newLevel, int newX, int newY)
@@ -135,7 +133,7 @@ namespace Halfbreed
 			// TODO: Need to use correct update move function so that it moves all minions as well.
 			_currentLevel = new Level(newLevel);
 			_player.UpdatePosition(newX, newY);
-			_currentLevel.AddActor(_player);
+			_currentLevel.AddPlayer(_player);
 			_player.UpdateVisibleTiles(_currentLevel);
 			MainGraphicDisplay.UpdateGameScreen();
 		}
