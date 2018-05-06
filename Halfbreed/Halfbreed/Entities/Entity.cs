@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System;
 using System.Collections.Generic;
 
@@ -16,7 +14,7 @@ namespace Halfbreed.Entities
 		string _fgColorName;
 		char _symbol;
 
-		List<Traits> _traits;
+		List<string> _traits;
 
 		bool _isConcealed;
 		bool _playerSpotted;
@@ -36,7 +34,7 @@ namespace Halfbreed.Entities
 			_xLoc = xLoc;
 			_yLoc = yLoc;
 
-			_traits = new List<Traits>();
+			_traits = new List<string>();
 
 			_effects = null;
 			_defensiveStats = new DefensiveStatBlock();
@@ -48,7 +46,7 @@ namespace Halfbreed.Entities
 			var basicDetails = EntityData.GetEntityDetails(entityName);
 			_symbol = basicDetails.Symbol;
 			_fgColorName = basicDetails.FGColorName;
-			foreach (Traits trait in basicDetails.Traits)
+			foreach (string trait in basicDetails.Traits)
 				AddTrait(trait);
 
 		}
@@ -104,13 +102,17 @@ namespace Halfbreed.Entities
 			get { return _yLoc; }
 		}
 
-		public void AddTrait(Traits trait) 
+		public void AddTrait(string trait) 
 		{
+			if (!Traits.IsValidTrait(trait))
+				ErrorLogger.AddDebugText("Unkown entity trait added: " + trait);
 			_traits.Add(trait);
 		}
 
-		public void RemoveTrait(Traits trait) 
+		public void RemoveTrait(string trait) 
 		{
+			if (!Traits.IsValidTrait(trait))
+				ErrorLogger.AddDebugText("Unkown entity trait removed: " + trait);
 			if (_traits.Contains(trait))
 				_traits.Remove(trait);
 			else
@@ -118,8 +120,10 @@ namespace Halfbreed.Entities
 				                                       "Entity: {0}, Trait: {1}", this, trait));
 		}
 
-		public bool HasTrait(Traits trait)
+		public bool HasTrait(string trait)
 		{
+			if (!Traits.IsValidTrait(trait))
+				ErrorLogger.AddDebugText("Unkown entity trait checked: " + trait);
 			return _traits.Contains(trait);
 		}
 

@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System.Collections.Generic;
 using System;
 
@@ -44,12 +42,12 @@ namespace Halfbreed.Entities.Furnishings
 					MainGraphicDisplay.TextConsole.AddOutputText("Something is blocking the door");
 					return;
 				}
-				furnishing.AddTrait(Traits.Impassible);
-				furnishing.AddTrait(Traits.BlockLOS);
+				furnishing.AddTrait("Impassible");
+				furnishing.AddTrait("BlockLOS");
 				furnishing.Symbol = '+';
 				furnishing.SetOtherAttribute("DoorOpen", "Closed");
 
-				if (actor.HasTrait(Traits.Player))
+				if (actor.HasTrait("Player"))
 					MainGraphicDisplay.TextConsole.AddOutputText("You close the door");
 			}
 			else
@@ -62,12 +60,12 @@ namespace Halfbreed.Entities.Furnishings
 					return;
 				}
 
-				furnishing.RemoveTrait(Traits.Impassible);
-				furnishing.RemoveTrait(Traits.BlockLOS);
+				furnishing.RemoveTrait("Impassible");
+				furnishing.RemoveTrait("BlockLOS");
 				furnishing.Symbol = '-';
 				furnishing.SetOtherAttribute("DoorOpen", "Open");
 
-				if (actor.HasTrait(Traits.Player))
+				if (actor.HasTrait("Player"))
 					MainGraphicDisplay.TextConsole.AddOutputText("You open the door");
 			}
 		}

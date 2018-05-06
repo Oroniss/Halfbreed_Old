@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System.Collections.Generic;
 using System;
 
@@ -21,10 +19,10 @@ namespace Halfbreed.Entities
 			_difficultySetting = playerParameters.DifficultySetting;
 			_useAchievements = playerParameters.UseAchievements;
 
-			AddTrait(Traits.Player);
-			AddTrait(Traits.Walking);
-			AddTrait(Traits.Swimming);
-			AddTrait(Traits.Climbing);
+			AddTrait("Player");
+			AddTrait("Walking");
+			AddTrait("Swimming");
+			AddTrait("Climbing");
 
 			_primaryStats = new PrimaryStatBlock(PlayerSetupData.GetCharacterStartingStats(_characterClass), 1);
 			foreach (var upgrade in PlayerSetupData.GetCharacterStartingUpgrades(_characterClass))
@@ -77,8 +75,8 @@ namespace Halfbreed.Entities
 		public void UpdateVisibleTiles(Level currentLevel)
 		{
 			var visibleTiles = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
-									   _lightRadius, HasTrait(Traits.DarkVision),
-									   HasTrait(Traits.BlindSight));
+									   _lightRadius, HasTrait("DarkVision"),
+									   HasTrait("BlindSight"));
 			foreach (XYCoordinateStruct tile in visibleTiles)
 				currentLevel.RevealTile(tile.X, tile.Y);
 			currentLevel.VisibleTiles = visibleTiles;
@@ -105,7 +103,7 @@ namespace Halfbreed.Entities
 		bool Search(Level currentLevel)
 		{
 			var tileSet = currentLevel.GetFOV(XLoc, YLoc, currentLevel.Elevation(XLoc, YLoc), ViewDistance,
-											  _lightRadius, HasTrait(Traits.DarkVision), HasTrait(Traits.BlindSight));
+											  _lightRadius, HasTrait("DarkVision"), HasTrait("BlindSight"));
 
 			var concealedEntities = currentLevel.GetConcealedEntities(tileSet);
 			foreach (var entity in concealedEntities)

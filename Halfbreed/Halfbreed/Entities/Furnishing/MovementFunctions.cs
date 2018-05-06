@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System.Collections.Generic;
 
 namespace Halfbreed.Entities.Furnishings
@@ -32,7 +30,7 @@ namespace Halfbreed.Entities.Furnishings
 
 		static void FlameVentTrapMoveOn(Furnishing furnishing, Actor actor, Level level, int originX, int originY)
 		{
-			if (actor.HasTrait(Traits.Flying))
+			if (actor.HasTrait("Flying"))
 				return;
 
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));
@@ -43,7 +41,7 @@ namespace Halfbreed.Entities.Furnishings
 
 		static void PitTrapMoveOn(Furnishing furnishing, Actor actor, Level level, int originX, int originY)
 		{
-			if (actor.HasTrait(Traits.Flying))
+			if (actor.HasTrait("Flying"))
 				return;
 
 			var trapLevel = int.Parse(furnishing.GetOtherAttributeValue("TrapLevel"));

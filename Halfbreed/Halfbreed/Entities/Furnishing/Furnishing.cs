@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System.Collections.Generic;
 using System;
 using Halfbreed.Entities.Furnishings;
@@ -9,8 +7,8 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Furnishing:Entity
 	{
-		static readonly List<Traits> _furnishingTraits = new List<Traits> {
-			Traits.ImmuneToDisease, Traits.ImmuneToMental, Traits.ImmuneToPoison };
+		static readonly List<string> _furnishingTraits = new List<string> {
+			"ImmuneToDisease", "ImmuneToMental", "ImmuneToPoison" };
 
 		bool _hasBGColor;
 		string _bgColorName;
@@ -28,7 +26,7 @@ namespace Halfbreed.Entities
 		public Furnishing(string furnishingName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(furnishingName, xLoc, yLoc, otherParameters)
 		{
-			foreach (Traits trait in _furnishingTraits)
+			foreach (string trait in _furnishingTraits)
 				AddTrait(trait);
 
 			var template = EntityData.GetFurnishingDetails(furnishingName);

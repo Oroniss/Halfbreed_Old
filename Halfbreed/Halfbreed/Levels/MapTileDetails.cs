@@ -1,6 +1,3 @@
-// Revised for version 0.02.
-
-using System;
 using System.Collections.Generic;
 
 namespace Halfbreed.Levels
@@ -15,7 +12,7 @@ namespace Halfbreed.Levels
 		public readonly string FogColorName;
 		public readonly string MoveOnFunction;
 		public readonly string MoveOffFunction;
-		readonly List<Traits> _traits;
+		readonly List<string> _traits;
 
 		public MapTileDetails(TileType tileType, string name, int elevation, string bgColorName, string fogColorName, 
 		                      string moveOnFunction, string moveOffFunction, string[] traits)
@@ -28,14 +25,14 @@ namespace Halfbreed.Levels
 			MoveOnFunction = moveOnFunction;
 			MoveOffFunction = moveOffFunction;
 
-			var tmp = new List<Traits>();
+			var tmp = new List<string>();
 
 			foreach (var traitName in traits)
-				tmp.Add((Traits)Enum.Parse(typeof(Traits), traitName));
+				tmp.Add(traitName);
 			_traits = tmp;
 		}
 
-		public bool HasTrait(Traits trait)
+		public bool HasTrait(string trait)
 		{
 			return _traits.Contains(trait);
 		}

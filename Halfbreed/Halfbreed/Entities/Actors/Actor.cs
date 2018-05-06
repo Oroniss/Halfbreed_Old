@@ -1,6 +1,4 @@
-﻿// Tidied up for version 0.02.
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 
 namespace Halfbreed.Entities
@@ -14,7 +12,7 @@ namespace Halfbreed.Entities
 		public Actor(string actorName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(actorName, xLoc, yLoc, otherParameters)
 		{
-			AddTrait(Traits.Impassible);
+			AddTrait("Impassible");
 			_viewDistance = 18; // Fix this properly later on.
 
 			_primaryStats = new PrimaryStatBlock();

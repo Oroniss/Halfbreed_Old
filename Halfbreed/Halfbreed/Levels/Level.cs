@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -166,7 +164,7 @@ namespace Halfbreed
 			return y * _width + x;
 		}
 
-		bool HasTrait(int index, Traits trait)
+		bool HasTrait(int index, string trait)
 		{
 			return _mapGrid[index].HasTrait(trait) ||
 				(_actors.ContainsKey(index) && _actors[index].HasTrait(trait)) ||
@@ -319,15 +317,15 @@ namespace Halfbreed
 			var index = ConvertXYToInt(x, y);
 			if (BlockAllMovement(index))
 				return false;
-			return (walk && !HasTrait(index, Traits.BlockWalk)) ||
-					(fly && !HasTrait(index, Traits.BlockFly)) ||
-					(swim && !HasTrait(index, Traits.BlockSwim));
+			return (walk && !HasTrait(index, "BlockWalk")) ||
+					(fly && !HasTrait(index, "BlockFly")) ||
+					(swim && !HasTrait(index, "BlockSwim"));
 		}
 
 		public bool isPassible(int x, int y, Actor actor)
 		{
-			return isPassible(x, y, actor.HasTrait(Traits.Walking), actor.HasTrait(Traits.Flying),
-			                  actor.HasTrait(Traits.Swimming));
+			return isPassible(x, y, actor.HasTrait("Walking"), actor.HasTrait("Flying"),
+			                  actor.HasTrait("Swimming"));
 		}
 
 		public bool BlockAllMovement(int x, int y)
@@ -338,7 +336,7 @@ namespace Halfbreed
 
 		bool BlockAllMovement(int index)
 		{
-			return HasTrait(index, Traits.Impassible);
+			return HasTrait(index, "Impassible");
 		}
 
 		void MoveActor(int newX, int newY, Actor actor)
@@ -355,7 +353,7 @@ namespace Halfbreed
 			var originX = actor.XLoc;
 			var originY = actor.YLoc;
 
-			if (actor.HasTrait(Traits.Flying) && !HasTrait(destinationIndex, Traits.BlockFly))
+			if (actor.HasTrait("Flying") && !HasTrait(destinationIndex, "BlockFly"))
 			{
 				if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 				{
@@ -365,11 +363,11 @@ namespace Halfbreed
 				}
 				return false;
 			}
-			if (actor.HasTrait(Traits.Walking) && !HasTrait(destinationIndex, Traits.BlockWalk))
+			if (actor.HasTrait("Walking") && !HasTrait(destinationIndex, "BlockWalk"))
 			{
 				var elevationDifference = GetElevation(destinationIndex) - GetElevation(originIndex);
 
-				if (Math.Abs(elevationDifference) <= 1 || HasTrait(originIndex, Traits.ElevationChange) || HasTrait(destinationIndex, Traits.ElevationChange))
+				if (Math.Abs(elevationDifference) <= 1 || HasTrait(originIndex, "ElevationChange") || HasTrait(destinationIndex, "ElevationChange"))
 				{
 					if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 					{
@@ -387,7 +385,7 @@ namespace Halfbreed
 				return false;
 			}
 
-			if (actor.HasTrait(Traits.Swimming) && !HasTrait(destinationIndex, Traits.BlockSwim))
+			if (actor.HasTrait("Swimming") && !HasTrait(destinationIndex, "BlockSwim"))
 			{
 				if (ApplyMoveOffFunctions(originIndex, actor, destinationX, destinationY))
 				{
@@ -421,7 +419,7 @@ namespace Halfbreed
 		// LOS and vision functions
 		bool BlockLOS(int index)
 		{
-			return HasTrait(index, Traits.BlockLOS);
+			return HasTrait(index, "BlockLOS");
 		}
 
 		bool BlockLOS(int x, int y, int elevation)
@@ -573,7 +571,7 @@ namespace Halfbreed
 				_harvestingNodes[index].Update(this);
 			foreach (var index in new List<int>(_actors.Keys))
 			{
-				if (!_actors[index].HasTrait(Traits.Player))
+				if (!_actors[index].HasTrait("Player"))
 					_actors[index].Update(this);
 			}
 		}
@@ -613,7 +611,7 @@ namespace Halfbreed
 					details.HarvestingNodes[i] = _harvestingNodes[i];
 				else
 					details.HarvestingNodes[i] = null;
-				if (_actors.ContainsKey(i) && !_actors[i].HasTrait(Traits.Player))
+				if (_actors.ContainsKey(i) && !_actors[i].HasTrait("Player"))
 					details.Actors[i] = _actors[i];
 				else
 					details.Actors[i] = null;

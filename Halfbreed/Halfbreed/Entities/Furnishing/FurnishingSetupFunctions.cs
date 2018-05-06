@@ -1,5 +1,3 @@
-// Tidied up for version 0.02.
-
 using System.Collections.Generic;
 
 namespace Halfbreed.Entities.Furnishings
@@ -52,8 +50,8 @@ namespace Halfbreed.Entities.Furnishings
 			else
 			{
 				furnishing.SetOtherAttribute("DoorOpen", "Closed");
-				furnishing.AddTrait(Traits.Impassible);
-				furnishing.AddTrait(Traits.BlockLOS);
+				furnishing.AddTrait("Impassible");
+				furnishing.AddTrait("BlockLOS");
 				furnishing.Symbol = '+';
 			}
 		}
