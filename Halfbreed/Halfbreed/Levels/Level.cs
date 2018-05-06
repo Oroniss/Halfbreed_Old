@@ -21,7 +21,7 @@ namespace Halfbreed
 		SortedDictionary<int, object> _triggers; // TODO: Swap to Triggers later
 		SortedDictionary<int, Furnishing> _furnishings;
 		SortedDictionary<int, HarvestingNode> _harvestingNodes;
-		SortedDictionary<int, Actor> _actors;
+		SortedDictionary<int, int> _actors;
 
 		List<XYCoordinateStruct> _visibleTiles = new List<XYCoordinateStruct>();
 
@@ -43,7 +43,7 @@ namespace Halfbreed
 			_triggers = new SortedDictionary<int, object>();
 			_furnishings = new SortedDictionary<int, Furnishing>();
 			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
-			_actors = new SortedDictionary<int, Actor>();
+			_actors = new SortedDictionary<int, int>();
 
 			LevelSpecificationFile.ReadLine(); // Move to start of dictionary.
 
@@ -128,7 +128,7 @@ namespace Halfbreed
 			_triggers = new SortedDictionary<int, object>();
 			_furnishings = new SortedDictionary<int, Furnishing>();
 			_harvestingNodes = new SortedDictionary<int, HarvestingNode>();
-			_actors = new SortedDictionary<int, Actor>();
+			_actors = details.Actors;
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -140,8 +140,6 @@ namespace Halfbreed
 					_furnishings[i] = details.Furnishings[i];
 				if (details.HarvestingNodes[i] != null)
 					_harvestingNodes[i] = details.HarvestingNodes[i];
-				if (details.Actors[i] != null)
-					_actors[i] = details.Actors[i];
 			}
 		}
 
@@ -167,7 +165,7 @@ namespace Halfbreed
 		bool HasTrait(int index, string trait)
 		{
 			return _mapGrid[index].HasTrait(trait) ||
-				(_actors.ContainsKey(index) && _actors[index].HasTrait(trait)) ||
+				                  (_actors.ContainsKey(index) && GetActor(index).HasTrait(trait)) ||
 				(_furnishings.ContainsKey(index) && _furnishings[index].HasTrait(trait)) ||
 				(_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].HasTrait(trait));
 		}
@@ -296,13 +294,21 @@ namespace Halfbreed
 		public Actor GetActor(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return _actors[index];
+			return GetActor(index);
+		}
+
+		Actor GetActor(int index)
+		{
+			if (_actors.ContainsKey(index))
+				return Actor.GetActor(_actors[index]);
+			Console.WriteLine(index);
+			return null;
 		}
 
 		public void AddActor(Actor actor)
 		{
 			var index = ConvertXYToInt(actor.XLoc, actor.YLoc);
-			_actors[index] = actor;
+			_actors[index] = actor.ActorId;
 		}
 
 		public void RemoveActor(Actor actor)
@@ -523,8 +529,8 @@ namespace Halfbreed
 					returnList.Add(_furnishings[index]);
 				if (_harvestingNodes.ContainsKey(index) && _harvestingNodes[index].Concealed)
 					returnList.Add(_harvestingNodes[index]);
-				if (_actors.ContainsKey(index) && _actors[index].Concealed)
-					returnList.Add(_actors[index]);
+				if (_actors.ContainsKey(index) && GetActor(index).Concealed)
+					returnList.Add(GetActor(index));
 			}
 			return returnList;
 		}
@@ -540,7 +546,7 @@ namespace Halfbreed
 		{
 			var index = ConvertXYToInt(x, y);
 			if (_actors.ContainsKey(index))
-				return _actors[index];
+				return GetActor(index);
 			if (_harvestingNodes.ContainsKey(index))
 				return _harvestingNodes[index];
 			return _furnishings[index];
@@ -571,8 +577,8 @@ namespace Halfbreed
 				_harvestingNodes[index].Update(this);
 			foreach (var index in new List<int>(_actors.Keys))
 			{
-				if (!_actors[index].HasTrait("Player"))
-					_actors[index].Update(this);
+				if (!GetActor(index).HasTrait("Player"))
+					GetActor(index).Update(this);
 			}
 		}
 
@@ -593,7 +599,7 @@ namespace Halfbreed
 			details.Triggers = new object[arraySize];
 			details.Furnishings = new Furnishing[arraySize];
 			details.HarvestingNodes = new HarvestingNode[arraySize];
-			details.Actors = new Actor[arraySize];
+			details.Actors = new SortedDictionary<int, int>();
 
 			for (int i = 0; i < arraySize; i++)
 			{
@@ -611,10 +617,8 @@ namespace Halfbreed
 					details.HarvestingNodes[i] = _harvestingNodes[i];
 				else
 					details.HarvestingNodes[i] = null;
-				if (_actors.ContainsKey(i) && !_actors[i].HasTrait("Player"))
+				if (_actors.ContainsKey(i) && !GetActor(i).HasTrait("Player"))
 					details.Actors[i] = _actors[i];
-				else
-					details.Actors[i] = null;
 			}
 
 			return details;
@@ -637,6 +641,6 @@ namespace Halfbreed
 		public object[] Triggers; // TODO: Swap to Triggers later
 		public Furnishing[] Furnishings;
 		public HarvestingNode[] HarvestingNodes;
-		public Actor[] Actors;
+		public SortedDictionary<int, int> Actors;
 	}
 }
