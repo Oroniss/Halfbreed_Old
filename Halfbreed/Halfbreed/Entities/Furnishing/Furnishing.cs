@@ -7,8 +7,14 @@ namespace Halfbreed.Entities
 	[Serializable]
 	public class Furnishing:Entity
 	{
-		static readonly List<string> _furnishingTraits = new List<string> {
+		static Dictionary<int, Furnishing> furnishings = new Dictionary<int, Furnishing>();
+		static int maxFurnishingId = 0;
+		static List<int> unusedFurnishingIds = new List<int>();
+
+		static readonly List<string> furnishingTraits = new List<string> {
 			"ImmuneToDisease", "ImmuneToMental", "ImmuneToPoison" };
+
+		readonly int _furnishingId;
 
 		bool _hasBGColor;
 		string _bgColorName;
@@ -26,7 +32,19 @@ namespace Halfbreed.Entities
 		public Furnishing(string furnishingName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(furnishingName, xLoc, yLoc, otherParameters)
 		{
-			foreach (string trait in _furnishingTraits)
+			if (unusedFurnishingIds.Count > 0)
+			{
+				_furnishingId = unusedFurnishingIds[0];
+				unusedFurnishingIds.RemoveAt(0);
+			}
+			else
+			{
+				_furnishingId = maxFurnishingId;
+				maxFurnishingId++;
+			}
+			furnishings[_furnishingId] = this;
+
+			foreach (string trait in furnishingTraits)
 				AddTrait(trait);
 
 			var template = EntityData.GetFurnishingDetails(furnishingName);
@@ -48,6 +66,11 @@ namespace Halfbreed.Entities
 				FurnishingSetupFunctions.GetSetupFunction("Interaction Trap Setup")(this, otherParameters);
 			if (otherParameters.Contains("Concealed"))
 				FurnishingSetupFunctions.GetSetupFunction("Concealed Furnishing Setup")(this, otherParameters);
+		}
+
+		public int FurnishingId
+		{
+			get { return _furnishingId; }
 		}
 
 		public bool HasBGColor
@@ -148,6 +171,11 @@ namespace Halfbreed.Entities
 
 			for (int i = 0; i < _interactionFunctions.Count; i++)
 				InteractionFunctions.GetInteractionFunction(_interactionFunctions[i])(this, actor, level);
+		}
+
+		public static Furnishing GetFurnishing(int id)
+		{
+			return furnishings[id];
 		}
 	}
 }

@@ -18,8 +18,8 @@ namespace Halfbreed
 		MapTileDetails[] _mapGrid;
 		bool[] _revealed;
 
-		SortedDictionary<int, object> _triggers; // TODO: Swap to Triggers later
-		SortedDictionary<int, Furnishing> _furnishings;
+		SortedDictionary<int, int> _triggers; // TODO: Swap to Triggers later
+		SortedDictionary<int, int> _furnishings;
 		SortedDictionary<int, int> _harvestingNodes;
 		SortedDictionary<int, int> _actors;
 
@@ -40,8 +40,8 @@ namespace Halfbreed
 			_lightLevel = int.Parse(LevelSpecificationFile.ReadLine());
 			_smokeLevel = int.Parse(LevelSpecificationFile.ReadLine());
 
-			_triggers = new SortedDictionary<int, object>();
-			_furnishings = new SortedDictionary<int, Furnishing>();
+			_triggers = new SortedDictionary<int, int>();
+			_furnishings = new SortedDictionary<int, int>();
 			_harvestingNodes = new SortedDictionary<int, int>();
 			_actors = new SortedDictionary<int, int>();
 
@@ -125,8 +125,8 @@ namespace Halfbreed
 			var arraySize = _height * _width;
 			_mapGrid = new MapTileDetails[arraySize];
 			_revealed = new bool[arraySize];
-			_triggers = new SortedDictionary<int, object>();
-			_furnishings = new SortedDictionary<int, Furnishing>();
+			_triggers = details.Triggers;
+			_furnishings = details.Furnishings;
 			_harvestingNodes = details.HarvestingNodes;
 			_actors = details.Actors;
 
@@ -134,10 +134,6 @@ namespace Halfbreed
 			{
 				_mapGrid[i] = TileDictionary.getTileDetails(details.MapGrid[i]);
 				_revealed[i] = details.Revealed[i];
-				if (details.Triggers[i] != null)
-					_triggers[i] = details.Triggers[i];
-				if (details.Furnishings[i] != null)
-					_furnishings[i] = details.Furnishings[i];
 			}
 		}
 
@@ -164,7 +160,7 @@ namespace Halfbreed
 		{
 			return _mapGrid[index].HasTrait(trait) ||
 				                  (_actors.ContainsKey(index) && GetActor(index).HasTrait(trait)) ||
-				(_furnishings.ContainsKey(index) && _furnishings[index].HasTrait(trait)) ||
+				                  (_furnishings.ContainsKey(index) && GetFurnishing(index).HasTrait(trait)) ||
 				                  (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).HasTrait(trait));
 		}
 
@@ -172,7 +168,7 @@ namespace Halfbreed
 		{
 			var elevation = _mapGrid[index].Elevation;
 			if (_furnishings.ContainsKey(index))
-				return Math.Max(elevation, _furnishings[index].Elevation);
+				return Math.Max(elevation, GetFurnishing(index).Elevation);
 			return elevation;
 		}
 
@@ -242,13 +238,18 @@ namespace Halfbreed
 		public Furnishing GetFurnishing(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			return _furnishings[index];
+			return GetFurnishing(index);
+		}
+
+		Furnishing GetFurnishing(int index)
+		{
+			return Furnishing.GetFurnishing(_furnishings[index]);
 		}
 
 		public void AddFurnishing(Furnishing furnishing)
 		{
 			var index = ConvertXYToInt(furnishing.XLoc, furnishing.YLoc);
-			_furnishings[index] = furnishing;
+			_furnishings[index] = furnishing.FurnishingId;
 		}
 
 		public void RemoveFurnishing(Furnishing furnishing)
@@ -413,7 +414,7 @@ namespace Halfbreed
 			// TODO: Call Tile functions.
 
 			if (_furnishings.ContainsKey(index))
-				return _furnishings[index].MoveOff(actor, this, destinationX, destinationY);
+				return GetFurnishing(index).MoveOff(actor, this, destinationX, destinationY);
 			return true;
 		}
 
@@ -422,7 +423,7 @@ namespace Halfbreed
 			// TODO: Call Tile functions.
 
 			if (_furnishings.ContainsKey(index))
-				_furnishings[index].MoveOn(actor, this, originX, originY);
+				GetFurnishing(index).MoveOn(actor, this, originX, originY);
 		}
 
 		// LOS and vision functions
@@ -528,8 +529,8 @@ namespace Halfbreed
 			foreach (var tile in visibleTiles)
 			{
 				var index = ConvertXYToInt(tile.X, tile.Y);
-				if (_furnishings.ContainsKey(index) && _furnishings[index].Concealed)
-					returnList.Add(_furnishings[index]);
+				if (_furnishings.ContainsKey(index) && GetFurnishing(index).Concealed)
+					returnList.Add(GetFurnishing(index));
 				if (_harvestingNodes.ContainsKey(index) && GetHarvestingNode(index).Concealed)
 					returnList.Add(GetHarvestingNode(index));
 				if (_actors.ContainsKey(index) && GetActor(index).Concealed)
@@ -552,22 +553,22 @@ namespace Halfbreed
 				return GetActor(index);
 			if (_harvestingNodes.ContainsKey(index))
 				return GetHarvestingNode(index);
-			return _furnishings[index];
+			return GetFurnishing(index);
 		}
 
 		public string GetBackgroundColor(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			if (_furnishings.ContainsKey(index) && _furnishings[index].HasBGColor)
-				return _furnishings[index].BGColorName;
+			if (_furnishings.ContainsKey(index) && GetFurnishing(index).HasBGColor)
+				return GetFurnishing(index).BGColorName;
 			return _mapGrid[index].BGColorName;
 		}
 
 		public string GetFogColor(int x, int y)
 		{
 			var index = ConvertXYToInt(x, y);
-			if (_furnishings.ContainsKey(index) && _furnishings[index].HasFogColor)
-				return _furnishings[index].FogColorName;
+			if (_furnishings.ContainsKey(index) && GetFurnishing(index).HasFogColor)
+				return GetFurnishing(index).FogColorName;
 			return _mapGrid[index].FogColorName;
 		}
 
@@ -575,7 +576,7 @@ namespace Halfbreed
 		public void ActivateEntities()
 		{
 			foreach (var index in new List<int>(_furnishings.Keys))
-				_furnishings[index].Update(this);
+				GetFurnishing(index).Update(this);
 			foreach (var index in new List<int>(_harvestingNodes.Keys))
 				GetHarvestingNode(index).Update(this);
 			foreach (var index in new List<int>(_actors.Keys))
@@ -599,8 +600,8 @@ namespace Halfbreed
 			var arraySize = _height * _width;
 			details.MapGrid = new TileType[arraySize];
 			details.Revealed = new bool[arraySize];
-			details.Triggers = new object[arraySize];
-			details.Furnishings = new Furnishing[arraySize];
+			details.Triggers = _triggers;
+			details.Furnishings = _furnishings;
 			details.HarvestingNodes = _harvestingNodes;
 			details.Actors = _actors;
 
@@ -611,14 +612,6 @@ namespace Halfbreed
 			{
 				details.MapGrid[i] = _mapGrid[i].TileType;
 				details.Revealed[i] = _revealed[i];
-				if (_triggers.ContainsKey(i))
-					details.Triggers[i] = _triggers[i];
-				else
-					details.Triggers[i] = null;
-				if (_furnishings.ContainsKey(i))
-					details.Furnishings[i] = _furnishings[i];
-				else
-					details.Furnishings[i] = null;
 			}
 
 			return details;
@@ -638,8 +631,8 @@ namespace Halfbreed
 		public TileType[] MapGrid;
 		public bool[] Revealed;
 
-		public object[] Triggers; // TODO: Swap to Triggers later
-		public Furnishing[] Furnishings;
+		public SortedDictionary<int, int> Triggers; // TODO: Swap to Triggers later
+		public SortedDictionary<int, int> Furnishings;
 		public SortedDictionary<int, int> HarvestingNodes;
 		public SortedDictionary<int, int> Actors;
 	}

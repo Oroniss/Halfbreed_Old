@@ -11,7 +11,7 @@ namespace Halfbreed.Entities
 		static int maxHarvestingId = 0;
 		static List<int> unusedHarvestingIds = new List<int>();
 
-		int _harvestingId;
+		readonly int _harvestingId;
 
 		public HarvestingNode(string harvestableName, int xLoc, int yLoc, List<string> otherParameters)
 			:base(harvestableName, xLoc, yLoc, otherParameters)
